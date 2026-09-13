@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pengalaman di PT Surya Citra Media — Kharismadina Hijra M</title>
+  <meta name="description" content="Detail rekayasa data streaming, pencocokan data iklan berbasis ML, dan orkestrasi Airflow di PT Surya Citra Media oleh Kharismadina Hijra M.">
+
+  <!-- Google Fonts: Inter & Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Minimal Nav Back & Language Switcher -->
+  <div class="detail-nav-back">
+    <div class="container detail-nav-wrapper">
+      <a href="index.html#experience" class="btn-back" id="btnBackHome">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        <span data-i18n="back_to_home">Kembali ke Portofolio Utama</span>
+      </a>
+
+      <!-- Language Selector -->
+      <div class="lang-switcher" role="group" aria-label="Pilih Bahasa / Select Language">
+        <button type="button" class="lang-btn active" data-lang="id" aria-pressed="true" title="Bahasa Indonesia">ID</button>
+        <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" title="English">EN</button>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- Detail Hero -->
+    <header class="detail-hero">
+      <div class="container">
+        <span class="section-subtitle" data-i18n="detail_case_badge">Studi Kasus Pengalaman Kerja</span>
+        <h1>Data Engineer</h1>
+        <h2 style="font-size: 1.4rem; color: var(--accent); margin-top: 0.25rem;">PT SURYA CITRA MEDIA</h2>
+
+        <div class="detail-header-meta">
+          <div class="detail-meta-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <strong data-i18n="scm_date">Januari 2022 — Juli 2023</strong>
+          </div>
+          <div class="detail-meta-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span>Jakarta, Indonesia</span>
+          </div>
+        </div>
+
+        <div class="tag-list" style="margin-top: 1rem;">
+          <span class="tag tag-accent">Python ML Matching</span>
+          <span class="tag tag-accent">Apache Kafka</span>
+          <span class="tag tag-accent">Apache Spark</span>
+          <span class="tag">Apache Airflow</span>
+          <span class="tag">Docker</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">Gen21 Integration</span>
+          <span class="tag">Nielsen TV Ratings</span>
+          <span class="tag">SCTV & Indosiar</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Detail Content -->
+    <div class="container detail-content">
+      
+      <!-- Project 1: Fuzzy Matching -->
+      <section class="detail-section-block">
+        <h3 class="detail-block-title" data-i18n="scm_b1_title">1. Event-Driven Advertising Data Matching (Python & Fuzzy ML)</h3>
+        <p data-i18n="scm_b1_desc">
+          Integrasi dan rekonsiliasi data penayangan iklan komersial antara sistem broadcast traffic internal dan lembaga rating independen.
+        </p>
+
+        <div class="feature-cards-grid">
+          <div class="feature-item-card">
+            <span class="stat-pill">+90% Akurasi • -80% Processing Time</span>
+            <h4 class="feature-item-title" data-i18n="scm_p1_title">Pencocokan Otomatis Gen21 & Nielsen TV Ratings</h4>
+            <p data-i18n="scm_p1_text">
+              Mengembangkan program pencocokan data periklanan berbasis <em>event-driven</em> dengan Python menggunakan teknik machine learning <strong>fuzzy wuzzy</strong>. Solusi ini berhasil mengintegrasikan dataset heterogeneous dari Gen21 (traffic log) dan Nielsen Media Research untuk analisis rating pemirsa siaran TV nasional (SCTV & Indosiar).
+            </p>
+            <div class="bullet-list" style="margin-top: 1rem;">
+              <div class="bullet-item" data-i18n="scm_p1_b1" data-i18n-html="true">
+                Meningkatkan akurasi pencocokan log iklan komersial hingga <strong>90%</strong>.
+              </div>
+              <div class="bullet-item" data-i18n="scm_p1_b2" data-i18n-html="true">
+                Memangkas waktu komputasi pemrosesan harian sebesar <strong>80%</strong> dibanding metode manual sebelumnya.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Project 2: Streaming Architecture -->
+      <section class="detail-section-block">
+        <h3 class="detail-block-title" data-i18n="scm_b2_title">2. Streaming Data Pipelines Skalabilitas Tinggi</h3>
+        <p data-i18n="scm_b2_desc">Infrastruktur pemrosesan aliran data terdistribusi untuk mengantisipasi lonjakan trafik siaran.</p>
+
+        <div class="feature-cards-grid">
+          <div class="feature-item-card">
+            <span class="stat-pill">+40% Kapasitas Volume Data</span>
+            <h4 class="feature-item-title" data-i18n="scm_p2_title">Pipeline Streaming Kafka + Spark + Docker</h4>
+            <p data-i18n="scm_p2_text">
+              Membangun dan mengonfigurasi pipeline streaming data menggunakan kontainerisasi <strong>Docker</strong>, <strong>Apache Kafka</strong> sebagai message broker terdistribusi, <strong>Apache Spark</strong> untuk micro-batch processing cepat, dan <strong>MySQL</strong> sebagai storage hilir.
+            </p>
+            <div class="bullet-list" style="margin-top: 1rem;">
+              <div class="bullet-item" data-i18n="scm_p2_b1" data-i18n-html="true">
+                Mampu menangani peningkatan volume data hingga <strong>40%</strong> tanpa latensi berlebih.
+              </div>
+              <div class="bullet-item" data-i18n="scm_p2_b2" data-i18n-html="true">
+                Menjamin keandalan pengiriman data (zero data loss) dan kontinuitas analitik waktu nyata.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Project 3: Airflow DAGs -->
+      <section class="detail-section-block">
+        <h3 class="detail-block-title" data-i18n="scm_b3_title">3. Orkestrasi & Efisiensi Operasional dengan Airflow</h3>
+        <p data-i18n="scm_b3_desc">Peningkatan keandalan job scheduler dan deteksi dini kegagalan pipeline.</p>
+
+        <div class="feature-cards-grid">
+          <div class="feature-item-card">
+            <span class="stat-pill">-35% Downtime • 99.8% Efisiensi Operasional</span>
+            <h4 class="feature-item-title" data-i18n="scm_p3_title">Troubleshooting Kompleks & Otomasi DAGs</h4>
+            <p data-i18n="scm_p3_text">
+              Mengimplementasikan Directed Acyclic Graphs (DAGs) terstandarisasi pada <strong>Apache Airflow</strong> untuk mengotomatiskan penanganan galat dan troubleshooting kesalahan sistem yang kompleks.
+            </p>
+            <div class="bullet-list" style="margin-top: 1rem;">
+              <div class="bullet-item" data-i18n="scm_p3_b1" data-i18n-html="true">
+                Mereduksi <em>system downtime</em> sebesar <strong>35%</strong> melalui notifikasi kegagalan dan automatic retries.
+              </div>
+              <div class="bullet-item" data-i18n="scm_p3_b2" data-i18n-html="true">
+                Mencapai efisiensi operasional sistem sebesar <strong>99.8%</strong> untuk seluruh batch job harian.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bottom Back Button -->
+      <div style="margin-top: 3rem; text-align: center;">
+        <a href="index.html#experience" class="btn btn-primary">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span data-i18n="back_to_exp">Kembali ke Pengalaman Lainnya</span>
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-wrapper">
+        <div>
+          <p>© 2026 <strong>Kharismadina Hijra M</strong>. All rights reserved.</p>
+        </div>
+        <div class="footer-links">
+          <a href="index.html" data-i18n="back_to_home">Halaman Utama</a>
+          <a href="index.html#contact" data-i18n="nav_contact">Kontak</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/translations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

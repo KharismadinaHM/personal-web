@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kharismadina Hijra M — Data & Machine Learning Engineer</title>
+  <meta name="description" content="Portfolio profesional Kharismadina Hijra M, Data & Machine Learning Engineer berpengalaman 4 tahun membangun analytics pipelines, ETL, event-driven architecture, dan distributed multi-agent GenAI.">
+  <meta name="author" content="Kharismadina Hijra M">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Kharismadina Hijra M — Data & Machine Learning Engineer">
+  <meta property="og:description" content="Dynamic Data Engineer dengan pengalaman 4 tahun membangun high-performance data pipelines, GCP architecture, dan Generative AI systems.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts: Inter & Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Header & Navigation -->
+  <header class="header">
+    <div class="container">
+      <div class="nav-wrapper">
+        <a href="#hero" class="nav-brand" id="navBrand">
+          <span class="brand-dot"></span>
+          Kharismadina Hijra M
+        </a>
+
+        <nav class="nav-menu" id="navMenu" aria-label="Main Navigation">
+          <a href="#about" class="nav-link" data-i18n="nav_about">Tentang</a>
+          <a href="#experience" class="nav-link" data-i18n="nav_experience">Pengalaman</a>
+          <a href="#skills" class="nav-link" data-i18n="nav_skills">Keahlian</a>
+          <a href="#education" class="nav-link" data-i18n="nav_education">Pendidikan & Sertifikasi</a>
+          <a href="#contact" class="nav-link" data-i18n="nav_contact">Kontak</a>
+        </nav>
+
+        <div class="nav-actions">
+          <!-- Bilingual Switcher (ID / EN) -->
+          <div class="lang-switcher" role="group" aria-label="Pilih Bahasa / Select Language">
+            <button type="button" class="lang-btn active" data-lang="id" aria-pressed="true" title="Bahasa Indonesia">ID</button>
+            <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" title="English">EN</button>
+          </div>
+          <a href="#contact" class="btn btn-primary btn-sm" id="navContactBtn" data-i18n="nav_contact_btn">Hubungi Saya</a>
+        </div>
+
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigasi menu" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-content fade-in-section">
+            <div class="hero-badge-available">
+              <span class="status-dot"></span>
+              <span data-i18n="hero_available">Tersedia untuk Peluang & Proyek Baru</span>
+            </div>
+            <h1 class="hero-title">Kharismadina Hijra M</h1>
+            <p class="hero-subtitle" data-i18n="hero_subtitle">Data & Machine Learning Engineer</p>
+            <p class="hero-tagline" data-i18n="hero_tagline">
+              Data Engineer dinamis dengan 4 tahun pengalaman membangun pipeline analitik berkinerja tinggi, alur kerja ETL & reverse ETL, arsitektur berbasis event, dan sistem Generative AI multi-agent di cloud. Membuka nilai data bisnis melalui data engineering dan kecerdasan buatan.
+            </p>
+
+            <div class="hero-cta">
+              <a href="#experience" class="btn btn-primary" id="heroBtnExperience">
+                <span data-i18n="hero_btn_experience">Lihat Pengalaman</span>
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </a>
+              <a href="#contact" class="btn btn-outline" id="heroBtnContact" data-i18n="hero_btn_contact">Hubungi Saya</a>
+              <!-- TODO: letakkan file CV di assets/CV_KharismadinaHM.pdf untuk unduhan langsung -->
+              <a href="mailto:kharismadinahijram@gmail.com?subject=Permintaan%20CV%20Kharismadina%20Hijra%20M" class="btn btn-outline" id="heroBtnCV">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                <span data-i18n="hero_btn_cv">Request CV</span>
+              </a>
+            </div>
+
+            <div class="hero-location-info">
+              <div class="hero-location-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Serpong, Tangerang, Indonesia</span>
+              </div>
+              <div class="hero-location-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <span data-i18n="hero_cert_badge">4x Google Cloud Certified</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual fade-in-section">
+            <div class="avatar-wrapper">
+              <img src="assets/avatar.svg" alt="Ilustrasi Kharismadina Hijra M Data & ML Engineer" class="avatar-img" width="320" height="320">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Metrics Strip -->
+    <div class="container">
+      <div class="metrics-strip fade-in-section">
+        <div class="metric-item">
+          <div class="metric-value" data-i18n="metric_exp_val">4+ Tahun</div>
+          <div class="metric-label" data-i18n="metric_exp_lbl">Pengalaman Data & ML Engineering</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-value" data-i18n="metric_gcp_val">4x GCP</div>
+          <div class="metric-label" data-i18n="metric_gcp_lbl">Google Cloud Professional Certified</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-value" data-i18n="metric_data_val">1TB+ Data</div>
+          <div class="metric-label" data-i18n="metric_data_lbl">ETL Pipelines Firebase ke BigQuery</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-value" data-i18n="metric_edu_val">Top 0.1%</div>
+          <div class="metric-label" data-i18n="metric_edu_lbl">Lulusan Terbaik Ilmu Komputer Gunadarma</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-header fade-in-section">
+          <span class="section-subtitle" data-i18n="about_subtitle">Tentang Saya</span>
+          <h2 data-i18n="about_title">Fondasi Kuat di Data Platform & Machine Learning</h2>
+        </div>
+
+        <div class="about-content fade-in-section">
+          <div class="about-text">
+            <p data-i18n="about_p1" data-i18n-html="true">
+              Saya adalah <strong>Data & Machine Learning Engineer</strong> yang berfokus pada perancangan arsitektur data skala besar, otomatisasi pipeline analitik, serta integrasi model machine learning dan LLM ke dalam alur kerja bisnis.
+            </p>
+            <p data-i18n="about_p2" data-i18n-html="true">
+              Berpengalaman mengelola siklus hidup data menyeluruh — mulai dari <em>real-time event streaming</em> dengan Apache Kafka & Apache Spark, orkestrasi batch dengan Apache Airflow & dbt, pergudangan data modern di Google BigQuery & ClickHouse, hingga implementasi <em>distributed multi-agent generative AI system</em> berbasis GCP (Cloud Run, ADK, MCP).
+            </p>
+            <p data-i18n="about_p3">
+              Saya memiliki rekam jejak terbukti dalam memangkas latensi data, mengoptimalkan query basis data hingga 30%, serta menjembatani kebutuhan teknis arsitektur (SAD/TSD) dengan sasaran bisnis (BRD/FSD).
+            </p>
+          </div>
+
+          <div class="about-card">
+            <h3 class="about-card-title" data-i18n="about_card_title">Fokus & Spesialisasi</h3>
+            <div class="about-highlight-list">
+              <div class="about-highlight-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                <span data-i18n="about_focus_1" data-i18n-html="true"><strong>High-Performance Pipelines:</strong> ETL & reverse ETL batch/streaming (Kafka, Dataflow, Airflow, dbt).</span>
+              </div>
+              <div class="about-highlight-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                <span data-i18n="about_focus_2" data-i18n-html="true"><strong>Generative AI & LLM:</strong> Multi-agent system, RAG, Gemini & Imagen integrations, MCP.</span>
+              </div>
+              <div class="about-highlight-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                <span data-i18n="about_focus_3" data-i18n-html="true"><strong>Cloud & Modern Data Stack:</strong> Google Cloud (BigQuery, Bigtable, Cloud Run), ClickHouse, Snowflake.</span>
+              </div>
+              <div class="about-highlight-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                <span data-i18n="about_focus_4" data-i18n-html="true"><strong>Analytics & BI:</strong> Looker real-time dashboards, reduksi proses manual hingga 40%.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section-header fade-in-section">
+          <span class="section-subtitle" data-i18n="exp_subtitle">Karier & Proyek</span>
+          <h2 data-i18n="exp_title">Pengalaman Kerja Profesional</h2>
+          <p class="section-desc" data-i18n="exp_desc">Ringkasan rekayasa data dan model machine learning yang diterapkan pada skala enterprise.</p>
+        </div>
+
+        <div class="experience-list">
+          <!-- Experience Card 1: PT Smartnet Magna Global -->
+          <article class="experience-card fade-in-section" id="exp-smartnet">
+            <div class="experience-header">
+              <div>
+                <h3 class="experience-role">Data & Machine Learning Engineer</h3>
+                <p class="experience-company">PT SMARTNET MAGNA GLOBAL</p>
+              </div>
+              <div class="experience-meta">
+                <span class="experience-period" data-i18n="exp_smartnet_period">Agu 2023 — Sekarang</span>
+                <span class="experience-location">Jakarta, Indonesia</span>
+              </div>
+            </div>
+
+            <p class="text-secondary" style="font-size: 0.95rem;" data-i18n="exp_smartnet_p">
+              Memimpin perancangan dan operasional data platform berskala besar, sistem orkestrasi data terdistribusi, serta rekayasa sistem AI generatif berbasis multi-agent di Google Cloud Platform.
+            </p>
+
+            <div class="experience-highlights">
+              <div class="experience-highlight-bullet" data-i18n="exp_smartnet_h1" data-i18n-html="true">
+                <strong>Distributed Multi-Agent Generative AI System:</strong> Merancang sistem agen otonom di GCP (Cloud Run, ADK, MCP) yang mengagregasi analitik BigQuery, API finansial eksternal, dan model Gemini/Imagen untuk kampanye pemasaran lokal.
+              </div>
+              <div class="experience-highlight-bullet" data-i18n="exp_smartnet_h2" data-i18n-html="true">
+                <strong>Large-scale ETL & Ingestion:</strong> Merancang pipeline ETL pengolah 1TB+ data dari Firebase ke BigQuery, serta mengefisiensikan real-time ingestion menggunakan Pub/Sub dan Dataflow dengan transformasi in-flight untuk mereduksi overhead penyimpanan.
+              </div>
+              <div class="experience-highlight-bullet" data-i18n="exp_smartnet_h3" data-i18n-html="true">
+                <strong>Orchestration & Database Optimization:</strong> Mengotomatiskan alur kerja Airflow dan dbt (meningkatkan data freshness 30%), mengintegrasikan ClickHouse untuk analitik berkecepatan tinggi, serta migrasi NoSQL dari Cassandra ke Cloud Bigtable.
+              </div>
+            </div>
+
+            <div class="experience-footer">
+              <div class="tag-list">
+                <span class="tag tag-accent">GCP</span>
+                <span class="tag tag-accent">Multi-Agent GenAI</span>
+                <span class="tag">BigQuery</span>
+                <span class="tag">Apache Airflow</span>
+                <span class="tag">dbt</span>
+                <span class="tag">ClickHouse</span>
+                <span class="tag">Looker</span>
+                <span class="tag">Cloud Bigtable</span>
+              </div>
+              <a href="experience-smartnet.html" class="link-detail" id="linkDetailSmartnet">
+                <span data-i18n="exp_smartnet_link">Lihat Detail Proyek Lengkap (15 Items)</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Experience Card 2: PT Surya Citra Media -->
+          <article class="experience-card fade-in-section" id="exp-scm">
+            <div class="experience-header">
+              <div>
+                <h3 class="experience-role">Data Engineer</h3>
+                <p class="experience-company">PT SURYA CITRA MEDIA</p>
+              </div>
+              <div class="experience-meta">
+                <span class="experience-period" data-i18n="exp_scm_period">Jan 2022 — Jul 2023</span>
+                <span class="experience-location">Jakarta, Indonesia</span>
+              </div>
+            </div>
+
+            <p class="text-secondary" style="font-size: 0.95rem;" data-i18n="exp_scm_p">
+              Bertanggung jawab atas integrasi data rating siaran televisi nasional (SCTV & Indosiar), pipeline streaming terdistribusi, dan keandalan operasional batch DAGs harian.
+            </p>
+
+            <div class="experience-highlights">
+              <div class="experience-highlight-bullet" data-i18n="exp_scm_h1" data-i18n-html="true">
+                <strong>Event-Driven Data Matching (Fuzzy ML):</strong> Membangun program pencocokan data periklanan Python menggunakan teknik machine learning <em>fuzzy wuzzy</em> untuk mengintegrasikan data Gen21 & Nielsen, meningkatkan akurasi matching sebesar 90% dan memangkas waktu pemrosesan 80%.
+              </div>
+              <div class="experience-highlight-bullet" data-i18n="exp_scm_h2" data-i18n-html="true">
+                <strong>Streaming Data Pipelines:</strong> Membangun infrastruktur streaming data menggunakan Docker, Apache Kafka, Apache Spark, dan MySQL yang mampu menangani peningkatan volume data sebesar 40% tanpa hambatan.
+              </div>
+              <div class="experience-highlight-bullet" data-i18n="exp_scm_h3" data-i18n-html="true">
+                <strong>Airflow Operational Efficiency:</strong> Mengimplementasikan Directed Acyclic Graphs (DAGs) untuk troubleshooting komprehensif, memangkas downtime sistem sebesar 35% dan mencapai 99.8% operational efficiency.
+              </div>
+            </div>
+
+            <div class="experience-footer">
+              <div class="tag-list">
+                <span class="tag tag-accent">Python ML</span>
+                <span class="tag tag-accent">Apache Kafka</span>
+                <span class="tag">Apache Spark</span>
+                <span class="tag">Apache Airflow</span>
+                <span class="tag">Docker</span>
+                <span class="tag">MySQL</span>
+                <span class="tag">Gen21 / Nielsen</span>
+              </div>
+              <a href="experience-scm.html" class="link-detail" id="linkDetailScm">
+                <span data-i18n="exp_scm_link">Lihat Detail Proyek & Arsitektur</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="section-header fade-in-section">
+          <span class="section-subtitle" data-i18n="skills_subtitle">Kompetensi Teknis</span>
+          <h2 data-i18n="skills_title">Keahlian & Penguasaan Teknologi</h2>
+          <p class="section-desc" data-i18n="skills_desc">Dikelompokkan berdasarkan domain keahlian dalam arsitektur data modern dan rekayasa AI.</p>
+        </div>
+
+        <div class="skills-grid fade-in-section">
+          <!-- Skill Card 1: Data Pipeline & Orchestration -->
+          <div class="skill-category-card">
+            <div class="skill-category-header">
+              <div class="skill-icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                </svg>
+              </div>
+              <h3 class="skill-category-title" data-i18n="skill_cat_1">Data Pipeline & Orchestration</h3>
+            </div>
+            <div class="skills-pill-container">
+              <span class="tag">Data Pipeline Development</span>
+              <span class="tag">Apache Airflow</span>
+              <span class="tag">dbt (Data Build Tool)</span>
+              <span class="tag">ETL & Reverse ETL</span>
+              <span class="tag">Dataflow</span>
+              <span class="tag">Data Governance</span>
+              <span class="tag">Data Wrangling</span>
+            </div>
+          </div>
+
+          <!-- Skill Card 2: Cloud Platforms -->
+          <div class="skill-category-card">
+            <div class="skill-category-header">
+              <div class="skill-icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
+                </svg>
+              </div>
+              <h3 class="skill-category-title" data-i18n="skill_cat_2">Cloud Platforms & Infra</h3>
+            </div>
+            <div class="skills-pill-container">
+              <span class="tag">Google Cloud Platform (GCP)</span>
+              <span class="tag">Amazon Web Services (AWS)</span>
+              <span class="tag">Cloud Run</span>
+              <span class="tag">Pub/Sub</span>
+              <span class="tag">Cloud Bigtable</span>
+              <span class="tag">Docker</span>
+              <span class="tag">Serverless Architecture</span>
+            </div>
+          </div>
+
+          <!-- Skill Card 3: Machine Learning & Generative AI -->
+          <div class="skill-category-card">
+            <div class="skill-category-header">
+              <div class="skill-icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2a10 10 0 1 0 10 10H12V2z"/>
+                  <path d="M12 12L2.5 7.5"/>
+                </svg>
+              </div>
+              <h3 class="skill-category-title" data-i18n="skill_cat_3">Machine Learning & GenAI</h3>
+            </div>
+            <div class="skills-pill-container">
+              <span class="tag">RAG (Retrieval-Augmented Gen)</span>
+              <span class="tag">Large Language Models (LLMs)</span>
+              <span class="tag">Multi-Agent Systems (ADK/MCP)</span>
+              <span class="tag">Gemini & Imagen</span>
+              <span class="tag">Customer Segmentation</span>
+              <span class="tag">Computer Vision (CNN)</span>
+              <span class="tag">Inception ResNet V2</span>
+            </div>
+          </div>
+
+          <!-- Skill Card 4: Databases & Warehousing -->
+          <div class="skill-category-card">
+            <div class="skill-category-header">
+              <div class="skill-icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                  <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                  <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+                </svg>
+              </div>
+              <h3 class="skill-category-title" data-i18n="skill_cat_4">Databases & Warehousing</h3>
+            </div>
+            <div class="skills-pill-container">
+              <span class="tag">Google BigQuery</span>
+              <span class="tag">ClickHouse (Columnar)</span>
+              <span class="tag">Snowflake</span>
+              <span class="tag">Greenplum</span>
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">MySQL</span>
+              <span class="tag">MongoDB</span>
+              <span class="tag">Apache Cassandra</span>
+            </div>
+          </div>
+
+          <!-- Skill Card 5: Streaming & Distributed Analytics -->
+          <div class="skill-category-card">
+            <div class="skill-category-header">
+              <div class="skill-icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                </svg>
+              </div>
+              <h3 class="skill-category-title" data-i18n="skill_cat_5">Streaming & Distributed</h3>
+            </div>
+            <div class="skills-pill-container">
+              <span class="tag">Apache Kafka & Confluent</span>
+              <span class="tag">Apache Spark</span>
+              <span class="tag">Apache Iceberg</span>
+              <span class="tag">Apache Beam</span>
+              <span class="tag">Apache Flink</span>
+              <span class="tag">Python & SQL</span>
+              <span class="tag">FlaskAPI</span>
+            </div>
+          </div>
+
+          <!-- Skill Card 6: Professional & Soft Skills -->
+          <div class="skill-category-card">
+            <div class="skill-category-header">
+              <div class="skill-icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </div>
+              <h3 class="skill-category-title" data-i18n="skill_cat_6">Metodologi & Kolaborasi</h3>
+            </div>
+            <div class="skills-pill-container">
+              <span class="tag">Critical Thinking</span>
+              <span class="tag">Problem Solving</span>
+              <span class="tag">SAD & TSD Authoring</span>
+              <span class="tag">BRD & FSD Documentation</span>
+              <span class="tag">Cross-functional Teamwork</span>
+              <span class="tag">Standards & Quality Control</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education & Certifications Section -->
+    <section class="section" id="education">
+      <div class="container">
+        <div class="section-header fade-in-section">
+          <span class="section-subtitle" data-i18n="edu_subtitle">Kualifikasi Formal</span>
+          <h2 data-i18n="edu_title">Pendidikan & Sertifikasi Cloud</h2>
+          <p class="section-desc" data-i18n="edu_desc">Standar kompetensi profesional bertaraf internasional dan pencapaian akademik teratas.</p>
+        </div>
+
+        <div class="edu-cert-grid fade-in-section">
+          <!-- Education Column -->
+          <div class="edu-column">
+            <h3 style="margin-bottom: 1.25rem;" data-i18n="edu_heading">Pendidikan</h3>
+            
+            <div class="edu-card">
+              <p class="edu-institution">UNIVERSITAS GUNADARMA</p>
+              <h4 class="edu-degree" data-i18n="edu_degree">Bachelor of Science in Computer Science (S.Kom)</h4>
+              <p class="edu-time" data-i18n="edu_time">Jakarta, Indonesia • Lulus Agustus 2023</p>
+
+              <div class="edu-award-badge">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+                <span data-i18n="edu_award">Awarded Best Student — Top 0.1% Universitas</span>
+              </div>
+
+              <div class="bullet-list">
+                <div class="bullet-item" data-i18n="edu_bullet_1" data-i18n-html="true">
+                  <strong>Deepfake Face Detection ML:</strong> Mengembangkan solusi deteksi wajah deepfake menggunakan Convolutional Neural Networks (CNN) dan Inception ResNet V2, mencapai akurasi 90% dan menurunkan false positive sebesar 80%.
+                </div>
+                <div class="bullet-item" data-i18n="edu_bullet_2" data-i18n-html="true">
+                  <strong>Mentorship & Training:</strong> Membimbing praktisi melalui materi pembelajaran komprehensif, meningkatkan kompetensi tim sebesar 30% dalam adopsi teknik ML mutakhir.
+                </div>
+              </div>
+
+              <div style="margin-top: 1.5rem;">
+                <a href="project-deepfake-detection.html" class="link-detail" id="linkDetailDeepfake">
+                  <span data-i18n="edu_link">Lihat Detail Proyek Deepfake (CNN/Inception) →</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Certifications Column -->
+          <div class="cert-column">
+            <h3 style="margin-bottom: 1.25rem;" data-i18n="cert_heading">Sertifikasi Resmi Google Cloud</h3>
+
+            <div class="cert-list">
+              <!-- Cert 1 -->
+              <div class="cert-card">
+                <div class="cert-info">
+                  <div class="cert-badge-logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 class="cert-title">Certified Professional Data Engineer</h4>
+                    <p class="cert-issuer">Google Cloud</p>
+                  </div>
+                </div>
+                <span class="cert-year">2026</span>
+              </div>
+
+              <!-- Cert 2 -->
+              <div class="cert-card">
+                <div class="cert-info">
+                  <div class="cert-badge-logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"/>
+                      <path d="M12 6v6l4 2"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 class="cert-title">Certified Professional Machine Learning Engineer</h4>
+                    <p class="cert-issuer">Google Cloud</p>
+                  </div>
+                </div>
+                <span class="cert-year">2024</span>
+              </div>
+
+              <!-- Cert 3 -->
+              <div class="cert-card">
+                <div class="cert-info">
+                  <div class="cert-badge-logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                      <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                      <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 class="cert-title">Certified Professional Database Engineer</h4>
+                    <p class="cert-issuer">Google Cloud</p>
+                  </div>
+                </div>
+                <span class="cert-year">2025</span>
+              </div>
+
+              <!-- Cert 4 -->
+              <div class="cert-card">
+                <div class="cert-info">
+                  <div class="cert-badge-logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 class="cert-title">Certified Generative AI Leader</h4>
+                    <p class="cert-issuer">Google Cloud</p>
+                  </div>
+                </div>
+                <span class="cert-year">2025</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-header fade-in-section">
+          <span class="section-subtitle" data-i18n="contact_subtitle">Mari Berkolaborasi</span>
+          <h2 data-i18n="contact_title">Informasi Kontak</h2>
+          <p class="section-desc" data-i18n="contact_desc">Terbuka untuk diskusi arsitektur data, implementasi machine learning/LLM, serta peluang kerja sama profesional.</p>
+        </div>
+
+        <div class="contact-grid fade-in-section">
+          <div class="contact-card-box">
+            <!-- Email Channel -->
+            <div class="contact-channel">
+              <div class="contact-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-label" data-i18n="contact_email_lbl">Email Utama</div>
+                <a href="mailto:kharismadinahijram@gmail.com" class="contact-val" id="contactEmailLink">kharismadinahijram@gmail.com</a>
+              </div>
+              <button type="button" class="btn-copy-email" id="btnCopyEmail" data-email="kharismadinahijram@gmail.com" title="Salin email" data-i18n="contact_copy_btn">
+                Salin
+              </button>
+            </div>
+
+            <!-- Phone / WhatsApp Channel -->
+            <div class="contact-channel">
+              <div class="contact-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-label" data-i18n="contact_phone_lbl">Telepon / WhatsApp</div>
+                <a href="https://wa.me/6285891218000" target="_blank" rel="noopener noreferrer" class="contact-val" id="contactPhoneLink">+62 858 9121 8000</a>
+              </div>
+            </div>
+
+            <!-- Location Channel -->
+            <div class="contact-channel">
+              <div class="contact-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-label" data-i18n="contact_loc_lbl">Domisili</div>
+                <span class="contact-val">Serpong, Tangerang, Indonesia</span>
+              </div>
+            </div>
+
+            <!-- GitHub Channel -->
+            <div class="contact-channel">
+              <div class="contact-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-label" data-i18n="contact_github_lbl">GitHub Profil</div>
+                <a href="https://github.com/KharismadinaHM" target="_blank" rel="noopener noreferrer" class="contact-val" id="contactGithubLink">github.com/KharismadinaHM</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Direct Message Card -->
+          <div class="about-card" style="display: flex; flex-direction: column; justify-content: center;">
+            <h3 style="margin-bottom: 0.75rem;" data-i18n="contact_cta_title">Mulai Percakapan</h3>
+            <p style="margin-bottom: 1.5rem; color: var(--text-secondary);" data-i18n="contact_cta_desc">
+              Baik untuk proyek transformasi data, audit infrastruktur cloud, implementasi generative AI multi-agent, atau peluang karier, saya siap terhubung.
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <a href="mailto:kharismadinahijram@gmail.com?subject=Kolaborasi%20Proyek%20Data%20&body=Halo%20Kharismadina," class="btn btn-primary" id="btnSendDirectEmail">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+                <span data-i18n="contact_btn_email">Kirim Pesan via Email</span>
+              </a>
+              <a href="https://wa.me/6285891218000?text=Halo%20Kharismadina,%20saya%20tertarik%20berdiskusi%20mengenai%20proyek%20data" target="_blank" rel="noopener noreferrer" class="btn btn-outline" id="btnSendWhatsapp" data-i18n="contact_btn_wa">
+                Hubungi via WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Toast Notification element -->
+  <div class="toast-notice" id="toastNotice" role="status" aria-live="polite"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-wrapper">
+        <div>
+          <p>© 2026 <strong>Kharismadina Hijra M</strong>. All rights reserved.</p>
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;" data-i18n="footer_tag">Dibangun dengan standar web performa tinggi & desain minimalis modern.</p>
+        </div>
+        <div class="footer-links">
+          <a href="#hero" data-i18n="footer_back_top">Kembali ke Atas ↑</a>
+          <a href="https://github.com/KharismadinaHM" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="mailto:kharismadinahijram@gmail.com">Email</a>
+          <a href="https://wa.me/6285891218000" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts: translations first, then main.js -->
+  <script src="js/translations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EBF4F3" />
+      <stop offset="100%" stop-color="#D7E8E6" />
+    </linearGradient>
+    <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E5F5A" />
+      <stop offset="100%" stop-color="#134340" />
+    </linearGradient>
+    <linearGradient id="accentGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38B2AC" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#1E5F5A" stop-opacity="0" />
+    </linearGradient>
+    <clipPath id="circleClip">
+      <circle cx="200" cy="200" r="180" />
+    </clipPath>
+  </defs>
+
+  <!-- Background Circle -->
+  <circle cx="200" cy="200" r="180" fill="url(#bgGrad)" stroke="#1E5F5A" stroke-width="3" stroke-opacity="0.2"/>
+  
+  <!-- Subtle Data Tech Grid Pattern inside Avatar -->
+  <g clip-path="url(#circleClip)" opacity="0.35">
+    <path d="M40,100 L360,100 M40,200 L360,200 M40,300 L360,300" stroke="#1E5F5A" stroke-width="1" stroke-dasharray="4 6" />
+    <path d="M100,40 L100,360 M200,40 L200,360 M300,40 L300,360" stroke="#1E5F5A" stroke-width="1" stroke-dasharray="4 6" />
+    <circle cx="100" cy="100" r="4" fill="#1E5F5A" />
+    <circle cx="300" cy="100" r="4" fill="#1E5F5A" />
+    <circle cx="200" cy="200" r="5" fill="#1E5F5A" />
+    <circle cx="100" cy="300" r="4" fill="#1E5F5A" />
+    <circle cx="300" cy="300" r="4" fill="#1E5F5A" />
+  </g>
+
+  <!-- Stylized Modern Silhouette with Professional Accent -->
+  <g clip-path="url(#circleClip)">
+    <!-- Shoulders / Body -->
+    <path d="M100 370 C100 290, 140 270, 200 270 C260 270, 300 290, 300 370 Z" fill="url(#tealGrad)" />
+    <!-- Collar / Shirt Detail -->
+    <path d="M185 270 L200 295 L215 270 Z" fill="#FFFFFF" opacity="0.9" />
+    <path d="M200 295 L200 350" stroke="#FFFFFF" stroke-width="2" opacity="0.6" stroke-linecap="round" />
+    <!-- Neck -->
+    <rect x="182" y="220" width="36" height="55" rx="10" fill="#E2C9B8" />
+    <!-- Head Base -->
+    <ellipse cx="200" cy="175" rx="55" ry="65" fill="#E8D1C0" />
+    <!-- Hair Modern Sleek -->
+    <path d="M142 165 C140 115, 175 105, 200 105 C225 105, 260 115, 258 165 C252 140, 238 125, 200 125 C162 125, 148 140, 142 165 Z" fill="#1A1A1A" />
+    <!-- Smart Glasses (Data/Tech detail) -->
+    <rect x="162" y="160" width="30" height="20" rx="6" fill="none" stroke="#1A1A1A" stroke-width="3" />
+    <rect x="208" y="160" width="30" height="20" rx="6" fill="none" stroke="#1A1A1A" stroke-width="3" />
+    <line x1="192" y1="170" x2="208" y2="170" stroke="#1A1A1A" stroke-width="3" />
+    <line x1="148" y1="168" x2="162" y2="168" stroke="#1A1A1A" stroke-width="2" />
+    <line x1="238" y1="168" x2="252" y2="168" stroke="#1A1A1A" stroke-width="2" />
+    <!-- Smile -->
+    <path d="M188 206 Q200 216 212 206" stroke="#5A4035" stroke-width="2.5" stroke-linecap="round" fill="none" />
+  </g>
+
+  <!-- Modern Floating Tech Badges / Nodes around Avatar -->
+  <g>
+    <!-- GCP Data Badge -->
+    <g transform="translate(45, 130)">
+      <rect width="68" height="26" rx="13" fill="#FFFFFF" stroke="#E5E3DE" stroke-width="1.5" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.05))"/>
+      <circle cx="14" cy="13" r="5" fill="#4285F4" />
+      <text x="24" y="17" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700" fill="#1A1A1A">GCP</text>
+    </g>
+    <!-- AI / ML Badge -->
+    <g transform="translate(290, 120)">
+      <rect width="65" height="26" rx="13" fill="#FFFFFF" stroke="#E5E3DE" stroke-width="1.5" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.05))"/>
+      <circle cx="14" cy="13" r="5" fill="#1E5F5A" />
+      <text x="24" y="17" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700" fill="#1A1A1A">AI/ML</text>
+    </g>
+    <!-- ETL Badge -->
+    <g transform="translate(305, 240)">
+      <rect width="60" height="26" rx="13" fill="#FFFFFF" stroke="#E5E3DE" stroke-width="1.5" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.05))"/>
+      <circle cx="14" cy="13" r="5" fill="#0F9D58" />
+      <text x="24" y="17" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700" fill="#1A1A1A">ETL</text>
+    </g>
+  </g>
+</svg>
