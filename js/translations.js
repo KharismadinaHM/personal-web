@@ -15,6 +15,7 @@ const translations = {
 
     // Hero
     hero_available: "Tersedia untuk Peluang & Proyek Baru",
+    hero_title: "Hai, I am Kharismadina Hijra Muhamad you can call me Kharis 👋",
     hero_greeting: "Hai, I am Kharismadina Hijra Muhamad you can call me Kharis 👋",
     hero_subtitle: "Data & Machine Learning Engineer",
     hero_tagline: "Data Engineer dinamis dengan 4 tahun pengalaman membangun pipeline analitik berkinerja tinggi, alur kerja ETL & reverse ETL, arsitektur berbasis event, dan sistem Generative AI multi-agent di cloud. Membuka nilai data bisnis melalui data engineering dan kecerdasan buatan.",
@@ -337,6 +338,7 @@ const translations = {
 
     // Hero
     hero_available: "Available for Opportunities & Projects",
+    hero_title: "Hi, I am Kharismadina Hijra Muhamad, you can call me Kharis 👋",
     hero_greeting: "Hi, I am Kharismadina Hijra Muhamad, you can call me Kharis 👋",
     hero_subtitle: "Data & Machine Learning Engineer",
     hero_tagline: "Dynamic Data Engineer with four years of experience building high-performance analytics pipelines, ETL and reverse ETL workflows, and event-driven architectures. Skilled in modern data stack tools including dbt, ClickHouse, Apache Airflow, BigQuery, Looker, Dataflow, PubSub, MongoDB, Cassandra and Confluent Kafka. Passionate about delivering business insights and unlocking value from data.",

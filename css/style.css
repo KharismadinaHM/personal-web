@@ -407,7 +407,9 @@ p:last-child {
 }
 
 .hero-title {
-  margin-bottom: 0.75rem;
+  font-size: clamp(1.85rem, 3.6vw, 2.65rem);
+  line-height: 1.25;
+  margin-bottom: 0.85rem;
 }
 
 .hero-subtitle {
