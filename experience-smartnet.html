@@ -103,6 +103,83 @@
             </p>
           </div>
         </div>
+
+        <!-- Architecture Diagram 1: Gemini Enterprise AI Solution -->
+        <div class="architecture-card">
+          <div class="architecture-card-header">
+            <h4 class="architecture-card-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                <line x1="6" y1="18" x2="6.01" y2="18"></line>
+              </svg>
+              <span data-i18n="smartnet_diag1_title">Arsitektur: AI & Search Intelligence using Gemini Enterprise Solution</span>
+            </h4>
+            <span class="stat-pill" data-i18n="smartnet_diag1_badge">Enterprise AI & RAG Architecture</span>
+          </div>
+
+          <div class="diagram-preview-box" data-lightbox-src="assets/gemini-enterprise-connection.png" data-lightbox-caption-key="smartnet_diag1_title" role="button" tabindex="0" aria-label="Perbesar diagram Gemini Enterprise">
+            <img src="assets/gemini-enterprise-connection.png" alt="Arsitektur AI & Search Intelligence Gemini Enterprise" class="diagram-preview-img" loading="lazy">
+            <div class="diagram-zoom-hint">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="11" y1="8" x2="11" y2="14"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+              </svg>
+              <span data-i18n="diagram_zoom_hint">Klik untuk memperbesar diagram</span>
+            </div>
+          </div>
+
+          <div class="architecture-card-body">
+            <p class="diagram-desc" data-i18n="smartnet_diag1_desc">
+              Solusi terpadu pencarian cerdas dan pemrosesan dokumen berbasis AI di Google Cloud Platform yang menghubungkan data enterprise terstruktur dan tidak terstruktur dengan Large Language Model multimodal.
+            </p>
+
+            <div class="diagram-steps-grid">
+              <div class="diagram-step-item">
+                <div class="diagram-step-header">
+                  <span class="diagram-step-number">1</span>
+                  <h5 class="diagram-step-title" data-i18n="smartnet_diag1_s1_title">1. Ingestion Dokumen Terpusat</h5>
+                </div>
+                <p class="diagram-step-text" data-i18n="smartnet_diag1_s1_text">
+                  Dokumen korporat disimpan secara terpusat di Google Cloud Storage (GCS) sebagai basis pengetahuan data tak terstruktur.
+                </p>
+              </div>
+
+              <div class="diagram-step-item">
+                <div class="diagram-step-header">
+                  <span class="diagram-step-number">2</span>
+                  <h5 class="diagram-step-title" data-i18n="smartnet_diag1_s2_title">2. Vertex AI Search & Indexing</h5>
+                </div>
+                <p class="diagram-step-text" data-i18n="smartnet_diag1_s2_text">
+                  Vertex AI Search mem-parsing dan mengindeks dokumen untuk semantic vector search berkecepatan tinggi dalam kerangka Retrieval-Augmented Generation (RAG).
+                </p>
+              </div>
+
+              <div class="diagram-step-item">
+                <div class="diagram-step-header">
+                  <span class="diagram-step-number">3</span>
+                  <h5 class="diagram-step-title" data-i18n="smartnet_diag1_s3_title">3. Konektor SharePoint & OneDrive</h5>
+                </div>
+                <p class="diagram-step-text" data-i18n="smartnet_diag1_s3_text">
+                  Integrasi konektor pihak ketiga menyinkronkan repositori Microsoft SharePoint dan OneDrive ke lingkungan AI secara aman.
+                </p>
+              </div>
+
+              <div class="diagram-step-item">
+                <div class="diagram-step-header">
+                  <span class="diagram-step-number">4</span>
+                  <h5 class="diagram-step-title" data-i18n="smartnet_diag1_s4_title">4. Grounding Gemini & BigQuery</h5>
+                </div>
+                <p class="diagram-step-text" data-i18n="smartnet_diag1_s4_text">
+                  Platform Gemini Enterprise melakukan grounding kueri dengan metrik terstruktur BigQuery dan dokumen untuk menyajikan respons akurat ke desktop dan mobile.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- Block 2: Large-Scale ETL & Streaming Pipelines -->
@@ -133,6 +210,307 @@
             <p data-i18n="smartnet_p5_text">
               Merekayasa pipeline migrasi data otomatis tanpa kendala (seamless migration) untuk memindahkan beban kerja NoSQL dari on-premise Apache Cassandra ke Google Cloud Bigtable terkelola.
             </p>
+          </div>
+        </div>
+
+        <!-- Architecture Diagram 2: Retail DWH Real-Time Analytics -->
+        <div class="architecture-card">
+          <div class="architecture-card-header">
+            <h4 class="architecture-card-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+              </svg>
+              <span data-i18n="smartnet_diag2_title">Arsitektur Real-Time Data Analytics & Medallion Data Warehouse (Retail DWH)</span>
+            </h4>
+            <span class="stat-pill" data-i18n="smartnet_diag2_badge">Real-Time Streaming & Medallion DWH</span>
+          </div>
+
+          <div class="diagram-preview-box" data-lightbox-src="assets/retail-dwh-analytics.png" data-lightbox-caption-key="smartnet_diag2_title" role="button" tabindex="0" aria-label="Perbesar diagram Retail DWH">
+            <img src="assets/retail-dwh-analytics.png" alt="Arsitektur Real-Time Data Analytics Retail DWH" class="diagram-preview-img" loading="lazy">
+            <div class="diagram-zoom-hint">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="11" y1="8" x2="11" y2="14"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+              </svg>
+              <span data-i18n="diagram_zoom_hint">Klik untuk memperbesar diagram</span>
+            </div>
+          </div>
+
+          <div class="architecture-card-body">
+            <p class="diagram-desc" data-i18n="smartnet_diag2_desc">
+              Rancangan arsitektur streaming data skala besar dari ratusan database toko (DB Express) dan cabang (DB Standard) menuju BigQuery Medallion Architecture (Bronze, Silver, Gold).
+            </p>
+
+            <div class="diagram-steps-grid">
+              <div class="diagram-step-item">
+                <div class="diagram-step-header">
+                  <span class="diagram-step-number">1</span>
+                  <h5 class="diagram-step-title" data-i18n="smartnet_diag2_s1_title">1. Ingestion Datastream & Pub/Sub</h5>
+                </div>
+                <p class="diagram-step-text" data-i18n="smartnet_diag2_s1_text">
+                  Menangkap transaksi kasir toko secara realtime via Stream App ke GCP Pub/Sub Topics dan CDC Datastream dari DB Standard cabang.
+                </p>
+              </div>
+
+              <div class="diagram-step-item">
+                <div class="diagram-step-header">
+                  <span class="diagram-step-number">2</span>
+                  <h5 class="diagram-step-title" data-i18n="smartnet_diag2_s2_title">2. Stream Processing via Dataflow</h5>
+                </div>
+                <p class="diagram-step-text" data-i18n="smartnet_diag2_s2_text">
+                  Cloud Dataflow menjalankan raw ingestion ke Data Lake (Cloud Storage) dan pembersihan data (cleansing & deduplication) in-flight.
+                </p>
+              </div>
+
+              <div class="diagram-step-item">
+                <div class="diagram-step-header">
+                  <span class="diagram-step-number">3</span>
+                  <h5 class="diagram-step-title" data-i18n="smartnet_diag2_s3_title">3. BigQuery Medallion Architecture</h5>
+                </div>
+                <p class="diagram-step-text" data-i18n="smartnet_diag2_s3_text">
+                  Alur data bertingkat: Bronze Layer (raw events), Silver Layer (data bersih), dan Gold Layer (agregasi data mart penjualan & stok toko).
+                </p>
+              </div>
+
+              <div class="diagram-step-item">
+                <div class="diagram-step-header">
+                  <span class="diagram-step-number">4</span>
+                  <h5 class="diagram-step-title" data-i18n="smartnet_diag2_s4_title">4. Observabilitas & Penyajian BI</h5>
+                </div>
+                <p class="diagram-step-text" data-i18n="smartnet_diag2_s4_text">
+                  Tata kelola data terpusat via Google Cloud Dataplex, visualisasi metrik sistem di Grafana, dan pelaporan real-time ke BI Dashboard.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Architecture Diagram 3: Data Lineage RekapTransaksiTokoDetail -->
+        <div class="architecture-card">
+          <div class="architecture-card-header">
+            <h4 class="architecture-card-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="6" y1="3" x2="6" y2="15"></line>
+                <circle cx="18" cy="6" r="3"></circle>
+                <circle cx="6" cy="18" r="3"></circle>
+                <path d="M18 9a9 9 0 0 1-9 9"></path>
+              </svg>
+              <span data-i18n="smartnet_diag3_title">Data Lineage Transaksi Toko: RekapTransaksiTokoDetail</span>
+            </h4>
+            <span class="stat-pill" data-i18n="smartnet_diag3_badge">Data Lineage & CDC Ingestion</span>
+          </div>
+
+          <div class="diagram-preview-box" data-lightbox-src="assets/retail-dwh-analytics-data-lineage.png" data-lightbox-caption-key="smartnet_diag3_title" role="button" tabindex="0" aria-label="Perbesar diagram Data Lineage">
+            <img src="assets/retail-dwh-analytics-data-lineage.png" alt="Data Lineage RekapTransaksiTokoDetail" class="diagram-preview-img" loading="lazy">
+            <div class="diagram-zoom-hint">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="11" y1="8" x2="11" y2="14"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+              </svg>
+              <span data-i18n="diagram_zoom_hint">Klik untuk memperbesar diagram</span>
+            </div>
+          </div>
+
+          <div class="architecture-card-body">
+            <p class="diagram-desc" data-i18n="smartnet_diag3_desc">
+              Silsilah alur data terperinci dari level trigger basis data SQL Express di gerai toko lokal hingga tersaji di tabel analitik Google BigQuery.
+            </p>
+
+            <div class="diagram-steps-grid">
+              <div class="diagram-step-item">
+                <div class="diagram-step-header">
+                  <span class="diagram-step-number">1</span>
+                  <h5 class="diagram-step-title" data-i18n="smartnet_diag3_s1_title">1. Trigger Tabel Audit Toko</h5>
+                </div>
+                <p class="diagram-step-text" data-i18n="smartnet_diag3_s1_text">
+                  Perubahan data di tabel RekapTransaksiTokoDetail mengaktifkan trigger otomatis yang mencatat log audit ke RekapTransaksiTokoDetail_Audit.
+                </p>
+              </div>
+
+              <div class="diagram-step-item">
+                <div class="diagram-step-header">
+                  <span class="diagram-step-number">2</span>
+                  <h5 class="diagram-step-title" data-i18n="smartnet_diag3_s2_title">2. Publikasi ke GCP Pub/Sub</h5>
+                </div>
+                <p class="diagram-step-text" data-i18n="smartnet_diag3_s2_text">
+                  Aplikasi toko mengekstrak baris audit dan menerbitkannya ke topik GCP Pub/Sub: pb-RekapTransaksiTokoDetail-raw.
+                </p>
+              </div>
+
+              <div class="diagram-step-item">
+                <div class="diagram-step-header">
+                  <span class="diagram-step-number">3</span>
+                  <h5 class="diagram-step-title" data-i18n="smartnet_diag3_s3_title">3. BigQuery Direct Subscription</h5>
+                </div>
+                <p class="diagram-step-text" data-i18n="smartnet_diag3_s3_text">
+                  Direct Subscriber BigQuery menyerap streaming message langsung ke tabel raw RekapTransaksiTokoDetail tanpa delay batch.
+                </p>
+              </div>
+
+              <div class="diagram-step-item">
+                <div class="diagram-step-header">
+                  <span class="diagram-step-number">4</span>
+                  <h5 class="diagram-step-title" data-i18n="smartnet_diag3_s4_title">4. Analytical View & Scheduler</h5>
+                </div>
+                <p class="diagram-step-text" data-i18n="smartnet_diag3_s4_text">
+                  View analitik vw_RekapTransaksiTokoDetail memfilter kolom redundan, dan Cloud Scheduler memprosesnya ke tabel produksi pb_bronze_toko.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Architecture Diagram 4: Firebase Mobile Analytics Pipeline Fase 1 & 2 -->
+        <div class="architecture-card">
+          <div class="architecture-card-header">
+            <h4 class="architecture-card-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
+                <line x1="4" y1="22" x2="4" y2="15"></line>
+              </svg>
+              <span data-i18n="smartnet_diag4_title">Arsitektur Pipeline Firebase Mobile Analytics (Fase 1 & 2)</span>
+            </h4>
+            <span class="stat-pill" data-i18n="smartnet_diag4_badge">Firebase Pipeline Fase 1 & 2</span>
+          </div>
+
+          <div class="diagram-preview-box" data-lightbox-src="assets/firebase-analytics-fase-1&2.png" data-lightbox-caption-key="smartnet_diag4_title" role="button" tabindex="0" aria-label="Perbesar diagram Firebase Analytics Fase 1 & 2">
+            <img src="assets/firebase-analytics-fase-1&2.png" alt="Firebase Mobile Analytics Pipeline Fase 1 & 2" class="diagram-preview-img" loading="lazy">
+            <div class="diagram-zoom-hint">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="11" y1="8" x2="11" y2="14"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+              </svg>
+              <span data-i18n="diagram_zoom_hint">Klik untuk memperbesar diagram</span>
+            </div>
+          </div>
+
+          <div class="architecture-card-body">
+            <p class="diagram-desc" data-i18n="smartnet_diag4_desc">
+              Jalur pemrosesan analitik aplikasi mobile berskala 1TB+ dari jutaan pengguna Android dan iOS menuju BigQuery dan Looker Studio.
+            </p>
+
+            <div class="diagram-steps-grid">
+              <div class="diagram-step-item">
+                <div class="diagram-step-header">
+                  <span class="diagram-step-number">1</span>
+                  <h5 class="diagram-step-title" data-i18n="smartnet_diag4_s1_title">1. Device SDK & Transport Layer</h5>
+                </div>
+                <p class="diagram-step-text" data-i18n="smartnet_diag4_s1_text">
+                  Telemetri pengguna dikumpulkan dari aplikasi Android (Android Transport Layer) dan iOS (APNs) menuju backend Firebase Analytics.
+                </p>
+              </div>
+
+              <div class="diagram-step-item">
+                <div class="diagram-step-header">
+                  <span class="diagram-step-number">2</span>
+                  <h5 class="diagram-step-title" data-i18n="smartnet_diag4_s2_title">2. BigQuery Data Marts & ML</h5>
+                </div>
+                <p class="diagram-step-text" data-i18n="smartnet_diag4_s2_text">
+                  Data Firebase dialirkan ke BigQuery, dipartisi menjadi Data Mart fungsional, dan dianalisis menggunakan algoritma BigQuery ML.
+                </p>
+              </div>
+
+              <div class="diagram-step-item">
+                <div class="diagram-step-header">
+                  <span class="diagram-step-number">3</span>
+                  <h5 class="diagram-step-title" data-i18n="smartnet_diag4_s3_title">3. Orkestrasi Cloud Composer</h5>
+                </div>
+                <p class="diagram-step-text" data-i18n="smartnet_diag4_s3_text">
+                  Apache Airflow terkelola (Cloud Composer) mengorkestrasi jadwal batch ETL harian dan sinkronisasi metadata Google Data Catalog.
+                </p>
+              </div>
+
+              <div class="diagram-step-item">
+                <div class="diagram-step-header">
+                  <span class="diagram-step-number">4</span>
+                  <h5 class="diagram-step-title" data-i18n="smartnet_diag4_s4_title">4. Dashboard Multi-Domain Looker</h5>
+                </div>
+                <p class="diagram-step-text" data-i18n="smartnet_diag4_s4_text">
+                  Looker Studio menyajikan visualisasi terpisah untuk Marketing Dashboard, User Monitoring Dashboard, dan Application Performance Dashboard.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Architecture Diagram 5: Firebase Analytics Fase 3 Multi-Store Ingestion -->
+        <div class="architecture-card">
+          <div class="architecture-card-header">
+            <h4 class="architecture-card-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              <span data-i18n="smartnet_diag5_title">Evolusi Arsitektur: Firebase Analytics Fase 3 (Multi-Store Ingestion)</span>
+            </h4>
+            <span class="stat-pill" data-i18n="smartnet_diag5_badge">Firebase Pipeline Fase 3</span>
+          </div>
+
+          <div class="diagram-preview-box" data-lightbox-src="assets/firebase-analytics-fase-3.png" data-lightbox-caption-key="smartnet_diag5_title" role="button" tabindex="0" aria-label="Perbesar diagram Firebase Analytics Fase 3">
+            <img src="assets/firebase-analytics-fase-3.png" alt="Firebase Analytics Fase 3 Multi-Store Ingestion" class="diagram-preview-img" loading="lazy">
+            <div class="diagram-zoom-hint">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="11" y1="8" x2="11" y2="14"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+              </svg>
+              <span data-i18n="diagram_zoom_hint">Klik untuk memperbesar diagram</span>
+            </div>
+          </div>
+
+          <div class="architecture-card-body">
+            <p class="diagram-desc" data-i18n="smartnet_diag5_desc">
+              Perluasan arsitektur analitik dengan otomatisasi integrasi data umpan balik dan metrik instalasi dari Apple App Store dan Google Play Store.
+            </p>
+
+            <div class="diagram-steps-grid">
+              <div class="diagram-step-item">
+                <div class="diagram-step-header">
+                  <span class="diagram-step-number">1</span>
+                  <h5 class="diagram-step-title" data-i18n="smartnet_diag5_s1_title">1. Serverless Cloud Functions (App Store)</h5>
+                </div>
+                <p class="diagram-step-text" data-i18n="smartnet_diag5_s1_text">
+                  GCP Cloud Functions mengeksekusi penarikan data API App Store Connect secara terjadwal untuk analitik pengguna aplikasi iOS.
+                </p>
+              </div>
+
+              <div class="diagram-step-item">
+                <div class="diagram-step-header">
+                  <span class="diagram-step-number">2</span>
+                  <h5 class="diagram-step-title" data-i18n="smartnet_diag5_s2_title">2. BigQuery Data Transfer Services</h5>
+                </div>
+                <p class="diagram-step-text" data-i18n="smartnet_diag5_s2_text">
+                  BigQuery Data Transfer Service menelan laporan analitik, install metrics, dan crash report Play Store secara otomatis tanpa server.
+                </p>
+              </div>
+
+              <div class="diagram-step-item">
+                <div class="diagram-step-header">
+                  <span class="diagram-step-number">3</span>
+                  <h5 class="diagram-step-title" data-i18n="smartnet_diag5_s3_title">3. Konsolidasi Data Marts & ML</h5>
+                </div>
+                <p class="diagram-step-text" data-i18n="smartnet_diag5_s3_text">
+                  Data dari kedua toko aplikasi digabungkan dengan log in-app untuk analisis churn prediction, sentimen review, dan retensi pengguna.
+                </p>
+              </div>
+
+              <div class="diagram-step-item">
+                <div class="diagram-step-header">
+                  <span class="diagram-step-number">4</span>
+                  <h5 class="diagram-step-title" data-i18n="smartnet_diag5_s4_title">4. Reporting Looker Studio Pro</h5>
+                </div>
+                <p class="diagram-step-text" data-i18n="smartnet_diag5_s4_text">
+                  Penyajian metrik performa aplikasi enterprise di Looker Studio Pro dengan pembaruan otomatis dan kontrol akses berbasis peran.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -245,6 +623,20 @@
       </div>
     </div>
   </footer>
+
+  <!-- Lightbox Modal for Architecture Diagrams -->
+  <div class="lightbox-modal" id="lightboxModal" role="dialog" aria-modal="true" aria-label="Diagram Viewer">
+    <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Tutup / Close">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <div class="lightbox-content">
+      <img src="" alt="High resolution architecture diagram" class="lightbox-img" id="lightboxImg">
+      <p class="lightbox-caption" id="lightboxCaption"></p>
+    </div>
+  </div>
 
   <!-- Scripts -->
   <script src="js/translations.js"></script>

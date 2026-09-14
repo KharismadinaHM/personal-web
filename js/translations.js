@@ -151,6 +151,75 @@ const translations = {
     smartnet_p13_title: "Supervisi Developer & Validasi Kualitas",
     smartnet_p13_text: "Memonitor pengerjaan tugas tim developer untuk 5+ proyek (menekan keterlambatan task hingga 10%) dan memvalidasi hasil pengujian untuk 4+ proyek dengan tingkat kepatuhan spesifikasi mencapai 90%.",
 
+    // Smartnet Architecture Diagrams (ID)
+    diagram_zoom_hint: "Klik untuk memperbesar diagram",
+    close_modal: "Tutup",
+    
+    // Diagram 1: Gemini Enterprise
+    smartnet_diag1_badge: "Enterprise AI & RAG Architecture",
+    smartnet_diag1_title: "Arsitektur: AI & Search Intelligence using Gemini Enterprise Solution",
+    smartnet_diag1_desc: "Solusi terpadu pencarian cerdas dan pemrosesan dokumen berbasis AI di Google Cloud Platform yang menghubungkan data enterprise terstruktur dan tidak terstruktur dengan Large Language Model multimodal.",
+    smartnet_diag1_s1_title: "1. Ingestion Dokumen Terpusat",
+    smartnet_diag1_s1_text: "Dokumen korporat disimpan secara terpusat di Google Cloud Storage (GCS) sebagai basis pengetahuan data tak terstruktur.",
+    smartnet_diag1_s2_title: "2. Vertex AI Search & Indexing",
+    smartnet_diag1_s2_text: "Vertex AI Search mem-parsing dan mengindeks dokumen untuk semantic vector search berkecepatan tinggi dalam kerangka Retrieval-Augmented Generation (RAG).",
+    smartnet_diag1_s3_title: "3. Konektor SharePoint & OneDrive",
+    smartnet_diag1_s3_text: "Integrasi konektor pihak ketiga menyinkronkan repositori Microsoft SharePoint dan OneDrive ke lingkungan AI secara aman.",
+    smartnet_diag1_s4_title: "4. Grounding Gemini & BigQuery",
+    smartnet_diag1_s4_text: "Platform Gemini Enterprise melakukan grounding kueri dengan metrik terstruktur BigQuery dan dokumen untuk menyajikan respons akurat ke desktop dan mobile.",
+
+    // Diagram 2: Retail DWH Real-Time Analytics
+    smartnet_diag2_badge: "Real-Time Streaming & Medallion DWH",
+    smartnet_diag2_title: "Arsitektur Real-Time Data Analytics & Medallion Data Warehouse (Retail DWH)",
+    smartnet_diag2_desc: "Rancangan arsitektur streaming data skala besar dari ratusan database toko (DB Express) dan cabang (DB Standard) menuju BigQuery Medallion Architecture (Bronze, Silver, Gold).",
+    smartnet_diag2_s1_title: "1. Ingestion Datastream & Pub/Sub",
+    smartnet_diag2_s1_text: "Menangkap transaksi kasir toko secara realtime via Stream App ke GCP Pub/Sub Topics dan CDC Datastream dari DB Standard cabang.",
+    smartnet_diag2_s2_title: "2. Stream Processing via Dataflow",
+    smartnet_diag2_s2_text: "Cloud Dataflow menjalankan raw ingestion ke Data Lake (Cloud Storage) dan pembersihan data (cleansing & deduplication) in-flight.",
+    smartnet_diag2_s3_title: "3. BigQuery Medallion Architecture",
+    smartnet_diag2_s3_text: "Alur data bertingkat: Bronze Layer (raw events), Silver Layer (data bersih), dan Gold Layer (agregasi data mart penjualan & stok toko).",
+    smartnet_diag2_s4_title: "4. Observabilitas & Penyajian BI",
+    smartnet_diag2_s4_text: "Tata kelola data terpusat via Google Cloud Dataplex, visualisasi metrik sistem di Grafana, dan pelaporan real-time ke BI Dashboard.",
+
+    // Diagram 3: Data Lineage RekapTransaksiTokoDetail
+    smartnet_diag3_badge: "Data Lineage & CDC Ingestion",
+    smartnet_diag3_title: "Data Lineage Transaksi Toko: RekapTransaksiTokoDetail",
+    smartnet_diag3_desc: "Silsilah alur data terperinci dari level trigger basis data SQL Express di gerai toko lokal hingga tersaji di tabel analitik Google BigQuery.",
+    smartnet_diag3_s1_title: "1. Trigger Tabel Audit Toko",
+    smartnet_diag3_s1_text: "Perubahan data di tabel RekapTransaksiTokoDetail mengaktifkan trigger otomatis yang mencatat log audit ke RekapTransaksiTokoDetail_Audit.",
+    smartnet_diag3_s2_title: "2. Publikasi ke GCP Pub/Sub",
+    smartnet_diag3_s2_text: "Aplikasi toko mengekstrak baris audit dan menerbitkannya ke topik GCP Pub/Sub: pb-RekapTransaksiTokoDetail-raw.",
+    smartnet_diag3_s3_title: "3. BigQuery Direct Subscription",
+    smartnet_diag3_s3_text: "Direct Subscriber BigQuery menyerap streaming message langsung ke tabel raw RekapTransaksiTokoDetail tanpa delay batch.",
+    smartnet_diag3_s4_title: "4. Analytical View & Scheduler",
+    smartnet_diag3_s4_text: "View analitik vw_RekapTransaksiTokoDetail memfilter kolom redundan, dan Cloud Scheduler memprosesnya ke tabel produksi pb_bronze_toko.",
+
+    // Diagram 4: Firebase Analytics Fase 1 & 2
+    smartnet_diag4_badge: "Firebase Pipeline Fase 1 & 2",
+    smartnet_diag4_title: "Arsitektur Pipeline Firebase Mobile Analytics (Fase 1 & 2)",
+    smartnet_diag4_desc: "Jalur pemrosesan analitik aplikasi mobile berskala 1TB+ dari jutaan pengguna Android dan iOS menuju BigQuery dan Looker Studio.",
+    smartnet_diag4_s1_title: "1. Device SDK & Transport Layer",
+    smartnet_diag4_s1_text: "Telemetri pengguna dikumpulkan dari aplikasi Android (Android Transport Layer) dan iOS (APNs) menuju backend Firebase Analytics.",
+    smartnet_diag4_s2_title: "2. BigQuery Data Marts & ML",
+    smartnet_diag4_s2_text: "Data Firebase dialirkan ke BigQuery, dipartisi menjadi Data Mart fungsional, dan dianalisis menggunakan algoritma BigQuery ML.",
+    smartnet_diag4_s3_title: "3. Orkestrasi Cloud Composer",
+    smartnet_diag4_s3_text: "Apache Airflow terkelola (Cloud Composer) mengorkestrasi jadwal batch ETL harian dan sinkronisasi metadata Google Data Catalog.",
+    smartnet_diag4_s4_title: "4. Dashboard Multi-Domain Looker",
+    smartnet_diag4_s4_text: "Looker Studio menyajikan visualisasi terpisah untuk Marketing Dashboard, User Monitoring Dashboard, dan Application Performance Dashboard.",
+
+    // Diagram 5: Firebase Analytics Fase 3
+    smartnet_diag5_badge: "Firebase Pipeline Fase 3",
+    smartnet_diag5_title: "Evolusi Arsitektur: Firebase Analytics Fase 3 (Multi-Store Ingestion)",
+    smartnet_diag5_desc: "Perluasan arsitektur analitik dengan otomatisasi integrasi data umpan balik dan metrik instalasi dari Apple App Store dan Google Play Store.",
+    smartnet_diag5_s1_title: "1. Serverless Cloud Functions (App Store)",
+    smartnet_diag5_s1_text: "GCP Cloud Functions mengeksekusi penarikan data API App Store Connect secara terjadwal untuk analitik pengguna aplikasi iOS.",
+    smartnet_diag5_s2_title: "2. BigQuery Data Transfer Services",
+    smartnet_diag5_s2_text: "BigQuery Data Transfer Service menelan laporan analitik, install metrics, dan crash report Play Store secara otomatis tanpa server.",
+    smartnet_diag5_s3_title: "3. Konsolidasi Data Marts & ML",
+    smartnet_diag5_s3_text: "Data dari kedua toko aplikasi digabungkan dengan log in-app untuk analisis churn prediction, sentimen review, dan retensi pengguna.",
+    smartnet_diag5_s4_title: "4. Reporting Looker Studio Pro",
+    smartnet_diag5_s4_text: "Penyajian metrik performa aplikasi enterprise di Looker Studio Pro dengan pembaruan otomatis dan kontrol akses berbasis peran.",
+
     // SCM Detail
     scm_date: "Januari 2022 — Juli 2023",
     scm_b1_title: "1. Event-Driven Advertising Data Matching (Python & Fuzzy ML)",
@@ -335,6 +404,75 @@ const translations = {
     smartnet_p12_text: "Analyzed requirements for 4+ projects, cutting misalignments by 25%. Developed concept features for 3+ software solutions, enhancing user experience and increasing adoption by 10%.",
     smartnet_p13_title: "Developer Supervision & Quality Assurance",
     smartnet_p13_text: "Monitored developer tasks for 5+ projects, ensuring timely delivery and reducing task overruns by 10%. Validated testing outcomes for 4+ projects, achieving 90% compliance with project specifications.",
+
+    // Smartnet Architecture Diagrams (EN)
+    diagram_zoom_hint: "Click to view full diagram",
+    close_modal: "Close",
+    
+    // Diagram 1: Gemini Enterprise
+    smartnet_diag1_badge: "Enterprise AI & RAG Architecture",
+    smartnet_diag1_title: "Architecture: AI & Search Intelligence using Gemini Enterprise Solution",
+    smartnet_diag1_desc: "Integrated enterprise search intelligence and document processing architecture on Google Cloud Platform, connecting structured BigQuery analytics and unstructured documents to multimodal Large Language Models.",
+    smartnet_diag1_s1_title: "1. Centralized Document Ingestion",
+    smartnet_diag1_s1_text: "Corporate documents are securely collected and stored in centralized Google Cloud Storage (GCS) as the unstructured enterprise knowledge base.",
+    smartnet_diag1_s2_title: "2. Vertex AI Search & Indexing",
+    smartnet_diag1_s2_text: "Vertex AI Search parses and indexes document content, delivering ultra-fast semantic vector search for contextual Retrieval-Augmented Generation (RAG).",
+    smartnet_diag1_s3_title: "3. SharePoint & OneDrive Connectors",
+    smartnet_diag1_s3_text: "Third-party enterprise connectors periodically synchronize files from Microsoft SharePoint and OneDrive into the AI environment securely.",
+    smartnet_diag1_s4_title: "4. Gemini Grounding & BigQuery",
+    smartnet_diag1_s4_text: "The Gemini Enterprise platform grounds user queries with structured BigQuery metrics and retrieved documents to deliver hallucination-free responses across desktop and mobile.",
+
+    // Diagram 2: Retail DWH Real-Time Analytics
+    smartnet_diag2_badge: "Real-Time Streaming & Medallion DWH",
+    smartnet_diag2_title: "Architecture: Real-Time Data Analytics & Medallion Data Warehouse (Retail DWH)",
+    smartnet_diag2_desc: "End-to-end large-scale streaming data architecture ingesting from hundreds of retail store databases (DB Express) and branch systems (DB Standard) into a BigQuery Medallion Architecture.",
+    smartnet_diag2_s1_title: "1. Datastream & Pub/Sub Ingestion",
+    smartnet_diag2_s1_text: "Captures point-of-sale transactions in real time via Stream App to Google Pub/Sub topics and CDC Datastream from branch DB Standard.",
+    smartnet_diag2_s2_title: "2. Stream Processing via Dataflow",
+    smartnet_diag2_s2_text: "Cloud Dataflow pipelines execute raw ingestion into Cloud Storage Data Lake and perform in-flight cleansing and deduplication.",
+    smartnet_diag2_s3_title: "3. BigQuery Medallion Architecture",
+    smartnet_diag2_s3_text: "Tiered data warehouse layers: Bronze Layer (raw events), Silver Layer (cleansed data), and Gold Layer (aggregated sales & inventory data marts).",
+    smartnet_diag2_s4_title: "4. Observability & BI Delivery",
+    smartnet_diag2_s4_text: "Centralized data governance via GCP Dataplex, live system monitoring in Grafana, and real-time executive reporting served to BI dashboards.",
+
+    // Diagram 3: Data Lineage RekapTransaksiTokoDetail
+    smartnet_diag3_badge: "Data Lineage & CDC Ingestion",
+    smartnet_diag3_title: "Data Lineage: RekapTransaksiTokoDetail Transaction Pipeline",
+    smartnet_diag3_desc: "Granular data lineage trace from retail store SQL Express database triggers to analytical BigQuery production tables.",
+    smartnet_diag3_s1_title: "1. Retail Store Audit Trigger",
+    smartnet_diag3_s1_text: "Every change in table RekapTransaksiTokoDetail activates a database trigger logging audit records into RekapTransaksiTokoDetail_Audit.",
+    smartnet_diag3_s2_title: "2. Publish to GCP Pub/Sub",
+    smartnet_diag3_s2_text: "Local store applications extract audit rows and asynchronously publish message events to GCP Pub/Sub topic: pb-RekapTransaksiTokoDetail-raw.",
+    smartnet_diag3_s3_title: "3. BigQuery Direct Subscription",
+    smartnet_diag3_s3_text: "BigQuery Direct Subscription ingests the real-time stream directly into raw table RekapTransaksiTokoDetail without batch latency.",
+    smartnet_diag3_s4_title: "4. Analytical Views & Scheduler",
+    smartnet_diag3_s4_text: "Analytical view vw_RekapTransaksiTokoDetail filters redundant audit fields, and Cloud Scheduler promotes records into production dataset pb_bronze_toko.",
+
+    // Diagram 4: Firebase Analytics Fase 1 & 2
+    smartnet_diag4_badge: "Firebase Pipeline Phase 1 & 2",
+    smartnet_diag4_title: "Firebase Mobile Analytics Pipeline Architecture (Phase 1 & 2)",
+    smartnet_diag4_desc: "Mobile telemetry analytics pipeline processing 1TB+ of event data from millions of Android and iOS users to BigQuery and Looker Studio.",
+    smartnet_diag4_s1_title: "1. Device SDK & Transport Layer",
+    smartnet_diag4_s1_text: "User telemetries are collected from Android (Android Transport Layer) and iOS (APNs) and sent to the Firebase Analytics backend.",
+    smartnet_diag4_s2_title: "2. BigQuery Data Marts & ML",
+    smartnet_diag4_s2_text: "Firebase streams into BigQuery, partitions into functional Data Marts, and feeds BigQuery ML predictive modeling.",
+    smartnet_diag4_s3_title: "3. Cloud Composer Orchestration",
+    smartnet_diag4_s3_text: "Managed Apache Airflow (Cloud Composer) orchestrates daily ETL schedules, schema validations, and Google Data Catalog metadata registration.",
+    smartnet_diag4_s4_title: "4. Multi-Domain Looker Dashboards",
+    smartnet_diag4_s4_text: "Looker Studio powers specialized executive views: Marketing Dashboard, User Monitoring Dashboard, and Application Performance Dashboard.",
+
+    // Diagram 5: Firebase Analytics Fase 3
+    smartnet_diag5_badge: "Firebase Pipeline Phase 3",
+    smartnet_diag5_title: "Architecture Evolution: Firebase Analytics Phase 3 (Multi-Store Ingestion)",
+    smartnet_diag5_desc: "Architecture expansion automating the ingestion of customer reviews, installation analytics, and financials from the Apple App Store and Google Play Store.",
+    smartnet_diag5_s1_title: "1. Serverless Cloud Functions (App Store)",
+    smartnet_diag5_s1_text: "Serverless GCP Cloud Functions automatically fetch App Store Connect API data on schedule for iOS application insights.",
+    smartnet_diag5_s2_title: "2. BigQuery Data Transfer Services",
+    smartnet_diag5_s2_text: "BigQuery Data Transfer Service natively automates ingestion of Google Play installation stats, financials, and crash reports without servers.",
+    smartnet_diag5_s3_title: "3. Data Marts & ML Consolidation",
+    smartnet_diag5_s3_text: "Consolidates cross-store metrics with in-app logs in BigQuery to drive user churn prediction, review sentiment, and retention modeling.",
+    smartnet_diag5_s4_title: "4. Looker Studio Pro Reporting",
+    smartnet_diag5_s4_text: "Enterprise reporting delivered via Looker Studio Pro with automated refreshes and role-based stakeholder access control.",
 
     // SCM Detail
     scm_date: "January 2022 — July 2023",

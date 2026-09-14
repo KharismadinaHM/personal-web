@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothScrollAndSpy();
   initScrollReveal();
   initCopyEmail();
+  initLightbox();
 });
 
 /**
@@ -207,6 +208,59 @@ function applyLanguage(lang) {
       } else {
         el.textContent = dict[key];
       }
+    }
+  });
+}
+
+/**
+ * Lightbox Modal for Architecture Diagrams
+ */
+function initLightbox() {
+  const modal = document.getElementById('lightboxModal');
+  const modalImg = document.getElementById('lightboxImg');
+  const modalCaption = document.getElementById('lightboxCaption');
+  const modalClose = document.getElementById('lightboxClose');
+
+  if (!modal || !modalImg) return;
+
+  // Open modal on click of any diagram trigger
+  document.querySelectorAll('[data-lightbox-src]').forEach(item => {
+    item.addEventListener('click', () => {
+      const src = item.getAttribute('data-lightbox-src');
+      const captionKey = item.getAttribute('data-lightbox-caption-key');
+      const currentLang = localStorage.getItem('portfolio_lang') || 'id';
+
+      modalImg.src = src;
+      if (modalCaption) {
+        if (captionKey && window.siteTranslations && window.siteTranslations[currentLang] && window.siteTranslations[currentLang][captionKey]) {
+          modalCaption.textContent = window.siteTranslations[currentLang][captionKey];
+        } else {
+          modalCaption.textContent = item.getAttribute('data-lightbox-caption') || '';
+        }
+      }
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  const closeModal = () => {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+
+  if (modalClose) {
+    modalClose.addEventListener('click', closeModal);
+  }
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      closeModal();
     }
   });
 }

@@ -36,7 +36,13 @@ personal-web/
 │   ├── main.js                       # Logika navigasi, smooth scroll, observer, copy email
 │   └── translations.js               # Kamus bilingual lengkap (ID & EN)
 ├── assets/
-│   └── avatar.svg                    # Ilustrasi avatar profesional vektor
+│   ├── ava.jpeg                      # Foto profil profesional Kharismadina
+│   ├── avatar.svg                    # Ilustrasi avatar profesional vektor alternatif
+│   ├── gemini-enterprise-connection.png # Diagram arsitektur Gemini Enterprise & Vertex AI Search
+│   ├── retail-dwh-analytics.png      # Diagram arsitektur Real-time Retail Medallion DWH
+│   ├── retail-dwh-analytics-data-lineage.png # Diagram data lineage RekapTransaksiTokoDetail
+│   ├── firebase-analytics-fase-1&2.png # Diagram pipeline Firebase Mobile Analytics Fase 1 & 2
+│   └── firebase-analytics-fase-3.png # Diagram pipeline Firebase Analytics Fase 3 Multi-Store
 ├── plan.md                           # Dokumen rancangan spesifikasi awal
 ├── claude.md                         # Instruksi & panduan kerja
 └── README.md                         # Panduan penggunaan & deployment ke GitHub Pages
