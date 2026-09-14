@@ -1238,6 +1238,104 @@ p:last-child {
   margin: 0;
 }
 
+/* --- Flow Breakdown & Key Point Callout --- */
+.flow-breakdown {
+  margin-top: 0.25rem;
+}
+
+.flow-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 2px solid var(--accent);
+}
+
+.flow-title svg {
+  color: var(--accent);
+}
+
+.flow-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.flow-item {
+  position: relative;
+  padding-left: 1.75rem;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.flow-item::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 9px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--accent);
+}
+
+.flow-item strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.flow-sublist {
+  list-style: none;
+  padding: 0;
+  margin: 0.4rem 0 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.flow-subitem {
+  position: relative;
+  padding-left: 1.25rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.flow-subitem::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: bold;
+}
+
+.flow-keypoint {
+  margin-top: 1.75rem;
+  padding: 1.1rem 1.35rem;
+  background-color: var(--accent-light);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+.flow-keypoint strong {
+  color: var(--accent);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  margin-right: 4px;
+}
+
 /* --- Lightbox Modal --- */
 .lightbox-modal {
   position: fixed;

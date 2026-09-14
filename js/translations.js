@@ -194,31 +194,98 @@ const translations = {
     smartnet_diag3_s4_title: "4. Analytical View & Scheduler",
     smartnet_diag3_s4_text: "View analitik vw_RekapTransaksiTokoDetail memfilter kolom redundan, dan Cloud Scheduler memprosesnya ke tabel produksi pb_bronze_toko.",
 
-    // Diagram 4: Firebase Analytics Fase 1 & 2
-    smartnet_diag4_badge: "Firebase Pipeline Fase 1 & 2",
-    smartnet_diag4_title: "Arsitektur Pipeline Firebase Mobile Analytics (Fase 1 & 2)",
-    smartnet_diag4_desc: "Jalur pemrosesan analitik aplikasi mobile berskala 1TB+ dari jutaan pengguna Android dan iOS menuju BigQuery dan Looker Studio.",
-    smartnet_diag4_s1_title: "1. Device SDK & Transport Layer",
-    smartnet_diag4_s1_text: "Telemetri pengguna dikumpulkan dari aplikasi Android (Android Transport Layer) dan iOS (APNs) menuju backend Firebase Analytics.",
-    smartnet_diag4_s2_title: "2. BigQuery Data Marts & ML",
-    smartnet_diag4_s2_text: "Data Firebase dialirkan ke BigQuery, dipartisi menjadi Data Mart fungsional, dan dianalisis menggunakan algoritma BigQuery ML.",
-    smartnet_diag4_s3_title: "3. Orkestrasi Cloud Composer",
-    smartnet_diag4_s3_text: "Apache Airflow terkelola (Cloud Composer) mengorkestrasi jadwal batch ETL harian dan sinkronisasi metadata Google Data Catalog.",
-    smartnet_diag4_s4_title: "4. Dashboard Multi-Domain Looker",
-    smartnet_diag4_s4_text: "Looker Studio menyajikan visualisasi terpisah untuk Marketing Dashboard, User Monitoring Dashboard, dan Application Performance Dashboard.",
+    // Diagram 4: Firebase Analytics Fase 1
+    smartnet_diag4_badge: "Firebase Analytics – Phase 1",
+    smartnet_diag4_title: "1. Firebase Analytics – Phase 1",
+    smartnet_fb1_details: `
+      <div class="flow-breakdown">
+        <div class="flow-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+          <span>Alur data:</span>
+        </div>
+
+        <ul class="flow-list">
+          <li class="flow-item">
+            <strong>SDK on Device:</strong> Data dikumpulkan dari aplikasi Android dan iOS.
+          </li>
+          <li class="flow-item">
+            <strong>Platform-level Message Transport:</strong> Android menggunakan Android Transport Layer, sedangkan iOS menggunakan iOS/APNs.
+          </li>
+          <li class="flow-item">
+            <strong>Firebase Backend:</strong> Kedua jalur data masuk ke modul Analytics di Firebase.
+          </li>
+          <li class="flow-item">
+            <strong>Data Warehouse (BigQuery):</strong> Data disimpan dan diorganisasi ke dalam beberapa Data Mart, serta diproses lebih lanjut dengan BigQuery ML.
+          </li>
+          <li class="flow-item">
+            <strong>Metadata &amp; Orkestrasi:</strong>
+            <ul class="flow-sublist">
+              <li class="flow-subitem">Data Catalog menyediakan metadata untuk memperkaya Data Mart.</li>
+              <li class="flow-subitem">Cloud Composer mengatur orkestrasi job/pipeline menuju BigQuery ML.</li>
+            </ul>
+          </li>
+          <li class="flow-item">
+            <strong>Insight and Visualization:</strong> Data dari BigQuery divisualisasikan menggunakan Looker Studio.
+          </li>
+          <li class="flow-item">
+            <strong>Output:</strong> Hasil akhir ditampilkan dalam 3 dashboard berbeda:
+            <ul class="flow-sublist">
+              <li class="flow-subitem">Marketing Dashboard</li>
+              <li class="flow-subitem">Users Monitoring Dashboard</li>
+              <li class="flow-subitem">Application Dashboard</li>
+            </ul>
+          </li>
+        </ul>
+
+        <div class="flow-keypoint">
+          <strong>Poin utama:</strong> Fokus Phase 1 adalah membangun pipeline dasar dari SDK aplikasi mobile hingga ke dashboard visualisasi, dengan dukungan metadata dan orkestrasi.
+        </div>
+      </div>
+    `,
 
     // Diagram 5: Firebase Analytics Fase 3
-    smartnet_diag5_badge: "Firebase Pipeline Fase 3",
-    smartnet_diag5_title: "Evolusi Arsitektur: Firebase Analytics Fase 3 (Multi-Store Ingestion)",
-    smartnet_diag5_desc: "Perluasan arsitektur analitik dengan otomatisasi integrasi data umpan balik dan metrik instalasi dari Apple App Store dan Google Play Store.",
-    smartnet_diag5_s1_title: "1. Serverless Cloud Functions (App Store)",
-    smartnet_diag5_s1_text: "GCP Cloud Functions mengeksekusi penarikan data API App Store Connect secara terjadwal untuk analitik pengguna aplikasi iOS.",
-    smartnet_diag5_s2_title: "2. BigQuery Data Transfer Services",
-    smartnet_diag5_s2_text: "BigQuery Data Transfer Service menelan laporan analitik, install metrics, dan crash report Play Store secara otomatis tanpa server.",
-    smartnet_diag5_s3_title: "3. Konsolidasi Data Marts & ML",
-    smartnet_diag5_s3_text: "Data dari kedua toko aplikasi digabungkan dengan log in-app untuk analisis churn prediction, sentimen review, dan retensi pengguna.",
-    smartnet_diag5_s4_title: "4. Reporting Looker Studio Pro",
-    smartnet_diag5_s4_text: "Penyajian metrik performa aplikasi enterprise di Looker Studio Pro dengan pembaruan otomatis dan kontrol akses berbasis peran.",
+    smartnet_diag5_badge: "Firebase Analytics – Phase 3",
+    smartnet_diag5_title: "2. Firebase Analytics – Phase 3",
+    smartnet_fb3_details: `
+      <div class="flow-breakdown">
+        <div class="flow-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+          <span>Alur data:</span>
+        </div>
+
+        <ul class="flow-list">
+          <li class="flow-item">
+            <strong>Data Sources:</strong> Data berasal dari App Store dan Playstore (bukan lagi dari SDK aplikasi langsung).
+          </li>
+          <li class="flow-item">
+            <strong>Google Cloud Platform:</strong>
+            <ul class="flow-sublist">
+              <li class="flow-subitem">Data dari App Store diproses lebih dulu melalui Cloud Functions.</li>
+              <li class="flow-subitem">Data dari Playstore langsung masuk ke BigQuery Data Transfer Service.</li>
+              <li class="flow-subitem">Output dari Cloud Functions juga diarahkan ke Data Warehouse.</li>
+            </ul>
+          </li>
+          <li class="flow-item">
+            <strong>Data Warehouse (BigQuery):</strong>
+            <ul class="flow-sublist">
+              <li class="flow-subitem">Berisi beberapa Data Mart.</li>
+              <li class="flow-subitem">Dilengkapi dengan BigQuery ML untuk pemrosesan/analitik lanjutan.</li>
+            </ul>
+          </li>
+          <li class="flow-item">
+            <strong>Output:</strong> Hasil akhir divisualisasikan melalui Looker Studio Pro (versi pro, lebih advanced dibanding Looker Studio biasa pada Phase 1).
+          </li>
+        </ul>
+
+        <div class="flow-keypoint">
+          <strong>Poin utama:</strong> Phase 3 memperluas sumber data ke tingkat store (App Store &amp; Playstore), menyederhanakan alur dengan BigQuery Data Transfer Service, dan meningkatkan kapabilitas visualisasi ke Looker Studio Pro.
+        </div>
+      </div>
+    `,
 
     // SCM Detail
     scm_date: "Januari 2022 — Juli 2023",
@@ -449,30 +516,97 @@ const translations = {
     smartnet_diag3_s4_text: "Analytical view vw_RekapTransaksiTokoDetail filters redundant audit fields, and Cloud Scheduler promotes records into production dataset pb_bronze_toko.",
 
     // Diagram 4: Firebase Analytics Fase 1 & 2
-    smartnet_diag4_badge: "Firebase Pipeline Phase 1 & 2",
-    smartnet_diag4_title: "Firebase Mobile Analytics Pipeline Architecture (Phase 1 & 2)",
-    smartnet_diag4_desc: "Mobile telemetry analytics pipeline processing 1TB+ of event data from millions of Android and iOS users to BigQuery and Looker Studio.",
-    smartnet_diag4_s1_title: "1. Device SDK & Transport Layer",
-    smartnet_diag4_s1_text: "User telemetries are collected from Android (Android Transport Layer) and iOS (APNs) and sent to the Firebase Analytics backend.",
-    smartnet_diag4_s2_title: "2. BigQuery Data Marts & ML",
-    smartnet_diag4_s2_text: "Firebase streams into BigQuery, partitions into functional Data Marts, and feeds BigQuery ML predictive modeling.",
-    smartnet_diag4_s3_title: "3. Cloud Composer Orchestration",
-    smartnet_diag4_s3_text: "Managed Apache Airflow (Cloud Composer) orchestrates daily ETL schedules, schema validations, and Google Data Catalog metadata registration.",
-    smartnet_diag4_s4_title: "4. Multi-Domain Looker Dashboards",
-    smartnet_diag4_s4_text: "Looker Studio powers specialized executive views: Marketing Dashboard, User Monitoring Dashboard, and Application Performance Dashboard.",
+    smartnet_diag4_badge: "Firebase Analytics – Phase 1 and 2",
+    smartnet_diag4_title: "1. Firebase Analytics – Phase 1 and 2",
+    smartnet_fb1_details: `
+      <div class="flow-breakdown">
+        <div class="flow-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+          <span>Data flow:</span>
+        </div>
+
+        <ul class="flow-list">
+          <li class="flow-item">
+            <strong>SDK on Device:</strong> Data is collected from Android and iOS apps.
+          </li>
+          <li class="flow-item">
+            <strong>Platform-level Message Transport:</strong> Android uses the Android Transport Layer, while iOS uses iOS/APNs.
+          </li>
+          <li class="flow-item">
+            <strong>Firebase Backend:</strong> Both data paths feed into the Analytics module in Firebase.
+          </li>
+          <li class="flow-item">
+            <strong>Data Warehouse (BigQuery):</strong> Data is stored and organized into several Data Marts, and further processed using BigQuery ML.
+          </li>
+          <li class="flow-item">
+            <strong>Metadata &amp; Orchestration:</strong>
+            <ul class="flow-sublist">
+              <li class="flow-subitem">Data Catalog provides metadata to enrich the Data Marts.</li>
+              <li class="flow-subitem">Cloud Composer orchestrates jobs/pipelines feeding into BigQuery ML.</li>
+            </ul>
+          </li>
+          <li class="flow-item">
+            <strong>Insight and Visualization:</strong> Data from BigQuery is visualized using Looker Studio.
+          </li>
+          <li class="flow-item">
+            <strong>Output:</strong> The final results are displayed across 3 different dashboards:
+            <ul class="flow-sublist">
+              <li class="flow-subitem">Marketing Dashboard</li>
+              <li class="flow-subitem">Users Monitoring Dashboard</li>
+              <li class="flow-subitem">Application Dashboard</li>
+            </ul>
+          </li>
+        </ul>
+
+        <div class="flow-keypoint">
+          <strong>Key point:</strong> Phase 1 focuses on building the foundational pipeline from mobile app SDKs to visualization dashboards, supported by metadata and orchestration layers.
+        </div>
+      </div>
+    `,
 
     // Diagram 5: Firebase Analytics Fase 3
-    smartnet_diag5_badge: "Firebase Pipeline Phase 3",
-    smartnet_diag5_title: "Architecture Evolution: Firebase Analytics Phase 3 (Multi-Store Ingestion)",
-    smartnet_diag5_desc: "Architecture expansion automating the ingestion of customer reviews, installation analytics, and financials from the Apple App Store and Google Play Store.",
-    smartnet_diag5_s1_title: "1. Serverless Cloud Functions (App Store)",
-    smartnet_diag5_s1_text: "Serverless GCP Cloud Functions automatically fetch App Store Connect API data on schedule for iOS application insights.",
-    smartnet_diag5_s2_title: "2. BigQuery Data Transfer Services",
-    smartnet_diag5_s2_text: "BigQuery Data Transfer Service natively automates ingestion of Google Play installation stats, financials, and crash reports without servers.",
-    smartnet_diag5_s3_title: "3. Data Marts & ML Consolidation",
-    smartnet_diag5_s3_text: "Consolidates cross-store metrics with in-app logs in BigQuery to drive user churn prediction, review sentiment, and retention modeling.",
-    smartnet_diag5_s4_title: "4. Looker Studio Pro Reporting",
-    smartnet_diag5_s4_text: "Enterprise reporting delivered via Looker Studio Pro with automated refreshes and role-based stakeholder access control.",
+    smartnet_diag5_badge: "Firebase Analytics – Phase 3",
+    smartnet_diag5_title: "2. Firebase Analytics – Phase 3",
+    smartnet_fb3_details: `
+      <div class="flow-breakdown">
+        <div class="flow-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+          <span>Data flow:</span>
+        </div>
+
+        <ul class="flow-list">
+          <li class="flow-item">
+            <strong>Data Sources:</strong> Data comes from the App Store and Playstore (no longer directly from app SDKs).
+          </li>
+          <li class="flow-item">
+            <strong>Google Cloud Platform:</strong>
+            <ul class="flow-sublist">
+              <li class="flow-subitem">Data from the App Store is first processed through Cloud Functions.</li>
+              <li class="flow-subitem">Data from Playstore goes directly into BigQuery Data Transfer Service.</li>
+              <li class="flow-subitem">The output from Cloud Functions is also routed into the Data Warehouse.</li>
+            </ul>
+          </li>
+          <li class="flow-item">
+            <strong>Data Warehouse (BigQuery):</strong>
+            <ul class="flow-sublist">
+              <li class="flow-subitem">Contains several Data Marts.</li>
+              <li class="flow-subitem">Equipped with BigQuery ML for advanced processing/analytics.</li>
+            </ul>
+          </li>
+          <li class="flow-item">
+            <strong>Output:</strong> The final results are visualized through Looker Studio Pro (a more advanced version compared to the standard Looker Studio in Phase 1).
+          </li>
+        </ul>
+
+        <div class="flow-keypoint">
+          <strong>Key point:</strong> Phase 3 expands the data source to the store level (App Store &amp; Playstore), simplifies the flow using BigQuery Data Transfer Service, and upgrades the visualization capability to Looker Studio Pro.
+        </div>
+      </div>
+    `,
 
     // SCM Detail
     scm_date: "January 2022 — July 2023",

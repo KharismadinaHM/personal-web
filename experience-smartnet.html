@@ -364,7 +364,7 @@
           </div>
         </div>
 
-        <!-- Architecture Diagram 4: Firebase Mobile Analytics Pipeline Fase 1 & 2 -->
+        <!-- Architecture Diagram 4: Firebase Mobile Analytics Pipeline Fase 1 -->
         <div class="architecture-card">
           <div class="architecture-card-header">
             <h4 class="architecture-card-title">
@@ -372,13 +372,13 @@
                 <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
                 <line x1="4" y1="22" x2="4" y2="15"></line>
               </svg>
-              <span data-i18n="smartnet_diag4_title">Arsitektur Pipeline Firebase Mobile Analytics (Fase 1 & 2)</span>
+              <span data-i18n="smartnet_diag4_title">1. Firebase Analytics – Phase 1</span>
             </h4>
-            <span class="stat-pill" data-i18n="smartnet_diag4_badge">Firebase Pipeline Fase 1 & 2</span>
+            <span class="stat-pill" data-i18n="smartnet_diag4_badge">Firebase Analytics – Phase 1</span>
           </div>
 
-          <div class="diagram-preview-box" data-lightbox-src="assets/firebase-analytics-fase-1&2.png" data-lightbox-caption-key="smartnet_diag4_title" role="button" tabindex="0" aria-label="Perbesar diagram Firebase Analytics Fase 1 & 2">
-            <img src="assets/firebase-analytics-fase-1&2.png" alt="Firebase Mobile Analytics Pipeline Fase 1 & 2" class="diagram-preview-img" loading="lazy">
+          <div class="diagram-preview-box" data-lightbox-src="assets/firebase-analytics-fase-1&2.png" data-lightbox-caption-key="smartnet_diag4_title" role="button" tabindex="0" aria-label="Perbesar diagram Firebase Analytics Phase 1">
+            <img src="assets/firebase-analytics-fase-1&2.png" alt="Firebase Analytics Phase 1" class="diagram-preview-img" loading="lazy">
             <div class="diagram-zoom-hint">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="11" cy="11" r="8"></circle>
@@ -390,50 +390,50 @@
             </div>
           </div>
 
-          <div class="architecture-card-body">
-            <p class="diagram-desc" data-i18n="smartnet_diag4_desc">
-              Jalur pemrosesan analitik aplikasi mobile berskala 1TB+ dari jutaan pengguna Android dan iOS menuju BigQuery dan Looker Studio.
-            </p>
-
-            <div class="diagram-steps-grid">
-              <div class="diagram-step-item">
-                <div class="diagram-step-header">
-                  <span class="diagram-step-number">1</span>
-                  <h5 class="diagram-step-title" data-i18n="smartnet_diag4_s1_title">1. Device SDK & Transport Layer</h5>
-                </div>
-                <p class="diagram-step-text" data-i18n="smartnet_diag4_s1_text">
-                  Telemetri pengguna dikumpulkan dari aplikasi Android (Android Transport Layer) dan iOS (APNs) menuju backend Firebase Analytics.
-                </p>
+          <div class="architecture-card-body" data-i18n="smartnet_fb1_details" data-i18n-html="true">
+            <div class="flow-breakdown">
+              <div class="flow-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                </svg>
+                <span>Alur data:</span>
               </div>
 
-              <div class="diagram-step-item">
-                <div class="diagram-step-header">
-                  <span class="diagram-step-number">2</span>
-                  <h5 class="diagram-step-title" data-i18n="smartnet_diag4_s2_title">2. BigQuery Data Marts & ML</h5>
-                </div>
-                <p class="diagram-step-text" data-i18n="smartnet_diag4_s2_text">
-                  Data Firebase dialirkan ke BigQuery, dipartisi menjadi Data Mart fungsional, dan dianalisis menggunakan algoritma BigQuery ML.
-                </p>
-              </div>
+              <ul class="flow-list">
+                <li class="flow-item">
+                  <strong>SDK on Device:</strong> Data dikumpulkan dari aplikasi Android dan iOS.
+                </li>
+                <li class="flow-item">
+                  <strong>Platform-level Message Transport:</strong> Android menggunakan Android Transport Layer, sedangkan iOS menggunakan iOS/APNs.
+                </li>
+                <li class="flow-item">
+                  <strong>Firebase Backend:</strong> Kedua jalur data masuk ke modul Analytics di Firebase.
+                </li>
+                <li class="flow-item">
+                  <strong>Data Warehouse (BigQuery):</strong> Data disimpan dan diorganisasi ke dalam beberapa Data Mart, serta diproses lebih lanjut dengan BigQuery ML.
+                </li>
+                <li class="flow-item">
+                  <strong>Metadata &amp; Orkestrasi:</strong>
+                  <ul class="flow-sublist">
+                    <li class="flow-subitem">Data Catalog menyediakan metadata untuk memperkaya Data Mart.</li>
+                    <li class="flow-subitem">Cloud Composer mengatur orkestrasi job/pipeline menuju BigQuery ML.</li>
+                  </ul>
+                </li>
+                <li class="flow-item">
+                  <strong>Insight and Visualization:</strong> Data dari BigQuery divisualisasikan menggunakan Looker Studio.
+                </li>
+                <li class="flow-item">
+                  <strong>Output:</strong> Hasil akhir ditampilkan dalam 3 dashboard berbeda:
+                  <ul class="flow-sublist">
+                    <li class="flow-subitem">Marketing Dashboard</li>
+                    <li class="flow-subitem">Users Monitoring Dashboard</li>
+                    <li class="flow-subitem">Application Dashboard</li>
+                  </ul>
+                </li>
+              </ul>
 
-              <div class="diagram-step-item">
-                <div class="diagram-step-header">
-                  <span class="diagram-step-number">3</span>
-                  <h5 class="diagram-step-title" data-i18n="smartnet_diag4_s3_title">3. Orkestrasi Cloud Composer</h5>
-                </div>
-                <p class="diagram-step-text" data-i18n="smartnet_diag4_s3_text">
-                  Apache Airflow terkelola (Cloud Composer) mengorkestrasi jadwal batch ETL harian dan sinkronisasi metadata Google Data Catalog.
-                </p>
-              </div>
-
-              <div class="diagram-step-item">
-                <div class="diagram-step-header">
-                  <span class="diagram-step-number">4</span>
-                  <h5 class="diagram-step-title" data-i18n="smartnet_diag4_s4_title">4. Dashboard Multi-Domain Looker</h5>
-                </div>
-                <p class="diagram-step-text" data-i18n="smartnet_diag4_s4_text">
-                  Looker Studio menyajikan visualisasi terpisah untuk Marketing Dashboard, User Monitoring Dashboard, dan Application Performance Dashboard.
-                </p>
+              <div class="flow-keypoint">
+                <strong>Poin utama:</strong> Fokus Phase 1 adalah membangun pipeline dasar dari SDK aplikasi mobile hingga ke dashboard visualisasi, dengan dukungan metadata dan orkestrasi.
               </div>
             </div>
           </div>
@@ -447,13 +447,13 @@
                 <circle cx="12" cy="12" r="10"></circle>
                 <polyline points="12 6 12 12 16 14"></polyline>
               </svg>
-              <span data-i18n="smartnet_diag5_title">Evolusi Arsitektur: Firebase Analytics Fase 3 (Multi-Store Ingestion)</span>
+              <span data-i18n="smartnet_diag5_title">2. Firebase Analytics – Phase 3</span>
             </h4>
-            <span class="stat-pill" data-i18n="smartnet_diag5_badge">Firebase Pipeline Fase 3</span>
+            <span class="stat-pill" data-i18n="smartnet_diag5_badge">Firebase Analytics – Phase 3</span>
           </div>
 
-          <div class="diagram-preview-box" data-lightbox-src="assets/firebase-analytics-fase-3.png" data-lightbox-caption-key="smartnet_diag5_title" role="button" tabindex="0" aria-label="Perbesar diagram Firebase Analytics Fase 3">
-            <img src="assets/firebase-analytics-fase-3.png" alt="Firebase Analytics Fase 3 Multi-Store Ingestion" class="diagram-preview-img" loading="lazy">
+          <div class="diagram-preview-box" data-lightbox-src="assets/firebase-analytics-fase-3.png" data-lightbox-caption-key="smartnet_diag5_title" role="button" tabindex="0" aria-label="Perbesar diagram Firebase Analytics Phase 3">
+            <img src="assets/firebase-analytics-fase-3.png" alt="Firebase Analytics Phase 3 Multi-Store Ingestion" class="diagram-preview-img" loading="lazy">
             <div class="diagram-zoom-hint">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="11" cy="11" r="8"></circle>
@@ -465,50 +465,41 @@
             </div>
           </div>
 
-          <div class="architecture-card-body">
-            <p class="diagram-desc" data-i18n="smartnet_diag5_desc">
-              Perluasan arsitektur analitik dengan otomatisasi integrasi data umpan balik dan metrik instalasi dari Apple App Store dan Google Play Store.
-            </p>
-
-            <div class="diagram-steps-grid">
-              <div class="diagram-step-item">
-                <div class="diagram-step-header">
-                  <span class="diagram-step-number">1</span>
-                  <h5 class="diagram-step-title" data-i18n="smartnet_diag5_s1_title">1. Serverless Cloud Functions (App Store)</h5>
-                </div>
-                <p class="diagram-step-text" data-i18n="smartnet_diag5_s1_text">
-                  GCP Cloud Functions mengeksekusi penarikan data API App Store Connect secara terjadwal untuk analitik pengguna aplikasi iOS.
-                </p>
+          <div class="architecture-card-body" data-i18n="smartnet_fb3_details" data-i18n-html="true">
+            <div class="flow-breakdown">
+              <div class="flow-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                </svg>
+                <span>Alur data:</span>
               </div>
 
-              <div class="diagram-step-item">
-                <div class="diagram-step-header">
-                  <span class="diagram-step-number">2</span>
-                  <h5 class="diagram-step-title" data-i18n="smartnet_diag5_s2_title">2. BigQuery Data Transfer Services</h5>
-                </div>
-                <p class="diagram-step-text" data-i18n="smartnet_diag5_s2_text">
-                  BigQuery Data Transfer Service menelan laporan analitik, install metrics, dan crash report Play Store secara otomatis tanpa server.
-                </p>
-              </div>
+              <ul class="flow-list">
+                <li class="flow-item">
+                  <strong>Data Sources:</strong> Data berasal dari App Store dan Playstore (bukan lagi dari SDK aplikasi langsung).
+                </li>
+                <li class="flow-item">
+                  <strong>Google Cloud Platform:</strong>
+                  <ul class="flow-sublist">
+                    <li class="flow-subitem">Data dari App Store diproses lebih dulu melalui Cloud Functions.</li>
+                    <li class="flow-subitem">Data dari Playstore langsung masuk ke BigQuery Data Transfer Service.</li>
+                    <li class="flow-subitem">Output dari Cloud Functions juga diarahkan ke Data Warehouse.</li>
+                  </ul>
+                </li>
+                <li class="flow-item">
+                  <strong>Data Warehouse (BigQuery):</strong>
+                  <ul class="flow-sublist">
+                    <li class="flow-subitem">Berisi beberapa Data Mart.</li>
+                    <li class="flow-subitem">Dilengkapi dengan BigQuery ML untuk pemrosesan/analitik lanjutan.</li>
+                  </ul>
+                </li>
+                <li class="flow-item">
+                  <strong>Output:</strong> Hasil akhir divisualisasikan melalui Looker Studio Pro (versi pro, lebih advanced dibanding Looker Studio biasa pada Phase 1).
+                </li>
+              </ul>
 
-              <div class="diagram-step-item">
-                <div class="diagram-step-header">
-                  <span class="diagram-step-number">3</span>
-                  <h5 class="diagram-step-title" data-i18n="smartnet_diag5_s3_title">3. Konsolidasi Data Marts & ML</h5>
-                </div>
-                <p class="diagram-step-text" data-i18n="smartnet_diag5_s3_text">
-                  Data dari kedua toko aplikasi digabungkan dengan log in-app untuk analisis churn prediction, sentimen review, dan retensi pengguna.
-                </p>
-              </div>
-
-              <div class="diagram-step-item">
-                <div class="diagram-step-header">
-                  <span class="diagram-step-number">4</span>
-                  <h5 class="diagram-step-title" data-i18n="smartnet_diag5_s4_title">4. Reporting Looker Studio Pro</h5>
-                </div>
-                <p class="diagram-step-text" data-i18n="smartnet_diag5_s4_text">
-                  Penyajian metrik performa aplikasi enterprise di Looker Studio Pro dengan pembaruan otomatis dan kontrol akses berbasis peran.
-                </p>
+              <div class="flow-keypoint">
+                <strong>Poin utama:</strong> Phase 3 memperluas sumber data ke tingkat store (App Store &amp; Playstore), menyederhanakan alur dengan BigQuery Data Transfer Service, dan meningkatkan kapabilitas visualisasi ke Looker Studio Pro.
               </div>
             </div>
           </div>
