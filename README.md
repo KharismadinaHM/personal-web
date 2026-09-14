@@ -38,6 +38,7 @@ personal-web/
 ├── assets/
 │   ├── ava.jpeg                      # Foto profil profesional Kharismadina
 │   ├── avatar.svg                    # Ilustrasi avatar profesional vektor alternatif
+│   ├── logo-cert/                    # Logo badge sertifikasi resmi Google Cloud
 │   ├── gemini-enterprise-connection.png # Diagram arsitektur Gemini Enterprise & Vertex AI Search
 │   ├── retail-dwh-analytics.png      # Diagram arsitektur Real-time Retail Medallion DWH
 │   ├── retail-dwh-analytics-data-lineage.png # Diagram data lineage RekapTransaksiTokoDetail
