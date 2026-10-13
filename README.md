@@ -9,9 +9,9 @@ Website portofolio profesional dan modern untuk **Kharismadina Hijra M** (*Data 
 1. **Desain Minimalis & Profesional**: Mengadopsi palet warna hangat *warm off-white* (`#FAFAF8`) dipadukan dengan aksen *deep teal* (`#1E5F5A`), border tipis elegan, dan tipografi modern (*Inter* & *Space Grotesk*).
 2. **Bilingual Support (ID & EN)**: Dilengkapi tombol pengalih bahasa (`[ ID | EN ]`) instan di header navigasi desktop maupun mobile. Versi bahasa Inggris disusun langsung dari CV asli dengan terminologi industri yang akurat. Preferensi bahasa tersimpan otomatis di browser (`localStorage`).
 3. **Single-Page Scroll + Halaman Detail Khusus**:
-   - `index.html`: Berisi Hero, Quick Metrics, About/Summary, Experience Summary Cards, Categorized Skills, Education & Certifications, dan Kontak.
-   - `experience-smartnet.html`: Detail 15 inisiatif & arsitektur proyek di PT Smartnet Magna Global (GenAI Multi-Agent, 1TB+ ETL, ClickHouse, Airflow + dbt, Cloud Bigtable).
-   - `experience-scm.html`: Detail proyek di PT Surya Citra Media (Event-driven fuzzy ML matching Gen21/Nielsen, streaming pipeline Kafka/Spark, optimasi DAG Airflow).
+   - `index.html`: Layout satu kolom minimalis — Hero, Tentang, Pengalaman, Keahlian, Pendidikan & Sertifikasi, dan Kontak (format baris label–isi).
+   - `experience-smartnet.html`: Detail proyek di PT Smartnet Magna Global, termasuk use case ML **Predictive Maintenance spare part motor** (ekstraksi foto odometer & plat nomor → data tabular → model prediktif, on-premise Python) beserta diagram high-level architecture, GenAI Multi-Agent, 1TB+ ETL, ClickHouse, Airflow + dbt, Cloud Bigtable.
+   - `experience-scm.html`: Detail proyek di PT Surya Citra Media, termasuk use case ML **Data Matching Nielsen × Gen21** (MySQL & SQL Server → batch harian Airflow / real-time Debezium + Kafka → program fuzzywuzzy di Docker → PostgreSQL Marketing) beserta diagram high-level architecture, streaming pipeline Kafka/Spark, dan optimasi DAG Airflow.
    - `project-deepfake-detection.html`: Riset akademik deteksi deepfake (CNN & Inception ResNet V2, akurasi 90%, false positive -80%).
 4. **Interaktivitas Ringan & Aksesibel**:
    - Menu navigasi responsif dengan tombol hamburger untuk mobile.

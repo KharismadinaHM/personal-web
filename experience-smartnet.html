@@ -9,22 +9,16 @@
   <!-- Google Fonts: Inter & Space Grotesk -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
   <!-- Minimal Nav Back & Language Switcher -->
-  <div class="detail-nav-back">
+  <nav class="detail-nav-back" aria-label="Navigasi halaman detail">
     <div class="container detail-nav-wrapper">
-      <a href="index.html#experience" class="btn-back" id="btnBackHome">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="19" y1="12" x2="5" y2="12"></line>
-          <polyline points="12 19 5 12 12 5"></polyline>
-        </svg>
-        <span data-i18n="back_to_home">Kembali ke Portofolio Utama</span>
-      </a>
+      <a href="index.html#experience" class="btn-back" id="btnBackHome">← <span data-i18n="back_to_home">Kembali ke Portofolio Utama</span></a>
 
       <!-- Language Selector -->
       <div class="lang-switcher" role="group" aria-label="Pilih Bahasa / Select Language">
@@ -32,48 +26,29 @@
         <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" title="English">EN</button>
       </div>
     </div>
-  </div>
+  </nav>
 
   <main>
-    <!-- Detail Hero -->
     <header class="detail-hero">
       <div class="container">
-        <span class="section-subtitle" data-i18n="detail_case_badge">Studi Kasus Pengalaman Kerja</span>
+        <span class="detail-eyebrow" data-i18n="detail_case_badge">Studi Kasus Pengalaman Kerja</span>
         <h1>Data & Machine Learning Engineer</h1>
-        <h2 style="font-size: 1.4rem; color: var(--accent); margin-top: 0.25rem;">PT SMARTNET MAGNA GLOBAL</h2>
-
+        <p class="detail-company">PT Smartnet Magna Global</p>
         <div class="detail-header-meta">
-          <div class="detail-meta-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-              <line x1="16" y1="2" x2="16" y2="6"></line>
-              <line x1="8" y1="2" x2="8" y2="6"></line>
-              <line x1="3" y1="10" x2="21" y2="10"></line>
-            </svg>
-            <strong data-i18n="smartnet_date">Agustus 2023 — Sekarang</strong>
-          </div>
-          <div class="detail-meta-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-              <circle cx="12" cy="10" r="3"></circle>
-            </svg>
-            <span>Jakarta, Indonesia</span>
-          </div>
+          <span data-i18n="smartnet_date">Agustus 2023 — Sekarang</span>
+          <span>Jakarta, Indonesia</span>
         </div>
-
-        <div class="tag-list" style="margin-top: 1rem;">
-          <span class="tag tag-accent">GCP Cloud Run</span>
-          <span class="tag tag-accent">Multi-Agent ADK/MCP</span>
+        <div class="tag-list">
+          <span class="tag tag-accent">Python ML (On-Premise)</span>
+          <span class="tag tag-accent">GCP · Multi-Agent ADK/MCP</span>
           <span class="tag tag-accent">Gemini / Imagen</span>
-          <span class="tag">Google BigQuery</span>
+          <span class="tag">BigQuery</span>
           <span class="tag">Apache Airflow</span>
           <span class="tag">dbt</span>
           <span class="tag">Pub/Sub & Dataflow</span>
           <span class="tag">ClickHouse</span>
           <span class="tag">Cloud Bigtable</span>
-          <span class="tag">Apache Cassandra</span>
           <span class="tag">Looker</span>
-          <span class="tag">PostgreSQL</span>
         </div>
       </div>
     </header>
@@ -81,15 +56,99 @@
     <!-- Detailed Highlights Content -->
     <div class="container detail-content">
       
+      <!-- ML Use Case: Predictive Maintenance Spare Part Motor (On-Premise) -->
+      <section class="detail-section-block" id="ml-predictive-maintenance">
+        <span class="detail-label">Machine Learning Use Case</span>
+        <h2 class="detail-block-title" data-i18n="smartnet_ml_title">Predictive Maintenance Spare Part Motor</h2>
+        <p class="detail-block-desc" data-i18n="smartnet_ml_desc">Memprediksi kapan sebuah motor perlu penggantian spare part dan ganti oli, menggunakan data yang diekstraksi dari foto odometer dan plat nomor. Seluruh pipeline berjalan on-premise dengan Python.</p>
+
+        <h3 class="feature-item-title" data-i18n="smartnet_ml_params_title">Parameter model</h3>
+        <ul class="dot-list">
+          <li data-i18n="smartnet_ml_param1" data-i18n-html="true"><strong>Odometer</strong> — jarak tempuh motor (km) hasil ekstraksi dari foto odometer.</li>
+          <li data-i18n="smartnet_ml_param2" data-i18n-html="true"><strong>Pembaruan spare part</strong> — riwayat kapan dan pada kilometer berapa spare part terakhir diganti.</li>
+          <li data-i18n="smartnet_ml_param3" data-i18n-html="true"><strong>Lamanya ganti oli</strong> — rentang waktu sejak penggantian oli terakhir.</li>
+        </ul>
+
+        <!-- High-Level Architecture -->
+        <div class="architecture-card">
+          <div class="architecture-card-header">
+            <h3 class="architecture-card-title" data-i18n="smartnet_ml_arch_title">High-Level Architecture (On-Premise · Python)</h3>
+          </div>
+
+          <figure class="arch-diagram">
+            <svg viewBox="0 0 840 270" role="img" aria-labelledby="pmArchTitle pmArchDesc">
+              <title id="pmArchTitle">High-level architecture predictive maintenance spare part motor</title>
+              <desc id="pmArchDesc">Di server on-premise: foto odometer dan plat nomor diekstraksi dengan Python menjadi data tabular, digabung dengan riwayat servis (spare part dan ganti oli) berdasarkan plat nomor, diolah menjadi fitur, lalu model prediktif Python menghasilkan rekomendasi jadwal maintenance.</desc>
+              <defs>
+                <marker id="arrowPm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0 0 L10 5 L0 10 z" class="arrowhead"/>
+                </marker>
+              </defs>
+
+              <rect class="boundary" x="8" y="8" width="824" height="254" rx="10"/>
+              <text class="lane-label" x="24" y="32">ON-PREMISE · PYTHON</text>
+
+              <!-- Row 1: image pipeline -->
+              <rect class="node" x="24" y="72" width="140" height="56" rx="6"/>
+              <text class="node-title" x="94" y="96" text-anchor="middle" data-i18n="diag_pm_photo_t">Foto Motor</text>
+              <text class="node-sub" x="94" y="114" text-anchor="middle" data-i18n="diag_pm_photo_s">odometer & plat nomor</text>
+
+              <rect class="node" x="184" y="72" width="140" height="56" rx="6"/>
+              <text class="node-title" x="254" y="96" text-anchor="middle" data-i18n="diag_pm_extract_t">Ekstraksi Gambar</text>
+              <text class="node-sub" x="254" y="114" text-anchor="middle">OCR · Python</text>
+
+              <rect class="node" x="344" y="72" width="140" height="56" rx="6"/>
+              <text class="node-title" x="414" y="96" text-anchor="middle" data-i18n="diag_pm_tab_t">Data Tabular</text>
+              <text class="node-sub" x="414" y="114" text-anchor="middle" data-i18n="diag_pm_tab_s">plat · km · tanggal</text>
+
+              <!-- Row 2: service history -->
+              <rect class="node" x="344" y="182" width="140" height="56" rx="6"/>
+              <text class="node-title" x="414" y="206" text-anchor="middle" data-i18n="diag_pm_hist_t">Riwayat Servis</text>
+              <text class="node-sub" x="414" y="224" text-anchor="middle" data-i18n="diag_pm_hist_s">spare part · ganti oli</text>
+
+              <!-- Merge: features → model → output -->
+              <rect class="node" x="504" y="127" width="140" height="56" rx="6"/>
+              <text class="node-title" x="574" y="151" text-anchor="middle">Feature Engineering</text>
+              <text class="node-sub" x="574" y="169" text-anchor="middle" data-i18n="diag_pm_feat_s">join by plat nomor</text>
+
+              <rect class="node node-accent" x="676" y="72" width="140" height="56" rx="6"/>
+              <text class="node-title" x="746" y="96" text-anchor="middle" data-i18n="diag_pm_model_t">Model Prediktif</text>
+              <text class="node-sub" x="746" y="114" text-anchor="middle">Python · ML</text>
+
+              <rect class="node" x="676" y="182" width="140" height="56" rx="6"/>
+              <text class="node-title" x="746" y="206" text-anchor="middle" data-i18n="diag_pm_out_t">Jadwal Servis</text>
+              <text class="node-sub" x="746" y="224" text-anchor="middle" data-i18n="diag_pm_out_s">prediksi maintenance</text>
+
+              <!-- Edges -->
+              <path class="edge" d="M164 100 L182 100" marker-end="url(#arrowPm)"/>
+              <path class="edge" d="M324 100 L342 100" marker-end="url(#arrowPm)"/>
+              <path class="edge" d="M484 100 C496 100 492 142 502 142" marker-end="url(#arrowPm)"/>
+              <path class="edge" d="M484 210 C496 210 492 168 502 168" marker-end="url(#arrowPm)"/>
+              <path class="edge" d="M644 155 C662 155 656 100 674 100" marker-end="url(#arrowPm)"/>
+              <path class="edge" d="M746 128 L746 180" marker-end="url(#arrowPm)"/>
+            </svg>
+          </figure>
+          <p class="diagram-scroll-hint" data-i18n="diagram_scroll_hint">Geser diagram ke samping untuk melihat seluruhnya →</p>
+
+          <ol class="flow-steps">
+            <li data-i18n="smartnet_ml_s1" data-i18n-html="true"><strong>Input gambar:</strong> foto odometer dan plat nomor motor dikumpulkan dan disimpan di server on-premise.</li>
+            <li data-i18n="smartnet_ml_s2" data-i18n-html="true"><strong>Ekstraksi gambar → tabular:</strong> program Python membaca angka odometer dan plat nomor dari gambar, lalu menyimpannya sebagai baris data tabular (plat nomor, odometer, tanggal).</li>
+            <li data-i18n="smartnet_ml_s3" data-i18n-html="true"><strong>Penggabungan riwayat servis:</strong> data tabular digabungkan berdasarkan plat nomor dengan riwayat pembaruan spare part dan ganti oli.</li>
+            <li data-i18n="smartnet_ml_s4" data-i18n-html="true"><strong>Feature engineering & model:</strong> odometer, jarak tempuh sejak spare part terakhir diganti, dan lamanya sejak ganti oli terakhir menjadi input model prediktif berbasis Python.</li>
+            <li data-i18n="smartnet_ml_s5" data-i18n-html="true"><strong>Output:</strong> prediksi kebutuhan penggantian spare part dan ganti oli per motor, sebagai dasar penjadwalan maintenance.</li>
+          </ol>
+        </div>
+      </section>
+
       <!-- Block 1: AI & Multi-Agent Systems -->
       <section class="detail-section-block">
-        <h3 class="detail-block-title" data-i18n="smartnet_b1_title">1. Generative AI & Distributed Multi-Agent Architecture</h3>
-        <p data-i18n="smartnet_b1_desc">Inisiatif strategis pemanfaatan kecerdasan buatan otonom untuk otomasi analisis dan pembuatan kampanye pemasaran berbasis data.</p>
+        <h2 class="detail-block-title" data-i18n="smartnet_b1_title">Generative AI & Distributed Multi-Agent Architecture</h2>
+        <p class="detail-block-desc" data-i18n="smartnet_b1_desc">Inisiatif strategis pemanfaatan kecerdasan buatan otonom untuk otomasi analisis dan pembuatan kampanye pemasaran berbasis data.</p>
         
         <div class="feature-cards-grid">
           <div class="feature-item-card">
             <span class="stat-pill">GCP Cloud Run • ADK • MCP</span>
-            <h4 class="feature-item-title" data-i18n="smartnet_p1_title">Distributed Multi-Agent Generative AI System</h4>
+            <h3 class="feature-item-title" data-i18n="smartnet_p1_title">Distributed Multi-Agent Generative AI System</h3>
             <p data-i18n="smartnet_p1_text">
               Merancang dan mengimplementasikan sistem multi-agent terdistribusi otonom di Google Cloud Platform. Agen-agen ini mengagregasi analitik BigQuery, integrasi API finansial pihak ketiga, dan pemodelan generative AI multimodal (Google Gemini & Imagen) untuk menghasilkan kampanye pemasaran berbasis data lokal secara dinamis dan terstruktur.
             </p>
@@ -97,7 +156,7 @@
 
           <div class="feature-item-card">
             <span class="stat-pill">Airflow • Latensi -30%</span>
-            <h4 class="feature-item-title" data-i18n="smartnet_p2_title">Automated AI Data Feeding & Latency Reduction</h4>
+            <h3 class="feature-item-title" data-i18n="smartnet_p2_title">Automated AI Data Feeding & Latency Reduction</h3>
             <p data-i18n="smartnet_p2_text">
               Mengimplementasikan alur kerja Apache Airflow untuk mengotomatiskan penarikan data PostgreSQL langsung ke BigQuery, memangkas latensi transfer data sebesar 30% dan mempercepat kapabilitas penyajian konteks data untuk aplikasi Generative AI.
             </p>
@@ -107,27 +166,13 @@
         <!-- Architecture Diagram 1: Gemini Enterprise AI Solution -->
         <div class="architecture-card">
           <div class="architecture-card-header">
-            <h4 class="architecture-card-title">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
-                <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
-                <line x1="6" y1="6" x2="6.01" y2="6"></line>
-                <line x1="6" y1="18" x2="6.01" y2="18"></line>
-              </svg>
-              <span data-i18n="smartnet_diag1_title">Arsitektur: AI & Search Intelligence using Gemini Enterprise Solution</span>
-            </h4>
+            <h3 class="architecture-card-title"><span data-i18n="smartnet_diag1_title">Arsitektur: AI & Search Intelligence using Gemini Enterprise Solution</span></h3>
             <span class="stat-pill" data-i18n="smartnet_diag1_badge">Enterprise AI & RAG Architecture</span>
           </div>
 
           <div class="diagram-preview-box" data-lightbox-src="assets/gemini-enterprise-connection.png" data-lightbox-caption-key="smartnet_diag1_title" role="button" tabindex="0" aria-label="Perbesar diagram Gemini Enterprise">
             <img src="assets/gemini-enterprise-connection.png" alt="Arsitektur AI & Search Intelligence Gemini Enterprise" class="diagram-preview-img" loading="lazy">
             <div class="diagram-zoom-hint">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                <line x1="11" y1="8" x2="11" y2="14"></line>
-                <line x1="8" y1="11" x2="14" y2="11"></line>
-              </svg>
               <span data-i18n="diagram_zoom_hint">Klik untuk memperbesar diagram</span>
             </div>
           </div>
@@ -140,7 +185,6 @@
             <div class="diagram-steps-grid">
               <div class="diagram-step-item">
                 <div class="diagram-step-header">
-                  <span class="diagram-step-number">1</span>
                   <h5 class="diagram-step-title" data-i18n="smartnet_diag1_s1_title">1. Ingestion Dokumen Terpusat</h5>
                 </div>
                 <p class="diagram-step-text" data-i18n="smartnet_diag1_s1_text">
@@ -150,7 +194,6 @@
 
               <div class="diagram-step-item">
                 <div class="diagram-step-header">
-                  <span class="diagram-step-number">2</span>
                   <h5 class="diagram-step-title" data-i18n="smartnet_diag1_s2_title">2. Vertex AI Search & Indexing</h5>
                 </div>
                 <p class="diagram-step-text" data-i18n="smartnet_diag1_s2_text">
@@ -160,7 +203,6 @@
 
               <div class="diagram-step-item">
                 <div class="diagram-step-header">
-                  <span class="diagram-step-number">3</span>
                   <h5 class="diagram-step-title" data-i18n="smartnet_diag1_s3_title">3. Konektor SharePoint & OneDrive</h5>
                 </div>
                 <p class="diagram-step-text" data-i18n="smartnet_diag1_s3_text">
@@ -170,7 +212,6 @@
 
               <div class="diagram-step-item">
                 <div class="diagram-step-header">
-                  <span class="diagram-step-number">4</span>
                   <h5 class="diagram-step-title" data-i18n="smartnet_diag1_s4_title">4. Grounding Gemini & BigQuery</h5>
                 </div>
                 <p class="diagram-step-text" data-i18n="smartnet_diag1_s4_text">
@@ -184,13 +225,13 @@
 
       <!-- Block 2: Large-Scale ETL & Streaming Pipelines -->
       <section class="detail-section-block">
-        <h3 class="detail-block-title" data-i18n="smartnet_b2_title">2. Ingestion Skala Besar & Streaming Pipelines</h3>
-        <p data-i18n="smartnet_b2_desc">Pengembangan jalur data bervolume tinggi, penanganan data real-time, dan migrasi basis data NoSQL.</p>
+        <h2 class="detail-block-title" data-i18n="smartnet_b2_title">Ingestion Skala Besar & Streaming Pipelines</h2>
+        <p class="detail-block-desc" data-i18n="smartnet_b2_desc">Pengembangan jalur data bervolume tinggi, penanganan data real-time, dan migrasi basis data NoSQL.</p>
 
         <div class="feature-cards-grid">
           <div class="feature-item-card">
             <span class="stat-pill">1TB+ Data Volume</span>
-            <h4 class="feature-item-title" data-i18n="smartnet_p3_title">ETL Firebase ke Google BigQuery</h4>
+            <h3 class="feature-item-title" data-i18n="smartnet_p3_title">ETL Firebase ke Google BigQuery</h3>
             <p data-i18n="smartnet_p3_text">
               Merancang dan memelihara pipeline ETL untuk memproses lebih dari 1TB data dari Firebase ke Google BigQuery, meningkatkan aksesibilitas dan ketersediaan data analitik untuk tim data science dan business intelligence.
             </p>
@@ -198,7 +239,7 @@
 
           <div class="feature-item-card">
             <span class="stat-pill">Pub/Sub • Dataflow In-Flight</span>
-            <h4 class="feature-item-title" data-i18n="smartnet_p4_title">Streamlined Real-Time Data Ingestion</h4>
+            <h3 class="feature-item-title" data-i18n="smartnet_p4_title">Streamlined Real-Time Data Ingestion</h3>
             <p data-i18n="smartnet_p4_text">
               Mengembangkan pipeline streaming real-time ke BigQuery memanfaatkan GCP Pub/Sub dan Cloud Dataflow. Mengintegrasikan logika transformasi <em>in-flight</em> untuk memfilter kolom audit redundan secara langsung, mengurangi overhead dan biaya penyimpanan hilir secara signifikan.
             </p>
@@ -206,7 +247,7 @@
 
           <div class="feature-item-card">
             <span class="stat-pill">Cassandra ke Cloud Bigtable</span>
-            <h4 class="feature-item-title" data-i18n="smartnet_p5_title">Automated NoSQL Database Migration</h4>
+            <h3 class="feature-item-title" data-i18n="smartnet_p5_title">Automated NoSQL Database Migration</h3>
             <p data-i18n="smartnet_p5_text">
               Merekayasa pipeline migrasi data otomatis tanpa kendala (seamless migration) untuk memindahkan beban kerja NoSQL dari on-premise Apache Cassandra ke Google Cloud Bigtable terkelola.
             </p>
@@ -216,24 +257,13 @@
         <!-- Architecture Diagram 2: Retail DWH Real-Time Analytics -->
         <div class="architecture-card">
           <div class="architecture-card-header">
-            <h4 class="architecture-card-title">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-              </svg>
-              <span data-i18n="smartnet_diag2_title">Arsitektur Real-Time Data Analytics & Medallion Data Warehouse (Retail DWH)</span>
-            </h4>
+            <h3 class="architecture-card-title"><span data-i18n="smartnet_diag2_title">Arsitektur Real-Time Data Analytics & Medallion Data Warehouse (Retail DWH)</span></h3>
             <span class="stat-pill" data-i18n="smartnet_diag2_badge">Real-Time Streaming & Medallion DWH</span>
           </div>
 
           <div class="diagram-preview-box" data-lightbox-src="assets/retail-dwh-analytics.png" data-lightbox-caption-key="smartnet_diag2_title" role="button" tabindex="0" aria-label="Perbesar diagram Retail DWH">
             <img src="assets/retail-dwh-analytics.png" alt="Arsitektur Real-Time Data Analytics Retail DWH" class="diagram-preview-img" loading="lazy">
             <div class="diagram-zoom-hint">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                <line x1="11" y1="8" x2="11" y2="14"></line>
-                <line x1="8" y1="11" x2="14" y2="11"></line>
-              </svg>
               <span data-i18n="diagram_zoom_hint">Klik untuk memperbesar diagram</span>
             </div>
           </div>
@@ -246,7 +276,6 @@
             <div class="diagram-steps-grid">
               <div class="diagram-step-item">
                 <div class="diagram-step-header">
-                  <span class="diagram-step-number">1</span>
                   <h5 class="diagram-step-title" data-i18n="smartnet_diag2_s1_title">1. Ingestion Datastream & Pub/Sub</h5>
                 </div>
                 <p class="diagram-step-text" data-i18n="smartnet_diag2_s1_text">
@@ -256,7 +285,6 @@
 
               <div class="diagram-step-item">
                 <div class="diagram-step-header">
-                  <span class="diagram-step-number">2</span>
                   <h5 class="diagram-step-title" data-i18n="smartnet_diag2_s2_title">2. Stream Processing via Dataflow</h5>
                 </div>
                 <p class="diagram-step-text" data-i18n="smartnet_diag2_s2_text">
@@ -266,7 +294,6 @@
 
               <div class="diagram-step-item">
                 <div class="diagram-step-header">
-                  <span class="diagram-step-number">3</span>
                   <h5 class="diagram-step-title" data-i18n="smartnet_diag2_s3_title">3. BigQuery Medallion Architecture</h5>
                 </div>
                 <p class="diagram-step-text" data-i18n="smartnet_diag2_s3_text">
@@ -276,7 +303,6 @@
 
               <div class="diagram-step-item">
                 <div class="diagram-step-header">
-                  <span class="diagram-step-number">4</span>
                   <h5 class="diagram-step-title" data-i18n="smartnet_diag2_s4_title">4. Observabilitas & Penyajian BI</h5>
                 </div>
                 <p class="diagram-step-text" data-i18n="smartnet_diag2_s4_text">
@@ -290,27 +316,13 @@
         <!-- Architecture Diagram 3: Data Lineage RekapTransaksiTokoDetail -->
         <div class="architecture-card">
           <div class="architecture-card-header">
-            <h4 class="architecture-card-title">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="6" y1="3" x2="6" y2="15"></line>
-                <circle cx="18" cy="6" r="3"></circle>
-                <circle cx="6" cy="18" r="3"></circle>
-                <path d="M18 9a9 9 0 0 1-9 9"></path>
-              </svg>
-              <span data-i18n="smartnet_diag3_title">Data Lineage Transaksi Toko: RekapTransaksiTokoDetail</span>
-            </h4>
+            <h3 class="architecture-card-title"><span data-i18n="smartnet_diag3_title">Data Lineage Transaksi Toko: RekapTransaksiTokoDetail</span></h3>
             <span class="stat-pill" data-i18n="smartnet_diag3_badge">Data Lineage & CDC Ingestion</span>
           </div>
 
           <div class="diagram-preview-box" data-lightbox-src="assets/retail-dwh-analytics-data-lineage.png" data-lightbox-caption-key="smartnet_diag3_title" role="button" tabindex="0" aria-label="Perbesar diagram Data Lineage">
             <img src="assets/retail-dwh-analytics-data-lineage.png" alt="Data Lineage RekapTransaksiTokoDetail" class="diagram-preview-img" loading="lazy">
             <div class="diagram-zoom-hint">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                <line x1="11" y1="8" x2="11" y2="14"></line>
-                <line x1="8" y1="11" x2="14" y2="11"></line>
-              </svg>
               <span data-i18n="diagram_zoom_hint">Klik untuk memperbesar diagram</span>
             </div>
           </div>
@@ -323,7 +335,6 @@
             <div class="diagram-steps-grid">
               <div class="diagram-step-item">
                 <div class="diagram-step-header">
-                  <span class="diagram-step-number">1</span>
                   <h5 class="diagram-step-title" data-i18n="smartnet_diag3_s1_title">1. Trigger Tabel Audit Toko</h5>
                 </div>
                 <p class="diagram-step-text" data-i18n="smartnet_diag3_s1_text">
@@ -333,7 +344,6 @@
 
               <div class="diagram-step-item">
                 <div class="diagram-step-header">
-                  <span class="diagram-step-number">2</span>
                   <h5 class="diagram-step-title" data-i18n="smartnet_diag3_s2_title">2. Publikasi ke GCP Pub/Sub</h5>
                 </div>
                 <p class="diagram-step-text" data-i18n="smartnet_diag3_s2_text">
@@ -343,7 +353,6 @@
 
               <div class="diagram-step-item">
                 <div class="diagram-step-header">
-                  <span class="diagram-step-number">3</span>
                   <h5 class="diagram-step-title" data-i18n="smartnet_diag3_s3_title">3. BigQuery Direct Subscription</h5>
                 </div>
                 <p class="diagram-step-text" data-i18n="smartnet_diag3_s3_text">
@@ -353,7 +362,6 @@
 
               <div class="diagram-step-item">
                 <div class="diagram-step-header">
-                  <span class="diagram-step-number">4</span>
                   <h5 class="diagram-step-title" data-i18n="smartnet_diag3_s4_title">4. Analytical View & Scheduler</h5>
                 </div>
                 <p class="diagram-step-text" data-i18n="smartnet_diag3_s4_text">
@@ -367,25 +375,13 @@
         <!-- Architecture Diagram 4: Firebase Mobile Analytics Pipeline Fase 1 -->
         <div class="architecture-card">
           <div class="architecture-card-header">
-            <h4 class="architecture-card-title">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
-                <line x1="4" y1="22" x2="4" y2="15"></line>
-              </svg>
-              <span data-i18n="smartnet_diag4_title">1. Firebase Analytics – Phase 1</span>
-            </h4>
+            <h3 class="architecture-card-title"><span data-i18n="smartnet_diag4_title">1. Firebase Analytics – Phase 1</span></h3>
             <span class="stat-pill" data-i18n="smartnet_diag4_badge">Firebase Analytics – Phase 1</span>
           </div>
 
           <div class="diagram-preview-box" data-lightbox-src="assets/firebase-analytics-fase-1&2.png" data-lightbox-caption-key="smartnet_diag4_title" role="button" tabindex="0" aria-label="Perbesar diagram Firebase Analytics Phase 1">
             <img src="assets/firebase-analytics-fase-1&2.png" alt="Firebase Analytics Phase 1" class="diagram-preview-img" loading="lazy">
             <div class="diagram-zoom-hint">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                <line x1="11" y1="8" x2="11" y2="14"></line>
-                <line x1="8" y1="11" x2="14" y2="11"></line>
-              </svg>
               <span data-i18n="diagram_zoom_hint">Klik untuk memperbesar diagram</span>
             </div>
           </div>
@@ -393,9 +389,6 @@
           <div class="architecture-card-body" data-i18n="smartnet_fb1_details" data-i18n-html="true">
             <div class="flow-breakdown">
               <div class="flow-title">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                </svg>
                 <span>Alur data:</span>
               </div>
 
@@ -442,25 +435,13 @@
         <!-- Architecture Diagram 5: Firebase Analytics Fase 3 Multi-Store Ingestion -->
         <div class="architecture-card">
           <div class="architecture-card-header">
-            <h4 class="architecture-card-title">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"></circle>
-                <polyline points="12 6 12 12 16 14"></polyline>
-              </svg>
-              <span data-i18n="smartnet_diag5_title">2. Firebase Analytics – Phase 3</span>
-            </h4>
+            <h3 class="architecture-card-title"><span data-i18n="smartnet_diag5_title">2. Firebase Analytics – Phase 3</span></h3>
             <span class="stat-pill" data-i18n="smartnet_diag5_badge">Firebase Analytics – Phase 3</span>
           </div>
 
           <div class="diagram-preview-box" data-lightbox-src="assets/firebase-analytics-fase-3.png" data-lightbox-caption-key="smartnet_diag5_title" role="button" tabindex="0" aria-label="Perbesar diagram Firebase Analytics Phase 3">
             <img src="assets/firebase-analytics-fase-3.png" alt="Firebase Analytics Phase 3 Multi-Store Ingestion" class="diagram-preview-img" loading="lazy">
             <div class="diagram-zoom-hint">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                <line x1="11" y1="8" x2="11" y2="14"></line>
-                <line x1="8" y1="11" x2="14" y2="11"></line>
-              </svg>
               <span data-i18n="diagram_zoom_hint">Klik untuk memperbesar diagram</span>
             </div>
           </div>
@@ -468,9 +449,6 @@
           <div class="architecture-card-body" data-i18n="smartnet_fb3_details" data-i18n-html="true">
             <div class="flow-breakdown">
               <div class="flow-title">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                </svg>
                 <span>Alur data:</span>
               </div>
 
@@ -508,13 +486,13 @@
 
       <!-- Block 3: Orchestration, Quality & Columnar Analytics -->
       <section class="detail-section-block">
-        <h3 class="detail-block-title" data-i18n="smartnet_b3_title">3. Data Orchestration, Transformation & Analytics</h3>
-        <p data-i18n="smartnet_b3_desc">Standardisasi logika bisnis dan percepatan kueri eksploratif data warehouse.</p>
+        <h2 class="detail-block-title" data-i18n="smartnet_b3_title">Data Orchestration, Transformation & Analytics</h2>
+        <p class="detail-block-desc" data-i18n="smartnet_b3_desc">Standardisasi logika bisnis dan percepatan kueri eksploratif data warehouse.</p>
 
         <div class="feature-cards-grid">
           <div class="feature-item-card">
             <span class="stat-pill">+30% Data Freshness</span>
-            <h4 class="feature-item-title" data-i18n="smartnet_p6_title">Orchestration via Apache Airflow & dbt</h4>
+            <h3 class="feature-item-title" data-i18n="smartnet_p6_title">Orchestration via Apache Airflow & dbt</h3>
             <p data-i18n="smartnet_p6_text">
               Mengorkestrasi tahapan ingestion, transformasi, dan uji kualitas data otomatis menggunakan Apache Airflow dan dbt (data build tool). Berhasil meningkatkan kesegaran data (freshness) sebesar 30% dan menjamin konsistensi logika bisnis di seluruh dataset perusahaan.
             </p>
@@ -522,7 +500,7 @@
 
           <div class="feature-item-card">
             <span class="stat-pill">High-Performance POC</span>
-            <h4 class="feature-item-title" data-i18n="smartnet_p7_title">Integrasi ClickHouse Columnar Storage</h4>
+            <h3 class="feature-item-title" data-i18n="smartnet_p7_title">Integrasi ClickHouse Columnar Storage</h3>
             <p data-i18n="smartnet_p7_text">
               Mengintegrasikan ClickHouse untuk pengujian analitik berkinerja tinggi pada proyek proof-of-concept (POC), menghasilkan akselerasi drastis dalam eksplorasi dan query analitik dataset berukuran besar.
             </p>
@@ -530,7 +508,7 @@
 
           <div class="feature-item-card">
             <span class="stat-pill">-40% Waktu Pemrosesan Manual</span>
-            <h4 class="feature-item-title" data-i18n="smartnet_p8_title">5+ Dashboard Interaktif Looker</h4>
+            <h3 class="feature-item-title" data-i18n="smartnet_p8_title">5+ Dashboard Interaktif Looker</h3>
             <p data-i18n="smartnet_p8_text">
               Membangun 5+ dashboard analitik interaktif di Looker untuk kebutuhan pelaporan real-time manajemen, mengotomatiskan alur kerja dan memangkas pemrosesan data manual hingga 40%.
             </p>
@@ -538,7 +516,7 @@
 
           <div class="feature-item-card">
             <span class="stat-pill">+30% Query Performance</span>
-            <h4 class="feature-item-title" data-i18n="smartnet_p9_title">Optimasi & Desain Basis Data</h4>
+            <h3 class="feature-item-title" data-i18n="smartnet_p9_title">Optimasi & Desain Basis Data</h3>
             <p data-i18n="smartnet_p9_text">
               Merancang dan mengoptimalkan skema basis data pada lebih dari 3 aplikasi produksi, menghasilkan peningkatan performa kueri rata-rata sebesar 30%.
             </p>
@@ -548,13 +526,13 @@
 
       <!-- Block 4: Architecture, Documentation & Team Leadership -->
       <section class="detail-section-block">
-        <h3 class="detail-block-title" data-i18n="smartnet_b4_title">4. Tata Kelola Arsitektur & Manajemen Proyek</h3>
-        <p data-i18n="smartnet_b4_desc">Menyelaraskan rancangan arsitektur teknis dengan sasaran bisnis strategis para pemangku kepentingan.</p>
+        <h2 class="detail-block-title" data-i18n="smartnet_b4_title">Tata Kelola Arsitektur & Manajemen Proyek</h2>
+        <p class="detail-block-desc" data-i18n="smartnet_b4_desc">Menyelaraskan rancangan arsitektur teknis dengan sasaran bisnis strategis para pemangku kepentingan.</p>
 
         <div class="feature-cards-grid">
           <div class="feature-item-card">
             <span class="stat-pill">3+ BRD & FSD • -20% Revisi</span>
-            <h4 class="feature-item-title" data-i18n="smartnet_p10_title">Dokumentasi Kebutuhan Bisnis & Fungsional</h4>
+            <h3 class="feature-item-title" data-i18n="smartnet_p10_title">Dokumentasi Kebutuhan Bisnis & Fungsional</h3>
             <p data-i18n="smartnet_p10_text">
               Menyusun 3+ Business Requirements Documents (BRD) dan Functional Specification Documents (FSD) komprehensif, mengeliminasi ambiguitas kebutuhan proyek dan memangkas revisi stakeholder hingga 20%.
             </p>
@@ -562,7 +540,7 @@
 
           <div class="feature-item-card">
             <span class="stat-pill">3+ SAD & TSD • +15% Kejelasan</span>
-            <h4 class="feature-item-title" data-i18n="smartnet_p11_title">Rancangan Arsitektur Sistem & Spesifikasi Teknis</h4>
+            <h3 class="feature-item-title" data-i18n="smartnet_p11_title">Rancangan Arsitektur Sistem & Spesifikasi Teknis</h3>
             <p data-i18n="smartnet_p11_text">
               Membuat 3+ System Architecture Documents (SAD) dan Technical Specification Documents (TSD), menyelaraskan rancang bangun teknis dengan objektif bisnis serta meningkatkan kejelasan tahap development sebesar 15%.
             </p>
@@ -570,7 +548,7 @@
 
           <div class="feature-item-card">
             <span class="stat-pill">4+ Proyek • -25% Misalignment</span>
-            <h4 class="feature-item-title" data-i18n="smartnet_p12_title">Analisis Kebutuhan Lintas Tim</h4>
+            <h3 class="feature-item-title" data-i18n="smartnet_p12_title">Analisis Kebutuhan Lintas Tim</h3>
             <p data-i18n="smartnet_p12_text">
               Menganalisis kebutuhan teknis untuk 4+ inisiatif proyek, memfasilitasi komunikasi efektif antara stakeholder bisnis dan developer, serta memotong miskomunikasi sebesar 25%.
             </p>
@@ -578,7 +556,7 @@
 
           <div class="feature-item-card">
             <span class="stat-pill">Delivery On-Time • 90% Compliance</span>
-            <h4 class="feature-item-title" data-i18n="smartnet_p13_title">Supervisi Developer & Validasi Kualitas</h4>
+            <h3 class="feature-item-title" data-i18n="smartnet_p13_title">Supervisi Developer & Validasi Kualitas</h3>
             <p data-i18n="smartnet_p13_text">
               Memonitor pengerjaan tugas tim developer untuk 5+ proyek (menekan keterlambatan task hingga 10%) dan memvalidasi hasil pengujian untuk 4+ proyek dengan tingkat kepatuhan spesifikasi mencapai 90%.
             </p>
@@ -586,31 +564,19 @@
         </div>
       </section>
 
-      <!-- Bottom Navigation Button -->
-      <div style="margin-top: 3rem; text-align: center;">
-        <a href="index.html#experience" class="btn btn-primary">
-          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <line x1="19" y1="12" x2="5" y2="12"></line>
-            <polyline points="12 19 5 12 12 5"></polyline>
-          </svg>
-          <span data-i18n="back_to_exp">Kembali ke Pengalaman Lainnya</span>
-        </a>
+      <div class="detail-footer-nav">
+        <a href="index.html#experience" class="link-detail">← <span data-i18n="back_to_exp">Kembali ke Pengalaman Lainnya</span></a>
       </div>
 
     </div>
   </main>
 
-  <!-- Footer -->
   <footer class="footer">
-    <div class="container">
-      <div class="footer-wrapper">
-        <div>
-          <p>© 2026 <strong>Kharismadina Hijra M</strong>. All rights reserved.</p>
-        </div>
-        <div class="footer-links">
-          <a href="index.html" data-i18n="back_to_home">Halaman Utama</a>
-          <a href="index.html#contact" data-i18n="nav_contact">Kontak</a>
-        </div>
+    <div class="container footer-wrapper">
+      <p>© 2026 Kharismadina Hijra M</p>
+      <div class="footer-links">
+        <a href="index.html" data-i18n="footer_home">Halaman Utama</a>
+        <a href="index.html#contact" data-i18n="nav_contact">Kontak</a>
       </div>
     </div>
   </footer>

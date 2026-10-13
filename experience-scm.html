@@ -4,184 +4,200 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pengalaman di PT Surya Citra Media — Kharismadina Hijra M</title>
-  <meta name="description" content="Detail rekayasa data streaming, pencocokan data iklan berbasis ML, dan orkestrasi Airflow di PT Surya Citra Media oleh Kharismadina Hijra M.">
+  <meta name="description" content="Data matching Nielsen × Gen21 berbasis ML (fuzzywuzzy), pipeline batch Airflow & real-time Debezium + Kafka, dan streaming pipeline di PT Surya Citra Media oleh Kharismadina Hijra M.">
 
-  <!-- Google Fonts: Inter & Space Grotesk -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- Minimal Nav Back & Language Switcher -->
-  <div class="detail-nav-back">
+  <nav class="detail-nav-back" aria-label="Navigasi halaman detail">
     <div class="container detail-nav-wrapper">
-      <a href="index.html#experience" class="btn-back" id="btnBackHome">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="19" y1="12" x2="5" y2="12"></line>
-          <polyline points="12 19 5 12 12 5"></polyline>
-        </svg>
-        <span data-i18n="back_to_home">Kembali ke Portofolio Utama</span>
-      </a>
-
-      <!-- Language Selector -->
+      <a href="index.html#experience" class="btn-back" id="btnBackHome">← <span data-i18n="back_to_home">Kembali ke Portofolio Utama</span></a>
       <div class="lang-switcher" role="group" aria-label="Pilih Bahasa / Select Language">
         <button type="button" class="lang-btn active" data-lang="id" aria-pressed="true" title="Bahasa Indonesia">ID</button>
         <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" title="English">EN</button>
       </div>
     </div>
-  </div>
+  </nav>
 
   <main>
-    <!-- Detail Hero -->
     <header class="detail-hero">
       <div class="container">
-        <span class="section-subtitle" data-i18n="detail_case_badge">Studi Kasus Pengalaman Kerja</span>
+        <span class="detail-eyebrow" data-i18n="detail_case_badge">Studi Kasus Pengalaman Kerja</span>
         <h1>Data Engineer</h1>
-        <h2 style="font-size: 1.4rem; color: var(--accent); margin-top: 0.25rem;">PT SURYA CITRA MEDIA</h2>
-
+        <p class="detail-company">PT Surya Citra Media</p>
         <div class="detail-header-meta">
-          <div class="detail-meta-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-              <line x1="16" y1="2" x2="16" y2="6"></line>
-              <line x1="8" y1="2" x2="8" y2="6"></line>
-              <line x1="3" y1="10" x2="21" y2="10"></line>
-            </svg>
-            <strong data-i18n="scm_date">Januari 2022 — Juli 2023</strong>
-          </div>
-          <div class="detail-meta-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-              <circle cx="12" cy="10" r="3"></circle>
-            </svg>
-            <span>Jakarta, Indonesia</span>
-          </div>
+          <span data-i18n="scm_date">Januari 2022 — Juli 2023</span>
+          <span>Jakarta, Indonesia</span>
         </div>
-
-        <div class="tag-list" style="margin-top: 1rem;">
-          <span class="tag tag-accent">Python ML Matching</span>
-          <span class="tag tag-accent">Apache Kafka</span>
-          <span class="tag tag-accent">Apache Spark</span>
-          <span class="tag">Apache Airflow</span>
+        <div class="tag-list">
+          <span class="tag tag-accent">Python · fuzzywuzzy</span>
+          <span class="tag tag-accent">Apache Airflow</span>
+          <span class="tag tag-accent">Debezium + Kafka</span>
           <span class="tag">Docker</span>
+          <span class="tag">Apache Spark</span>
           <span class="tag">MySQL</span>
-          <span class="tag">Gen21 Integration</span>
-          <span class="tag">Nielsen TV Ratings</span>
-          <span class="tag">SCTV & Indosiar</span>
+          <span class="tag">SQL Server</span>
+          <span class="tag">PostgreSQL</span>
         </div>
       </div>
     </header>
 
-    <!-- Detail Content -->
     <div class="container detail-content">
-      
-      <!-- Project 1: Fuzzy Matching -->
-      <section class="detail-section-block">
-        <h3 class="detail-block-title" data-i18n="scm_b1_title">1. Event-Driven Advertising Data Matching (Python & Fuzzy ML)</h3>
-        <p data-i18n="scm_b1_desc">
-          Integrasi dan rekonsiliasi data penayangan iklan komersial antara sistem broadcast traffic internal dan lembaga rating independen.
-        </p>
+
+      <!-- ML Use Case: Data Matching Nielsen × Gen21 -->
+      <section class="detail-section-block" id="ml-data-matching">
+        <span class="detail-label">Machine Learning Use Case</span>
+        <h2 class="detail-block-title" data-i18n="scm_b1_title">Data Matching Nielsen × Gen21</h2>
+        <p class="detail-block-desc" data-i18n="scm_b1_desc">Integrasi dan rekonsiliasi data penayangan iklan komersial antara sistem broadcast traffic internal dan lembaga rating independen.</p>
 
         <div class="feature-cards-grid">
           <div class="feature-item-card">
-            <span class="stat-pill">+90% Akurasi • -80% Processing Time</span>
-            <h4 class="feature-item-title" data-i18n="scm_p1_title">Pencocokan Otomatis Gen21 & Nielsen TV Ratings</h4>
+            <span class="stat-pill" data-i18n="scm_p1_stat">+90% akurasi matching · −80% waktu proses</span>
+            <h3 class="feature-item-title" data-i18n="scm_p1_title">Pencocokan Otomatis Gen21 & Nielsen TV Ratings</h3>
             <p data-i18n="scm_p1_text">
-              Mengembangkan program pencocokan data periklanan berbasis <em>event-driven</em> dengan Python menggunakan teknik machine learning <strong>fuzzy wuzzy</strong>. Solusi ini berhasil mengintegrasikan dataset heterogeneous dari Gen21 (traffic log) dan Nielsen Media Research untuk analisis rating pemirsa siaran TV nasional (SCTV & Indosiar).
+              Mengembangkan program pencocokan data periklanan berbasis event-driven dengan Python menggunakan teknik machine learning fuzzy wuzzy. Solusi ini berhasil mengintegrasikan dataset heterogeneous dari Gen21 (traffic log) dan Nielsen Media Research untuk analisis rating pemirsa siaran TV nasional (SCTV & Indosiar).
             </p>
-            <div class="bullet-list" style="margin-top: 1rem;">
-              <div class="bullet-item" data-i18n="scm_p1_b1" data-i18n-html="true">
-                Meningkatkan akurasi pencocokan log iklan komersial hingga <strong>90%</strong>.
-              </div>
-              <div class="bullet-item" data-i18n="scm_p1_b2" data-i18n-html="true">
-                Memangkas waktu komputasi pemrosesan harian sebesar <strong>80%</strong> dibanding metode manual sebelumnya.
-              </div>
+            <div class="bullet-list">
+              <div class="bullet-item" data-i18n="scm_p1_b1" data-i18n-html="true">Meningkatkan akurasi pencocokan log iklan komersial hingga <strong>90%</strong>.</div>
+              <div class="bullet-item" data-i18n="scm_p1_b2" data-i18n-html="true">Memangkas waktu komputasi pemrosesan harian sebesar <strong>80%</strong> dibanding metode manual sebelumnya.</div>
             </div>
           </div>
         </div>
+
+        <!-- High-Level Architecture -->
+        <div class="architecture-card">
+          <div class="architecture-card-header">
+            <h3 class="architecture-card-title" data-i18n="scm_arch_title">High-Level Architecture: Batch & Real-Time Data Matching</h3>
+          </div>
+
+          <figure class="arch-diagram">
+            <svg viewBox="0 0 860 310" role="img" aria-labelledby="scmArchTitle scmArchDesc">
+              <title id="scmArchTitle">High-level architecture data matching Nielsen × Gen21</title>
+              <desc id="scmArchDesc">MySQL (Nielsen) dan SQL Server (Gen21) dialirkan lewat dua jalur: batch harian dengan Apache Airflow, dan real-time dengan Debezium CDC ke Apache Kafka. Keduanya masuk ke program matching Python fuzzywuzzy di Docker, lalu hasil disimpan ke PostgreSQL departemen Marketing.</desc>
+              <defs>
+                <marker id="arrowScm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0 0 L10 5 L0 10 z" class="arrowhead"/>
+                </marker>
+              </defs>
+
+              <!-- Source databases -->
+              <rect class="boundary" x="12" y="74" width="156" height="156" rx="8"/>
+              <text class="lane-label" x="24" y="94">SOURCE DB</text>
+              <rect class="node" x="24" y="104" width="132" height="52" rx="6"/>
+              <text class="node-title" x="90" y="126" text-anchor="middle">MySQL</text>
+              <text class="node-sub" x="90" y="144" text-anchor="middle">Nielsen</text>
+              <rect class="node" x="24" y="166" width="132" height="52" rx="6"/>
+              <text class="node-title" x="90" y="188" text-anchor="middle">SQL Server</text>
+              <text class="node-sub" x="90" y="206" text-anchor="middle">Gen21</text>
+
+              <!-- Batch lane -->
+              <text class="lane-label" x="230" y="18" data-i18n="diag_scm_batch">BATCH · HARIAN</text>
+              <rect class="node" x="230" y="28" width="160" height="56" rx="6"/>
+              <text class="node-title" x="310" y="52" text-anchor="middle">Apache Airflow</text>
+              <text class="node-sub" x="310" y="70" text-anchor="middle" data-i18n="diag_scm_airflow_sub">DAG terjadwal harian</text>
+
+              <!-- Real-time lane -->
+              <rect class="node" x="230" y="222" width="130" height="56" rx="6"/>
+              <text class="node-title" x="295" y="246" text-anchor="middle">Debezium</text>
+              <text class="node-sub" x="295" y="264" text-anchor="middle">CDC connector</text>
+              <rect class="node" x="390" y="222" width="130" height="56" rx="6"/>
+              <text class="node-title" x="455" y="246" text-anchor="middle">Apache Kafka</text>
+              <text class="node-sub" x="455" y="264" text-anchor="middle">change topics</text>
+              <text class="lane-label" x="230" y="302">REAL-TIME · CDC</text>
+
+              <!-- ML program -->
+              <rect class="node node-accent" x="560" y="104" width="150" height="96" rx="6"/>
+              <text class="node-title" x="635" y="134" text-anchor="middle" data-i18n="diag_scm_ml_title">Program Matching</text>
+              <text class="node-sub" x="635" y="153" text-anchor="middle">Python · fuzzywuzzy</text>
+              <text class="node-sub" x="635" y="171" text-anchor="middle">Docker container</text>
+
+              <!-- Sink -->
+              <rect class="node" x="740" y="124" width="108" height="56" rx="6"/>
+              <text class="node-title" x="794" y="148" text-anchor="middle">PostgreSQL</text>
+              <text class="node-sub" x="794" y="166" text-anchor="middle" data-i18n="diag_scm_pg_sub">Dept. Marketing</text>
+
+              <!-- Edges -->
+              <path class="edge" d="M168 112 C200 112 200 56 228 56" marker-end="url(#arrowScm)"/>
+              <path class="edge" d="M168 192 C200 192 200 250 228 250" marker-end="url(#arrowScm)"/>
+              <path class="edge" d="M360 250 L388 250" marker-end="url(#arrowScm)"/>
+              <path class="edge" d="M390 56 C480 56 480 130 558 130" marker-end="url(#arrowScm)"/>
+              <path class="edge" d="M520 250 C545 250 535 176 558 176" marker-end="url(#arrowScm)"/>
+              <path class="edge" d="M710 152 L738 152" marker-end="url(#arrowScm)"/>
+            </svg>
+          </figure>
+          <p class="diagram-scroll-hint" data-i18n="diagram_scroll_hint">Geser diagram ke samping untuk melihat seluruhnya →</p>
+
+          <ol class="flow-steps">
+            <li data-i18n="scm_arch_s1" data-i18n-html="true"><strong>Sumber data:</strong> data rating Nielsen tersimpan di MySQL, sedangkan traffic log iklan Gen21 tersimpan di SQL Server.</li>
+            <li data-i18n="scm_arch_s2" data-i18n-html="true"><strong>Jalur batch (harian):</strong> DAG Apache Airflow mengekstrak data dari kedua database setiap hari lalu menjalankan program matching.</li>
+            <li data-i18n="scm_arch_s3" data-i18n-html="true"><strong>Jalur real-time:</strong> Debezium menangkap setiap perubahan data (CDC) di kedua database dan mengalirkannya ke topik Apache Kafka, yang kemudian dikonsumsi oleh program matching.</li>
+            <li data-i18n="scm_arch_s4" data-i18n-html="true"><strong>Program matching (Docker):</strong> aplikasi Python yang dikemas dalam container Docker mencocokkan record Nielsen dan Gen21 berdasarkan kemiripan string menggunakan <em>fuzzywuzzy</em>.</li>
+            <li data-i18n="scm_arch_s5" data-i18n-html="true"><strong>Output:</strong> hasil matching dari kedua jalur dikirim ke PostgreSQL milik departemen Marketing untuk analisis rating dan penayangan iklan.</li>
+          </ol>
+        </div>
       </section>
 
-      <!-- Project 2: Streaming Architecture -->
+      <!-- Streaming Pipelines -->
       <section class="detail-section-block">
-        <h3 class="detail-block-title" data-i18n="scm_b2_title">2. Streaming Data Pipelines Skalabilitas Tinggi</h3>
-        <p data-i18n="scm_b2_desc">Infrastruktur pemrosesan aliran data terdistribusi untuk mengantisipasi lonjakan trafik siaran.</p>
+        <h2 class="detail-block-title" data-i18n="scm_b2_title">Streaming Data Pipelines Skalabilitas Tinggi</h2>
+        <p class="detail-block-desc" data-i18n="scm_b2_desc">Infrastruktur pemrosesan aliran data terdistribusi untuk mengantisipasi lonjakan trafik siaran.</p>
 
         <div class="feature-cards-grid">
           <div class="feature-item-card">
-            <span class="stat-pill">+40% Kapasitas Volume Data</span>
-            <h4 class="feature-item-title" data-i18n="scm_p2_title">Pipeline Streaming Kafka + Spark + Docker</h4>
+            <span class="stat-pill" data-i18n="scm_p2_stat">+40% kapasitas volume data</span>
+            <h3 class="feature-item-title" data-i18n="scm_p2_title">Pipeline Streaming Kafka + Spark + Docker</h3>
             <p data-i18n="scm_p2_text">
-              Membangun dan mengonfigurasi pipeline streaming data menggunakan kontainerisasi <strong>Docker</strong>, <strong>Apache Kafka</strong> sebagai message broker terdistribusi, <strong>Apache Spark</strong> untuk micro-batch processing cepat, dan <strong>MySQL</strong> sebagai storage hilir.
+              Membangun dan mengonfigurasi pipeline streaming data menggunakan kontainerisasi Docker, Apache Kafka sebagai message broker terdistribusi, Apache Spark untuk micro-batch processing cepat, dan MySQL sebagai storage hilir.
             </p>
-            <div class="bullet-list" style="margin-top: 1rem;">
-              <div class="bullet-item" data-i18n="scm_p2_b1" data-i18n-html="true">
-                Mampu menangani peningkatan volume data hingga <strong>40%</strong> tanpa latensi berlebih.
-              </div>
-              <div class="bullet-item" data-i18n="scm_p2_b2" data-i18n-html="true">
-                Menjamin keandalan pengiriman data (zero data loss) dan kontinuitas analitik waktu nyata.
-              </div>
+            <div class="bullet-list">
+              <div class="bullet-item" data-i18n="scm_p2_b1" data-i18n-html="true">Mampu menangani peningkatan volume data hingga <strong>40%</strong> tanpa latensi berlebih.</div>
+              <div class="bullet-item" data-i18n="scm_p2_b2" data-i18n-html="true">Menjamin keandalan pengiriman data (zero data loss) dan kontinuitas analitik waktu nyata.</div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Project 3: Airflow DAGs -->
+      <!-- Airflow -->
       <section class="detail-section-block">
-        <h3 class="detail-block-title" data-i18n="scm_b3_title">3. Orkestrasi & Efisiensi Operasional dengan Airflow</h3>
-        <p data-i18n="scm_b3_desc">Peningkatan keandalan job scheduler dan deteksi dini kegagalan pipeline.</p>
+        <h2 class="detail-block-title" data-i18n="scm_b3_title">Orkestrasi & Efisiensi Operasional dengan Airflow</h2>
+        <p class="detail-block-desc" data-i18n="scm_b3_desc">Peningkatan keandalan job scheduler dan deteksi dini kegagalan pipeline.</p>
 
         <div class="feature-cards-grid">
           <div class="feature-item-card">
-            <span class="stat-pill">-35% Downtime • 99.8% Efisiensi Operasional</span>
-            <h4 class="feature-item-title" data-i18n="scm_p3_title">Troubleshooting Kompleks & Otomasi DAGs</h4>
+            <span class="stat-pill" data-i18n="scm_p3_stat">−35% downtime · 99.8% efisiensi operasional</span>
+            <h3 class="feature-item-title" data-i18n="scm_p3_title">Troubleshooting Kompleks & Otomasi DAGs</h3>
             <p data-i18n="scm_p3_text">
-              Mengimplementasikan Directed Acyclic Graphs (DAGs) terstandarisasi pada <strong>Apache Airflow</strong> untuk mengotomatiskan penanganan galat dan troubleshooting kesalahan sistem yang kompleks.
+              Mengimplementasikan Directed Acyclic Graphs (DAGs) terstandarisasi pada Apache Airflow untuk mengotomatiskan penanganan galat dan troubleshooting kesalahan sistem yang kompleks.
             </p>
-            <div class="bullet-list" style="margin-top: 1rem;">
-              <div class="bullet-item" data-i18n="scm_p3_b1" data-i18n-html="true">
-                Mereduksi <em>system downtime</em> sebesar <strong>35%</strong> melalui notifikasi kegagalan dan automatic retries.
-              </div>
-              <div class="bullet-item" data-i18n="scm_p3_b2" data-i18n-html="true">
-                Mencapai efisiensi operasional sistem sebesar <strong>99.8%</strong> untuk seluruh batch job harian.
-              </div>
+            <div class="bullet-list">
+              <div class="bullet-item" data-i18n="scm_p3_b1" data-i18n-html="true">Mereduksi <em>system downtime</em> sebesar <strong>35%</strong> melalui notifikasi kegagalan dan automatic retries.</div>
+              <div class="bullet-item" data-i18n="scm_p3_b2" data-i18n-html="true">Mencapai efisiensi operasional sistem sebesar <strong>99.8%</strong> untuk seluruh batch job harian.</div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Bottom Back Button -->
-      <div style="margin-top: 3rem; text-align: center;">
-        <a href="index.html#experience" class="btn btn-primary">
-          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <line x1="19" y1="12" x2="5" y2="12"></line>
-            <polyline points="12 19 5 12 12 5"></polyline>
-          </svg>
-          <span data-i18n="back_to_exp">Kembali ke Pengalaman Lainnya</span>
-        </a>
+      <div class="detail-footer-nav">
+        <a href="index.html#experience" class="link-detail">← <span data-i18n="back_to_exp">Kembali ke Pengalaman Lainnya</span></a>
       </div>
-
     </div>
   </main>
 
-  <!-- Footer -->
   <footer class="footer">
-    <div class="container">
-      <div class="footer-wrapper">
-        <div>
-          <p>© 2026 <strong>Kharismadina Hijra M</strong>. All rights reserved.</p>
-        </div>
-        <div class="footer-links">
-          <a href="index.html" data-i18n="back_to_home">Halaman Utama</a>
-          <a href="index.html#contact" data-i18n="nav_contact">Kontak</a>
-        </div>
+    <div class="container footer-wrapper">
+      <p>© 2026 Kharismadina Hijra M</p>
+      <div class="footer-links">
+        <a href="index.html" data-i18n="footer_home">Halaman Utama</a>
+        <a href="index.html#contact" data-i18n="nav_contact">Kontak</a>
       </div>
     </div>
   </footer>
 
-  <!-- Scripts -->
   <script src="js/translations.js"></script>
   <script src="js/main.js"></script>
 </body>

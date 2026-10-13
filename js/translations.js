@@ -59,7 +59,7 @@ const translations = {
 
     exp_scm_period: "Jan 2022 — Jul 2023",
     exp_scm_p: "Bertanggung jawab atas integrasi data rating siaran televisi nasional (SCTV & Indosiar), pipeline streaming terdistribusi, dan keandalan operasional batch DAGs harian.",
-    exp_scm_h1: "<strong>Event-Driven Data Matching (Fuzzy ML):</strong> Membangun program pencocokan data periklanan Python menggunakan teknik machine learning <em>fuzzy wuzzy</em> untuk mengintegrasikan data Gen21 & Nielsen, meningkatkan akurasi matching sebesar 90% dan memangkas waktu pemrosesan 80%.",
+    exp_scm_h1: "<strong>Data Matching Nielsen × Gen21 (ML):</strong> Program Python berbasis <em>fuzzywuzzy</em> dalam Docker yang mencocokkan data MySQL (Nielsen) dan SQL Server (Gen21) — batch harian via Airflow dan real-time via Debezium + Kafka — ke PostgreSQL tim Marketing. Akurasi matching naik 90%, waktu proses turun 80%.",
     exp_scm_h2: "<strong>Streaming Data Pipelines:</strong> Membangun infrastruktur streaming data menggunakan Docker, Apache Kafka, Apache Spark, dan MySQL yang mampu menangani peningkatan volume data sebesar 40% tanpa hambatan.",
     exp_scm_h3: "<strong>Airflow Operational Efficiency:</strong> Mengimplementasikan Directed Acyclic Graphs (DAGs) untuk troubleshooting komprehensif, memangkas downtime sistem sebesar 35% dan mencapai 99.8% operational efficiency.",
     exp_scm_link: "Lihat Detail Proyek & Arsitektur",
@@ -118,13 +118,13 @@ const translations = {
 
     // Smartnet Detail
     smartnet_date: "Agustus 2023 — Sekarang",
-    smartnet_b1_title: "1. Generative AI & Distributed Multi-Agent Architecture",
+    smartnet_b1_title: "Generative AI & Distributed Multi-Agent Architecture",
     smartnet_b1_desc: "Inisiatif strategis pemanfaatan kecerdasan buatan otonom untuk otomasi analisis dan pembuatan kampanye pemasaran berbasis data.",
     smartnet_p1_title: "Distributed Multi-Agent Generative AI System",
     smartnet_p1_text: "Merancang dan mengimplementasikan sistem multi-agent terdistribusi otonom di Google Cloud Platform. Agen-agen ini mengagregasi analitik BigQuery, integrasi API finansial pihak ketiga, dan pemodelan generative AI multimodal (Google Gemini & Imagen) untuk menghasilkan kampanye pemasaran berbasis data lokal secara dinamis dan terstruktur.",
     smartnet_p2_title: "Automated AI Data Feeding & Latency Reduction",
     smartnet_p2_text: "Mengimplementasikan alur kerja Apache Airflow untuk mengotomatiskan penarikan data PostgreSQL langsung ke BigQuery, memangkas latensi transfer data sebesar 30% dan mempercepat kapabilitas penyajian konteks data untuk aplikasi Generative AI.",
-    smartnet_b2_title: "2. Ingestion Skala Besar & Streaming Pipelines",
+    smartnet_b2_title: "Ingestion Skala Besar & Streaming Pipelines",
     smartnet_b2_desc: "Pengembangan jalur data bervolume tinggi, penanganan data real-time, dan migrasi basis data NoSQL.",
     smartnet_p3_title: "ETL Firebase ke Google BigQuery",
     smartnet_p3_text: "Merancang dan memelihara pipeline ETL untuk memproses lebih dari 1TB data dari Firebase ke Google BigQuery, meningkatkan aksesibilitas dan ketersediaan data analitik untuk tim data science dan business intelligence.",
@@ -132,7 +132,7 @@ const translations = {
     smartnet_p4_text: "Mengembangkan pipeline streaming real-time ke BigQuery memanfaatkan GCP Pub/Sub dan Cloud Dataflow. Mengintegrasikan logika transformasi in-flight untuk memfilter kolom audit redundan secara langsung, mengurangi overhead dan biaya penyimpanan hilir secara signifikan.",
     smartnet_p5_title: "Automated NoSQL Database Migration",
     smartnet_p5_text: "Merekayasa pipeline migrasi data otomatis tanpa kendala (seamless migration) untuk memindahkan beban kerja NoSQL dari on-premise Apache Cassandra ke Google Cloud Bigtable terkelola.",
-    smartnet_b3_title: "3. Data Orchestration, Transformation & Analytics",
+    smartnet_b3_title: "Data Orchestration, Transformation & Analytics",
     smartnet_b3_desc: "Standardisasi logika bisnis dan percepatan kueri eksploratif data warehouse.",
     smartnet_p6_title: "Orchestration via Apache Airflow & dbt",
     smartnet_p6_text: "Mengorkestrasi tahapan ingestion, transformasi, dan uji kualitas data otomatis menggunakan Apache Airflow dan dbt (data build tool). Berhasil meningkatkan kesegaran data (freshness) sebesar 30% dan menjamin konsistensi logika bisnis di seluruh dataset perusahaan.",
@@ -142,7 +142,7 @@ const translations = {
     smartnet_p8_text: "Membangun 5+ dashboard analitik interaktif di Looker untuk kebutuhan pelaporan real-time manajemen, mengotomatiskan alur kerja dan memangkas pemrosesan data manual hingga 40%.",
     smartnet_p9_title: "Optimasi & Desain Basis Data",
     smartnet_p9_text: "Merancang dan mengoptimalkan skema basis data pada lebih dari 3 aplikasi produksi, menghasilkan peningkatan performa kueri rata-rata sebesar 30%.",
-    smartnet_b4_title: "4. Tata Kelola Arsitektur & Manajemen Proyek",
+    smartnet_b4_title: "Tata Kelola Arsitektur & Manajemen Proyek",
     smartnet_b4_desc: "Menyelaraskan rancangan arsitektur teknis dengan sasaran bisnis strategis para pemangku kepentingan.",
     smartnet_p10_title: "Dokumentasi Kebutuhan Bisnis & Fungsional",
     smartnet_p10_text: "Menyusun 3+ Business Requirements Documents (BRD) dan Functional Specification Documents (FSD) komprehensif, mengeliminasi ambiguitas kebutuhan proyek dan memangkas revisi stakeholder hingga 20%.",
@@ -291,19 +291,19 @@ const translations = {
 
     // SCM Detail
     scm_date: "Januari 2022 — Juli 2023",
-    scm_b1_title: "1. Event-Driven Advertising Data Matching (Python & Fuzzy ML)",
+    scm_b1_title: "Data Matching Nielsen × Gen21 (Python & Fuzzy ML)",
     scm_b1_desc: "Integrasi dan rekonsiliasi data penayangan iklan komersial antara sistem broadcast traffic internal dan lembaga rating independen.",
     scm_p1_title: "Pencocokan Otomatis Gen21 & Nielsen TV Ratings",
     scm_p1_text: "Mengembangkan program pencocokan data periklanan berbasis event-driven dengan Python menggunakan teknik machine learning fuzzy wuzzy. Solusi ini berhasil mengintegrasikan dataset heterogeneous dari Gen21 (traffic log) dan Nielsen Media Research untuk analisis rating pemirsa siaran TV nasional (SCTV & Indosiar).",
     scm_p1_b1: "Meningkatkan akurasi pencocokan log iklan komersial hingga <strong>90%</strong>.",
     scm_p1_b2: "Memangkas waktu komputasi pemrosesan harian sebesar <strong>80%</strong> dibanding metode manual sebelumnya.",
-    scm_b2_title: "2. Streaming Data Pipelines Skalabilitas Tinggi",
+    scm_b2_title: "Streaming Data Pipelines Skalabilitas Tinggi",
     scm_b2_desc: "Infrastruktur pemrosesan aliran data terdistribusi untuk mengantisipasi lonjakan trafik siaran.",
     scm_p2_title: "Pipeline Streaming Kafka + Spark + Docker",
     scm_p2_text: "Membangun dan mengonfigurasi pipeline streaming data menggunakan kontainerisasi Docker, Apache Kafka sebagai message broker terdistribusi, Apache Spark untuk micro-batch processing cepat, dan MySQL sebagai storage hilir.",
     scm_p2_b1: "Mampu menangani peningkatan volume data hingga <strong>40%</strong> tanpa latensi berlebih.",
     scm_p2_b2: "Menjamin keandalan pengiriman data (zero data loss) dan kontinuitas analitik waktu nyata.",
-    scm_b3_title: "3. Orkestrasi & Efisiensi Operasional dengan Airflow",
+    scm_b3_title: "Orkestrasi & Efisiensi Operasional dengan Airflow",
     scm_b3_desc: "Peningkatan keandalan job scheduler dan deteksi dini kegagalan pipeline.",
     scm_p3_title: "Troubleshooting Kompleks & Otomasi DAGs",
     scm_p3_text: "Mengimplementasikan Directed Acyclic Graphs (DAGs) terstandarisasi pada Apache Airflow untuk mengotomatiskan penanganan galat dan troubleshooting kesalahan sistem yang kompleks.",
@@ -382,7 +382,7 @@ const translations = {
 
     exp_scm_period: "Jan 2022 — Jul 2023",
     exp_scm_p: "Responsible for nationwide TV audience ratings data integration (SCTV & Indosiar), streaming pipelines, and daily DAG operational reliability.",
-    exp_scm_h1: "<strong>Event-Driven Advertising Data Matching:</strong> Developed a Python-based advertising data matching program using fuzzy wuzzy machine learning techniques to integrate Gen21 and Nielsen datasets for analyzing SCTV & Indosiar ratings, increasing matching accuracy by 90% and reducing processing time by 80%.",
+    exp_scm_h1: "<strong>Nielsen × Gen21 Data Matching (ML):</strong> A Dockerized Python program using <em>fuzzywuzzy</em> to match MySQL (Nielsen) and SQL Server (Gen21) data — daily batches via Airflow and real-time via Debezium + Kafka — into the Marketing team's PostgreSQL. Increased matching accuracy by 90% and cut processing time by 80%.",
     exp_scm_h2: "<strong>Real-Time Data Streaming Pipelines:</strong> Built robust data streaming pipelines using Docker, Apache Kafka, Apache Spark, and MySQL that handled a 40% increase in data volume while ensuring seamless, reliable data flow.",
     exp_scm_h3: "<strong>Airflow Operational Efficiency:</strong> Implemented Directed Acyclic Graphs (DAGs) in Apache Airflow to troubleshoot complex errors, reducing system downtime by 35% and achieving 99.8% operational efficiency.",
     exp_scm_link: "View Architecture & Project Details",
@@ -441,13 +441,13 @@ const translations = {
 
     // Smartnet Detail
     smartnet_date: "August 2023 — Present",
-    smartnet_b1_title: "1. Generative AI & Distributed Multi-Agent Architecture",
+    smartnet_b1_title: "Generative AI & Distributed Multi-Agent Architecture",
     smartnet_b1_desc: "Strategic initiative engineering autonomous multi-agent systems for aggregated analytics and automated marketing campaigns.",
     smartnet_p1_title: "Distributed Multi-Agent Generative AI System",
     smartnet_p1_text: "Engineered a distributed multi-agent generative AI system on GCP (Cloud Run, ADK, MCP), autonomously aggregating BigQuery analytics, external financial APIs, and Gemini/Imagen models into structured, localized marketing campaigns.",
     smartnet_p2_title: "Automated AI Data Feeding & Latency Reduction",
     smartnet_p2_text: "Implemented Airflow workflows to automate PostgreSQL data ingestion into BigQuery, reducing data latency by 30% and enhancing generative AI capabilities.",
-    smartnet_b2_title: "2. Large-Scale Ingestion & Streaming Pipelines",
+    smartnet_b2_title: "Large-Scale Ingestion & Streaming Pipelines",
     smartnet_b2_desc: "High-volume data pipelines, real-time ingestion, and seamless NoSQL database migrations.",
     smartnet_p3_title: "ETL Firebase to Google BigQuery",
     smartnet_p3_text: "Designed and maintained ETL pipelines processing 1TB+ of data from Firebase to BigQuery, improving data accessibility for analytics teams.",
@@ -455,7 +455,7 @@ const translations = {
     smartnet_p4_text: "Streamlined real-time data ingestion into BigQuery using Pub/Sub and Dataflow, incorporating in-flight data transformation logic to remove redundant audit columns and reduce downstream storage overhead.",
     smartnet_p5_title: "Automated NoSQL Database Migration",
     smartnet_p5_text: "Engineered and automated a seamless data migration pipeline, successfully transferring NoSQL workloads from Apache Cassandra to Cloud Bigtable.",
-    smartnet_b3_title: "3. Data Orchestration, Transformation & Analytics",
+    smartnet_b3_title: "Data Orchestration, Transformation & Analytics",
     smartnet_b3_desc: "Standardizing business logic across data warehouse layers and accelerating exploratory queries.",
     smartnet_p6_title: "Orchestration via Apache Airflow & dbt",
     smartnet_p6_text: "Orchestrated ingestion, transformation, and quality checks using Apache Airflow and dbt, improving data freshness by 30% and ensuring consistent business logic across datasets.",
@@ -465,7 +465,7 @@ const translations = {
     smartnet_p8_text: "Developed 5+ interactive dashboards in Looker, optimizing real-time reporting and reducing manual data processing by 40%.",
     smartnet_p9_title: "Database Design & Query Optimization",
     smartnet_p9_text: "Designed and optimized databases for 3+ applications, improving query performance by 30%.",
-    smartnet_b4_title: "4. Technical Governance & Project Delivery",
+    smartnet_b4_title: "Technical Governance & Project Delivery",
     smartnet_b4_desc: "Aligning technical architecture designs with strategic business objectives and stakeholder requirements.",
     smartnet_p10_title: "BRD & FSD Documentation",
     smartnet_p10_text: "Authored 3+ BRDs and FSDs, clarifying project requirements and reducing stakeholder revisions by 20%.",
@@ -614,19 +614,19 @@ const translations = {
 
     // SCM Detail
     scm_date: "January 2022 — July 2023",
-    scm_b1_title: "1. Event-Driven Advertising Data Matching (Python & Fuzzy ML)",
+    scm_b1_title: "Data Matching Nielsen × Gen21 (Python & Fuzzy ML)",
     scm_b1_desc: "Commercial airtime data integration and reconciliation between internal traffic logs and independent ratings agencies.",
     scm_p1_title: "Gen21 & Nielsen TV Ratings Automated Matching",
     scm_p1_text: "Developed an event-driven, Python-based advertising data matching program using fuzzy wuzzy machine learning techniques to integrate datasets from Gen21 and Nielsen for analyzing SCTV and Indosiar TV ratings.",
     scm_p1_b1: "Increased commercial log matching accuracy by <strong>90%</strong>.",
     scm_p1_b2: "Reduced computational processing time by <strong>80%</strong> compared to manual reconciliation.",
-    scm_b2_title: "2. High-Scalability Streaming Data Pipelines",
+    scm_b2_title: "High-Scalability Streaming Data Pipelines",
     scm_b2_desc: "Distributed stream processing infrastructure handling significant broadcast traffic spikes.",
     scm_p2_title: "Kafka + Spark + Docker Streaming Pipeline",
     scm_p2_text: "Built robust data streaming pipelines using Docker, Apache Kafka, Apache Spark, and MySQL that handled a 40% increase in data volume while ensuring seamless, reliable data flow.",
     scm_p2_b1: "Handled a <strong>40%</strong> increase in data volume without operational friction.",
     scm_p2_b2: "Guaranteed seamless delivery with zero data loss and real-time analytics continuity.",
-    scm_b3_title: "3. Operational Efficiency & Airflow Orchestration",
+    scm_b3_title: "Operational Efficiency & Airflow Orchestration",
     scm_b3_desc: "Enhanced scheduler reliability and proactive error detection across scheduled pipelines.",
     scm_p3_title: "Airflow Directed Acyclic Graphs (DAGs) Troubleshooting",
     scm_p3_text: "Implemented Directed Acyclic Graphs (DAGs) in Apache Airflow to troubleshoot complex errors, reducing system downtime by 35% and achieving 99.8% operational efficiency.",
@@ -650,6 +650,107 @@ const translations = {
     deepfake_p2_b2: "Drove a 30% improvement in team competency and faster adoption of modern ML techniques."
   }
 };
+
+// ---------------------------------------------------------------------------
+// Tambahan: layout minimalis & use case Machine Learning (Okt 2026)
+// ---------------------------------------------------------------------------
+Object.assign(translations.id, {
+  exp_detail_link: "Lihat detail & arsitektur",
+  cert_heading_short: "Sertifikasi",
+  footer_home: "Halaman Utama",
+  diagram_scroll_hint: "Geser diagram ke samping untuk melihat seluruhnya →",
+
+  exp_smartnet_h_ml: "<strong>Predictive Maintenance (ML):</strong> Mengekstraksi foto odometer & plat nomor menjadi data tabular untuk memprediksi kebutuhan penggantian spare part dan oli motor — berjalan on-premise dengan Python.",
+
+  // Smartnet — Predictive Maintenance
+  smartnet_ml_title: "Predictive Maintenance Spare Part Motor",
+  smartnet_ml_desc: "Memprediksi kapan sebuah motor perlu penggantian spare part dan ganti oli, menggunakan data yang diekstraksi dari foto odometer dan plat nomor. Seluruh pipeline berjalan on-premise dengan Python.",
+  smartnet_ml_params_title: "Parameter model",
+  smartnet_ml_param1: "<strong>Odometer</strong> — jarak tempuh motor (km) hasil ekstraksi dari foto odometer.",
+  smartnet_ml_param2: "<strong>Pembaruan spare part</strong> — riwayat kapan dan pada kilometer berapa spare part terakhir diganti.",
+  smartnet_ml_param3: "<strong>Lamanya ganti oli</strong> — rentang waktu sejak penggantian oli terakhir.",
+  smartnet_ml_arch_title: "High-Level Architecture (On-Premise · Python)",
+  smartnet_ml_s1: "<strong>Input gambar:</strong> foto odometer dan plat nomor motor dikumpulkan dan disimpan di server on-premise.",
+  smartnet_ml_s2: "<strong>Ekstraksi gambar → tabular:</strong> program Python membaca angka odometer dan plat nomor dari gambar, lalu menyimpannya sebagai baris data tabular (plat nomor, odometer, tanggal).",
+  smartnet_ml_s3: "<strong>Penggabungan riwayat servis:</strong> data tabular digabungkan berdasarkan plat nomor dengan riwayat pembaruan spare part dan ganti oli.",
+  smartnet_ml_s4: "<strong>Feature engineering & model:</strong> odometer, jarak tempuh sejak spare part terakhir diganti, dan lamanya sejak ganti oli terakhir menjadi input model prediktif berbasis Python.",
+  smartnet_ml_s5: "<strong>Output:</strong> prediksi kebutuhan penggantian spare part dan ganti oli per motor, sebagai dasar penjadwalan maintenance.",
+  diag_pm_photo_t: "Foto Motor",
+  diag_pm_photo_s: "odometer & plat nomor",
+  diag_pm_extract_t: "Ekstraksi Gambar",
+  diag_pm_tab_t: "Data Tabular",
+  diag_pm_tab_s: "plat · km · tanggal",
+  diag_pm_hist_t: "Riwayat Servis",
+  diag_pm_hist_s: "spare part · ganti oli",
+  diag_pm_feat_s: "join by plat nomor",
+  diag_pm_model_t: "Model Prediktif",
+  diag_pm_out_t: "Jadwal Servis",
+  diag_pm_out_s: "prediksi maintenance",
+
+  // SCM — Data Matching architecture
+  scm_p1_stat: "+90% akurasi matching · −80% waktu proses",
+  scm_p2_stat: "+40% kapasitas volume data",
+  scm_p3_stat: "−35% downtime · 99.8% efisiensi operasional",
+  scm_arch_title: "High-Level Architecture: Batch & Real-Time Data Matching",
+  scm_arch_s1: "<strong>Sumber data:</strong> data rating Nielsen tersimpan di MySQL, sedangkan traffic log iklan Gen21 tersimpan di SQL Server.",
+  scm_arch_s2: "<strong>Jalur batch (harian):</strong> DAG Apache Airflow mengekstrak data dari kedua database setiap hari lalu menjalankan program matching.",
+  scm_arch_s3: "<strong>Jalur real-time:</strong> Debezium menangkap setiap perubahan data (CDC) di kedua database dan mengalirkannya ke topik Apache Kafka, yang kemudian dikonsumsi oleh program matching.",
+  scm_arch_s4: "<strong>Program matching (Docker):</strong> aplikasi Python yang dikemas dalam container Docker mencocokkan record Nielsen dan Gen21 berdasarkan kemiripan string menggunakan <em>fuzzywuzzy</em>.",
+  scm_arch_s5: "<strong>Output:</strong> hasil matching dari kedua jalur dikirim ke PostgreSQL milik departemen Marketing untuk analisis rating dan penayangan iklan.",
+  diag_scm_batch: "BATCH · HARIAN",
+  diag_scm_airflow_sub: "DAG terjadwal harian",
+  diag_scm_ml_title: "Program Matching",
+  diag_scm_pg_sub: "Dept. Marketing"
+});
+
+Object.assign(translations.en, {
+  exp_detail_link: "View details & architecture",
+  cert_heading_short: "Certifications",
+  footer_home: "Home",
+  diagram_scroll_hint: "Scroll the diagram sideways to see all of it →",
+
+  exp_smartnet_h_ml: "<strong>Predictive Maintenance (ML):</strong> Extracting odometer & license-plate photos into tabular data to predict motorcycle spare-part replacement and oil changes — running on-premise in Python.",
+
+  // Smartnet — Predictive Maintenance
+  smartnet_ml_title: "Motorcycle Spare-Part Predictive Maintenance",
+  smartnet_ml_desc: "Predicts when a motorcycle needs a spare-part replacement or an oil change, using data extracted from odometer and license-plate photos. The whole pipeline runs on-premise in Python.",
+  smartnet_ml_params_title: "Model parameters",
+  smartnet_ml_param1: "<strong>Odometer</strong> — mileage (km) extracted from the odometer photo.",
+  smartnet_ml_param2: "<strong>Spare-part replacements</strong> — when, and at what mileage, each spare part was last replaced.",
+  smartnet_ml_param3: "<strong>Oil-change interval</strong> — time elapsed since the last oil change.",
+  smartnet_ml_arch_title: "High-Level Architecture (On-Premise · Python)",
+  smartnet_ml_s1: "<strong>Image input:</strong> odometer and license-plate photos are collected and stored on an on-premise server.",
+  smartnet_ml_s2: "<strong>Image → tabular extraction:</strong> a Python program reads the odometer value and plate number from each image and stores them as tabular rows (plate number, odometer, date).",
+  smartnet_ml_s3: "<strong>Service-history join:</strong> the tabular data is joined on plate number with the spare-part replacement and oil-change history.",
+  smartnet_ml_s4: "<strong>Feature engineering & model:</strong> odometer, mileage since the last spare-part replacement, and time since the last oil change feed a Python predictive model.",
+  smartnet_ml_s5: "<strong>Output:</strong> per-motorcycle predictions of upcoming spare-part replacements and oil changes, used to schedule maintenance.",
+  diag_pm_photo_t: "Vehicle Photos",
+  diag_pm_photo_s: "odometer & license plate",
+  diag_pm_extract_t: "Image Extraction",
+  diag_pm_tab_t: "Tabular Data",
+  diag_pm_tab_s: "plate · km · date",
+  diag_pm_hist_t: "Service History",
+  diag_pm_hist_s: "spare parts · oil change",
+  diag_pm_feat_s: "join on plate number",
+  diag_pm_model_t: "Predictive Model",
+  diag_pm_out_t: "Service Schedule",
+  diag_pm_out_s: "maintenance forecast",
+
+  // SCM — Data Matching architecture
+  scm_p1_stat: "+90% matching accuracy · −80% processing time",
+  scm_p2_stat: "+40% data volume capacity",
+  scm_p3_stat: "−35% downtime · 99.8% operational efficiency",
+  scm_arch_title: "High-Level Architecture: Batch & Real-Time Data Matching",
+  scm_arch_s1: "<strong>Sources:</strong> Nielsen ratings data lives in MySQL, while Gen21 ad traffic logs live in SQL Server.",
+  scm_arch_s2: "<strong>Batch path (daily):</strong> an Apache Airflow DAG extracts data from both databases every day and runs the matching program.",
+  scm_arch_s3: "<strong>Real-time path:</strong> Debezium captures every data change (CDC) in both databases and streams it to Apache Kafka topics, which the matching program consumes.",
+  scm_arch_s4: "<strong>Matching program (Docker):</strong> a containerized Python application matches Nielsen and Gen21 records by string similarity using <em>fuzzywuzzy</em>.",
+  scm_arch_s5: "<strong>Output:</strong> match results from both paths are written to the Marketing department's PostgreSQL for ratings and ad-airing analysis.",
+  diag_scm_batch: "BATCH · DAILY",
+  diag_scm_airflow_sub: "daily scheduled DAG",
+  diag_scm_ml_title: "Matching Program",
+  diag_scm_pg_sub: "Marketing Dept."
+});
 
 // Expose globally for vanilla browser usage
 window.siteTranslations = translations;
