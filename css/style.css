@@ -132,12 +132,6 @@ strong {
   gap: 1rem;
 }
 
-.nav-brand {
-  font-family: var(--font-heading);
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
 .nav-menu {
   display: flex;
   align-items: center;
