@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
   initCopyEmail();
   initLightbox();
+  initUseCaseAccordion();
 });
 
 /**
@@ -210,6 +211,16 @@ function applyLanguage(lang) {
       }
     }
   });
+
+  // Update accordion status hints based on their current open/closed state
+  document.querySelectorAll('.usecase-accordion-item').forEach(item => {
+    const hint = item.querySelector('.usecase-status-hint');
+    if (!hint) return;
+    const isOpen = item.classList.contains('is-open');
+    hint.textContent = isOpen
+      ? (dict.usecase_hint_close || (lang === 'en' ? 'Close' : 'Tutup'))
+      : (dict.usecase_hint_open || (lang === 'en' ? 'View Details' : 'Lihat Detail'));
+  });
 }
 
 /**
@@ -223,25 +234,22 @@ function initLightbox() {
 
   if (!modal || !modalImg) return;
 
-  // Open modal on click of any diagram trigger
-  document.querySelectorAll('[data-lightbox-src]').forEach(item => {
-    item.addEventListener('click', () => {
-      const src = item.getAttribute('data-lightbox-src');
-      const captionKey = item.getAttribute('data-lightbox-caption-key');
-      const currentLang = localStorage.getItem('portfolio_lang') || 'id';
+  const openLightbox = (trigger) => {
+    const src = trigger.getAttribute('data-lightbox-src');
+    const captionKey = trigger.getAttribute('data-lightbox-caption-key');
+    const currentLang = localStorage.getItem('portfolio_lang') || 'id';
 
-      modalImg.src = src;
-      if (modalCaption) {
-        if (captionKey && window.siteTranslations && window.siteTranslations[currentLang] && window.siteTranslations[currentLang][captionKey]) {
-          modalCaption.textContent = window.siteTranslations[currentLang][captionKey];
-        } else {
-          modalCaption.textContent = item.getAttribute('data-lightbox-caption') || '';
-        }
+    modalImg.src = src;
+    if (modalCaption) {
+      if (captionKey && window.siteTranslations && window.siteTranslations[currentLang] && window.siteTranslations[currentLang][captionKey]) {
+        modalCaption.textContent = window.siteTranslations[currentLang][captionKey];
+      } else {
+        modalCaption.textContent = trigger.getAttribute('data-lightbox-caption') || '';
       }
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    });
-  });
+    }
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  };
 
   const closeModal = () => {
     modal.classList.remove('active');
@@ -252,8 +260,16 @@ function initLightbox() {
     modalClose.addEventListener('click', closeModal);
   }
 
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
+  // Event delegation: works even when translation HTML is dynamically updated
+  document.addEventListener('click', (e) => {
+    const trigger = e.target.closest('[data-lightbox-src]');
+    if (trigger) {
+      e.preventDefault();
+      openLightbox(trigger);
+      return;
+    }
+
+    if (e.target.closest('#lightboxClose') || e.target === modal) {
       closeModal();
     }
   });
@@ -261,6 +277,131 @@ function initLightbox() {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.classList.contains('active')) {
       closeModal();
+      return;
+    }
+
+    if (e.key === 'Enter' || e.key === ' ') {
+      const trigger = e.target.closest('[data-lightbox-src]');
+      if (trigger && document.activeElement === trigger) {
+        e.preventDefault();
+        openLightbox(trigger);
+      }
     }
   });
+}
+
+/**
+ * Interactive Use Case Accordion List (Robust & Accessible)
+ */
+function initUseCaseAccordion() {
+  const accordionItems = document.querySelectorAll('.usecase-accordion-item');
+  if (accordionItems.length === 0) return;
+
+  const expandAllBtn = document.getElementById('btnExpandAllCases');
+  const collapseAllBtn = document.getElementById('btnCollapseAllCases');
+
+  const updateHint = (item, open) => {
+    const hint = item.querySelector('.usecase-status-hint');
+    if (!hint) return;
+    const currentLang = localStorage.getItem('portfolio_lang') || 'id';
+    const dict = window.siteTranslations && window.siteTranslations[currentLang];
+    if (open) {
+      hint.textContent = (dict && dict.usecase_hint_close) ? dict.usecase_hint_close : (currentLang === 'en' ? 'Close' : 'Tutup');
+    } else {
+      hint.textContent = (dict && dict.usecase_hint_open) ? dict.usecase_hint_open : (currentLang === 'en' ? 'View Details' : 'Lihat Detail');
+    }
+  };
+
+  const setItemState = (item, open) => {
+    const headerBtn = item.querySelector('.usecase-accordion-header');
+    const body = item.querySelector('.usecase-accordion-body');
+    if (open) {
+      item.classList.add('is-open');
+      if (headerBtn) headerBtn.setAttribute('aria-expanded', 'true');
+      if (body) {
+        body.style.display = 'block';
+      }
+    } else {
+      item.classList.remove('is-open');
+      if (headerBtn) headerBtn.setAttribute('aria-expanded', 'false');
+      if (body) {
+        body.style.display = 'none';
+      }
+    }
+    updateHint(item, open);
+  };
+
+  // Expose global controller helpers
+  window.toggleUseCaseItem = function(idOrEl) {
+    let item = null;
+    if (typeof idOrEl === 'string') {
+      item = document.getElementById(idOrEl);
+    } else if (idOrEl && idOrEl.closest) {
+      item = idOrEl.closest('.usecase-accordion-item');
+    }
+    if (item) {
+      const isOpen = item.classList.contains('is-open');
+      setItemState(item, !isOpen);
+    }
+  };
+
+  window.expandAllUseCases = function() {
+    accordionItems.forEach(item => setItemState(item, true));
+  };
+
+  window.collapseAllUseCases = function() {
+    accordionItems.forEach(item => setItemState(item, false));
+  };
+
+  // Explicitly apply initial states to match DOM classes
+  accordionItems.forEach(item => {
+    const isOpen = item.classList.contains('is-open');
+    setItemState(item, isOpen);
+  });
+
+  // Event delegation on document: foolproof against any dynamic DOM alteration
+  document.addEventListener('click', (e) => {
+    const headerBtn = e.target.closest('.usecase-accordion-header');
+    if (headerBtn) {
+      const item = headerBtn.closest('.usecase-accordion-item');
+      if (item) {
+        const isOpen = item.classList.contains('is-open');
+        setItemState(item, !isOpen);
+      }
+      return;
+    }
+
+    if (e.target.closest('#btnExpandAllCases')) {
+      window.expandAllUseCases();
+      return;
+    }
+
+    if (e.target.closest('#btnCollapseAllCases')) {
+      window.collapseAllUseCases();
+      return;
+    }
+  });
+
+  // Handle URL hash navigation on initial load & hash change
+  const handleHash = () => {
+    const hash = window.location.hash;
+    if (!hash) return;
+    try {
+      const targetEl = document.querySelector(hash);
+      if (targetEl) {
+        const parentItem = targetEl.closest('.usecase-accordion-item') || (targetEl.classList.contains('usecase-accordion-item') ? targetEl : null);
+        if (parentItem) {
+          setItemState(parentItem, true);
+          setTimeout(() => {
+            parentItem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 200);
+        }
+      }
+    } catch (_) {
+      // Ignore invalid query selector from arbitrary hash
+    }
+  };
+
+  handleHash();
+  window.addEventListener('hashchange', handleHash);
 }

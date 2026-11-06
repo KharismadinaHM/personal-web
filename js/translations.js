@@ -172,16 +172,262 @@ const translations = {
 
     // Diagram 2: Retail DWH Real-Time Analytics
     smartnet_diag2_badge: "Real-Time Streaming & Medallion DWH",
-    smartnet_diag2_title: "Arsitektur Real-Time Data Analytics & Medallion Data Warehouse (Retail DWH)",
-    smartnet_diag2_desc: "Rancangan arsitektur streaming data skala besar dari ratusan database toko (DB Express) dan cabang (DB Standard) menuju BigQuery Medallion Architecture (Bronze, Silver, Gold).",
-    smartnet_diag2_s1_title: "1. Ingestion Datastream & Pub/Sub",
-    smartnet_diag2_s1_text: "Menangkap transaksi kasir toko secara realtime via Stream App ke GCP Pub/Sub Topics dan CDC Datastream dari DB Standard cabang.",
-    smartnet_diag2_s2_title: "2. Stream Processing via Dataflow",
-    smartnet_diag2_s2_text: "Cloud Dataflow menjalankan raw ingestion ke Data Lake (Cloud Storage) dan pembersihan data (cleansing & deduplication) in-flight.",
-    smartnet_diag2_s3_title: "3. BigQuery Medallion Architecture",
-    smartnet_diag2_s3_text: "Alur data bertingkat: Bronze Layer (raw events), Silver Layer (data bersih), dan Gold Layer (agregasi data mart penjualan & stok toko).",
-    smartnet_diag2_s4_title: "4. Observabilitas & Penyajian BI",
-    smartnet_diag2_s4_text: "Tata kelola data terpusat via Google Cloud Dataplex, visualisasi metrik sistem di Grafana, dan pelaporan real-time ke BI Dashboard.",
+    smartnet_diag2_title: "1. Arsitektur Real-Time Data Analytics & Medallion Data Warehouse (Retail DWH)",
+    smartnet_diag2_arch_title: "High-Level Architecture (Real-Time Streaming & Medallion DWH)",
+    smartnet_diag2_desc: "Rancangan arsitektur streaming data skala besar dari 1.200 database toko (DB Express) dan cabang (DB Standard) menuju BigQuery Medallion Architecture (Bronze, Silver, Gold) dengan pemantauan terpadu Grafana.",
+    smartnet_diag2_details: `
+      <div class="flow-breakdown">
+        <!-- Overview Meta Grid -->
+        <div class="flow-meta-grid">
+          <div class="flow-meta-box">
+            <div class="flow-meta-label">Klien &amp; Jangkauan</div>
+            <div class="flow-meta-value">1.200 Toko Retail</div>
+            <div class="flow-meta-desc">Ritel &amp; bengkel motor di seluruh Indonesia</div>
+          </div>
+          <div class="flow-meta-box">
+            <div class="flow-meta-label">Volume &amp; Skala</div>
+            <div class="flow-meta-value">~100 GB / Bulan</div>
+            <div class="flow-meta-desc">Near real-time streaming ingestion</div>
+          </div>
+          <div class="flow-meta-box">
+            <div class="flow-meta-label">Efisiensi Biaya</div>
+            <div class="flow-meta-value">~$300 / Bulan</div>
+            <div class="flow-meta-desc">1 multi-stream job Dataflow terpadu</div>
+          </div>
+          <div class="flow-meta-box">
+            <div class="flow-meta-label">Tech Stack Utama</div>
+            <div class="flow-meta-value">Dataflow &amp; BigQuery</div>
+            <div class="flow-meta-desc">Beam Python, Pub/Sub, Datastream, Grafana</div>
+          </div>
+        </div>
+
+        <!-- Section 1: Overview & Yang Saya Bangun -->
+        <div class="flow-section">
+          <h4 class="flow-section-heading">1. Ringkasan &amp; Ruang Lingkup Proyek</h4>
+          <p class="flow-item" style="padding-left: 0; margin-bottom: 0.5rem;">
+            Arsitektur data streaming berskala besar end-to-end yang menyerap data transaksi kasir toko dan master data cabang ke dalam BigQuery Medallion Data Warehouse, dilengkapi sistem observabilitas proaktif dan penyajian BI real-time.
+          </p>
+          <ul class="flow-list">
+            <li class="flow-item">
+              <strong>Komponen yang saya bangun:</strong>
+              <ul class="flow-sublist">
+                <li class="flow-subitem"><strong>Streaming Dataflow Ingestion Layer:</strong> Raw ingestion dari 20 stream Pub/Sub, pembersihan data (in-flight cleansing), deduplikasi stateful, dan pemuatan ke layer bronze (staging) BigQuery via Storage Write API.</li>
+                <li class="flow-subitem"><strong>Transformasi Bronze ke Silver:</strong> Pipeline Dataflow otomatis untuk standardisasi dan pembersihan data lebih lanjut.</li>
+                <li class="flow-subitem"><strong>CDC Master Data Cabang:</strong> Alur Google Cloud Datastream untuk menangkap perubahan data master dari basis data cabang ke BigQuery.</li>
+                <li class="flow-subitem"><strong>Observabilitas Grafana 1.200 Toko:</strong> Monitoring live transfer data, keterlambatan (late data), dan pencegahan data loss pada seluruh 1.200 gerai toko.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Section 2: End-to-End Architecture Flow -->
+        <div class="flow-section">
+          <h4 class="flow-section-heading">2. Alur Arsitektur End-to-End (High-Level Architecture Flow)</h4>
+          
+          <div class="flow-table-responsive">
+            <table class="flow-table">
+              <thead>
+                <tr>
+                  <th>Sumber Data</th>
+                  <th>Deskripsi</th>
+                  <th>Jalur Masuk ke GCP</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Store: DB Express</strong></td>
+                  <td>Database di PC pada masing-masing 1.200 toko lokal, terhubung dengan Stream App</td>
+                  <td>Stream App menerbitkan transaksi kasir (POS) secara real-time ke GCP Pub/Sub table topics</td>
+                </tr>
+                <tr>
+                  <td><strong>Branch: DB Standard</strong></td>
+                  <td>Database tingkat cabang yang mengelola data master</td>
+                  <td>CDC (Change Data Capture) via Datastream langsung menuju BigQuery</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <ul class="flow-list">
+            <li class="flow-item">
+              <strong>1. Ingestion (Pub/Sub &amp; Datastream):</strong> Stream App mengirim transaksi kasir real-time ke topik Pub/Sub. Datastream menangkap perubahan CDC master data cabang ke BigQuery.
+            </li>
+            <li class="flow-item">
+              <strong>2. Stream Processing (Dataflow Raw Ingestion):</strong> Membaca Pub/Sub, mendaratkan data mentah ke Cloud Storage Data Lake, dan memuat ke Bronze Layer BigQuery dengan pembersihan in-flight dan deduplikasi. Event bronze juga dipublikasikan ke Bronze Topics (Pub/Sub).
+            </li>
+            <li class="flow-item">
+              <strong>3. Data Jobs (Dataflow):</strong> Transformasi Cleansing (bronze ke silver, dibangun mandiri) dan Transformasi Business Logic (silver ke gold).
+            </li>
+            <li class="flow-item">
+              <strong>4. Medallion Layers (BigQuery):</strong>
+              <ul class="flow-sublist">
+                <li class="flow-subitem"><strong>Bronze:</strong> Raw events transaksi langsung dari toko.</li>
+                <li class="flow-subitem"><strong>Silver:</strong> Data bersih dan tervalidasi setelah deduplikasi.</li>
+                <li class="flow-subitem"><strong>Gold:</strong> Data mart agregasi penjualan dan inventaris stok toko untuk analitik eksekutif.</li>
+              </ul>
+            </li>
+            <li class="flow-item">
+              <strong>5. Stock Data Path:</strong> Khusus data stok disalurkan melalui Silver Topics (Pub/Sub) ke target RDBMS operasional (DB App metadata dan DB Stock Monitor) untuk mendukung sistem aplikasi lain.
+            </li>
+            <li class="flow-item">
+              <strong>6. Governance &amp; Monitoring:</strong> Dataplex untuk tata kelola data terpusat; Grafana untuk monitoring kesehatan pipeline dan transmisi data 1.200 gerai toko.
+            </li>
+            <li class="flow-item">
+              <strong>7. Delivery:</strong> Gold Layer menyuplai dashboards, reporting analitik (BI), dan konsumsi aplikasi bisnis lainnya.
+            </li>
+          </ul>
+        </div>
+
+        <!-- Section 3: Dataflow Streaming Pipeline In Detail -->
+        <div class="flow-section">
+          <h4 class="flow-section-heading">3. Detail Implementasi: Pipeline Streaming Dataflow</h4>
+          <p class="flow-item" style="padding-left: 0; margin-bottom: 0.5rem;">
+            Satu streaming Dataflow job terpadu menangani <strong>10 tabel sumber dari 2 tipe toko (total 20 subscription Pub/Sub dan 20 tabel BigQuery bronze)</strong>. Pipeline dibangun secara dinamis berbasis loop konfigurasi tanpa perlu deploy job terpisah per tabel.
+          </p>
+
+          <div class="flow-table-responsive">
+            <table class="flow-table">
+              <thead>
+                <tr>
+                  <th>Tahap</th>
+                  <th>Komponen</th>
+                  <th>Fungsi &amp; Logika Pemrosesan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>1. Read</strong></td>
+                  <td>Pub/Sub I/O</td>
+                  <td>Membaca streaming messages dari 20 subscription Pub/Sub secara paralel.</td>
+                </tr>
+                <tr>
+                  <td><strong>2. CDC Prepare</strong></td>
+                  <td>JSON Parser &amp; Formatter</td>
+                  <td>Parsing payload JSON, klasifikasi record UPSERT atau DELETE, pembuatan sequence number dari waktu operasi (fallback waktu server jika kosong), normalisasi kode toko, tagging tipe toko, dan penambahan ingestion timestamp.</td>
+                </tr>
+                <tr>
+                  <td><strong>3. Make Dedup Key</strong></td>
+                  <td>Key Extractor</td>
+                  <td>Membentuk composite key dari nama tabel + primary key (selalu menyertakan kode toko unik).</td>
+                </tr>
+                <tr>
+                  <td><strong>4. Stateful Dedup</strong></td>
+                  <td>Stateful Processing (Beam State API)</td>
+                  <td>Menyimpan sequence number tertinggi per key dan mendrop record lama atau duplikat. State otomatis kedaluwarsa setelah 7 hari inaktivitas.</td>
+                </tr>
+                <tr>
+                  <td><strong>5. Fix Types</strong></td>
+                  <td>Defensive Schema Mapper</td>
+                  <td>Type casting ketat ke skema BigQuery tujuan, validasi nilai numerik (mencegah error seperti "N/A"), penghapusan kolom operasional redundan, failed cast diubah menjadi NULL dengan peringatan log.</td>
+                </tr>
+                <tr>
+                  <td><strong>6. Write</strong></td>
+                  <td>Storage Write API</td>
+                  <td>Penulisan streaming berkecepatan tinggi ke tabel BigQuery bronze.</td>
+                </tr>
+                <tr>
+                  <td><strong>Side Output</strong></td>
+                  <td>Dead-Letter Queue</td>
+                  <td>Record yang gagal diparsing ditulis ke tabel <code>error_logs</code> bersama payload asli dan pesan error tanpa memutus pipeline.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <ul class="flow-list">
+            <li class="flow-item">
+              <strong>Keputusan Desain Kunci:</strong>
+              <ul class="flow-sublist">
+                <li class="flow-subitem"><strong>1 Job Terpadu:</strong> Shared workers (<code>n2-standard-4</code>, autoscaling 1–4, Streaming Engine) membuat biaya fixed per-job hanya dibayar 1 kali dibanding 20 job terpisah.</li>
+                <li class="flow-subitem"><strong>At-least-once Delivery by Design:</strong> Menjamin zero data loss saat jaringan toko tidak stabil; potensi duplikasi diselesaikan oleh stateful dedup berbasis sequence number.</li>
+                <li class="flow-subitem"><strong>Stateful Deduplication:</strong> Menjamin urutan data; record out-of-order atau late data tidak akan menimpa data yang lebih mutakhir.</li>
+                <li class="flow-subitem"><strong>Retry Under Load:</strong> Pipeline melakukan retry otomatis saat worker mencapai beban maksimal, mencegah data terbuang pada jam sibuk.</li>
+                <li class="flow-subitem"><strong>Preservasi Riwayat Delete:</strong> Operasi delete ditandai (<code>cdc_change_type = DELETE</code>), mempertahankan riwayat audit untuk keputusan di silver layer.</li>
+                <li class="flow-subitem"><strong>Defensive Type Handling:</strong> Validasi ketat mencegah nilai abnormal merusak Storage Write API; anomali dicatat sebagai NULL dengan log warning.</li>
+              </ul>
+            </li>
+            <li class="flow-item">
+              <strong>Runtime &amp; Libraries:</strong> Apache Beam Python SDK (<code>apache_beam</code>), Storage Write API, Streaming Engine Runner v2, stateful timer 7 hari, counters Beam metrics, dan structured JSON logging.
+            </li>
+          </ul>
+        </div>
+
+        <!-- Section 4: Grafana Monitoring -->
+        <div class="flow-section">
+          <h4 class="flow-section-heading">4. Lapisan Observabilitas &amp; Monitoring Grafana</h4>
+          <p class="flow-item" style="padding-left: 0; margin-bottom: 0.5rem;">
+            Layer monitoring dan alerting real-time yang dirancang untuk mengawasi integritas aliran data dari seluruh 1.200 toko, menjawab 4 pilar utama:
+          </p>
+
+          <div class="flow-table-responsive">
+            <table class="flow-table">
+              <thead>
+                <tr>
+                  <th>Pilar Monitor</th>
+                  <th>Pertanyaan yang Dijawab</th>
+                  <th>Metrik &amp; Visualisasi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Data Transfer</strong></td>
+                  <td>Apakah setiap toko aktif mengirimkan data?</td>
+                  <td>Status pengiriman data per toko dan per tabel, serta volume throughput 1.200 toko.</td>
+                </tr>
+                <tr>
+                  <td><strong>Late Data</strong></td>
+                  <td>Tabel atau toko mana yang mengalami keterlambatan?</td>
+                  <td>Selisih waktu antara jadwal estimasi kedatangan dengan waktu tiba aktual di BigQuery.</td>
+                </tr>
+                <tr>
+                  <td><strong>Duplicate Data</strong></td>
+                  <td>Apakah ada data yang masuk berulang?</td>
+                  <td>Deteksi record duplikat per toko dan tabel akibat mekanisme pengiriman at-least-once.</td>
+                </tr>
+                <tr>
+                  <td><strong>Data Loss</strong></td>
+                  <td>Apakah ada transaksi yang hilang dari BigQuery?</td>
+                  <td>Perbandingan data sumber vs data BigQuery, ditambah pelacakan error dead-letter table dan metrik Beam.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <ul class="flow-list">
+            <li class="flow-item">
+              <strong>Aturan Alerting:</strong> Notifikasi instan via <strong>Email dan WhatsApp</strong> langsung aktif saat terdeteksi anomali data loss atau lonjakan duplikasi data.
+            </li>
+            <li class="flow-item">
+              <strong>Laporan Harian Otomatis:</strong> Automated daily report dikirim via email merangkum kesehatan transfer data, late data, duplikasi, dan potensi data loss dari seluruh gerai toko.
+            </li>
+            <li class="flow-item">
+              <strong>Pengguna Sistem:</strong> Digunakan oleh tim <strong>PIC IT Data Operation</strong> (kualitas data) dan <strong>IT Network</strong> klien (menemukan toko dengan masalah konektivitas lokal).
+            </li>
+          </ul>
+        </div>
+
+        <!-- Section 5: Problems Solved & Key Impact -->
+        <div class="flow-section">
+          <h4 class="flow-section-heading">5. Masalah yang Diselesaikan &amp; Dampak Bisnis</h4>
+          <div class="flow-keypoint">
+            <ul class="flow-list" style="margin-top: 0.3rem;">
+              <li class="flow-item">
+                <strong>Streaming Near Real-Time Hemat Biaya:</strong> Mengonsolidasi 20 pipeline terpisah menjadi 1 streaming job multi-stream, melayani 1.200 toko (~100 GB/bulan) hanya dengan biaya operasional sekitar <strong>$300 per bulan</strong>.
+              </li>
+              <li class="flow-item">
+                <strong>Mengatasi Ketidakcocokan Data Master:</strong> Menemukan akar masalah selisih data akibat gangguan konektivitas toko, diatasi dengan at-least-once delivery + stateful dedup + monitoring proaktif.
+              </li>
+              <li class="flow-item">
+                <strong>Deteksi Toko Offline dalam 10 Menit:</strong> Toko yang tidak mengirim data langsung terdeteksi dalam waktu <strong>10 menit</strong> melalui alert WhatsApp/Email (sebelumnya baru disadari berhari-hari setelah terjadi selisih rekonsiliasi manual).
+              </li>
+              <li class="flow-item">
+                <strong>Zero Silent Data Loss:</strong> Kombinasi dead-letter error logs dan metrik internal pipeline menjamin tidak ada data transaksi kasir yang hilang secara diam-diam.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    `,
 
     // Diagram 3: Data Lineage RekapTransaksiTokoDetail
     smartnet_diag3_badge: "Data Lineage & CDC Ingestion",
@@ -196,96 +442,313 @@ const translations = {
     smartnet_diag3_s4_title: "4. Analytical View & Scheduler",
     smartnet_diag3_s4_text: "View analitik vw_RekapTransaksiTokoDetail memfilter kolom redundan, dan Cloud Scheduler memprosesnya ke tabel produksi pb_bronze_toko.",
 
-    // Diagram 4: Firebase Analytics Fase 1
-    smartnet_diag4_badge: "Firebase Analytics – Phase 1",
-    smartnet_diag4_title: "1. Firebase Analytics – Phase 1",
-    smartnet_fb1_details: `
+    // Use Case Accordion Controls
+    usecases_section_title: "Daftar Studi Kasus & Arsitektur Sistem",
+    usecases_section_desc: "Kumpulan rancangan arsitektur data engineering, streaming skala besar, analitik mobile, machine learning, dan sistem multi-agent end-to-end.",
+    usecases_count_pill: "5 Studi Kasus End-to-End",
+    usecases_expand_all: "Buka Semua",
+    usecases_collapse_all: "Tutup Semua",
+    usecase_open_hint: "Klik judul kasus untuk melihat detail",
+    usecase_hint_open: "Lihat Detail",
+    usecase_hint_close: "Tutup",
+    competency_divider_label: "Kompetensi Teknis & Tanggung Jawab Inti",
+
+    // Use Case 1: Retail DWH
+    usecase_retail_badge: "Real-Time Streaming & Medallion DWH",
+    usecase_retail_title: "1. Arsitektur Real-Time Data Analytics & Medallion Data Warehouse (Retail DWH)",
+    usecase_retail_summary: "Rancangan arsitektur streaming data 1.200 toko (100 GB/bulan, ~$300/bln) via Dataflow ke BigQuery Medallion Architecture dengan observabilitas Grafana.",
+
+    // Use Case 2: Train Ticket Mobile App DWH (Firebase Analytics Phase 1, 2 & 3)
+    usecase_fb_badge: "Firebase Analytics & Medallion DWH",
+    usecase_fb_title: "2. Mobile App Analytics Data Warehouse (Train Ticket Booking) — Firebase Analytics (Phase 1, 2 & 3)",
+    usecase_fb_summary: "BigQuery Data Warehouse (~100 GB/hari) berbasis Medallion Architecture & Star Schema untuk aplikasi pemesanan tiket kereta (10M+ unduhan), mengintegrasikan analitik mobile Firebase (Fase 1 & 2) serta data store (Fase 3) ke Looker Studio.",
+    usecase_fb_details: `
       <div class="flow-breakdown">
-        <div class="flow-title">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-          </svg>
-          <span>Alur data:</span>
+        <!-- Overview Meta Grid -->
+        <div class="flow-meta-grid">
+          <div class="flow-meta-box">
+            <div class="flow-meta-label">Klien &amp; Jangkauan</div>
+            <div class="flow-meta-value">10M+ Downloads</div>
+            <div class="flow-meta-desc">Aplikasi Tiket Kereta Indonesia (Play Store)</div>
+          </div>
+          <div class="flow-meta-box">
+            <div class="flow-meta-label">Volume &amp; Skala Data</div>
+            <div class="flow-meta-value">~100 GB / Hari</div>
+            <div class="flow-meta-desc">~3 TB / Bulan event analitik berskala besar</div>
+          </div>
+          <div class="flow-meta-box">
+            <div class="flow-meta-label">Pola Arsitektur</div>
+            <div class="flow-meta-value">Medallion &amp; Star Schema</div>
+            <div class="flow-meta-desc">BigQuery Bronze, Silver, Gold + Looker Studio</div>
+          </div>
+          <div class="flow-meta-box">
+            <div class="flow-meta-label">Tech Stack Utama</div>
+            <div class="flow-meta-value">Firebase &amp; BigQuery</div>
+            <div class="flow-meta-desc">Looker Studio Pro, Cloud Functions, BigQuery DTS, SQL</div>
+          </div>
         </div>
 
-        <ul class="flow-list">
-          <li class="flow-item">
-            <strong>SDK on Device:</strong> Data dikumpulkan dari aplikasi Android dan iOS.
-          </li>
-          <li class="flow-item">
-            <strong>Platform-level Message Transport:</strong> Android menggunakan Android Transport Layer, sedangkan iOS menggunakan iOS/APNs.
-          </li>
-          <li class="flow-item">
-            <strong>Firebase Backend:</strong> Kedua jalur data masuk ke modul Analytics di Firebase.
-          </li>
-          <li class="flow-item">
-            <strong>Data Warehouse (BigQuery):</strong> Data disimpan dan diorganisasi ke dalam beberapa Data Mart, serta diproses lebih lanjut dengan BigQuery ML.
-          </li>
-          <li class="flow-item">
-            <strong>Metadata &amp; Orkestrasi:</strong>
-            <ul class="flow-sublist">
-              <li class="flow-subitem">Data Catalog menyediakan metadata untuk memperkaya Data Mart.</li>
-              <li class="flow-subitem">Cloud Composer mengatur orkestrasi job/pipeline menuju BigQuery ML.</li>
-            </ul>
-          </li>
-          <li class="flow-item">
-            <strong>Insight and Visualization:</strong> Data dari BigQuery divisualisasikan menggunakan Looker Studio.
-          </li>
-          <li class="flow-item">
-            <strong>Output:</strong> Hasil akhir ditampilkan dalam 3 dashboard berbeda:
-            <ul class="flow-sublist">
-              <li class="flow-subitem">Marketing Dashboard</li>
-              <li class="flow-subitem">Users Monitoring Dashboard</li>
-              <li class="flow-subitem">Application Dashboard</li>
-            </ul>
-          </li>
-        </ul>
+        <!-- Section 1: Overview & Yang Saya Bangun -->
+        <div class="flow-section">
+          <h4 class="flow-section-heading">1. Ringkasan &amp; Ruang Lingkup Proyek</h4>
+          <p class="flow-item" style="padding-left: 0; margin-bottom: 0.5rem;">
+            Data warehouse BigQuery berskala enterprise menggunakan <strong>Medallion Architecture</strong> untuk aplikasi pemesanan tiket kereta terkemuka di Indonesia (10M+ unduhan di Google Play Store). Sistem ini mengolah sekitar <strong>100 GB event analitik per hari</strong> yang diekspor dari Firebase Analytics, memodelkannya menjadi data marts berformat <strong>Star Schema</strong> pada layer Gold, dan menyajikan dashboard Looker Studio interaktif untuk pemantauan perjalanan pengguna (<em>user journey</em>). Proyek ini diselesaikan secara kolaboratif dalam tim (<em>team project</em>).
+          </p>
+          <ul class="flow-list">
+            <li class="flow-item">
+              <strong>Komponen yang saya bangun (My part):</strong>
+              <ul class="flow-sublist">
+                <li class="flow-subitem"><strong>Silver Layer Pipelines:</strong> Membangun sejumlah tabel silver untuk flattening struktur payload JSON bersarang (<em>nested &amp; repeated fields</em>), deduplikasi event ganda akibat retry jaringan mobile, dan clustering event analitik.</li>
+                <li class="flow-subitem"><strong>Gold Layer Data Marts:</strong> Merancang dan mengimplementasikan data mart dalam format Star Schema (tabel fakta transaksi/event dan tabel dimensi atribut perjalanan) yang siap pakai untuk visualisasi performa tinggi.</li>
+                <li class="flow-subitem"><strong>Dashboards di Looker Studio &amp; Looker Studio Pro:</strong> Membangun visualisasi perjalanan pengguna end-to-end, mencakup alur pembelian tiket (<em>purchase</em>), pengembalian dana (<em>refund</em>), dan ubah jadwal (<em>reschedule</em>).</li>
+                <li class="flow-subitem"><strong>Data Quality Review &amp; Mitigasi Tagging:</strong> Berperan aktif dalam audit kualitas data yang menemukan celah ketiadaan tagging event di beberapa layar kunci aplikasi, serta menyusun strategi perbaikan di sisi mobile app sebelum kalkulasi metrik funnel dijalankan.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
 
-        <div class="flow-keypoint">
-          <strong>Poin utama:</strong> Fokus Phase 1 adalah membangun pipeline dasar dari SDK aplikasi mobile hingga ke dashboard visualisasi, dengan dukungan metadata dan orkestrasi.
+        <!-- Section 2: End-to-End Architecture Flow -->
+        <div class="flow-section">
+          <h4 class="flow-section-heading">2. Alur Arsitektur End-to-End (High-Level Architecture Flow)</h4>
+          <div class="flow-table-responsive">
+            <table class="flow-table">
+              <thead>
+                <tr>
+                  <th>Sumber Data</th>
+                  <th>Deskripsi</th>
+                  <th>Jalur Masuk ke BigQuery</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Mobile App (Firebase)</strong></td>
+                  <td>Event analitik pengguna dari aplikasi tiket Android &amp; iOS</td>
+                  <td>Native export harian &amp; streaming dari Firebase ke BigQuery (~100 GB/hari)</td>
+                </tr>
+                <tr>
+                  <td><strong>Backend Event Tagging</strong></td>
+                  <td>Tagging event layar (<em>screen views</em>) dan status transaksi</td>
+                  <td>Jalur export Firebase yang sama ke BigQuery</td>
+                </tr>
+                <tr>
+                  <td><strong>Multi-Store Data (Fase 3)</strong></td>
+                  <td>Metrik unduhan &amp; instalasi dari Apple App Store &amp; Google Play Store</td>
+                  <td>Cloud Functions (App Store) dan BigQuery Data Transfer Service (Play Store)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <ul class="flow-list">
+            <li class="flow-item"><strong>1. Ingestion:</strong> Event pengguna diserap via ekspor native Firebase ke BigQuery pada skala ~100 GB per hari.</li>
+            <li class="flow-item"><strong>2. Bronze Layer:</strong> Mendaratkan raw events apa adanya (<em>as-is</em>) tanpa modifikasi, menjamin auditabilitas dan kemampuan melacak kembali (<em>traceability</em>) angka ke event mentah aslinya.</li>
+            <li class="flow-item"><strong>3. Silver Layer:</strong> Transformasi pembersihan dan standardisasi data: flattening skema array bersarang (<em>unnesting</em>), deduplikasi rekaman ganda, serta pengelompokan (<em>clustering</em>) event.</li>
+            <li class="flow-item"><strong>4. Gold Layer:</strong> Data marts bisnis siap pakai dengan Star Schema (tabel fakta dan tabel dimensi) yang dioptimasi untuk kueri cepat tanpa kalkulasi berulang.</li>
+            <li class="flow-item"><strong>5. Delivery:</strong> Dashboard Looker Studio &amp; Looker Studio Pro menyajikan visualisasi user journey tiket secara real-time dan terpercaya.</li>
+          </ul>
+        </div>
+
+        <!-- Section 3: Arsitektur Pipeline & Evolusi Fase (Fase 1, 2 & 3) -->
+        <div class="flow-section">
+          <h4 class="flow-section-heading">3. Detail Arsitektur Pipeline &amp; Evolusi Fase (Fase 1, 2 &amp; 3)</h4>
+
+          <!-- Sub-Fase 1 & 2 -->
+          <div class="phase-subcard">
+            <div class="phase-subcard-header">
+              <h5 class="phase-subcard-title">Fase 1 &amp; 2: Pipeline Analitik Mobile App &amp; BigQuery Data Marts</h5>
+              <span class="phase-badge-pill phase-badge-1">Fase 1 &amp; 2 · Ingestion &amp; Funnels</span>
+            </div>
+            <div class="diagram-preview-box" data-lightbox-src="assets/firebase-analytics-fase-1&amp;2.png" data-lightbox-caption-key="usecase_fb_title" role="button" tabindex="0" aria-label="Perbesar diagram Firebase Analytics Fase 1 &amp; 2">
+              <img src="assets/firebase-analytics-fase-1&amp;2.png" alt="Firebase Analytics Fase 1 &amp; 2" class="diagram-preview-img" loading="lazy">
+              <div class="diagram-zoom-hint">
+                <span data-i18n="diagram_zoom_hint">Klik untuk memperbesar diagram</span>
+              </div>
+            </div>
+            <ul class="flow-list" style="margin-top: 1rem;">
+              <li class="flow-item"><strong>SDK on Device:</strong> Telemetri dan event interaksi dikumpulkan dari aplikasi Android dan iOS.</li>
+              <li class="flow-item"><strong>Transport Layer:</strong> Android Transport Layer dan Apple Push Notification service (APNs) menyalurkan pesan ke backend Firebase.</li>
+              <li class="flow-item"><strong>Firebase Analytics Backend:</strong> Memvalidasi dan mengekspor payload event langsung ke Google BigQuery.</li>
+              <li class="flow-item"><strong>Warehouse &amp; ML:</strong> Data dikelola dalam Data Marts terstruktur, diperkaya metadata via Data Catalog, dan diorkestrasi Cloud Composer untuk pemodelan prediktif BigQuery ML.</li>
+              <li class="flow-item"><strong>3 Dashboard Looker Studio:</strong> Menghasilkan <em>Marketing Dashboard</em>, <em>Users Monitoring Dashboard</em>, dan <em>Application Dashboard</em> untuk analisis konversi tiket.</li>
+            </ul>
+          </div>
+
+          <!-- Sub-Fase 3 -->
+          <div class="phase-subcard">
+            <div class="phase-subcard-header">
+              <h5 class="phase-subcard-title">Fase 3: Multi-Store Ingestion &amp; Looker Studio Pro</h5>
+              <span class="phase-badge-pill phase-badge-3">Fase 3 · Multi-Store &amp; Pro</span>
+            </div>
+            <div class="diagram-preview-box" data-lightbox-src="assets/firebase-analytics-fase-3.png" data-lightbox-caption-key="usecase_fb_title" role="button" tabindex="0" aria-label="Perbesar diagram Firebase Analytics Fase 3">
+              <img src="assets/firebase-analytics-fase-3.png" alt="Firebase Analytics Fase 3 Multi-Store Ingestion" class="diagram-preview-img" loading="lazy">
+              <div class="diagram-zoom-hint">
+                <span data-i18n="diagram_zoom_hint">Klik untuk memperbesar diagram</span>
+              </div>
+            </div>
+            <ul class="flow-list" style="margin-top: 1rem;">
+              <li class="flow-item"><strong>Sumber Data Store Eksternal:</strong> Memperluas penyerapan data ke tingkat store resmi (Apple App Store &amp; Google Play Store).</li>
+              <li class="flow-item"><strong>Ingestion GCP Otomatis:</strong> Data App Store diekstrak via Cloud Functions terkelola, sedangkan data Play Store diserap otomatis lewat BigQuery Data Transfer Service (DTS).</li>
+              <li class="flow-item"><strong>Data Warehouse Terintegrasi:</strong> Konsolidasi data store dengan data interaksi pengguna aplikasi ke dalam Star Schema Data Marts dan evaluasi BigQuery ML.</li>
+              <li class="flow-item"><strong>Looker Studio Pro:</strong> Peningkatan kapabilitas analitik dan kolaborasi enterprise dengan Looker Studio Pro untuk pemangku kepentingan tingkat manajemen.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Section 4: Detail Implementasi & Keputusan Desain -->
+        <div class="flow-section">
+          <h4 class="flow-section-heading">4. Rincian Layer &amp; Keputusan Desain Utama</h4>
+          <div class="flow-table-responsive">
+            <table class="flow-table">
+              <thead>
+                <tr>
+                  <th>Layer</th>
+                  <th>Tujuan Arsitektur</th>
+                  <th>Kontribusi Spesifik Saya</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Bronze</strong></td>
+                  <td>Raw Landing</td>
+                  <td>Data tiba melalui ekspor native Firebase dan dipertahankan apa adanya (<em>as-is</em>) untuk kebutuhan audit.</td>
+                </tr>
+                <tr>
+                  <td><strong>Silver</strong></td>
+                  <td>Cleaned Data</td>
+                  <td>Membangun pipeline unnesting payload bersarang, deduplikasi record ganda, dan klusterisasi event.</td>
+                </tr>
+                <tr>
+                  <td><strong>Gold</strong></td>
+                  <td>Ready-to-use Marts</td>
+                  <td>Merancang data marts Star Schema dengan fact tables transaksi/event dan dimension tables deskriptif.</td>
+                </tr>
+                <tr>
+                  <td><strong>Dashboards</strong></td>
+                  <td>Business Intelligence</td>
+                  <td>Membangun dashboard interaktif di Looker Studio untuk visualisasi user journey (purchase, refund, reschedule).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <ul class="flow-list">
+            <li class="flow-item"><strong>Keputusan Desain Kunci:</strong>
+              <ul class="flow-sublist">
+                <li class="flow-subitem"><strong>Medallion Architecture:</strong> Memisahkan data mentah, data bersih, dan data siap analitik, sehingga setiap masalah inkonsistensi dapat dilacak langsung ke layer spesifik.</li>
+                <li class="flow-subitem"><strong>Star Schema pada Gold:</strong> Menyediakan kueri join yang ringan dan cepat untuk Looker Studio, memastikan seluruh departemen membaca tabel fakta dan dimensi yang seragam.</li>
+                <li class="flow-subitem"><strong>Dashboard Hanya Membaca Layer Gold:</strong> Menjaga dashboard tetap kencang dan mencegah duplikasi logika bisnis di layer visualisasi.</li>
+                <li class="flow-subitem"><strong>Flatten &amp; Dedup pada Silver:</strong> Membersihkan skema bersarang dan duplikasi event satu kali di layer silver, sehingga seluruh tabel hilir bermula dari data yang bersih dan terpercaya.</li>
+                <li class="flow-subitem"><strong>Data Quality Before Analysis:</strong> Menegakkan prinsip integritas data—memperbaiki sumber tagging terlebih dahulu sebelum merilis visualisasi funnel.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Section 5: Problems Solved & Key Impact -->
+        <div class="flow-section">
+          <h4 class="flow-section-heading">5. Masalah yang Diselesaikan &amp; Dampak Bisnis</h4>
+          <div class="flow-keypoint">
+            <ul class="flow-list" style="margin-top: 0.3rem;">
+              <li class="flow-item">
+                <strong>Kasus 1 — Permintaan Funnel Perjalanan Pengguna yang Belum Didukung Data:</strong>
+                <ul class="flow-sublist">
+                  <li class="flow-subitem"><em>Permintaan:</em> Stakeholder bisnis meminta analisis funnel perjalanan pengguna (<em>user journey funnel</em>) untuk seluruh alur pemesanan tiket: pembelian tiket, pengembalian dana (<em>refund</em>), dan ubah jadwal (<em>reschedule</em>).</li>
+                  <li class="flow-subitem"><em>Permasalahan:</em> Audit data menemukan bahwa sejumlah layar penting aplikasi belum memiliki tagging event sama sekali, dan sebagian record transaksi/promo tidak valid. Funnel yang dipaksakan dari data ini akan menampilkan persentase drop-off yang salah dan dapat memicu salah ambil keputusan bisnis.</li>
+                  <li class="flow-subitem"><em>Investigasi &amp; Keputusan:</em> Kami mengkomparasi seluruh layar alur tiket dengan log event BigQuery untuk memetakan layar yang tidak terlacak. Kami mengomunikasikan temuan ini secara transparan dalam bahasa bisnis dan menyepakati penundaan singkat untuk memperbaiki tagging di aplikasi terlebih dahulu sebelum funnel dibuat.</li>
+                  <li class="flow-subitem"><em>Hasil:</em> Klien terhindar dari keputusan bias dan berhasil memperoleh metrik funnel yang 100% akurat dan dapat diandalkan.</li>
+                </ul>
+              </li>
+              <li class="flow-item" style="margin-top: 0.6rem;">
+                <strong>Kasus 2 — Menjinakkan 100 GB/Hari Event Mentah Bersarang Menjadi Data Mart Cepat:</strong>
+                <ul class="flow-sublist">
+                  <li class="flow-subitem"><em>Tantangan:</em> Event mentah Firebase memiliki format sangat bersarang (<em>nested arrays</em>), rekaman berulang akibat pengiriman ulang jaringan mobile, dan berukuran ~100 GB/hari sehingga sangat berat dan lambat jika di-query langsung oleh tim analitik.</li>
+                  <li class="flow-subitem"><em>Solusi:</em> Medallion warehouse yang melakukan flattening dan deduplikasi otomatis di silver, lalu memodelkannya ke Star Schema di gold.</li>
+                  <li class="flow-subitem"><em>Hasil:</em> Tim bisnis dan BI memperoleh dashboard perjalanan tiket yang responsif, kueri cepat, hemat biaya komputasi BigQuery, dan berbasis tabel data yang konsisten di seluruh departemen.</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     `,
 
-    // Diagram 5: Firebase Analytics Fase 3
+    // Use Case 3: Predictive Maintenance Spare Part Motor
+    usecase_pm_badge: "On-Premise ML · Python",
+    usecase_pm_title: "3. Machine Learning: Predictive Maintenance Spare Part Motor",
+    usecase_pm_summary: "Memprediksi kebutuhan penggantian spare part dan oli motor menggunakan data yang diekstraksi dari foto odometer dan plat nomor via pipeline Python on-premise.",
+    usecase_pm_meta1_label: "Target Objek",
+    usecase_pm_meta1_val: "1.200 Toko & Bengkel",
+    usecase_pm_meta1_desc: "Pelanggan servis motor ritel",
+    usecase_pm_meta2_label: "Input Ekstraksi",
+    usecase_pm_meta2_val: "Odometer & Plat",
+    usecase_pm_meta2_desc: "Foto smartphone via OCR Python",
+    usecase_pm_meta3_label: "Estimasi Output",
+    usecase_pm_meta3_val: "Jadwal Servis & Oli",
+    usecase_pm_meta3_desc: "Rekomendasi suku cadang presisi",
+    usecase_pm_meta4_label: "Infrastruktur & Stack",
+    usecase_pm_meta4_val: "On-Premise Python",
+    usecase_pm_meta4_desc: "OpenCV, Tabular Data, Scikit-Learn",
+
+    // Use Case 4: Generative AI & Distributed Multi-Agent Architecture
+    usecase_genai_badge: "Enterprise AI & RAG Architecture",
+    usecase_genai_title: "4. Generative AI & Distributed Multi-Agent Architecture (Gemini Enterprise)",
+    usecase_genai_summary: "Arsitektur AI otonom terdistribusi di GCP yang menggabungkan analitik BigQuery, Vertex AI Search RAG, konektor SharePoint/OneDrive, dan multimodal Gemini/Imagen.",
+    usecase_genai_meta1_label: "Domain Solusi",
+    usecase_genai_meta1_val: "Marketing AI Otonom",
+    usecase_genai_meta1_desc: "Kampanye pemasaran lokal dinamis",
+    usecase_genai_meta2_label: "Model Multimodal",
+    usecase_genai_meta2_val: "Gemini & Imagen",
+    usecase_genai_meta2_desc: "Pembuatan konten teks & visual",
+    usecase_genai_meta3_label: "Arsitektur Agen",
+    usecase_genai_meta3_val: "ADK & MCP Protocol",
+    usecase_genai_meta3_desc: "Distributed runtime di Cloud Run",
+    usecase_genai_meta4_label: "Integrasi Data & RAG",
+    usecase_genai_meta4_val: "BigQuery + Vertex AI",
+    usecase_genai_meta4_desc: "Grounding data terstruktur & dokumen",
+
+    // Use Case 5: Data Lineage Transaksi Toko
+    usecase_lineage_badge: "Data Lineage & CDC Ingestion",
+    usecase_lineage_title: "5. Data Lineage Transaksi Toko: RekapTransaksiTokoDetail",
+    usecase_lineage_summary: "Silsilah alur data terperinci dari level trigger basis data SQL Express di gerai toko lokal via Pub/Sub dan BigQuery Direct Subscription ke tabel analitik produksi.",
+    usecase_lineage_meta1_label: "Titik Asal (Origin)",
+    usecase_lineage_meta1_val: "1.200 Toko Retail",
+    usecase_lineage_meta1_desc: "Basis data SQL Server Express POS",
+    usecase_lineage_meta2_label: "Mekanisme CDC",
+    usecase_lineage_meta2_val: "DB Triggers & Audit",
+    usecase_lineage_meta2_desc: "Pencatatan mutasi transaksi otomatis",
+    usecase_lineage_meta3_label: "Transport Layer",
+    usecase_lineage_meta3_val: "GCP Pub/Sub Streaming",
+    usecase_lineage_meta3_desc: "Pengiriman streaming tanpa delay batch",
+    usecase_lineage_meta4_label: "Target BigQuery",
+    usecase_lineage_meta4_val: "Direct Sub & Views",
+    usecase_lineage_meta4_desc: "Tabel analitik produksi terverifikasi",
+
+    // Diagram 4: Firebase Analytics Fase 1 (Legacy Key Compatibility)
+    smartnet_diag4_badge: "Firebase Analytics – Phase 1 and 2",
+    smartnet_diag4_title: "1. Firebase Analytics – Phase 1 and 2",
+    smartnet_fb1_details: `
+      <div class="flow-breakdown">
+        <ul class="flow-list">
+          <li class="flow-item"><strong>SDK on Device:</strong> Data dikumpulkan dari aplikasi Android dan iOS.</li>
+          <li class="flow-item"><strong>Platform-level Message Transport:</strong> Android Transport Layer dan iOS APNs menyalurkan pesan.</li>
+          <li class="flow-item"><strong>Firebase Backend:</strong> Masuk ke modul Analytics di Firebase.</li>
+          <li class="flow-item"><strong>Data Warehouse (BigQuery):</strong> Data disimpan dalam Data Marts dan diproses BigQuery ML.</li>
+          <li class="flow-item"><strong>Insight &amp; Visualisasi:</strong> 3 Dashboard Looker Studio (Marketing, Users Monitoring, Application).</li>
+        </ul>
+      </div>
+    `,
+
+    // Diagram 5: Firebase Analytics Fase 3 (Legacy Key Compatibility)
     smartnet_diag5_badge: "Firebase Analytics – Phase 3",
     smartnet_diag5_title: "2. Firebase Analytics – Phase 3",
     smartnet_fb3_details: `
       <div class="flow-breakdown">
-        <div class="flow-title">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-          </svg>
-          <span>Alur data:</span>
-        </div>
-
         <ul class="flow-list">
-          <li class="flow-item">
-            <strong>Data Sources:</strong> Data berasal dari App Store dan Playstore (bukan lagi dari SDK aplikasi langsung).
-          </li>
-          <li class="flow-item">
-            <strong>Google Cloud Platform:</strong>
-            <ul class="flow-sublist">
-              <li class="flow-subitem">Data dari App Store diproses lebih dulu melalui Cloud Functions.</li>
-              <li class="flow-subitem">Data dari Playstore langsung masuk ke BigQuery Data Transfer Service.</li>
-              <li class="flow-subitem">Output dari Cloud Functions juga diarahkan ke Data Warehouse.</li>
-            </ul>
-          </li>
-          <li class="flow-item">
-            <strong>Data Warehouse (BigQuery):</strong>
-            <ul class="flow-sublist">
-              <li class="flow-subitem">Berisi beberapa Data Mart.</li>
-              <li class="flow-subitem">Dilengkapi dengan BigQuery ML untuk pemrosesan/analitik lanjutan.</li>
-            </ul>
-          </li>
-          <li class="flow-item">
-            <strong>Output:</strong> Hasil akhir divisualisasikan melalui Looker Studio Pro (versi pro, lebih advanced dibanding Looker Studio biasa pada Phase 1).
-          </li>
+          <li class="flow-item"><strong>Data Sources:</strong> App Store &amp; Playstore store-level data.</li>
+          <li class="flow-item"><strong>Google Cloud Platform:</strong> Cloud Functions untuk App Store, BigQuery Data Transfer Service untuk Playstore.</li>
+          <li class="flow-item"><strong>Data Warehouse:</strong> Data Marts &amp; BigQuery ML.</li>
+          <li class="flow-item"><strong>Output:</strong> Looker Studio Pro enterprise visualization.</li>
         </ul>
-
-        <div class="flow-keypoint">
-          <strong>Poin utama:</strong> Phase 3 memperluas sumber data ke tingkat store (App Store &amp; Playstore), menyederhanakan alur dengan BigQuery Data Transfer Service, dan meningkatkan kapabilitas visualisasi ke Looker Studio Pro.
-        </div>
       </div>
     `,
 
@@ -495,16 +958,262 @@ const translations = {
 
     // Diagram 2: Retail DWH Real-Time Analytics
     smartnet_diag2_badge: "Real-Time Streaming & Medallion DWH",
-    smartnet_diag2_title: "Architecture: Real-Time Data Analytics & Medallion Data Warehouse (Retail DWH)",
-    smartnet_diag2_desc: "End-to-end large-scale streaming data architecture ingesting from hundreds of retail store databases (DB Express) and branch systems (DB Standard) into a BigQuery Medallion Architecture.",
-    smartnet_diag2_s1_title: "1. Datastream & Pub/Sub Ingestion",
-    smartnet_diag2_s1_text: "Captures point-of-sale transactions in real time via Stream App to Google Pub/Sub topics and CDC Datastream from branch DB Standard.",
-    smartnet_diag2_s2_title: "2. Stream Processing via Dataflow",
-    smartnet_diag2_s2_text: "Cloud Dataflow pipelines execute raw ingestion into Cloud Storage Data Lake and perform in-flight cleansing and deduplication.",
-    smartnet_diag2_s3_title: "3. BigQuery Medallion Architecture",
-    smartnet_diag2_s3_text: "Tiered data warehouse layers: Bronze Layer (raw events), Silver Layer (cleansed data), and Gold Layer (aggregated sales & inventory data marts).",
-    smartnet_diag2_s4_title: "4. Observability & BI Delivery",
-    smartnet_diag2_s4_text: "Centralized data governance via GCP Dataplex, live system monitoring in Grafana, and real-time executive reporting served to BI dashboards.",
+    smartnet_diag2_title: "1. Architecture: Real-Time Data Analytics & Medallion Data Warehouse (Retail DWH)",
+    smartnet_diag2_arch_title: "High-Level Architecture (Real-Time Streaming & Medallion DWH)",
+    smartnet_diag2_desc: "End-to-end large-scale streaming data architecture ingesting from 1,200 retail store databases (DB Express) and branch systems (DB Standard) into a BigQuery Medallion Architecture with live Grafana monitoring.",
+    smartnet_diag2_details: `
+      <div class="flow-breakdown">
+        <!-- Overview Meta Grid -->
+        <div class="flow-meta-grid">
+          <div class="flow-meta-box">
+            <div class="flow-meta-label">Client &amp; Scale</div>
+            <div class="flow-meta-value">1,200 Retail Stores</div>
+            <div class="flow-meta-desc">Motorcycle repair &amp; retail chain across Indonesia</div>
+          </div>
+          <div class="flow-meta-box">
+            <div class="flow-meta-label">Data Volume</div>
+            <div class="flow-meta-value">~100 GB / Month</div>
+            <div class="flow-meta-desc">Near real-time streaming ingestion</div>
+          </div>
+          <div class="flow-meta-box">
+            <div class="flow-meta-label">Cost Efficiency</div>
+            <div class="flow-meta-value">~$300 / Month</div>
+            <div class="flow-meta-desc">Single consolidated multi-stream Dataflow job</div>
+          </div>
+          <div class="flow-meta-box">
+            <div class="flow-meta-label">Core Tech Stack</div>
+            <div class="flow-meta-value">Dataflow &amp; BigQuery</div>
+            <div class="flow-meta-desc">Beam Python, Pub/Sub, Datastream, Grafana</div>
+          </div>
+        </div>
+
+        <!-- Section 1: Overview & What I Built -->
+        <div class="flow-section">
+          <h4 class="flow-section-heading">1. Overview &amp; Project Scope</h4>
+          <p class="flow-item" style="padding-left: 0; margin-bottom: 0.5rem;">
+            An end-to-end, large-scale streaming data architecture that ingests store transactions and branch master data into a BigQuery Medallion Data Warehouse, equipped with proactive observability and real-time BI delivery.
+          </p>
+          <ul class="flow-list">
+            <li class="flow-item">
+              <strong>What I built:</strong>
+              <ul class="flow-sublist">
+                <li class="flow-subitem"><strong>Dataflow Streaming Ingestion Layer:</strong> Raw ingestion from 20 Pub/Sub streams, in-flight cleansing, stateful deduplication, and loading into BigQuery bronze (staging) via Storage Write API.</li>
+                <li class="flow-subitem"><strong>Bronze-to-Silver Transformation:</strong> Automated Dataflow jobs for standardized data cleansing and preparation.</li>
+                <li class="flow-subitem"><strong>Branch Master Data CDC:</strong> Google Cloud Datastream pipeline capturing change data from branch databases into BigQuery.</li>
+                <li class="flow-subitem"><strong>1,200-Store Grafana Observability:</strong> Live monitoring for data transfer, arrival latency (late data), and data loss prevention across all 1,200 stores.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Section 2: End-to-End Architecture Flow -->
+        <div class="flow-section">
+          <h4 class="flow-section-heading">2. End-to-End High-Level Architecture Flow</h4>
+          
+          <div class="flow-table-responsive">
+            <table class="flow-table">
+              <thead>
+                <tr>
+                  <th>Source</th>
+                  <th>Description</th>
+                  <th>Path into GCP</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Store: DB Express</strong></td>
+                  <td>Database installed on local PCs across each of the 1,200 stores, linked with a Stream App</td>
+                  <td>Stream App publishes point-of-sale (POS) transactions in real time to GCP Pub/Sub table topics</td>
+                </tr>
+                <tr>
+                  <td><strong>Branch: DB Standard</strong></td>
+                  <td>Branch-level database holding organizational master data</td>
+                  <td>CDC (Change Data Capture) through Datastream directly into BigQuery</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <ul class="flow-list">
+            <li class="flow-item">
+              <strong>1. Ingestion (Pub/Sub &amp; Datastream):</strong> Stream App sends real-time POS transactions to Pub/Sub table topics. Datastream captures branch master data changes via CDC into BigQuery.
+            </li>
+            <li class="flow-item">
+              <strong>2. Stream Processing (Dataflow Raw Ingestion):</strong> Reads from Pub/Sub, lands raw records in Cloud Storage Data Lake, and loads BigQuery Bronze Layer with in-flight cleansing and deduplication. Bronze events are also published to Bronze Topics (Pub/Sub).
+            </li>
+            <li class="flow-item">
+              <strong>3. Data Jobs (Dataflow):</strong> Transformation Cleansing (bronze to silver, built by me) and Business Logic Transformation (silver to gold).
+            </li>
+            <li class="flow-item">
+              <strong>4. Medallion Layers (BigQuery):</strong>
+              <ul class="flow-sublist">
+                <li class="flow-subitem"><strong>Bronze:</strong> Raw point-of-sale events directly from stores.</li>
+                <li class="flow-subitem"><strong>Silver:</strong> Cleansed, deduplicated, and typed operational data.</li>
+                <li class="flow-subitem"><strong>Gold:</strong> Aggregated sales and store inventory data marts for business intelligence.</li>
+              </ul>
+            </li>
+            <li class="flow-item">
+              <strong>5. Stock Data Path:</strong> Dedicated stock telemetry is routed via Silver Topics (Pub/Sub) to operational RDBMS targets (DB App metadata and DB Stock Monitor) powering downstream apps.
+            </li>
+            <li class="flow-item">
+              <strong>6. Governance &amp; Monitoring:</strong> Google Cloud Dataplex for centralized data governance; Grafana for live monitoring of pipeline health and store data transmission.
+            </li>
+            <li class="flow-item">
+              <strong>7. Delivery:</strong> Gold layer feeds executive dashboards, BI reports, and downstream business applications.
+            </li>
+          </ul>
+        </div>
+
+        <!-- Section 3: Dataflow Streaming Pipeline In Detail -->
+        <div class="flow-section">
+          <h4 class="flow-section-heading">3. Detailed Implementation: Dataflow Streaming Pipeline</h4>
+          <p class="flow-item" style="padding-left: 0; margin-bottom: 0.5rem;">
+            A single consolidated streaming Dataflow job handles <strong>10 source tables across 2 store types (20 Pub/Sub subscriptions and 20 BigQuery bronze tables)</strong>. Built in a loop structure so adding new tables requires configuration rather than deploying new pipelines.
+          </p>
+
+          <div class="flow-table-responsive">
+            <table class="flow-table">
+              <thead>
+                <tr>
+                  <th>Step</th>
+                  <th>Component</th>
+                  <th>Processing Logic &amp; Function</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>1. Read</strong></td>
+                  <td>Pub/Sub I/O</td>
+                  <td>Parallel ingestion from 20 Pub/Sub streaming subscriptions.</td>
+                </tr>
+                <tr>
+                  <td><strong>2. CDC Prepare</strong></td>
+                  <td>JSON Parser &amp; Formatter</td>
+                  <td>Parses JSON, classifies record as UPSERT or DELETE, derives sequence number from operation time (falls back to server time if missing), normalizes store code, tags store type, and appends ingestion timestamp.</td>
+                </tr>
+                <tr>
+                  <td><strong>3. Make Dedup Key</strong></td>
+                  <td>Key Extractor</td>
+                  <td>Generates composite key from table name + primary key values (always includes unique store code).</td>
+                </tr>
+                <tr>
+                  <td><strong>4. Stateful Dedup</strong></td>
+                  <td>Stateful Processing (Beam State API)</td>
+                  <td>Retains highest sequence number per key and drops older or duplicate records. State automatically expires after 7 days of inactivity.</td>
+                </tr>
+                <tr>
+                  <td><strong>5. Fix Types</strong></td>
+                  <td>Defensive Schema Mapper</td>
+                  <td>Strict type casting to destination BigQuery schema, strict numeric validation (preventing "N/A" crashes), removes redundant audit columns, and converts failed casts into NULL with logged warnings.</td>
+                </tr>
+                <tr>
+                  <td><strong>6. Write</strong></td>
+                  <td>Storage Write API</td>
+                  <td>High-performance streaming writes into BigQuery bronze tables.</td>
+                </tr>
+                <tr>
+                  <td><strong>Side Output</strong></td>
+                  <td>Dead-Letter Queue</td>
+                  <td>Unparseable records are diverted to an <code>error_logs</code> table with raw payload and error details without halting stream execution.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <ul class="flow-list">
+            <li class="flow-item">
+              <strong>Key Design Decisions:</strong>
+              <ul class="flow-sublist">
+                <li class="flow-subitem"><strong>Single Multi-Stream Job:</strong> Shared workers (<code>n2-standard-4</code>, autoscaling 1–4, Streaming Engine) reduce fixed per-job infrastructure overhead to 1x instead of 20x.</li>
+                <li class="flow-subitem"><strong>At-Least-Once Delivery by Design:</strong> Zero data loss during store connectivity outages; duplicates created by retransmissions are resolved via stateful sequence deduplication.</li>
+                <li class="flow-subitem"><strong>Stateful Deduplication by Sequence:</strong> Guarantees that late or out-of-order records never overwrite fresher data versions.</li>
+                <li class="flow-subitem"><strong>Retry Under Load:</strong> Processing is retried automatically when workers hit maximum utilization, preventing dropped records during traffic spikes.</li>
+                <li class="flow-subitem"><strong>Deletes Preserved:</strong> Deletions are tagged (<code>cdc_change_type = DELETE</code>), maintaining full audit history for downstream silver layer decisions.</li>
+                <li class="flow-subitem"><strong>Defensive Type Handling:</strong> Strict validation prevents corrupt values from crashing the Storage Write API, safely converting anomalies into NULL with warnings.</li>
+              </ul>
+            </li>
+            <li class="flow-item">
+              <strong>Runtime &amp; Libraries:</strong> Apache Beam Python SDK (<code>apache_beam</code>), Storage Write API, Streaming Engine Runner v2, 7-day state expiry timers, internal Beam metrics counters, and sampled JSON logging.
+            </li>
+          </ul>
+        </div>
+
+        <!-- Section 4: Grafana Monitoring -->
+        <div class="flow-section">
+          <h4 class="flow-section-heading">4. Grafana Observability &amp; Proactive Alerting Layer</h4>
+          <p class="flow-item" style="padding-left: 0; margin-bottom: 0.5rem;">
+            Real-time monitoring and alerting layer built to watch data integrity across all 1,200 stores, answering four critical operational questions:
+          </p>
+
+          <div class="flow-table-responsive">
+            <table class="flow-table">
+              <thead>
+                <tr>
+                  <th>Monitor Pillar</th>
+                  <th>Question Answered</th>
+                  <th>Metrics &amp; Visibility</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Data Transfer</strong></td>
+                  <td>Is each store actively sending data?</td>
+                  <td>Tracks transmission status and throughput per store and table across all 1,200 retail outlets.</td>
+                </tr>
+                <tr>
+                  <td><strong>Late Data</strong></td>
+                  <td>Which tables or stores are arriving late?</td>
+                  <td>Measures delta between expected arrival times and actual arrival timestamps in BigQuery.</td>
+                </tr>
+                <tr>
+                  <td><strong>Duplicate Data</strong></td>
+                  <td>Is any data arriving redundantly?</td>
+                  <td>Counts duplicate records per store and table resulting from at-least-once transport delivery.</td>
+                </tr>
+                <tr>
+                  <td><strong>Data Loss</strong></td>
+                  <td>Is anything missing from BigQuery?</td>
+                  <td>Reconciles source database counts against BigQuery records, plus dead-letter error logs and Beam metrics.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <ul class="flow-list">
+            <li class="flow-item">
+              <strong>Alert Rules:</strong> Instant alerts trigger upon detection of data loss anomalies or duplicate spikes, dispatched via <strong>Email and WhatsApp</strong>.
+            </li>
+            <li class="flow-item">
+              <strong>Automated Daily Report:</strong> Daily email digests summarize transmission health, late data deltas, duplicates, and missing records across all stores.
+            </li>
+            <li class="flow-item">
+              <strong>Stakeholder Adoption:</strong> Actively used by the client's <strong>PIC IT Data Operation</strong> (pipeline health &amp; data quality) and <strong>IT Network</strong> teams (locating stores with local connectivity issues).
+            </li>
+          </ul>
+        </div>
+
+        <!-- Section 5: Problems Solved & Key Impact -->
+        <div class="flow-section">
+          <h4 class="flow-section-heading">5. Problems Solved &amp; Business Impact</h4>
+          <div class="flow-keypoint">
+            <ul class="flow-list" style="margin-top: 0.3rem;">
+              <li class="flow-item">
+                <strong>Near Real-Time Streaming at Low Cost:</strong> Consolidated 20 isolated table pipelines into a single multi-stream Dataflow job, ingesting ~100 GB/month for 1,200 stores at only <strong>~$300 per month</strong>.
+              </li>
+              <li class="flow-item">
+                <strong>Master Data Mismatch Resolved:</strong> Diagnosed root cause to store network outages, resolved via at-least-once delivery + stateful dedup + proactive Grafana monitoring.
+              </li>
+              <li class="flow-item">
+                <strong>10-Minute Store Outage Detection:</strong> Stores failing to transmit data are detected within <strong>10 minutes</strong> via automated WhatsApp/Email alerts (previously discovered days later during manual reconciliations).
+              </li>
+              <li class="flow-item">
+                <strong>Zero Silent Data Loss:</strong> Dead-letter tables and pipeline metrics guarantee that no transaction is ever dropped silently.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    `,
 
     // Diagram 3: Data Lineage RekapTransaksiTokoDetail
     smartnet_diag3_badge: "Data Lineage & CDC Ingestion",
@@ -519,96 +1228,313 @@ const translations = {
     smartnet_diag3_s4_title: "4. Analytical Views & Scheduler",
     smartnet_diag3_s4_text: "Analytical view vw_RekapTransaksiTokoDetail filters redundant audit fields, and Cloud Scheduler promotes records into production dataset pb_bronze_toko.",
 
-    // Diagram 4: Firebase Analytics Fase 1 & 2
-    smartnet_diag4_badge: "Firebase Analytics – Phase 1 and 2",
-    smartnet_diag4_title: "1. Firebase Analytics – Phase 1 and 2",
-    smartnet_fb1_details: `
+    // Use Case Accordion Controls
+    usecases_section_title: "Key Case Studies & System Architectures",
+    usecases_section_desc: "End-to-end data engineering architectures, high-scale streaming, mobile analytics, machine learning, and multi-agent systems.",
+    usecases_count_pill: "5 End-to-End Case Studies",
+    usecases_expand_all: "Expand All",
+    usecases_collapse_all: "Collapse All",
+    usecase_open_hint: "Click any case title to view details",
+    usecase_hint_open: "View Details",
+    usecase_hint_close: "Close",
+    competency_divider_label: "Core Engineering Competencies & Responsibilities",
+
+    // Use Case 1: Retail DWH
+    usecase_retail_badge: "Real-Time Streaming & Medallion DWH",
+    usecase_retail_title: "1. Real-Time Data Analytics & Medallion Data Warehouse Architecture (Retail DWH)",
+    usecase_retail_summary: "High-scale streaming architecture ingesting 1,200 store databases (~100 GB/month, ~$300/mo) via Dataflow into BigQuery Medallion Architecture with Grafana observability.",
+
+    // Use Case 2: Train Ticket Mobile App DWH (Firebase Analytics Phase 1, 2 & 3)
+    usecase_fb_badge: "Firebase Analytics & Medallion DWH",
+    usecase_fb_title: "2. Mobile App Analytics Data Warehouse (Train Ticket Booking) — Firebase Analytics (Phase 1, 2 & 3)",
+    usecase_fb_summary: "BigQuery Data Warehouse (~100 GB/day) utilizing Medallion Architecture & Star Schema for an Indonesian train ticket booking app (10M+ downloads), unifying Firebase mobile analytics (Phase 1 & 2) and store-level data (Phase 3) into Looker Studio.",
+    usecase_fb_details: `
       <div class="flow-breakdown">
-        <div class="flow-title">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-          </svg>
-          <span>Data flow:</span>
+        <!-- Overview Meta Grid -->
+        <div class="flow-meta-grid">
+          <div class="flow-meta-box">
+            <div class="flow-meta-label">Client &amp; Reach</div>
+            <div class="flow-meta-value">10M+ Downloads</div>
+            <div class="flow-meta-desc">Indonesian Train Ticket Booking App (Play Store)</div>
+          </div>
+          <div class="flow-meta-box">
+            <div class="flow-meta-label">Data Volume &amp; Scale</div>
+            <div class="flow-meta-value">~100 GB / Day</div>
+            <div class="flow-meta-desc">~3 TB / Month high-velocity analytics events</div>
+          </div>
+          <div class="flow-meta-box">
+            <div class="flow-meta-label">Architecture Pattern</div>
+            <div class="flow-meta-value">Medallion &amp; Star Schema</div>
+            <div class="flow-meta-desc">BigQuery Bronze, Silver, Gold + Looker Studio</div>
+          </div>
+          <div class="flow-meta-box">
+            <div class="flow-meta-label">Core Tech Stack</div>
+            <div class="flow-meta-value">Firebase &amp; BigQuery</div>
+            <div class="flow-meta-desc">Looker Studio Pro, Cloud Functions, BigQuery DTS, SQL</div>
+          </div>
         </div>
 
-        <ul class="flow-list">
-          <li class="flow-item">
-            <strong>SDK on Device:</strong> Data is collected from Android and iOS apps.
-          </li>
-          <li class="flow-item">
-            <strong>Platform-level Message Transport:</strong> Android uses the Android Transport Layer, while iOS uses iOS/APNs.
-          </li>
-          <li class="flow-item">
-            <strong>Firebase Backend:</strong> Both data paths feed into the Analytics module in Firebase.
-          </li>
-          <li class="flow-item">
-            <strong>Data Warehouse (BigQuery):</strong> Data is stored and organized into several Data Marts, and further processed using BigQuery ML.
-          </li>
-          <li class="flow-item">
-            <strong>Metadata &amp; Orchestration:</strong>
-            <ul class="flow-sublist">
-              <li class="flow-subitem">Data Catalog provides metadata to enrich the Data Marts.</li>
-              <li class="flow-subitem">Cloud Composer orchestrates jobs/pipelines feeding into BigQuery ML.</li>
-            </ul>
-          </li>
-          <li class="flow-item">
-            <strong>Insight and Visualization:</strong> Data from BigQuery is visualized using Looker Studio.
-          </li>
-          <li class="flow-item">
-            <strong>Output:</strong> The final results are displayed across 3 different dashboards:
-            <ul class="flow-sublist">
-              <li class="flow-subitem">Marketing Dashboard</li>
-              <li class="flow-subitem">Users Monitoring Dashboard</li>
-              <li class="flow-subitem">Application Dashboard</li>
-            </ul>
-          </li>
-        </ul>
+        <!-- Section 1: Overview & My Part -->
+        <div class="flow-section">
+          <h4 class="flow-section-heading">1. Project Overview &amp; Scope</h4>
+          <p class="flow-item" style="padding-left: 0; margin-bottom: 0.5rem;">
+            Enterprise BigQuery data warehouse utilizing <strong>Medallion Architecture</strong> for a major train ticket booking app in Indonesia (10M+ downloads on Google Play Store). The warehouse ingests approximately <strong>100 GB of analytics events per day</strong> from Firebase Analytics, models them into ready-to-use <strong>Star Schema</strong> data marts in the Gold layer, and serves interactive Looker Studio dashboards for user journey monitoring. Delivered as a collaborative team project.
+          </p>
+          <ul class="flow-list">
+            <li class="flow-item">
+              <strong>Components I built (My part):</strong>
+              <ul class="flow-sublist">
+                <li class="flow-subitem"><strong>Silver Layer Pipelines:</strong> Built several silver tables to flatten deeply nested JSON payloads (<em>nested &amp; repeated fields</em>), deduplicate events triggered by mobile network retries, and cluster analytical events.</li>
+                <li class="flow-subitem"><strong>Gold Layer Data Marts:</strong> Designed and implemented Star Schema data marts (fact tables for transactions/events and dimension tables for journey attributes) optimized for fast visualization.</li>
+                <li class="flow-subitem"><strong>Looker Studio &amp; Looker Studio Pro Dashboards:</strong> Built full user journey dashboards covering ticket purchase, refund, and reschedule flows.</li>
+                <li class="flow-subitem"><strong>Data Quality Review &amp; Tagging Alignment:</strong> Actively contributed to the data audit that uncovered missing event tagging across key screens, aligning on a fix at the mobile app source before computing funnel metrics.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
 
-        <div class="flow-keypoint">
-          <strong>Key point:</strong> Phase 1 focuses on building the foundational pipeline from mobile app SDKs to visualization dashboards, supported by metadata and orchestration layers.
+        <!-- Section 2: End-to-End Architecture Flow -->
+        <div class="flow-section">
+          <h4 class="flow-section-heading">2. End-to-End Architecture Flow</h4>
+          <div class="flow-table-responsive">
+            <table class="flow-table">
+              <thead>
+                <tr>
+                  <th>Data Source</th>
+                  <th>Description</th>
+                  <th>Path into BigQuery</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Mobile App (Firebase)</strong></td>
+                  <td>User analytics events from Android &amp; iOS ticket booking app</td>
+                  <td>Firebase native daily &amp; streaming export into BigQuery (~100 GB/day)</td>
+                </tr>
+                <tr>
+                  <td><strong>Backend Event Tagging</strong></td>
+                  <td>Screen view tags and transaction status markers</td>
+                  <td>Same native Firebase export pipeline to BigQuery</td>
+                </tr>
+                <tr>
+                  <td><strong>Multi-Store Data (Phase 3)</strong></td>
+                  <td>Install &amp; app performance data from Apple App Store &amp; Google Play Store</td>
+                  <td>Cloud Functions (App Store) and BigQuery Data Transfer Service (Play Store)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <ul class="flow-list">
+            <li class="flow-item"><strong>1. Ingestion:</strong> User interaction events are ingested via Firebase's native export at ~100 GB per day into BigQuery.</li>
+            <li class="flow-item"><strong>2. Bronze Layer:</strong> Raw events land completely unmodified (<em>as-is</em>), preserving full auditability and traceability to original payload records.</li>
+            <li class="flow-item"><strong>3. Silver Layer:</strong> Data cleaning and standardization: unnesting nested JSON structures, deduplicating repeated event rows, and event clustering.</li>
+            <li class="flow-item"><strong>4. Gold Layer:</strong> Business-ready data marts structured in a Star Schema (fact and dimension tables) engineered for rapid BI dashboard queries without repeated aggregations.</li>
+            <li class="flow-item"><strong>5. Delivery:</strong> Looker Studio &amp; Looker Studio Pro dashboards display real-time, trusted ticket journey analytics.</li>
+          </ul>
+        </div>
+
+        <!-- Section 3: Pipeline Architecture & Phase Evolution (Phase 1, 2 & 3) -->
+        <div class="flow-section">
+          <h4 class="flow-section-heading">3. Pipeline Architecture &amp; Phase Evolution (Phase 1, 2 &amp; 3)</h4>
+
+          <!-- Sub-Phase 1 & 2 -->
+          <div class="phase-subcard">
+            <div class="phase-subcard-header">
+              <h5 class="phase-subcard-title">Phase 1 &amp; 2: Mobile App Analytics Pipeline &amp; BigQuery Data Marts</h5>
+              <span class="phase-badge-pill phase-badge-1">Phase 1 &amp; 2 · Ingestion &amp; Funnels</span>
+            </div>
+            <div class="diagram-preview-box" data-lightbox-src="assets/firebase-analytics-fase-1&amp;2.png" data-lightbox-caption-key="usecase_fb_title" role="button" tabindex="0" aria-label="Enlarge Firebase Analytics Phase 1 &amp; 2 diagram">
+              <img src="assets/firebase-analytics-fase-1&amp;2.png" alt="Firebase Analytics Phase 1 &amp; 2" class="diagram-preview-img" loading="lazy">
+              <div class="diagram-zoom-hint">
+                <span data-i18n="diagram_zoom_hint">Click to enlarge diagram</span>
+              </div>
+            </div>
+            <ul class="flow-list" style="margin-top: 1rem;">
+              <li class="flow-item"><strong>SDK on Device:</strong> Telemetry and user interaction events captured from Android and iOS mobile apps.</li>
+              <li class="flow-item"><strong>Transport Layer:</strong> Android Transport Layer and Apple Push Notification service (APNs) stream events to Firebase backend.</li>
+              <li class="flow-item"><strong>Firebase Analytics Backend:</strong> Validates payloads and streams events directly into Google BigQuery.</li>
+              <li class="flow-item"><strong>Warehouse &amp; ML:</strong> Data organized into structured Data Marts, cataloged with metadata via Data Catalog, and orchestrated by Cloud Composer for BigQuery ML predictive analysis.</li>
+              <li class="flow-item"><strong>3 Looker Studio Dashboards:</strong> Powers the <em>Marketing Dashboard</em>, <em>Users Monitoring Dashboard</em>, and <em>Application Dashboard</em> for conversion rate tracking.</li>
+            </ul>
+          </div>
+
+          <!-- Sub-Phase 3 -->
+          <div class="phase-subcard">
+            <div class="phase-subcard-header">
+              <h5 class="phase-subcard-title">Phase 3: Multi-Store Ingestion &amp; Looker Studio Pro</h5>
+              <span class="phase-badge-pill phase-badge-3">Phase 3 · Multi-Store &amp; Pro</span>
+            </div>
+            <div class="diagram-preview-box" data-lightbox-src="assets/firebase-analytics-fase-3.png" data-lightbox-caption-key="usecase_fb_title" role="button" tabindex="0" aria-label="Enlarge Firebase Analytics Phase 3 diagram">
+              <img src="assets/firebase-analytics-fase-3.png" alt="Firebase Analytics Phase 3 Multi-Store Ingestion" class="diagram-preview-img" loading="lazy">
+              <div class="diagram-zoom-hint">
+                <span data-i18n="diagram_zoom_hint">Click to enlarge diagram</span>
+              </div>
+            </div>
+            <ul class="flow-list" style="margin-top: 1rem;">
+              <li class="flow-item"><strong>Store Data Sources:</strong> Broadened data sources to external application marketplaces (Apple App Store &amp; Google Play Store).</li>
+              <li class="flow-item"><strong>Automated GCP Ingestion:</strong> App Store reports extracted via Cloud Functions, while Google Play data ingested automatically via BigQuery Data Transfer Service (DTS).</li>
+              <li class="flow-item"><strong>Unified Data Warehouse:</strong> Store analytics reconciled with in-app behavioral events in Star Schema Data Marts and enriched with BigQuery ML.</li>
+              <li class="flow-item"><strong>Looker Studio Pro:</strong> Advanced enterprise reporting and governance features deployed for cross-functional management.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Section 4: Implementation Details & Key Design Decisions -->
+        <div class="flow-section">
+          <h4 class="flow-section-heading">4. Layer Breakdown &amp; Key Design Decisions</h4>
+          <div class="flow-table-responsive">
+            <table class="flow-table">
+              <thead>
+                <tr>
+                  <th>Layer</th>
+                  <th>Architectural Purpose</th>
+                  <th>My Specific Contribution</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Bronze</strong></td>
+                  <td>Raw Landing</td>
+                  <td>Data arrives via Firebase native export, preserved as-is for auditable lineage.</td>
+                </tr>
+                <tr>
+                  <td><strong>Silver</strong></td>
+                  <td>Cleaned Data</td>
+                  <td>Built pipelines to flatten nested event structures, deduplicate retried records, and cluster events.</td>
+                </tr>
+                <tr>
+                  <td><strong>Gold</strong></td>
+                  <td>Ready-to-use Marts</td>
+                  <td>Designed Star Schema data marts with transaction/event facts and descriptive dimension tables.</td>
+                </tr>
+                <tr>
+                  <td><strong>Dashboards</strong></td>
+                  <td>Business Intelligence</td>
+                  <td>Built Looker Studio dashboards visualizing the full ticket journey (purchase, refund, reschedule).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <ul class="flow-list">
+            <li class="flow-item"><strong>Key Architectural Decisions:</strong>
+              <ul class="flow-sublist">
+                <li class="flow-subitem"><strong>Medallion Architecture:</strong> Clearly isolates raw, clean, and business-ready data so data anomalies can be quickly traced to a specific layer.</li>
+                <li class="flow-subitem"><strong>Star Schema in Gold:</strong> Enables clean, rapid dimension joins for Looker Studio, ensuring all business units reference identical business logic.</li>
+                <li class="flow-subitem"><strong>Dashboards Read from Gold Only:</strong> Eliminates runtime query strain and avoids fragmented business logic calculations in dashboard formulas.</li>
+                <li class="flow-subitem"><strong>Flatten &amp; Dedup in Silver:</strong> Solves nested record complexity once at the silver layer, guaranteeing trusted downstream analytical tables.</li>
+                <li class="flow-subitem"><strong>Data Quality Before Analysis:</strong> Maintained rigorous data integrity standards—insisted on fixing tracking issues at the source before launching misleading funnels.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Section 5: Problems Solved & Key Impact -->
+        <div class="flow-section">
+          <h4 class="flow-section-heading">5. Problems Solved &amp; Business Impact</h4>
+          <div class="flow-keypoint">
+            <ul class="flow-list" style="margin-top: 0.3rem;">
+              <li class="flow-item">
+                <strong>Problem 1 — A Client Asked for a User Journey Funnel the Data Could Not Honestly Support:</strong>
+                <ul class="flow-sublist">
+                  <li class="flow-subitem"><em>Request:</em> The business requested an end-to-end user journey funnel for ticket purchasing, refunds, and rescheduling.</li>
+                  <li class="flow-subitem"><em>Problem:</em> Data quality review revealed several critical application screens had missing event tags, and several promo/transaction records were corrupted. A funnel built on this would falsely suggest major user drop-offs, misleading product decisions.</li>
+                  <li class="flow-subitem"><em>Investigation &amp; Decision:</em> Mapped application screens against BigQuery logs to identify untagged screens. Transparently explained the business risks to the client and agreed to defer funnel release until the mobile team implemented proper event tagging.</li>
+                  <li class="flow-subitem"><em>Result:</em> The client accepted a brief delay in exchange for an accurate, trusted funnel that drove genuine product optimization.</li>
+                </ul>
+              </li>
+              <li class="flow-item" style="margin-top: 0.6rem;">
+                <strong>Problem 2 — Making 100 GB per Day of Raw Nested Events Performant:</strong>
+                <ul class="flow-sublist">
+                  <li class="flow-subitem"><em>Challenge:</em> Raw Firebase events were deeply nested, duplicated by mobile retries, and voluminous (~100 GB/day), making direct queries sluggish and expensive.</li>
+                  <li class="flow-subitem"><em>Solution:</em> Medallion warehouse pipeline with automated flattening and deduplication in silver, modeled into Star Schema data marts in gold.</li>
+                  <li class="flow-subitem"><em>Result:</em> Provided Looker Studio with fast, responsive queries, reduced BigQuery compute costs, and established unified reporting across the company.</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     `,
 
-    // Diagram 5: Firebase Analytics Fase 3
+    // Use Case 3: Predictive Maintenance Spare Part Motor
+    usecase_pm_badge: "On-Premise ML · Python",
+    usecase_pm_title: "3. Machine Learning: Motorcycle Spare Part Predictive Maintenance",
+    usecase_pm_summary: "Predicting spare part replacements and oil changes using computer vision OCR on odometer and license plate photos combined with historical service records.",
+    usecase_pm_meta1_label: "Target Scope",
+    usecase_pm_meta1_val: "1,200 Stores & Garages",
+    usecase_pm_meta1_desc: "Retail motorcycle service fleet",
+    usecase_pm_meta2_label: "Input Extraction",
+    usecase_pm_meta2_val: "Odometer & Plate",
+    usecase_pm_meta2_desc: "Smartphone photos via Python OCR",
+    usecase_pm_meta3_label: "Output Estimation",
+    usecase_pm_meta3_val: "Service & Oil Schedule",
+    usecase_pm_meta3_desc: "Accurate parts replacement timeline",
+    usecase_pm_meta4_label: "Infrastructure & Stack",
+    usecase_pm_meta4_val: "On-Premise Python",
+    usecase_pm_meta4_desc: "OpenCV, Tabular Data, Scikit-Learn",
+
+    // Use Case 4: Generative AI & Distributed Multi-Agent Architecture
+    usecase_genai_badge: "Enterprise AI & RAG Architecture",
+    usecase_genai_title: "4. Generative AI & Distributed Multi-Agent Architecture (Gemini Enterprise)",
+    usecase_genai_summary: "Autonomous distributed AI architecture on GCP aggregating BigQuery analytics, Vertex AI Search RAG, SharePoint/OneDrive connectors, and multimodal Gemini/Imagen.",
+    usecase_genai_meta1_label: "Solution Domain",
+    usecase_genai_meta1_val: "Autonomous Marketing AI",
+    usecase_genai_meta1_desc: "Data-driven dynamic localized campaigns",
+    usecase_genai_meta2_label: "Multimodal Models",
+    usecase_genai_meta2_val: "Gemini & Imagen",
+    usecase_genai_meta2_desc: "Dynamic text & visual content synthesis",
+    usecase_genai_meta3_label: "Agent Architecture",
+    usecase_genai_meta3_val: "ADK & MCP Protocol",
+    usecase_genai_meta3_desc: "Distributed runtime on Cloud Run",
+    usecase_genai_meta4_label: "Data Integration & RAG",
+    usecase_genai_meta4_val: "BigQuery + Vertex AI",
+    usecase_genai_meta4_desc: "Structured grounding & document retrieval",
+
+    // Use Case 5: Data Lineage Transaksi Toko
+    usecase_lineage_badge: "Data Lineage & CDC Ingestion",
+    usecase_lineage_title: "5. Store Transaction Data Lineage: RekapTransaksiTokoDetail",
+    usecase_lineage_summary: "Detailed data lineage from local store SQL Express triggers through Pub/Sub and BigQuery Direct Subscription to production analytical views.",
+    usecase_lineage_meta1_label: "Origin Point",
+    usecase_lineage_meta1_val: "1,200 Retail Stores",
+    usecase_lineage_meta1_desc: "Local SQL Server Express POS database",
+    usecase_lineage_meta2_label: "CDC Mechanism",
+    usecase_lineage_meta2_val: "DB Triggers & Audit",
+    usecase_lineage_meta2_desc: "Automatic transaction event mutation logs",
+    usecase_lineage_meta3_label: "Transport Layer",
+    usecase_lineage_meta3_val: "GCP Pub/Sub Streaming",
+    usecase_lineage_meta3_desc: "Real-time stream with zero batch lag",
+    usecase_lineage_meta4_label: "BigQuery Target",
+    usecase_lineage_meta4_val: "Direct Sub & Views",
+    usecase_lineage_meta4_desc: "Verified analytical production datasets",
+
+    // Diagram 4: Firebase Analytics Fase 1 & 2 (Legacy Key Compatibility)
+    smartnet_diag4_badge: "Firebase Analytics – Phase 1 and 2",
+    smartnet_diag4_title: "1. Firebase Analytics – Phase 1 and 2",
+    smartnet_fb1_details: `
+      <div class="flow-breakdown">
+        <ul class="flow-list">
+          <li class="flow-item"><strong>SDK on Device:</strong> Telemetry collected from Android and iOS apps.</li>
+          <li class="flow-item"><strong>Transport Layer:</strong> Android Transport Layer and iOS APNs stream events.</li>
+          <li class="flow-item"><strong>Firebase Backend:</strong> Exported to Google BigQuery.</li>
+          <li class="flow-item"><strong>Warehouse &amp; ML:</strong> Data Marts and BigQuery ML.</li>
+          <li class="flow-item"><strong>Output:</strong> 3 Looker Studio Dashboards (Marketing, Users Monitoring, Application).</li>
+        </ul>
+      </div>
+    `,
+
+    // Diagram 5: Firebase Analytics Fase 3 (Legacy Key Compatibility)
     smartnet_diag5_badge: "Firebase Analytics – Phase 3",
     smartnet_diag5_title: "2. Firebase Analytics – Phase 3",
     smartnet_fb3_details: `
       <div class="flow-breakdown">
-        <div class="flow-title">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-          </svg>
-          <span>Data flow:</span>
-        </div>
-
         <ul class="flow-list">
-          <li class="flow-item">
-            <strong>Data Sources:</strong> Data comes from the App Store and Playstore (no longer directly from app SDKs).
-          </li>
-          <li class="flow-item">
-            <strong>Google Cloud Platform:</strong>
-            <ul class="flow-sublist">
-              <li class="flow-subitem">Data from the App Store is first processed through Cloud Functions.</li>
-              <li class="flow-subitem">Data from Playstore goes directly into BigQuery Data Transfer Service.</li>
-              <li class="flow-subitem">The output from Cloud Functions is also routed into the Data Warehouse.</li>
-            </ul>
-          </li>
-          <li class="flow-item">
-            <strong>Data Warehouse (BigQuery):</strong>
-            <ul class="flow-sublist">
-              <li class="flow-subitem">Contains several Data Marts.</li>
-              <li class="flow-subitem">Equipped with BigQuery ML for advanced processing/analytics.</li>
-            </ul>
-          </li>
-          <li class="flow-item">
-            <strong>Output:</strong> The final results are visualized through Looker Studio Pro (a more advanced version compared to the standard Looker Studio in Phase 1).
-          </li>
+          <li class="flow-item"><strong>Data Sources:</strong> App Store &amp; Playstore store-level data.</li>
+          <li class="flow-item"><strong>GCP Services:</strong> Cloud Functions &amp; BigQuery Data Transfer Service.</li>
+          <li class="flow-item"><strong>Warehouse:</strong> Data Marts &amp; BigQuery ML.</li>
+          <li class="flow-item"><strong>Output:</strong> Looker Studio Pro enterprise visualization.</li>
         </ul>
-
-        <div class="flow-keypoint">
-          <strong>Key point:</strong> Phase 3 expands the data source to the store level (App Store &amp; Playstore), simplifies the flow using BigQuery Data Transfer Service, and upgrades the visualization capability to Looker Studio Pro.
-        </div>
       </div>
     `,
 

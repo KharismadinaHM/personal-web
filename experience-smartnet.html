@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=20261106_v2">
 </head>
 <body>
 
@@ -56,176 +56,929 @@
     <!-- Detailed Highlights Content -->
     <div class="container detail-content">
       
-      <!-- ML Use Case: Predictive Maintenance Spare Part Motor (On-Premise) -->
-      <section class="detail-section-block" id="ml-predictive-maintenance">
-        <span class="detail-label">Machine Learning Use Case</span>
-        <h2 class="detail-block-title" data-i18n="smartnet_ml_title">Predictive Maintenance Spare Part Motor</h2>
-        <p class="detail-block-desc" data-i18n="smartnet_ml_desc">Memprediksi kapan sebuah motor perlu penggantian spare part dan ganti oli, menggunakan data yang diekstraksi dari foto odometer dan plat nomor. Seluruh pipeline berjalan on-premise dengan Python.</p>
+      <!-- Unified Section: Key Case Studies & Architectures (Accordion List) -->
+      <section class="detail-section-block" id="usecases-accordion-section">
+        <h2 class="detail-block-title" data-i18n="usecases_section_title">Daftar Studi Kasus &amp; Arsitektur Sistem</h2>
+        <p class="detail-block-desc" data-i18n="usecases_section_desc">
+          Kumpulan rancangan arsitektur data engineering, streaming skala besar, analitik mobile, machine learning, dan sistem multi-agent end-to-end.
+        </p>
 
-        <h3 class="feature-item-title" data-i18n="smartnet_ml_params_title">Parameter model</h3>
-        <ul class="dot-list">
-          <li data-i18n="smartnet_ml_param1" data-i18n-html="true"><strong>Odometer</strong> — jarak tempuh motor (km) hasil ekstraksi dari foto odometer.</li>
-          <li data-i18n="smartnet_ml_param2" data-i18n-html="true"><strong>Pembaruan spare part</strong> — riwayat kapan dan pada kilometer berapa spare part terakhir diganti.</li>
-          <li data-i18n="smartnet_ml_param3" data-i18n-html="true"><strong>Lamanya ganti oli</strong> — rentang waktu sejak penggantian oli terakhir.</li>
-        </ul>
-
-        <!-- High-Level Architecture -->
-        <div class="architecture-card">
-          <div class="architecture-card-header">
-            <h3 class="architecture-card-title" data-i18n="smartnet_ml_arch_title">High-Level Architecture (On-Premise · Python)</h3>
+        <!-- Accordion Controls Toolbar -->
+        <div class="usecase-accordion-toolbar">
+          <div class="usecase-count-info">
+            <span class="usecase-count-pill" data-i18n="usecases_count_pill">5 Studi Kasus End-to-End</span>
+            <span data-i18n="usecase_open_hint">Klik judul kasus untuk melihat detail</span>
           </div>
-
-          <figure class="arch-diagram">
-            <svg viewBox="0 0 840 270" role="img" aria-labelledby="pmArchTitle pmArchDesc">
-              <title id="pmArchTitle">High-level architecture predictive maintenance spare part motor</title>
-              <desc id="pmArchDesc">Di server on-premise: foto odometer dan plat nomor diekstraksi dengan Python menjadi data tabular, digabung dengan riwayat servis (spare part dan ganti oli) berdasarkan plat nomor, diolah menjadi fitur, lalu model prediktif Python menghasilkan rekomendasi jadwal maintenance.</desc>
-              <defs>
-                <marker id="arrowPm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                  <path d="M0 0 L10 5 L0 10 z" class="arrowhead"/>
-                </marker>
-              </defs>
-
-              <rect class="boundary" x="8" y="8" width="824" height="254" rx="10"/>
-              <text class="lane-label" x="24" y="32">ON-PREMISE · PYTHON</text>
-
-              <!-- Row 1: image pipeline -->
-              <rect class="node" x="24" y="72" width="140" height="56" rx="6"/>
-              <text class="node-title" x="94" y="96" text-anchor="middle" data-i18n="diag_pm_photo_t">Foto Motor</text>
-              <text class="node-sub" x="94" y="114" text-anchor="middle" data-i18n="diag_pm_photo_s">odometer & plat nomor</text>
-
-              <rect class="node" x="184" y="72" width="140" height="56" rx="6"/>
-              <text class="node-title" x="254" y="96" text-anchor="middle" data-i18n="diag_pm_extract_t">Ekstraksi Gambar</text>
-              <text class="node-sub" x="254" y="114" text-anchor="middle">OCR · Python</text>
-
-              <rect class="node" x="344" y="72" width="140" height="56" rx="6"/>
-              <text class="node-title" x="414" y="96" text-anchor="middle" data-i18n="diag_pm_tab_t">Data Tabular</text>
-              <text class="node-sub" x="414" y="114" text-anchor="middle" data-i18n="diag_pm_tab_s">plat · km · tanggal</text>
-
-              <!-- Row 2: service history -->
-              <rect class="node" x="344" y="182" width="140" height="56" rx="6"/>
-              <text class="node-title" x="414" y="206" text-anchor="middle" data-i18n="diag_pm_hist_t">Riwayat Servis</text>
-              <text class="node-sub" x="414" y="224" text-anchor="middle" data-i18n="diag_pm_hist_s">spare part · ganti oli</text>
-
-              <!-- Merge: features → model → output -->
-              <rect class="node" x="504" y="127" width="140" height="56" rx="6"/>
-              <text class="node-title" x="574" y="151" text-anchor="middle">Feature Engineering</text>
-              <text class="node-sub" x="574" y="169" text-anchor="middle" data-i18n="diag_pm_feat_s">join by plat nomor</text>
-
-              <rect class="node node-accent" x="676" y="72" width="140" height="56" rx="6"/>
-              <text class="node-title" x="746" y="96" text-anchor="middle" data-i18n="diag_pm_model_t">Model Prediktif</text>
-              <text class="node-sub" x="746" y="114" text-anchor="middle">Python · ML</text>
-
-              <rect class="node" x="676" y="182" width="140" height="56" rx="6"/>
-              <text class="node-title" x="746" y="206" text-anchor="middle" data-i18n="diag_pm_out_t">Jadwal Servis</text>
-              <text class="node-sub" x="746" y="224" text-anchor="middle" data-i18n="diag_pm_out_s">prediksi maintenance</text>
-
-              <!-- Edges -->
-              <path class="edge" d="M164 100 L182 100" marker-end="url(#arrowPm)"/>
-              <path class="edge" d="M324 100 L342 100" marker-end="url(#arrowPm)"/>
-              <path class="edge" d="M484 100 C496 100 492 142 502 142" marker-end="url(#arrowPm)"/>
-              <path class="edge" d="M484 210 C496 210 492 168 502 168" marker-end="url(#arrowPm)"/>
-              <path class="edge" d="M644 155 C662 155 656 100 674 100" marker-end="url(#arrowPm)"/>
-              <path class="edge" d="M746 128 L746 180" marker-end="url(#arrowPm)"/>
-            </svg>
-          </figure>
-          <p class="diagram-scroll-hint" data-i18n="diagram_scroll_hint">Geser diagram ke samping untuk melihat seluruhnya →</p>
-
-          <ol class="flow-steps">
-            <li data-i18n="smartnet_ml_s1" data-i18n-html="true"><strong>Input gambar:</strong> foto odometer dan plat nomor motor dikumpulkan dan disimpan di server on-premise.</li>
-            <li data-i18n="smartnet_ml_s2" data-i18n-html="true"><strong>Ekstraksi gambar → tabular:</strong> program Python membaca angka odometer dan plat nomor dari gambar, lalu menyimpannya sebagai baris data tabular (plat nomor, odometer, tanggal).</li>
-            <li data-i18n="smartnet_ml_s3" data-i18n-html="true"><strong>Penggabungan riwayat servis:</strong> data tabular digabungkan berdasarkan plat nomor dengan riwayat pembaruan spare part dan ganti oli.</li>
-            <li data-i18n="smartnet_ml_s4" data-i18n-html="true"><strong>Feature engineering & model:</strong> odometer, jarak tempuh sejak spare part terakhir diganti, dan lamanya sejak ganti oli terakhir menjadi input model prediktif berbasis Python.</li>
-            <li data-i18n="smartnet_ml_s5" data-i18n-html="true"><strong>Output:</strong> prediksi kebutuhan penggantian spare part dan ganti oli per motor, sebagai dasar penjadwalan maintenance.</li>
-          </ol>
-        </div>
-      </section>
-
-      <!-- Block 1: AI & Multi-Agent Systems -->
-      <section class="detail-section-block">
-        <h2 class="detail-block-title" data-i18n="smartnet_b1_title">Generative AI & Distributed Multi-Agent Architecture</h2>
-        <p class="detail-block-desc" data-i18n="smartnet_b1_desc">Inisiatif strategis pemanfaatan kecerdasan buatan otonom untuk otomasi analisis dan pembuatan kampanye pemasaran berbasis data.</p>
-        
-        <div class="feature-cards-grid">
-          <div class="feature-item-card">
-            <span class="stat-pill">GCP Cloud Run • ADK • MCP</span>
-            <h3 class="feature-item-title" data-i18n="smartnet_p1_title">Distributed Multi-Agent Generative AI System</h3>
-            <p data-i18n="smartnet_p1_text">
-              Merancang dan mengimplementasikan sistem multi-agent terdistribusi otonom di Google Cloud Platform. Agen-agen ini mengagregasi analitik BigQuery, integrasi API finansial pihak ketiga, dan pemodelan generative AI multimodal (Google Gemini & Imagen) untuk menghasilkan kampanye pemasaran berbasis data lokal secara dinamis dan terstruktur.
-            </p>
-          </div>
-
-          <div class="feature-item-card">
-            <span class="stat-pill">Airflow • Latensi -30%</span>
-            <h3 class="feature-item-title" data-i18n="smartnet_p2_title">Automated AI Data Feeding & Latency Reduction</h3>
-            <p data-i18n="smartnet_p2_text">
-              Mengimplementasikan alur kerja Apache Airflow untuk mengotomatiskan penarikan data PostgreSQL langsung ke BigQuery, memangkas latensi transfer data sebesar 30% dan mempercepat kapabilitas penyajian konteks data untuk aplikasi Generative AI.
-            </p>
+          <div class="usecase-toolbar-actions">
+            <button type="button" class="usecase-action-btn" id="btnExpandAllCases">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline><polyline points="6 3 12 9 18 3"></polyline></svg>
+              <span data-i18n="usecases_expand_all">Buka Semua</span>
+            </button>
+            <button type="button" class="usecase-action-btn" id="btnCollapseAllCases">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline><polyline points="18 21 12 15 6 21"></polyline></svg>
+              <span data-i18n="usecases_collapse_all">Tutup Semua</span>
+            </button>
           </div>
         </div>
 
-        <!-- Architecture Diagram 1: Gemini Enterprise AI Solution -->
-        <div class="architecture-card">
-          <div class="architecture-card-header">
-            <h3 class="architecture-card-title"><span data-i18n="smartnet_diag1_title">Arsitektur: AI & Search Intelligence using Gemini Enterprise Solution</span></h3>
-            <span class="stat-pill" data-i18n="smartnet_diag1_badge">Enterprise AI & RAG Architecture</span>
-          </div>
+        <div class="usecase-accordion-container">
+          
+          <!-- Case Study 1: Real-Time Data Analytics Retail DWH -->
+          <div class="usecase-accordion-item is-open" id="retail-dwh-streaming">
+            <button type="button" class="usecase-accordion-header" id="header-case-retail" aria-expanded="true" aria-controls="body-case-retail">
+              <div class="usecase-header-left">
+                <div class="usecase-badge-row">
+                  <span class="stat-pill" data-i18n="usecase_retail_badge">Real-Time Streaming &amp; Medallion DWH</span>
+                </div>
+                <h3 class="usecase-accordion-title" data-i18n="usecase_retail_title">1. Arsitektur Real-Time Data Analytics &amp; Medallion Data Warehouse (Retail DWH)</h3>
+                <p class="usecase-accordion-summary" data-i18n="usecase_retail_summary">Rancangan arsitektur streaming data 1.200 toko (100 GB/bulan, ~$300/bln) via Dataflow ke BigQuery Medallion Architecture dengan observabilitas Grafana.</p>
+              </div>
+              <div class="usecase-header-right">
+                <span class="usecase-status-hint">Tutup</span>
+                <span class="usecase-chevron">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </span>
+              </div>
+            </button>
 
-          <div class="diagram-preview-box" data-lightbox-src="assets/gemini-enterprise-connection.png" data-lightbox-caption-key="smartnet_diag1_title" role="button" tabindex="0" aria-label="Perbesar diagram Gemini Enterprise">
-            <img src="assets/gemini-enterprise-connection.png" alt="Arsitektur AI & Search Intelligence Gemini Enterprise" class="diagram-preview-img" loading="lazy">
-            <div class="diagram-zoom-hint">
-              <span data-i18n="diagram_zoom_hint">Klik untuk memperbesar diagram</span>
+            <div class="usecase-accordion-body" id="body-case-retail" role="region" aria-labelledby="header-case-retail">
+              <div class="usecase-accordion-body-inner">
+                <div class="architecture-card" style="margin-top: 0.75rem;">
+                  <div class="architecture-card-header">
+                    <h4 class="architecture-card-title"><span data-i18n="smartnet_diag2_arch_title">High-Level Architecture (Real-Time Streaming &amp; Medallion DWH)</span></h4>
+                  </div>
+
+                  <div class="diagram-preview-box" data-lightbox-src="assets/retail-dwh-analytics.png" data-lightbox-caption-key="smartnet_diag2_title" role="button" tabindex="0" aria-label="Perbesar diagram Retail DWH">
+                    <img src="assets/retail-dwh-analytics.png" alt="High-Level Architecture: Real-Time Data Analytics Retail DWH" class="diagram-preview-img" loading="eager">
+                    <div class="diagram-zoom-hint">
+                      <span data-i18n="diagram_zoom_hint">Klik untuk memperbesar diagram</span>
+                    </div>
+                  </div>
+
+                  <div class="architecture-card-body" data-i18n="smartnet_diag2_details" data-i18n-html="true">
+                    <div class="flow-breakdown">
+                      <!-- Overview Meta Grid -->
+                      <div class="flow-meta-grid">
+                        <div class="flow-meta-box">
+                          <div class="flow-meta-label">Klien &amp; Jangkauan</div>
+                          <div class="flow-meta-value">1.200 Toko Retail</div>
+                          <div class="flow-meta-desc">Ritel &amp; bengkel motor di seluruh Indonesia</div>
+                        </div>
+                        <div class="flow-meta-box">
+                          <div class="flow-meta-label">Volume &amp; Skala</div>
+                          <div class="flow-meta-value">~100 GB / Bulan</div>
+                          <div class="flow-meta-desc">Near real-time streaming ingestion</div>
+                        </div>
+                        <div class="flow-meta-box">
+                          <div class="flow-meta-label">Efisiensi Biaya</div>
+                          <div class="flow-meta-value">~$300 / Bulan</div>
+                          <div class="flow-meta-desc">1 multi-stream job Dataflow terpadu</div>
+                        </div>
+                        <div class="flow-meta-box">
+                          <div class="flow-meta-label">Tech Stack Utama</div>
+                          <div class="flow-meta-value">Dataflow &amp; BigQuery</div>
+                          <div class="flow-meta-desc">Beam Python, Pub/Sub, Datastream, Grafana</div>
+                        </div>
+                      </div>
+
+                      <!-- Section 1: Overview & Yang Saya Bangun -->
+                      <div class="flow-section">
+                        <h4 class="flow-section-heading">1. Ringkasan &amp; Ruang Lingkup Proyek</h4>
+                        <p class="flow-item" style="padding-left: 0; margin-bottom: 0.5rem;">
+                          Arsitektur data streaming berskala besar end-to-end yang menyerap data transaksi kasir toko dan master data cabang ke dalam BigQuery Medallion Data Warehouse, dilengkapi sistem observabilitas proaktif dan penyajian BI real-time.
+                        </p>
+                        <ul class="flow-list">
+                          <li class="flow-item">
+                            <strong>Komponen yang saya bangun:</strong>
+                            <ul class="flow-sublist">
+                              <li class="flow-subitem"><strong>Streaming Dataflow Ingestion Layer:</strong> Raw ingestion dari 20 stream Pub/Sub, pembersihan data (in-flight cleansing), deduplikasi stateful, dan pemuatan ke layer bronze (staging) BigQuery via Storage Write API.</li>
+                              <li class="flow-subitem"><strong>Transformasi Bronze ke Silver:</strong> Pipeline Dataflow otomatis untuk standardisasi dan pembersihan data lebih lanjut.</li>
+                              <li class="flow-subitem"><strong>CDC Master Data Cabang:</strong> Alur Google Cloud Datastream untuk menangkap perubahan data master dari basis data cabang ke BigQuery.</li>
+                              <li class="flow-subitem"><strong>Observabilitas Grafana 1.200 Toko:</strong> Monitoring live transfer data, keterlambatan (late data), dan pencegahan data loss pada seluruh 1.200 gerai toko.</li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <!-- Section 2: End-to-End Architecture Flow -->
+                      <div class="flow-section">
+                        <h4 class="flow-section-heading">2. Alur Arsitektur End-to-End (High-Level Architecture Flow)</h4>
+                        
+                        <div class="flow-table-responsive">
+                          <table class="flow-table">
+                            <thead>
+                              <tr>
+                                <th>Sumber Data</th>
+                                <th>Deskripsi</th>
+                                <th>Jalur Masuk ke GCP</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td><strong>Store: DB Express</strong></td>
+                                <td>Database di PC pada masing-masing 1.200 toko lokal, terhubung dengan Stream App</td>
+                                <td>Stream App menerbitkan transaksi kasir (POS) secara real-time ke GCP Pub/Sub table topics</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Branch: DB Standard</strong></td>
+                                <td>Database tingkat cabang yang mengelola data master</td>
+                                <td>CDC (Change Data Capture) via Datastream langsung menuju BigQuery</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+
+                        <ul class="flow-list">
+                          <li class="flow-item">
+                            <strong>1. Ingestion (Pub/Sub &amp; Datastream):</strong> Stream App mengirim transaksi kasir real-time ke topik Pub/Sub. Datastream menangkap perubahan CDC master data cabang ke BigQuery.
+                          </li>
+                          <li class="flow-item">
+                            <strong>2. Stream Processing (Dataflow Raw Ingestion):</strong> Membaca Pub/Sub, mendaratkan data mentah ke Cloud Storage Data Lake, dan memuat ke Bronze Layer BigQuery dengan pembersihan in-flight dan deduplikasi. Event bronze juga dipublikasikan ke Bronze Topics (Pub/Sub).
+                          </li>
+                          <li class="flow-item">
+                            <strong>3. Data Jobs (Dataflow):</strong> Transformasi Cleansing (bronze ke silver, dibangun mandiri) dan Transformasi Business Logic (silver ke gold).
+                          </li>
+                          <li class="flow-item">
+                            <strong>4. Medallion Layers (BigQuery):</strong>
+                            <ul class="flow-sublist">
+                              <li class="flow-subitem"><strong>Bronze:</strong> Raw events transaksi langsung dari toko.</li>
+                              <li class="flow-subitem"><strong>Silver:</strong> Data bersih dan tervalidasi setelah deduplikasi.</li>
+                              <li class="flow-subitem"><strong>Gold:</strong> Data mart agregasi penjualan dan inventaris stok toko untuk analitik eksekutif.</li>
+                            </ul>
+                          </li>
+                          <li class="flow-item">
+                            <strong>5. Stock Data Path:</strong> Khusus data stok disalurkan melalui Silver Topics (Pub/Sub) ke target RDBMS operasional (DB App metadata dan DB Stock Monitor) untuk mendukung sistem aplikasi lain.
+                          </li>
+                          <li class="flow-item">
+                            <strong>6. Governance &amp; Monitoring:</strong> Dataplex untuk tata kelola data terpusat; Grafana untuk monitoring kesehatan pipeline dan transmisi data 1.200 gerai toko.
+                          </li>
+                          <li class="flow-item">
+                            <strong>7. Delivery:</strong> Gold Layer menyuplai dashboards, reporting analitik (BI), dan konsumsi aplikasi bisnis lainnya.
+                          </li>
+                        </ul>
+                      </div>
+
+                      <!-- Section 3: Dataflow Streaming Pipeline In Detail -->
+                      <div class="flow-section">
+                        <h4 class="flow-section-heading">3. Detail Implementasi: Pipeline Streaming Dataflow</h4>
+                        <p class="flow-item" style="padding-left: 0; margin-bottom: 0.5rem;">
+                          Satu streaming Dataflow job terpadu menangani <strong>10 tabel sumber dari 2 tipe toko (total 20 subscription Pub/Sub dan 20 tabel BigQuery bronze)</strong>. Pipeline dibangun secara dinamis berbasis loop konfigurasi tanpa perlu deploy job terpisah per tabel.
+                        </p>
+
+                        <div class="flow-table-responsive">
+                          <table class="flow-table">
+                            <thead>
+                              <tr>
+                                <th>Tahap</th>
+                                <th>Komponen</th>
+                                <th>Fungsi &amp; Logika Pemrosesan</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td><strong>1. Read</strong></td>
+                                <td>Pub/Sub I/O</td>
+                                <td>Membaca streaming messages dari 20 subscription Pub/Sub secara paralel.</td>
+                              </tr>
+                              <tr>
+                                <td><strong>2. CDC Prepare</strong></td>
+                                <td>JSON Parser &amp; Formatter</td>
+                                <td>Parsing payload JSON, klasifikasi record UPSERT atau DELETE, pembuatan sequence number dari waktu operasi (fallback waktu server jika kosong), normalisasi kode toko, tagging tipe toko, dan penambahan ingestion timestamp.</td>
+                              </tr>
+                              <tr>
+                                <td><strong>3. Make Dedup Key</strong></td>
+                                <td>Key Extractor</td>
+                                <td>Membentuk composite key dari nama tabel + primary key (selalu menyertakan kode toko unik).</td>
+                              </tr>
+                              <tr>
+                                <td><strong>4. Stateful Dedup</strong></td>
+                                <td>Stateful Processing (Beam State API)</td>
+                                <td>Menyimpan sequence number tertinggi per key dan mendrop record lama atau duplikat. State otomatis kedaluwarsa setelah 7 hari inaktivitas.</td>
+                              </tr>
+                              <tr>
+                                <td><strong>5. Fix Types</strong></td>
+                                <td>Defensive Schema Mapper</td>
+                                <td>Type casting ketat ke skema BigQuery tujuan, validasi nilai numerik (mencegah error seperti "N/A"), penghapusan kolom operasional redundan, failed cast diubah menjadi NULL dengan peringatan log.</td>
+                              </tr>
+                              <tr>
+                                <td><strong>6. Write</strong></td>
+                                <td>Storage Write API</td>
+                                <td>Penulisan streaming berkecepatan tinggi ke tabel BigQuery bronze.</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Side Output</strong></td>
+                                <td>Dead-Letter Queue</td>
+                                <td>Record yang gagal diparsing ditulis ke tabel <code>error_logs</code> bersama payload asli dan pesan error tanpa memutus pipeline.</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+
+                        <ul class="flow-list">
+                          <li class="flow-item">
+                            <strong>Keputusan Desain Kunci:</strong>
+                            <ul class="flow-sublist">
+                              <li class="flow-subitem"><strong>1 Job Terpadu:</strong> Shared workers (<code>n2-standard-4</code>, autoscaling 1–4, Streaming Engine) membuat biaya fixed per-job hanya dibayar 1 kali dibanding 20 job terpisah.</li>
+                              <li class="flow-subitem"><strong>At-least-once Delivery by Design:</strong> Menjamin zero data loss saat jaringan toko tidak stabil; potensi duplikasi diselesaikan oleh stateful dedup berbasis sequence number.</li>
+                              <li class="flow-subitem"><strong>Stateful Deduplication:</strong> Menjamin urutan data; record out-of-order atau late data tidak akan menimpa data yang lebih mutakhir.</li>
+                              <li class="flow-subitem"><strong>Retry Under Load:</strong> Pipeline melakukan retry otomatis saat worker mencapai beban maksimal, mencegah data terbuang pada jam sibuk.</li>
+                              <li class="flow-subitem"><strong>Preservasi Riwayat Delete:</strong> Operasi delete ditandai (<code>cdc_change_type = DELETE</code>), mempertahankan riwayat audit untuk keputusan di silver layer.</li>
+                              <li class="flow-subitem"><strong>Defensive Type Handling:</strong> Validasi ketat mencegah nilai abnormal merusak Storage Write API; anomali dicatat sebagai NULL dengan log warning.</li>
+                            </ul>
+                          </li>
+                          <li class="flow-item">
+                            <strong>Runtime &amp; Libraries:</strong> Apache Beam Python SDK (<code>apache_beam</code>), Storage Write API, Streaming Engine Runner v2, stateful timer 7 hari, counters Beam metrics, dan structured JSON logging.
+                          </li>
+                        </ul>
+                      </div>
+
+                      <!-- Section 4: Grafana Monitoring -->
+                      <div class="flow-section">
+                        <h4 class="flow-section-heading">4. Lapisan Observabilitas &amp; Monitoring Grafana</h4>
+                        <p class="flow-item" style="padding-left: 0; margin-bottom: 0.5rem;">
+                          Layer monitoring dan alerting real-time yang dirancang untuk mengawasi integritas aliran data dari seluruh 1.200 toko, menjawab 4 pilar utama:
+                        </p>
+
+                        <div class="flow-table-responsive">
+                          <table class="flow-table">
+                            <thead>
+                              <tr>
+                                <th>Pilar Monitor</th>
+                                <th>Pertanyaan yang Dijawab</th>
+                                <th>Metrik &amp; Visualisasi</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td><strong>Data Transfer</strong></td>
+                                <td>Apakah setiap toko aktif mengirimkan data?</td>
+                                <td>Status pengiriman data per toko dan per tabel, serta volume throughput 1.200 toko.</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Late Data</strong></td>
+                                <td>Tabel atau toko mana yang mengalami keterlambatan?</td>
+                                <td>Selisih waktu antara jadwal estimasi kedatangan dengan waktu tiba aktual di BigQuery.</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Duplicate Data</strong></td>
+                                <td>Apakah ada data yang masuk berulang?</td>
+                                <td>Deteksi record duplikat per toko dan tabel akibat mekanisme pengiriman at-least-once.</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Data Loss</strong></td>
+                                <td>Apakah ada transaksi yang hilang dari BigQuery?</td>
+                                <td>Perbandingan data sumber vs data BigQuery, ditambah pelacakan error dead-letter table dan metrik Beam.</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+
+                        <ul class="flow-list">
+                          <li class="flow-item">
+                            <strong>Aturan Alerting:</strong> Notifikasi instan via <strong>Email dan WhatsApp</strong> langsung aktif saat terdeteksi anomali data loss atau lonjakan duplikasi data.
+                          </li>
+                          <li class="flow-item">
+                            <strong>Laporan Harian Otomatis:</strong> Automated daily report dikirim via email merangkum kesehatan transfer data, late data, duplikasi, dan potensi data loss dari seluruh gerai toko.
+                          </li>
+                          <li class="flow-item">
+                            <strong>Pengguna Sistem:</strong> Digunakan oleh tim <strong>PIC IT Data Operation</strong> (kualitas data) dan <strong>IT Network</strong> klien (menemukan toko dengan masalah konektivitas lokal).
+                          </li>
+                        </ul>
+                      </div>
+
+                      <!-- Section 5: Problems Solved & Key Impact -->
+                      <div class="flow-section">
+                        <h4 class="flow-section-heading">5. Masalah yang Diselesaikan &amp; Dampak Bisnis</h4>
+                        <div class="flow-keypoint">
+                          <ul class="flow-list" style="margin-top: 0.3rem;">
+                            <li class="flow-item">
+                              <strong>Streaming Near Real-Time Hemat Biaya:</strong> Mengonsolidasi 20 pipeline terpisah menjadi 1 streaming job multi-stream, melayani 1.200 toko (~100 GB/bulan) hanya dengan biaya operasional sekitar <strong>$300 per bulan</strong>.
+                            </li>
+                            <li class="flow-item">
+                              <strong>Mengatasi Ketidakcocokan Data Master:</strong> Menemukan akar masalah selisih data akibat gangguan konektivitas toko, diatasi dengan at-least-once delivery + stateful dedup + monitoring proaktif.
+                            </li>
+                            <li class="flow-item">
+                              <strong>Deteksi Toko Offline dalam 10 Menit:</strong> Toko yang tidak mengirim data langsung terdeteksi dalam waktu <strong>10 menit</strong> melalui alert WhatsApp/Email (sebelumnya baru disadari berhari-hari setelah terjadi selisih rekonsiliasi manual).
+                            </li>
+                            <li class="flow-item">
+                              <strong>Zero Silent Data Loss:</strong> Kombinasi dead-letter error logs dan metrik internal pipeline menjamin tidak ada data transaksi kasir yang hilang secara diam-diam.
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="architecture-card-body">
-            <p class="diagram-desc" data-i18n="smartnet_diag1_desc">
-              Solusi terpadu pencarian cerdas dan pemrosesan dokumen berbasis AI di Google Cloud Platform yang menghubungkan data enterprise terstruktur dan tidak terstruktur dengan Large Language Model multimodal.
-            </p>
-
-            <div class="diagram-steps-grid">
-              <div class="diagram-step-item">
-                <div class="diagram-step-header">
-                  <h5 class="diagram-step-title" data-i18n="smartnet_diag1_s1_title">1. Ingestion Dokumen Terpusat</h5>
+          <!-- Case Study 2: Mobile App Analytics DWH (Train Ticket Booking) - Firebase Analytics Phase 1, 2 & 3 -->
+          <div class="usecase-accordion-item" id="firebase-ticket-dwh">
+            <button type="button" class="usecase-accordion-header" id="header-case-firebase" aria-expanded="false" aria-controls="body-case-firebase">
+              <div class="usecase-header-left">
+                <div class="usecase-badge-row">
+                  <span class="stat-pill" data-i18n="usecase_fb_badge">Firebase Analytics &amp; Medallion DWH</span>
                 </div>
-                <p class="diagram-step-text" data-i18n="smartnet_diag1_s1_text">
-                  Dokumen korporat disimpan secara terpusat di Google Cloud Storage (GCS) sebagai basis pengetahuan data tak terstruktur.
-                </p>
+                <h3 class="usecase-accordion-title" data-i18n="usecase_fb_title">2. Mobile App Analytics Data Warehouse (Train Ticket Booking) — Firebase Analytics (Phase 1, 2 &amp; 3)</h3>
+                <p class="usecase-accordion-summary" data-i18n="usecase_fb_summary">BigQuery Data Warehouse (~100 GB/hari) berbasis Medallion Architecture &amp; Star Schema untuk aplikasi pemesanan tiket kereta (10M+ unduhan), mengintegrasikan analitik mobile Firebase (Fase 1 &amp; 2) serta data store (Fase 3) ke Looker Studio.</p>
               </div>
-
-              <div class="diagram-step-item">
-                <div class="diagram-step-header">
-                  <h5 class="diagram-step-title" data-i18n="smartnet_diag1_s2_title">2. Vertex AI Search & Indexing</h5>
-                </div>
-                <p class="diagram-step-text" data-i18n="smartnet_diag1_s2_text">
-                  Vertex AI Search mem-parsing dan mengindeks dokumen untuk semantic vector search berkecepatan tinggi dalam kerangka Retrieval-Augmented Generation (RAG).
-                </p>
+              <div class="usecase-header-right">
+                <span class="usecase-status-hint">Lihat Detail</span>
+                <span class="usecase-chevron">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </span>
               </div>
+            </button>
 
-              <div class="diagram-step-item">
-                <div class="diagram-step-header">
-                  <h5 class="diagram-step-title" data-i18n="smartnet_diag1_s3_title">3. Konektor SharePoint & OneDrive</h5>
-                </div>
-                <p class="diagram-step-text" data-i18n="smartnet_diag1_s3_text">
-                  Integrasi konektor pihak ketiga menyinkronkan repositori Microsoft SharePoint dan OneDrive ke lingkungan AI secara aman.
-                </p>
-              </div>
+            <div class="usecase-accordion-body" id="body-case-firebase" role="region" aria-labelledby="header-case-firebase">
+              <div class="usecase-accordion-body-inner" data-i18n="usecase_fb_details" data-i18n-html="true">
+                <div class="flow-breakdown">
+                  <!-- Overview Meta Grid -->
+                  <div class="flow-meta-grid">
+                    <div class="flow-meta-box">
+                      <div class="flow-meta-label">Klien &amp; Jangkauan</div>
+                      <div class="flow-meta-value">10M+ Downloads</div>
+                      <div class="flow-meta-desc">Aplikasi Tiket Kereta Indonesia (Play Store)</div>
+                    </div>
+                    <div class="flow-meta-box">
+                      <div class="flow-meta-label">Volume &amp; Skala Data</div>
+                      <div class="flow-meta-value">~100 GB / Hari</div>
+                      <div class="flow-meta-desc">~3 TB / Bulan event analitik berskala besar</div>
+                    </div>
+                    <div class="flow-meta-box">
+                      <div class="flow-meta-label">Pola Arsitektur</div>
+                      <div class="flow-meta-value">Medallion &amp; Star Schema</div>
+                      <div class="flow-meta-desc">BigQuery Bronze, Silver, Gold + Looker Studio</div>
+                    </div>
+                    <div class="flow-meta-box">
+                      <div class="flow-meta-label">Tech Stack Utama</div>
+                      <div class="flow-meta-value">Firebase &amp; BigQuery</div>
+                      <div class="flow-meta-desc">Looker Studio Pro, Cloud Functions, BigQuery DTS, SQL</div>
+                    </div>
+                  </div>
 
-              <div class="diagram-step-item">
-                <div class="diagram-step-header">
-                  <h5 class="diagram-step-title" data-i18n="smartnet_diag1_s4_title">4. Grounding Gemini & BigQuery</h5>
+                  <!-- Section 1: Overview & Yang Saya Bangun -->
+                  <div class="flow-section">
+                    <h4 class="flow-section-heading">1. Ringkasan &amp; Ruang Lingkup Proyek</h4>
+                    <p class="flow-item" style="padding-left: 0; margin-bottom: 0.5rem;">
+                      Data warehouse BigQuery berskala enterprise menggunakan <strong>Medallion Architecture</strong> untuk aplikasi pemesanan tiket kereta terkemuka di Indonesia (10M+ unduhan di Google Play Store). Sistem ini mengolah sekitar <strong>100 GB event analitik per hari</strong> yang diekspor dari Firebase Analytics, memodelkannya menjadi data marts berformat <strong>Star Schema</strong> pada layer Gold, dan menyajikan dashboard Looker Studio interaktif untuk pemantauan perjalanan pengguna (<em>user journey</em>). Proyek ini diselesaikan secara kolaboratif dalam tim (<em>team project</em>).
+                    </p>
+                    <ul class="flow-list">
+                      <li class="flow-item">
+                        <strong>Komponen yang saya bangun (My part):</strong>
+                        <ul class="flow-sublist">
+                          <li class="flow-subitem"><strong>Silver Layer Pipelines:</strong> Membangun sejumlah tabel silver untuk flattening struktur payload JSON bersarang (<em>nested &amp; repeated fields</em>), deduplikasi event ganda akibat retry jaringan mobile, dan clustering event analitik.</li>
+                          <li class="flow-subitem"><strong>Gold Layer Data Marts:</strong> Merancang dan mengimplementasikan data mart dalam format Star Schema (tabel fakta transaksi/event dan tabel dimensi atribut perjalanan) yang siap pakai untuk visualisasi performa tinggi.</li>
+                          <li class="flow-subitem"><strong>Dashboards di Looker Studio &amp; Looker Studio Pro:</strong> Membangun visualisasi perjalanan pengguna end-to-end, mencakup alur pembelian tiket (<em>purchase</em>), pengembalian dana (<em>refund</em>), dan ubah jadwal (<em>reschedule</em>).</li>
+                          <li class="flow-subitem"><strong>Data Quality Review &amp; Mitigasi Tagging:</strong> Berperan aktif dalam audit kualitas data yang menemukan celah ketiadaan tagging event di beberapa layar kunci aplikasi, serta menyusun strategi perbaikan di sisi mobile app sebelum kalkulasi metrik funnel dijalankan.</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- Section 2: End-to-End Architecture Flow -->
+                  <div class="flow-section">
+                    <h4 class="flow-section-heading">2. Alur Arsitektur End-to-End (High-Level Architecture Flow)</h4>
+                    <div class="flow-table-responsive">
+                      <table class="flow-table">
+                        <thead>
+                          <tr>
+                            <th>Sumber Data</th>
+                            <th>Deskripsi</th>
+                            <th>Jalur Masuk ke BigQuery</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><strong>Mobile App (Firebase)</strong></td>
+                            <td>Event analitik pengguna dari aplikasi tiket Android &amp; iOS</td>
+                            <td>Native export harian &amp; streaming dari Firebase ke BigQuery (~100 GB/hari)</td>
+                          </tr>
+                          <tr>
+                            <td><strong>Backend Event Tagging</strong></td>
+                            <td>Tagging event layar (<em>screen views</em>) dan status transaksi</td>
+                            <td>Jalur export Firebase yang sama ke BigQuery</td>
+                          </tr>
+                          <tr>
+                            <td><strong>Multi-Store Data (Fase 3)</strong></td>
+                            <td>Metrik unduhan &amp; instalasi dari Apple App Store &amp; Google Play Store</td>
+                            <td>Cloud Functions (App Store) dan BigQuery Data Transfer Service (Play Store)</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <ul class="flow-list">
+                      <li class="flow-item"><strong>1. Ingestion:</strong> Event pengguna diserap via ekspor native Firebase ke BigQuery pada skala ~100 GB per hari.</li>
+                      <li class="flow-item"><strong>2. Bronze Layer:</strong> Mendaratkan raw events apa adanya (<em>as-is</em>) tanpa modifikasi, menjamin auditabilitas dan kemampuan melacak kembali (<em>traceability</em>) angka ke event mentah aslinya.</li>
+                      <li class="flow-item"><strong>3. Silver Layer:</strong> Transformasi pembersihan dan standardisasi data: flattening skema array bersarang (<em>unnesting</em>), deduplikasi rekaman ganda, serta pengelompokan (<em>clustering</em>) event.</li>
+                      <li class="flow-item"><strong>4. Gold Layer:</strong> Data marts bisnis siap pakai dengan Star Schema (tabel fakta dan tabel dimensi) yang dioptimasi untuk kueri cepat tanpa kalkulasi berulang.</li>
+                      <li class="flow-item"><strong>5. Delivery:</strong> Dashboard Looker Studio &amp; Looker Studio Pro menyajikan visualisasi user journey tiket secara real-time dan terpercaya.</li>
+                    </ul>
+                  </div>
+
+                  <!-- Section 3: Arsitektur Pipeline & Evolusi Fase (Fase 1, 2 & 3) -->
+                  <div class="flow-section">
+                    <h4 class="flow-section-heading">3. Detail Arsitektur Pipeline &amp; Evolusi Fase (Fase 1, 2 &amp; 3)</h4>
+
+                    <!-- Sub-Fase 1 & 2 -->
+                    <div class="phase-subcard">
+                      <div class="phase-subcard-header">
+                        <h5 class="phase-subcard-title">Fase 1 &amp; 2: Pipeline Analitik Mobile App &amp; BigQuery Data Marts</h5>
+                        <span class="phase-badge-pill phase-badge-1">Fase 1 &amp; 2 · Ingestion &amp; Funnels</span>
+                      </div>
+                      <div class="diagram-preview-box" data-lightbox-src="assets/firebase-analytics-fase-1&amp;2.png" data-lightbox-caption-key="usecase_fb_title" role="button" tabindex="0" aria-label="Perbesar diagram Firebase Analytics Fase 1 &amp; 2">
+                        <img src="assets/firebase-analytics-fase-1&amp;2.png" alt="Firebase Analytics Fase 1 &amp; 2" class="diagram-preview-img" loading="lazy">
+                        <div class="diagram-zoom-hint">
+                          <span data-i18n="diagram_zoom_hint">Klik untuk memperbesar diagram</span>
+                        </div>
+                      </div>
+                      <ul class="flow-list" style="margin-top: 1rem;">
+                        <li class="flow-item"><strong>SDK on Device:</strong> Telemetri dan event interaksi dikumpulkan dari aplikasi Android dan iOS.</li>
+                        <li class="flow-item"><strong>Transport Layer:</strong> Android Transport Layer dan Apple Push Notification service (APNs) menyalurkan pesan ke backend Firebase.</li>
+                        <li class="flow-item"><strong>Firebase Analytics Backend:</strong> Memvalidasi dan mengekspor payload event langsung ke Google BigQuery.</li>
+                        <li class="flow-item"><strong>Warehouse &amp; ML:</strong> Data dikelola dalam Data Marts terstruktur, diperkaya metadata via Data Catalog, dan diorkestrasi Cloud Composer untuk pemodelan prediktif BigQuery ML.</li>
+                        <li class="flow-item"><strong>3 Dashboard Looker Studio:</strong> Menghasilkan <em>Marketing Dashboard</em>, <em>Users Monitoring Dashboard</em>, dan <em>Application Dashboard</em> untuk analisis konversi tiket.</li>
+                      </ul>
+                    </div>
+
+                    <!-- Sub-Fase 3 -->
+                    <div class="phase-subcard">
+                      <div class="phase-subcard-header">
+                        <h5 class="phase-subcard-title">Fase 3: Multi-Store Ingestion &amp; Looker Studio Pro</h5>
+                        <span class="phase-badge-pill phase-badge-3">Fase 3 · Multi-Store &amp; Pro</span>
+                      </div>
+                      <div class="diagram-preview-box" data-lightbox-src="assets/firebase-analytics-fase-3.png" data-lightbox-caption-key="usecase_fb_title" role="button" tabindex="0" aria-label="Perbesar diagram Firebase Analytics Fase 3">
+                        <img src="assets/firebase-analytics-fase-3.png" alt="Firebase Analytics Fase 3 Multi-Store Ingestion" class="diagram-preview-img" loading="lazy">
+                        <div class="diagram-zoom-hint">
+                          <span data-i18n="diagram_zoom_hint">Klik untuk memperbesar diagram</span>
+                        </div>
+                      </div>
+                      <ul class="flow-list" style="margin-top: 1rem;">
+                        <li class="flow-item"><strong>Sumber Data Store Eksternal:</strong> Memperluas penyerapan data ke tingkat store resmi (Apple App Store &amp; Google Play Store).</li>
+                        <li class="flow-item"><strong>Ingestion GCP Otomatis:</strong> Data App Store diekstrak via Cloud Functions terkelola, sedangkan data Play Store diserap otomatis lewat BigQuery Data Transfer Service (DTS).</li>
+                        <li class="flow-item"><strong>Data Warehouse Terintegrasi:</strong> Konsolidasi data store dengan data interaksi pengguna aplikasi ke dalam Star Schema Data Marts dan evaluasi BigQuery ML.</li>
+                        <li class="flow-item"><strong>Looker Studio Pro:</strong> Peningkatan kapabilitas analitik dan kolaborasi enterprise dengan Looker Studio Pro untuk pemangku kepentingan tingkat manajemen.</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!-- Section 4: Detail Implementasi & Keputusan Desain -->
+                  <div class="flow-section">
+                    <h4 class="flow-section-heading">4. Rincian Layer &amp; Keputusan Desain Utama</h4>
+                    <div class="flow-table-responsive">
+                      <table class="flow-table">
+                        <thead>
+                          <tr>
+                            <th>Layer</th>
+                            <th>Tujuan Arsitektur</th>
+                            <th>Kontribusi Spesifik Saya</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><strong>Bronze</strong></td>
+                            <td>Raw Landing</td>
+                            <td>Data tiba melalui ekspor native Firebase dan dipertahankan apa adanya (<em>as-is</em>) untuk kebutuhan audit.</td>
+                          </tr>
+                          <tr>
+                            <td><strong>Silver</strong></td>
+                            <td>Cleaned Data</td>
+                            <td>Membangun pipeline unnesting payload bersarang, deduplikasi record ganda, dan klusterisasi event.</td>
+                          </tr>
+                          <tr>
+                            <td><strong>Gold</strong></td>
+                            <td>Ready-to-use Marts</td>
+                            <td>Merancang data marts Star Schema dengan fact tables transaksi/event dan dimension tables deskriptif.</td>
+                          </tr>
+                          <tr>
+                            <td><strong>Dashboards</strong></td>
+                            <td>Business Intelligence</td>
+                            <td>Membangun dashboard interaktif di Looker Studio untuk visualisasi user journey (purchase, refund, reschedule).</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <ul class="flow-list">
+                      <li class="flow-item"><strong>Keputusan Desain Kunci:</strong>
+                        <ul class="flow-sublist">
+                          <li class="flow-subitem"><strong>Medallion Architecture:</strong> Memisahkan data mentah, data bersih, dan data siap analitik, sehingga setiap masalah inkonsistensi dapat dilacak langsung ke layer spesifik.</li>
+                          <li class="flow-subitem"><strong>Star Schema pada Gold:</strong> Menyediakan kueri join yang ringan dan cepat untuk Looker Studio, memastikan seluruh departemen membaca tabel fakta dan dimensi yang seragam.</li>
+                          <li class="flow-subitem"><strong>Dashboard Hanya Membaca Layer Gold:</strong> Menjaga dashboard tetap kencang dan mencegah duplikasi logika bisnis di layer visualisasi.</li>
+                          <li class="flow-subitem"><strong>Flatten &amp; Dedup pada Silver:</strong> Membersihkan skema bersarang dan duplikasi event satu kali di layer silver, sehingga seluruh tabel hilir bermula dari data yang bersih dan terpercaya.</li>
+                          <li class="flow-subitem"><strong>Data Quality Before Analysis:</strong> Menegakkan prinsip integritas data—memperbaiki sumber tagging terlebih dahulu sebelum merilis visualisasi funnel.</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- Section 5: Problems Solved & Key Impact -->
+                  <div class="flow-section">
+                    <h4 class="flow-section-heading">5. Masalah yang Diselesaikan &amp; Dampak Bisnis</h4>
+                    <div class="flow-keypoint">
+                      <ul class="flow-list" style="margin-top: 0.3rem;">
+                        <li class="flow-item">
+                          <strong>Kasus 1 — Permintaan Funnel Perjalanan Pengguna yang Belum Didukung Data:</strong>
+                          <ul class="flow-sublist">
+                            <li class="flow-subitem"><em>Permintaan:</em> Stakeholder bisnis meminta analisis funnel perjalanan pengguna (<em>user journey funnel</em>) untuk seluruh alur pemesanan tiket: pembelian tiket, pengembalian dana (<em>refund</em>), dan ubah jadwal (<em>reschedule</em>).</li>
+                            <li class="flow-subitem"><em>Permasalahan:</em> Audit data menemukan bahwa sejumlah layar penting aplikasi belum memiliki tagging event sama sekali, dan sebagian record transaksi/promo tidak valid. Funnel yang dipaksakan dari data ini akan menampilkan persentase drop-off yang salah dan dapat memicu salah ambil keputusan bisnis.</li>
+                            <li class="flow-subitem"><em>Investigasi &amp; Keputusan:</em> Kami mengkomparasi seluruh layar alur tiket dengan log event BigQuery untuk memetakan layar yang tidak terlacak. Kami mengomunikasikan temuan ini secara transparan dalam bahasa bisnis dan menyepakati penundaan singkat untuk memperbaiki tagging di aplikasi terlebih dahulu sebelum funnel dibuat.</li>
+                            <li class="flow-subitem"><em>Hasil:</em> Klien terhindar dari keputusan bias dan berhasil memperoleh metrik funnel yang 100% akurat dan dapat diandalkan.</li>
+                          </ul>
+                        </li>
+                        <li class="flow-item" style="margin-top: 0.6rem;">
+                          <strong>Kasus 2 — Menjinakkan 100 GB/Hari Event Mentah Bersarang Menjadi Data Mart Cepat:</strong>
+                          <ul class="flow-sublist">
+                            <li class="flow-subitem"><em>Tantangan:</em> Event mentah Firebase memiliki format sangat bersarang (<em>nested arrays</em>), rekaman berulang akibat pengiriman ulang jaringan mobile, dan berukuran ~100 GB/hari sehingga sangat berat dan lambat jika di-query langsung oleh tim analitik.</li>
+                            <li class="flow-subitem"><em>Solusi:</em> Medallion warehouse yang melakukan flattening dan deduplikasi otomatis di silver, lalu memodelkannya ke Star Schema di gold.</li>
+                            <li class="flow-subitem"><em>Hasil:</em> Tim bisnis dan BI memperoleh dashboard perjalanan tiket yang responsif, kueri cepat, hemat biaya komputasi BigQuery, dan berbasis tabel data yang konsisten di seluruh departemen.</li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
-                <p class="diagram-step-text" data-i18n="smartnet_diag1_s4_text">
-                  Platform Gemini Enterprise melakukan grounding kueri dengan metrik terstruktur BigQuery dan dokumen untuk menyajikan respons akurat ke desktop dan mobile.
-                </p>
               </div>
             </div>
           </div>
+
+          <!-- Case Study 3: Predictive Maintenance Spare Part Motor -->
+          <div class="usecase-accordion-item" id="ml-predictive-maintenance">
+            <button type="button" class="usecase-accordion-header" id="header-case-pm" aria-expanded="false" aria-controls="body-case-pm">
+              <div class="usecase-header-left">
+                <div class="usecase-badge-row">
+                  <span class="stat-pill" data-i18n="usecase_pm_badge">On-Premise ML · Python</span>
+                </div>
+                <h3 class="usecase-accordion-title" data-i18n="usecase_pm_title">3. Machine Learning: Predictive Maintenance Spare Part Motor</h3>
+                <p class="usecase-accordion-summary" data-i18n="usecase_pm_summary">Memprediksi kebutuhan penggantian spare part dan oli motor menggunakan data yang diekstraksi dari foto odometer dan plat nomor via pipeline Python on-premise.</p>
+              </div>
+              <div class="usecase-header-right">
+                <span class="usecase-status-hint">Lihat Detail</span>
+                <span class="usecase-chevron">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </span>
+              </div>
+            </button>
+
+            <div class="usecase-accordion-body" id="body-case-pm" role="region" aria-labelledby="header-case-pm">
+              <div class="usecase-accordion-body-inner">
+                <!-- Overview Meta Grid -->
+                <div class="flow-meta-grid" style="margin-top: 0.75rem;">
+                  <div class="flow-meta-box">
+                    <div class="flow-meta-label" data-i18n="usecase_pm_meta1_label">Target Objek</div>
+                    <div class="flow-meta-value" data-i18n="usecase_pm_meta1_val">1.200 Toko &amp; Bengkel</div>
+                    <div class="flow-meta-desc" data-i18n="usecase_pm_meta1_desc">Pelanggan servis motor ritel</div>
+                  </div>
+                  <div class="flow-meta-box">
+                    <div class="flow-meta-label" data-i18n="usecase_pm_meta2_label">Input Ekstraksi</div>
+                    <div class="flow-meta-value" data-i18n="usecase_pm_meta2_val">Odometer &amp; Plat</div>
+                    <div class="flow-meta-desc" data-i18n="usecase_pm_meta2_desc">Foto smartphone via OCR Python</div>
+                  </div>
+                  <div class="flow-meta-box">
+                    <div class="flow-meta-label" data-i18n="usecase_pm_meta3_label">Estimasi Output</div>
+                    <div class="flow-meta-value" data-i18n="usecase_pm_meta3_val">Jadwal Servis &amp; Oli</div>
+                    <div class="flow-meta-desc" data-i18n="usecase_pm_meta3_desc">Rekomendasi suku cadang presisi</div>
+                  </div>
+                  <div class="flow-meta-box">
+                    <div class="flow-meta-label" data-i18n="usecase_pm_meta4_label">Infrastruktur &amp; Stack</div>
+                    <div class="flow-meta-value" data-i18n="usecase_pm_meta4_val">On-Premise Python</div>
+                    <div class="flow-meta-desc" data-i18n="usecase_pm_meta4_desc">OpenCV, Tabular Data, Scikit-Learn</div>
+                  </div>
+                </div>
+
+                <p class="detail-block-desc" data-i18n="smartnet_ml_desc" style="margin-top: 0.75rem;">
+                  Memprediksi kapan sebuah motor perlu penggantian spare part dan ganti oli, menggunakan data yang diekstraksi dari foto odometer dan plat nomor. Seluruh pipeline berjalan on-premise dengan Python.
+                </p>
+
+                <h4 class="feature-item-title" data-i18n="smartnet_ml_params_title" style="margin-top: 1rem;">Parameter model</h4>
+                <ul class="dot-list">
+                  <li data-i18n="smartnet_ml_param1" data-i18n-html="true"><strong>Odometer</strong> — jarak tempuh motor (km) hasil ekstraksi dari foto odometer.</li>
+                  <li data-i18n="smartnet_ml_param2" data-i18n-html="true"><strong>Pembaruan spare part</strong> — riwayat kapan dan pada kilometer berapa spare part terakhir diganti.</li>
+                  <li data-i18n="smartnet_ml_param3" data-i18n-html="true"><strong>Lamanya ganti oli</strong> — rentang waktu sejak penggantian oli terakhir.</li>
+                </ul>
+
+                <div class="architecture-card">
+                  <div class="architecture-card-header">
+                    <h4 class="architecture-card-title" data-i18n="smartnet_ml_arch_title">High-Level Architecture (On-Premise · Python)</h4>
+                  </div>
+
+                  <figure class="arch-diagram">
+                    <svg viewBox="0 0 840 270" role="img" aria-labelledby="pmArchTitle pmArchDesc">
+                      <title id="pmArchTitle">High-level architecture predictive maintenance spare part motor</title>
+                      <desc id="pmArchDesc">Di server on-premise: foto odometer dan plat nomor diekstraksi dengan Python menjadi data tabular, digabung dengan riwayat servis (spare part dan ganti oli) berdasarkan plat nomor, diolah menjadi fitur, lalu model prediktif Python menghasilkan rekomendasi jadwal maintenance.</desc>
+                      <defs>
+                        <marker id="arrowPm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                          <path d="M0 0 L10 5 L0 10 z" class="arrowhead"/>
+                        </marker>
+                      </defs>
+
+                      <rect class="boundary" x="8" y="8" width="824" height="254" rx="10"/>
+                      <text class="lane-label" x="24" y="32">ON-PREMISE · PYTHON</text>
+
+                      <!-- Row 1: image pipeline -->
+                      <rect class="node" x="24" y="72" width="140" height="56" rx="6"/>
+                      <text class="node-title" x="94" y="96" text-anchor="middle" data-i18n="diag_pm_photo_t">Foto Motor</text>
+                      <text class="node-sub" x="94" y="114" text-anchor="middle" data-i18n="diag_pm_photo_s">odometer &amp; plat nomor</text>
+
+                      <rect class="node" x="184" y="72" width="140" height="56" rx="6"/>
+                      <text class="node-title" x="254" y="96" text-anchor="middle" data-i18n="diag_pm_extract_t">Ekstraksi Gambar</text>
+                      <text class="node-sub" x="254" y="114" text-anchor="middle">OCR · Python</text>
+
+                      <rect class="node" x="344" y="72" width="140" height="56" rx="6"/>
+                      <text class="node-title" x="414" y="96" text-anchor="middle" data-i18n="diag_pm_tab_t">Data Tabular</text>
+                      <text class="node-sub" x="414" y="114" text-anchor="middle" data-i18n="diag_pm_tab_s">plat · km · tanggal</text>
+
+                      <!-- Row 2: service history -->
+                      <rect class="node" x="344" y="182" width="140" height="56" rx="6"/>
+                      <text class="node-title" x="414" y="206" text-anchor="middle" data-i18n="diag_pm_hist_t">Riwayat Servis</text>
+                      <text class="node-sub" x="414" y="224" text-anchor="middle" data-i18n="diag_pm_hist_s">spare part · ganti oli</text>
+
+                      <!-- Merge: features → model → output -->
+                      <rect class="node" x="504" y="127" width="140" height="56" rx="6"/>
+                      <text class="node-title" x="574" y="151" text-anchor="middle">Feature Engineering</text>
+                      <text class="node-sub" x="574" y="169" text-anchor="middle" data-i18n="diag_pm_feat_s">join by plat nomor</text>
+
+                      <rect class="node node-accent" x="676" y="72" width="140" height="56" rx="6"/>
+                      <text class="node-title" x="746" y="96" text-anchor="middle" data-i18n="diag_pm_model_t">Model Prediktif</text>
+                      <text class="node-sub" x="746" y="114" text-anchor="middle">Python · ML</text>
+
+                      <rect class="node" x="676" y="182" width="140" height="56" rx="6"/>
+                      <text class="node-title" x="746" y="206" text-anchor="middle" data-i18n="diag_pm_out_t">Jadwal Servis</text>
+                      <text class="node-sub" x="746" y="224" text-anchor="middle" data-i18n="diag_pm_out_s">prediksi maintenance</text>
+
+                      <!-- Edges -->
+                      <path class="edge" d="M164 100 L182 100" marker-end="url(#arrowPm)"/>
+                      <path class="edge" d="M324 100 L342 100" marker-end="url(#arrowPm)"/>
+                      <path class="edge" d="M484 100 C496 100 492 142 502 142" marker-end="url(#arrowPm)"/>
+                      <path class="edge" d="M484 210 C496 210 492 168 502 168" marker-end="url(#arrowPm)"/>
+                      <path class="edge" d="M644 155 C662 155 656 100 674 100" marker-end="url(#arrowPm)"/>
+                      <path class="edge" d="M746 128 L746 180" marker-end="url(#arrowPm)"/>
+                    </svg>
+                  </figure>
+                  <p class="diagram-scroll-hint" data-i18n="diagram_scroll_hint">Geser diagram ke samping untuk melihat seluruhnya →</p>
+
+                  <ol class="flow-steps">
+                    <li data-i18n="smartnet_ml_s1" data-i18n-html="true"><strong>Input gambar:</strong> foto odometer dan plat nomor motor dikumpulkan dan disimpan di server on-premise.</li>
+                    <li data-i18n="smartnet_ml_s2" data-i18n-html="true"><strong>Ekstraksi gambar → tabular:</strong> program Python membaca angka odometer dan plat nomor dari gambar, lalu menyimpannya sebagai baris data tabular (plat nomor, odometer, tanggal).</li>
+                    <li data-i18n="smartnet_ml_s3" data-i18n-html="true"><strong>Penggabungan riwayat servis:</strong> data tabular digabungkan berdasarkan plat nomor dengan riwayat pembaruan spare part dan ganti oli.</li>
+                    <li data-i18n="smartnet_ml_s4" data-i18n-html="true"><strong>Feature engineering &amp; model:</strong> odometer, jarak tempuh sejak spare part terakhir diganti, dan lamanya sejak ganti oli terakhir menjadi input model prediktif berbasis Python.</li>
+                    <li data-i18n="smartnet_ml_s5" data-i18n-html="true"><strong>Output:</strong> prediksi kebutuhan penggantian spare part dan ganti oli per motor, sebagai dasar penjadwalan maintenance.</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Case Study 4: Generative AI & Multi-Agent Architecture -->
+          <div class="usecase-accordion-item" id="ai-multi-agent">
+            <button type="button" class="usecase-accordion-header" id="header-case-genai" aria-expanded="false" aria-controls="body-case-genai">
+              <div class="usecase-header-left">
+                <div class="usecase-badge-row">
+                  <span class="stat-pill" data-i18n="usecase_genai_badge">Enterprise AI &amp; RAG Architecture</span>
+                </div>
+                <h3 class="usecase-accordion-title" data-i18n="usecase_genai_title">4. Generative AI &amp; Distributed Multi-Agent Architecture (Gemini Enterprise)</h3>
+                <p class="usecase-accordion-summary" data-i18n="usecase_genai_summary">Arsitektur AI otonom terdistribusi di GCP yang menggabungkan analitik BigQuery, Vertex AI Search RAG, konektor SharePoint/OneDrive, dan multimodal Gemini/Imagen.</p>
+              </div>
+              <div class="usecase-header-right">
+                <span class="usecase-status-hint">Lihat Detail</span>
+                <span class="usecase-chevron">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </span>
+              </div>
+            </button>
+
+            <div class="usecase-accordion-body" id="body-case-genai" role="region" aria-labelledby="header-case-genai">
+              <div class="usecase-accordion-body-inner">
+                <!-- Overview Meta Grid -->
+                <div class="flow-meta-grid" style="margin-top: 0.75rem;">
+                  <div class="flow-meta-box">
+                    <div class="flow-meta-label" data-i18n="usecase_genai_meta1_label">Domain Solusi</div>
+                    <div class="flow-meta-value" data-i18n="usecase_genai_meta1_val">Marketing AI Otonom</div>
+                    <div class="flow-meta-desc" data-i18n="usecase_genai_meta1_desc">Kampanye pemasaran lokal dinamis</div>
+                  </div>
+                  <div class="flow-meta-box">
+                    <div class="flow-meta-label" data-i18n="usecase_genai_meta2_label">Model Multimodal</div>
+                    <div class="flow-meta-value" data-i18n="usecase_genai_meta2_val">Gemini &amp; Imagen</div>
+                    <div class="flow-meta-desc" data-i18n="usecase_genai_meta2_desc">Pembuatan konten teks &amp; visual</div>
+                  </div>
+                  <div class="flow-meta-box">
+                    <div class="flow-meta-label" data-i18n="usecase_genai_meta3_label">Arsitektur Agen</div>
+                    <div class="flow-meta-value" data-i18n="usecase_genai_meta3_val">ADK &amp; MCP Protocol</div>
+                    <div class="flow-meta-desc" data-i18n="usecase_genai_meta3_desc">Distributed runtime di Cloud Run</div>
+                  </div>
+                  <div class="flow-meta-box">
+                    <div class="flow-meta-label" data-i18n="usecase_genai_meta4_label">Integrasi Data &amp; RAG</div>
+                    <div class="flow-meta-value" data-i18n="usecase_genai_meta4_val">BigQuery + Vertex AI</div>
+                    <div class="flow-meta-desc" data-i18n="usecase_genai_meta4_desc">Grounding data terstruktur &amp; dokumen</div>
+                  </div>
+                </div>
+
+                <p class="detail-block-desc" data-i18n="smartnet_b1_desc" style="margin-top: 0.75rem;">
+                  Inisiatif strategis pemanfaatan kecerdasan buatan otonom untuk otomasi analisis dan pembuatan kampanye pemasaran berbasis data.
+                </p>
+
+                <div class="feature-cards-grid" style="margin-top: 1rem;">
+                  <div class="feature-item-card">
+                    <span class="stat-pill">GCP Cloud Run • ADK • MCP</span>
+                    <h4 class="feature-item-title" data-i18n="smartnet_p1_title">Distributed Multi-Agent Generative AI System</h4>
+                    <p data-i18n="smartnet_p1_text">
+                      Merancang dan mengimplementasikan sistem multi-agent terdistribusi otonom di Google Cloud Platform. Agen-agen ini mengagregasi analitik BigQuery, integrasi API finansial pihak ketiga, dan pemodelan generative AI multimodal (Google Gemini &amp; Imagen) untuk menghasilkan kampanye pemasaran berbasis data lokal secara dinamis dan terstruktur.
+                    </p>
+                  </div>
+
+                  <div class="feature-item-card">
+                    <span class="stat-pill">Airflow • Latensi -30%</span>
+                    <h4 class="feature-item-title" data-i18n="smartnet_p2_title">Automated AI Data Feeding &amp; Latency Reduction</h4>
+                    <p data-i18n="smartnet_p2_text">
+                      Mengimplementasikan alur kerja Apache Airflow untuk mengotomatiskan penarikan data PostgreSQL langsung ke BigQuery, memangkas latensi transfer data sebesar 30% dan mempercepat kapabilitas penyajian konteks data untuk aplikasi Generative AI.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Architecture Diagram 1: Gemini Enterprise AI Solution -->
+                <div class="architecture-card">
+                  <div class="architecture-card-header">
+                    <h4 class="architecture-card-title"><span data-i18n="smartnet_diag1_title">Arsitektur: AI &amp; Search Intelligence using Gemini Enterprise Solution</span></h4>
+                  </div>
+
+                  <div class="diagram-preview-box" data-lightbox-src="assets/gemini-enterprise-connection.png" data-lightbox-caption-key="smartnet_diag1_title" role="button" tabindex="0" aria-label="Perbesar diagram Gemini Enterprise">
+                    <img src="assets/gemini-enterprise-connection.png" alt="Arsitektur AI &amp; Search Intelligence Gemini Enterprise" class="diagram-preview-img" loading="lazy">
+                    <div class="diagram-zoom-hint">
+                      <span data-i18n="diagram_zoom_hint">Klik untuk memperbesar diagram</span>
+                    </div>
+                  </div>
+
+                  <div class="architecture-card-body">
+                    <p class="diagram-desc" data-i18n="smartnet_diag1_desc">
+                      Solusi terpadu pencarian cerdas dan pemrosesan dokumen berbasis AI di Google Cloud Platform yang menghubungkan data enterprise terstruktur dan tidak terstruktur dengan Large Language Model multimodal.
+                    </p>
+
+                    <div class="diagram-steps-grid">
+                      <div class="diagram-step-item">
+                        <div class="diagram-step-header">
+                          <h5 class="diagram-step-title" data-i18n="smartnet_diag1_s1_title">1. Ingestion Dokumen Terpusat</h5>
+                        </div>
+                        <p class="diagram-step-text" data-i18n="smartnet_diag1_s1_text">
+                          Dokumen korporat disimpan secara terpusat di Google Cloud Storage (GCS) sebagai basis pengetahuan data tak terstruktur.
+                        </p>
+                      </div>
+
+                      <div class="diagram-step-item">
+                        <div class="diagram-step-header">
+                          <h5 class="diagram-step-title" data-i18n="smartnet_diag1_s2_title">2. Vertex AI Search &amp; Indexing</h5>
+                        </div>
+                        <p class="diagram-step-text" data-i18n="smartnet_diag1_s2_text">
+                          Vertex AI Search mem-parsing dan mengindeks dokumen untuk semantic vector search berkecepatan tinggi dalam kerangka Retrieval-Augmented Generation (RAG).
+                        </p>
+                      </div>
+
+                      <div class="diagram-step-item">
+                        <div class="diagram-step-header">
+                          <h5 class="diagram-step-title" data-i18n="smartnet_diag1_s3_title">3. Konektor SharePoint &amp; OneDrive</h5>
+                        </div>
+                        <p class="diagram-step-text" data-i18n="smartnet_diag1_s3_text">
+                          Integrasi konektor pihak ketiga menyinkronkan repositori Microsoft SharePoint dan OneDrive ke lingkungan AI secara aman.
+                        </p>
+                      </div>
+
+                      <div class="diagram-step-item">
+                        <div class="diagram-step-header">
+                          <h5 class="diagram-step-title" data-i18n="smartnet_diag1_s4_title">4. Grounding Gemini &amp; BigQuery</h5>
+                        </div>
+                        <p class="diagram-step-text" data-i18n="smartnet_diag1_s4_text">
+                          Platform Gemini Enterprise melakukan grounding kueri dengan metrik terstruktur BigQuery dan dokumen untuk menyajikan respons akurat ke desktop dan mobile.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Case Study 5: Data Lineage Transaksi Toko -->
+          <div class="usecase-accordion-item" id="retail-data-lineage">
+            <button type="button" class="usecase-accordion-header" id="header-case-lineage" aria-expanded="false" aria-controls="body-case-lineage">
+              <div class="usecase-header-left">
+                <div class="usecase-badge-row">
+                  <span class="stat-pill" data-i18n="usecase_lineage_badge">Data Lineage &amp; CDC Ingestion</span>
+                </div>
+                <h3 class="usecase-accordion-title" data-i18n="usecase_lineage_title">5. Data Lineage Transaksi Toko: RekapTransaksiTokoDetail</h3>
+                <p class="usecase-accordion-summary" data-i18n="usecase_lineage_summary">Silsilah alur data terperinci dari level trigger basis data SQL Express di gerai toko lokal via Pub/Sub dan BigQuery Direct Subscription ke tabel analitik produksi.</p>
+              </div>
+              <div class="usecase-header-right">
+                <span class="usecase-status-hint">Lihat Detail</span>
+                <span class="usecase-chevron">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </span>
+              </div>
+            </button>
+
+            <div class="usecase-accordion-body" id="body-case-lineage" role="region" aria-labelledby="header-case-lineage">
+              <div class="usecase-accordion-body-inner">
+                <!-- Overview Meta Grid -->
+                <div class="flow-meta-grid" style="margin-top: 0.75rem;">
+                  <div class="flow-meta-box">
+                    <div class="flow-meta-label" data-i18n="usecase_lineage_meta1_label">Titik Asal (Origin)</div>
+                    <div class="flow-meta-value" data-i18n="usecase_lineage_meta1_val">1.200 Toko Retail</div>
+                    <div class="flow-meta-desc" data-i18n="usecase_lineage_meta1_desc">Basis data SQL Server Express POS</div>
+                  </div>
+                  <div class="flow-meta-box">
+                    <div class="flow-meta-label" data-i18n="usecase_lineage_meta2_label">Mekanisme CDC</div>
+                    <div class="flow-meta-value" data-i18n="usecase_lineage_meta2_val">DB Triggers &amp; Audit</div>
+                    <div class="flow-meta-desc" data-i18n="usecase_lineage_meta2_desc">Pencatatan mutasi transaksi otomatis</div>
+                  </div>
+                  <div class="flow-meta-box">
+                    <div class="flow-meta-label" data-i18n="usecase_lineage_meta3_label">Transport Layer</div>
+                    <div class="flow-meta-value" data-i18n="usecase_lineage_meta3_val">GCP Pub/Sub Streaming</div>
+                    <div class="flow-meta-desc" data-i18n="usecase_lineage_meta3_desc">Pengiriman streaming tanpa delay batch</div>
+                  </div>
+                  <div class="flow-meta-box">
+                    <div class="flow-meta-label" data-i18n="usecase_lineage_meta4_label">Target BigQuery</div>
+                    <div class="flow-meta-value" data-i18n="usecase_lineage_meta4_val">Direct Sub &amp; Views</div>
+                    <div class="flow-meta-desc" data-i18n="usecase_lineage_meta4_desc">Tabel analitik produksi terverifikasi</div>
+                  </div>
+                </div>
+
+                <!-- Architecture Diagram 3: Data Lineage RekapTransaksiTokoDetail -->
+                <div class="architecture-card" style="margin-top: 0.75rem;">
+                  <div class="architecture-card-header">
+                    <h4 class="architecture-card-title"><span data-i18n="smartnet_diag3_title">Data Lineage Transaksi Toko: RekapTransaksiTokoDetail</span></h4>
+                  </div>
+
+                  <div class="diagram-preview-box" data-lightbox-src="assets/retail-dwh-analytics-data-lineage.png" data-lightbox-caption-key="smartnet_diag3_title" role="button" tabindex="0" aria-label="Perbesar diagram Data Lineage">
+                    <img src="assets/retail-dwh-analytics-data-lineage.png" alt="Data Lineage RekapTransaksiTokoDetail" class="diagram-preview-img" loading="lazy">
+                    <div class="diagram-zoom-hint">
+                      <span data-i18n="diagram_zoom_hint">Klik untuk memperbesar diagram</span>
+                    </div>
+                  </div>
+
+                  <div class="architecture-card-body">
+                    <p class="diagram-desc" data-i18n="smartnet_diag3_desc">
+                      Silsilah alur data terperinci dari level trigger basis data SQL Express di gerai toko lokal hingga tersaji di tabel analitik Google BigQuery.
+                    </p>
+
+                    <div class="diagram-steps-grid">
+                      <div class="diagram-step-item">
+                        <div class="diagram-step-header">
+                          <h5 class="diagram-step-title" data-i18n="smartnet_diag3_s1_title">1. Trigger Tabel Audit Toko</h5>
+                        </div>
+                        <p class="diagram-step-text" data-i18n="smartnet_diag3_s1_text">
+                          Perubahan data di tabel RekapTransaksiTokoDetail mengaktifkan trigger otomatis yang mencatat log audit ke RekapTransaksiTokoDetail_Audit.
+                        </p>
+                      </div>
+
+                      <div class="diagram-step-item">
+                        <div class="diagram-step-header">
+                          <h5 class="diagram-step-title" data-i18n="smartnet_diag3_s2_title">2. Publikasi ke GCP Pub/Sub</h5>
+                        </div>
+                        <p class="diagram-step-text" data-i18n="smartnet_diag3_s2_text">
+                          Aplikasi toko mengekstrak baris audit dan menerbitkannya ke topik GCP Pub/Sub: pb-RekapTransaksiTokoDetail-raw.
+                        </p>
+                      </div>
+
+                      <div class="diagram-step-item">
+                        <div class="diagram-step-header">
+                          <h5 class="diagram-step-title" data-i18n="smartnet_diag3_s3_title">3. BigQuery Direct Subscription</h5>
+                        </div>
+                        <p class="diagram-step-text" data-i18n="smartnet_diag3_s3_text">
+                          Direct Subscriber BigQuery menyerap streaming message langsung ke tabel raw RekapTransaksiTokoDetail tanpa delay batch.
+                        </p>
+                      </div>
+
+                      <div class="diagram-step-item">
+                        <div class="diagram-step-header">
+                          <h5 class="diagram-step-title" data-i18n="smartnet_diag3_s4_title">4. Analytical View &amp; Scheduler</h5>
+                        </div>
+                        <p class="diagram-step-text" data-i18n="smartnet_diag3_s4_text">
+                          View analitik vw_RekapTransaksiTokoDetail memfilter kolom redundan, dan Cloud Scheduler memprosesnya ke tabel produksi pb_bronze_toko.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 
-      <!-- Block 2: Large-Scale ETL & Streaming Pipelines -->
-      <section class="detail-section-block">
-        <h2 class="detail-block-title" data-i18n="smartnet_b2_title">Ingestion Skala Besar & Streaming Pipelines</h2>
+      <!-- Section Divider: Competencies & Core Responsibilities -->
+      <div class="competency-section-divider">
+        <div class="competency-divider-line"></div>
+        <div class="competency-divider-badge">
+          <span class="competency-divider-dot"></span>
+          <span data-i18n="competency_divider_label">Kompetensi Teknis &amp; Tanggung Jawab Inti</span>
+        </div>
+        <div class="competency-divider-line"></div>
+      </div>
+
+      <!-- Competency Block 1: Ingestion Skala Besar & Pipeline Data Terdistribusi -->
+      <section class="detail-section-block" id="large-scale-etl">
+        <h2 class="detail-block-title" data-i18n="smartnet_b2_title">Ingestion Skala Besar &amp; Streaming Pipelines</h2>
         <p class="detail-block-desc" data-i18n="smartnet_b2_desc">Pengembangan jalur data bervolume tinggi, penanganan data real-time, dan migrasi basis data NoSQL.</p>
 
         <div class="feature-cards-grid">
@@ -251,235 +1004,6 @@
             <p data-i18n="smartnet_p5_text">
               Merekayasa pipeline migrasi data otomatis tanpa kendala (seamless migration) untuk memindahkan beban kerja NoSQL dari on-premise Apache Cassandra ke Google Cloud Bigtable terkelola.
             </p>
-          </div>
-        </div>
-
-        <!-- Architecture Diagram 2: Retail DWH Real-Time Analytics -->
-        <div class="architecture-card">
-          <div class="architecture-card-header">
-            <h3 class="architecture-card-title"><span data-i18n="smartnet_diag2_title">Arsitektur Real-Time Data Analytics & Medallion Data Warehouse (Retail DWH)</span></h3>
-            <span class="stat-pill" data-i18n="smartnet_diag2_badge">Real-Time Streaming & Medallion DWH</span>
-          </div>
-
-          <div class="diagram-preview-box" data-lightbox-src="assets/retail-dwh-analytics.png" data-lightbox-caption-key="smartnet_diag2_title" role="button" tabindex="0" aria-label="Perbesar diagram Retail DWH">
-            <img src="assets/retail-dwh-analytics.png" alt="Arsitektur Real-Time Data Analytics Retail DWH" class="diagram-preview-img" loading="lazy">
-            <div class="diagram-zoom-hint">
-              <span data-i18n="diagram_zoom_hint">Klik untuk memperbesar diagram</span>
-            </div>
-          </div>
-
-          <div class="architecture-card-body">
-            <p class="diagram-desc" data-i18n="smartnet_diag2_desc">
-              Rancangan arsitektur streaming data skala besar dari ratusan database toko (DB Express) dan cabang (DB Standard) menuju BigQuery Medallion Architecture (Bronze, Silver, Gold).
-            </p>
-
-            <div class="diagram-steps-grid">
-              <div class="diagram-step-item">
-                <div class="diagram-step-header">
-                  <h5 class="diagram-step-title" data-i18n="smartnet_diag2_s1_title">1. Ingestion Datastream & Pub/Sub</h5>
-                </div>
-                <p class="diagram-step-text" data-i18n="smartnet_diag2_s1_text">
-                  Menangkap transaksi kasir toko secara realtime via Stream App ke GCP Pub/Sub Topics dan CDC Datastream dari DB Standard cabang.
-                </p>
-              </div>
-
-              <div class="diagram-step-item">
-                <div class="diagram-step-header">
-                  <h5 class="diagram-step-title" data-i18n="smartnet_diag2_s2_title">2. Stream Processing via Dataflow</h5>
-                </div>
-                <p class="diagram-step-text" data-i18n="smartnet_diag2_s2_text">
-                  Cloud Dataflow menjalankan raw ingestion ke Data Lake (Cloud Storage) dan pembersihan data (cleansing & deduplication) in-flight.
-                </p>
-              </div>
-
-              <div class="diagram-step-item">
-                <div class="diagram-step-header">
-                  <h5 class="diagram-step-title" data-i18n="smartnet_diag2_s3_title">3. BigQuery Medallion Architecture</h5>
-                </div>
-                <p class="diagram-step-text" data-i18n="smartnet_diag2_s3_text">
-                  Alur data bertingkat: Bronze Layer (raw events), Silver Layer (data bersih), dan Gold Layer (agregasi data mart penjualan & stok toko).
-                </p>
-              </div>
-
-              <div class="diagram-step-item">
-                <div class="diagram-step-header">
-                  <h5 class="diagram-step-title" data-i18n="smartnet_diag2_s4_title">4. Observabilitas & Penyajian BI</h5>
-                </div>
-                <p class="diagram-step-text" data-i18n="smartnet_diag2_s4_text">
-                  Tata kelola data terpusat via Google Cloud Dataplex, visualisasi metrik sistem di Grafana, dan pelaporan real-time ke BI Dashboard.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Architecture Diagram 3: Data Lineage RekapTransaksiTokoDetail -->
-        <div class="architecture-card">
-          <div class="architecture-card-header">
-            <h3 class="architecture-card-title"><span data-i18n="smartnet_diag3_title">Data Lineage Transaksi Toko: RekapTransaksiTokoDetail</span></h3>
-            <span class="stat-pill" data-i18n="smartnet_diag3_badge">Data Lineage & CDC Ingestion</span>
-          </div>
-
-          <div class="diagram-preview-box" data-lightbox-src="assets/retail-dwh-analytics-data-lineage.png" data-lightbox-caption-key="smartnet_diag3_title" role="button" tabindex="0" aria-label="Perbesar diagram Data Lineage">
-            <img src="assets/retail-dwh-analytics-data-lineage.png" alt="Data Lineage RekapTransaksiTokoDetail" class="diagram-preview-img" loading="lazy">
-            <div class="diagram-zoom-hint">
-              <span data-i18n="diagram_zoom_hint">Klik untuk memperbesar diagram</span>
-            </div>
-          </div>
-
-          <div class="architecture-card-body">
-            <p class="diagram-desc" data-i18n="smartnet_diag3_desc">
-              Silsilah alur data terperinci dari level trigger basis data SQL Express di gerai toko lokal hingga tersaji di tabel analitik Google BigQuery.
-            </p>
-
-            <div class="diagram-steps-grid">
-              <div class="diagram-step-item">
-                <div class="diagram-step-header">
-                  <h5 class="diagram-step-title" data-i18n="smartnet_diag3_s1_title">1. Trigger Tabel Audit Toko</h5>
-                </div>
-                <p class="diagram-step-text" data-i18n="smartnet_diag3_s1_text">
-                  Perubahan data di tabel RekapTransaksiTokoDetail mengaktifkan trigger otomatis yang mencatat log audit ke RekapTransaksiTokoDetail_Audit.
-                </p>
-              </div>
-
-              <div class="diagram-step-item">
-                <div class="diagram-step-header">
-                  <h5 class="diagram-step-title" data-i18n="smartnet_diag3_s2_title">2. Publikasi ke GCP Pub/Sub</h5>
-                </div>
-                <p class="diagram-step-text" data-i18n="smartnet_diag3_s2_text">
-                  Aplikasi toko mengekstrak baris audit dan menerbitkannya ke topik GCP Pub/Sub: pb-RekapTransaksiTokoDetail-raw.
-                </p>
-              </div>
-
-              <div class="diagram-step-item">
-                <div class="diagram-step-header">
-                  <h5 class="diagram-step-title" data-i18n="smartnet_diag3_s3_title">3. BigQuery Direct Subscription</h5>
-                </div>
-                <p class="diagram-step-text" data-i18n="smartnet_diag3_s3_text">
-                  Direct Subscriber BigQuery menyerap streaming message langsung ke tabel raw RekapTransaksiTokoDetail tanpa delay batch.
-                </p>
-              </div>
-
-              <div class="diagram-step-item">
-                <div class="diagram-step-header">
-                  <h5 class="diagram-step-title" data-i18n="smartnet_diag3_s4_title">4. Analytical View & Scheduler</h5>
-                </div>
-                <p class="diagram-step-text" data-i18n="smartnet_diag3_s4_text">
-                  View analitik vw_RekapTransaksiTokoDetail memfilter kolom redundan, dan Cloud Scheduler memprosesnya ke tabel produksi pb_bronze_toko.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Architecture Diagram 4: Firebase Mobile Analytics Pipeline Fase 1 -->
-        <div class="architecture-card">
-          <div class="architecture-card-header">
-            <h3 class="architecture-card-title"><span data-i18n="smartnet_diag4_title">1. Firebase Analytics – Phase 1</span></h3>
-            <span class="stat-pill" data-i18n="smartnet_diag4_badge">Firebase Analytics – Phase 1</span>
-          </div>
-
-          <div class="diagram-preview-box" data-lightbox-src="assets/firebase-analytics-fase-1&2.png" data-lightbox-caption-key="smartnet_diag4_title" role="button" tabindex="0" aria-label="Perbesar diagram Firebase Analytics Phase 1">
-            <img src="assets/firebase-analytics-fase-1&2.png" alt="Firebase Analytics Phase 1" class="diagram-preview-img" loading="lazy">
-            <div class="diagram-zoom-hint">
-              <span data-i18n="diagram_zoom_hint">Klik untuk memperbesar diagram</span>
-            </div>
-          </div>
-
-          <div class="architecture-card-body" data-i18n="smartnet_fb1_details" data-i18n-html="true">
-            <div class="flow-breakdown">
-              <div class="flow-title">
-                <span>Alur data:</span>
-              </div>
-
-              <ul class="flow-list">
-                <li class="flow-item">
-                  <strong>SDK on Device:</strong> Data dikumpulkan dari aplikasi Android dan iOS.
-                </li>
-                <li class="flow-item">
-                  <strong>Platform-level Message Transport:</strong> Android menggunakan Android Transport Layer, sedangkan iOS menggunakan iOS/APNs.
-                </li>
-                <li class="flow-item">
-                  <strong>Firebase Backend:</strong> Kedua jalur data masuk ke modul Analytics di Firebase.
-                </li>
-                <li class="flow-item">
-                  <strong>Data Warehouse (BigQuery):</strong> Data disimpan dan diorganisasi ke dalam beberapa Data Mart, serta diproses lebih lanjut dengan BigQuery ML.
-                </li>
-                <li class="flow-item">
-                  <strong>Metadata &amp; Orkestrasi:</strong>
-                  <ul class="flow-sublist">
-                    <li class="flow-subitem">Data Catalog menyediakan metadata untuk memperkaya Data Mart.</li>
-                    <li class="flow-subitem">Cloud Composer mengatur orkestrasi job/pipeline menuju BigQuery ML.</li>
-                  </ul>
-                </li>
-                <li class="flow-item">
-                  <strong>Insight and Visualization:</strong> Data dari BigQuery divisualisasikan menggunakan Looker Studio.
-                </li>
-                <li class="flow-item">
-                  <strong>Output:</strong> Hasil akhir ditampilkan dalam 3 dashboard berbeda:
-                  <ul class="flow-sublist">
-                    <li class="flow-subitem">Marketing Dashboard</li>
-                    <li class="flow-subitem">Users Monitoring Dashboard</li>
-                    <li class="flow-subitem">Application Dashboard</li>
-                  </ul>
-                </li>
-              </ul>
-
-              <div class="flow-keypoint">
-                <strong>Poin utama:</strong> Fokus Phase 1 adalah membangun pipeline dasar dari SDK aplikasi mobile hingga ke dashboard visualisasi, dengan dukungan metadata dan orkestrasi.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Architecture Diagram 5: Firebase Analytics Fase 3 Multi-Store Ingestion -->
-        <div class="architecture-card">
-          <div class="architecture-card-header">
-            <h3 class="architecture-card-title"><span data-i18n="smartnet_diag5_title">2. Firebase Analytics – Phase 3</span></h3>
-            <span class="stat-pill" data-i18n="smartnet_diag5_badge">Firebase Analytics – Phase 3</span>
-          </div>
-
-          <div class="diagram-preview-box" data-lightbox-src="assets/firebase-analytics-fase-3.png" data-lightbox-caption-key="smartnet_diag5_title" role="button" tabindex="0" aria-label="Perbesar diagram Firebase Analytics Phase 3">
-            <img src="assets/firebase-analytics-fase-3.png" alt="Firebase Analytics Phase 3 Multi-Store Ingestion" class="diagram-preview-img" loading="lazy">
-            <div class="diagram-zoom-hint">
-              <span data-i18n="diagram_zoom_hint">Klik untuk memperbesar diagram</span>
-            </div>
-          </div>
-
-          <div class="architecture-card-body" data-i18n="smartnet_fb3_details" data-i18n-html="true">
-            <div class="flow-breakdown">
-              <div class="flow-title">
-                <span>Alur data:</span>
-              </div>
-
-              <ul class="flow-list">
-                <li class="flow-item">
-                  <strong>Data Sources:</strong> Data berasal dari App Store dan Playstore (bukan lagi dari SDK aplikasi langsung).
-                </li>
-                <li class="flow-item">
-                  <strong>Google Cloud Platform:</strong>
-                  <ul class="flow-sublist">
-                    <li class="flow-subitem">Data dari App Store diproses lebih dulu melalui Cloud Functions.</li>
-                    <li class="flow-subitem">Data dari Playstore langsung masuk ke BigQuery Data Transfer Service.</li>
-                    <li class="flow-subitem">Output dari Cloud Functions juga diarahkan ke Data Warehouse.</li>
-                  </ul>
-                </li>
-                <li class="flow-item">
-                  <strong>Data Warehouse (BigQuery):</strong>
-                  <ul class="flow-sublist">
-                    <li class="flow-subitem">Berisi beberapa Data Mart.</li>
-                    <li class="flow-subitem">Dilengkapi dengan BigQuery ML untuk pemrosesan/analitik lanjutan.</li>
-                  </ul>
-                </li>
-                <li class="flow-item">
-                  <strong>Output:</strong> Hasil akhir divisualisasikan melalui Looker Studio Pro (versi pro, lebih advanced dibanding Looker Studio biasa pada Phase 1).
-                </li>
-              </ul>
-
-              <div class="flow-keypoint">
-                <strong>Poin utama:</strong> Phase 3 memperluas sumber data ke tingkat store (App Store &amp; Playstore), menyederhanakan alur dengan BigQuery Data Transfer Service, dan meningkatkan kapabilitas visualisasi ke Looker Studio Pro.
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -596,7 +1120,7 @@
   </div>
 
   <!-- Scripts -->
-  <script src="js/translations.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/translations.js?v=20261106_v2"></script>
+  <script src="js/main.js?v=20261106_v2"></script>
 </body>
 </html>
