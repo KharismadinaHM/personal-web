@@ -172,7 +172,7 @@ const translations = {
 
     // Diagram 2: Retail DWH Real-Time Analytics
     smartnet_diag2_badge: "Real-Time Streaming & Medallion DWH",
-    smartnet_diag2_title: "1. Arsitektur Real-Time Data Analytics & Medallion Data Warehouse (Retail DWH)",
+    smartnet_diag2_title: "2. Arsitektur Real-Time Data Analytics & Medallion Data Warehouse (Retail DWH)",
     smartnet_diag2_arch_title: "High-Level Architecture (Real-Time Streaming & Medallion DWH)",
     smartnet_diag2_desc: "Rancangan arsitektur streaming data skala besar dari 1.200 database toko (DB Express) dan cabang (DB Standard) menuju BigQuery Medallion Architecture (Bronze, Silver, Gold) dengan pemantauan terpadu Grafana.",
     smartnet_diag2_details: `
@@ -445,7 +445,7 @@ const translations = {
     // Use Case Accordion Controls
     usecases_section_title: "Daftar Studi Kasus & Arsitektur Sistem",
     usecases_section_desc: "Kumpulan rancangan arsitektur data engineering, streaming skala besar, analitik mobile, machine learning, dan sistem multi-agent end-to-end.",
-    usecases_count_pill: "5 Studi Kasus End-to-End",
+    usecases_count_pill: "6 Studi Kasus End-to-End",
     usecases_expand_all: "Buka Semua",
     usecases_collapse_all: "Tutup Semua",
     usecase_open_hint: "Klik judul kasus untuk melihat detail",
@@ -453,14 +453,328 @@ const translations = {
     usecase_hint_close: "Tutup",
     competency_divider_label: "Kompetensi Teknis & Tanggung Jawab Inti",
 
-    // Use Case 1: Retail DWH
+    // Use Case 1: Multifinance Payment & Financing Data Platform
+    usecase_mf_badge: "Real-Time Fraud Detection & Medallion DWH",
+    usecase_mf_title: "1. Multifinance: Payment & Financing Data Platform dengan Real-Time Fraud Detection",
+    usecase_mf_summary: "Platform data pembayaran & pembiayaan skala besar (1,6 jt transaksi/hari) di GCP dengan Dataflow streaming 12 sumber Pub/Sub, deteksi fraud real-time (<2s P95), rekonsiliasi bank otomatis (D+1), dan BigQuery Medallion DWH.",
+    usecase_mf_arch_title: "High-Level Architecture (Payment, Financing & Real-Time Fraud Platform)",
+    usecase_mf_details: `
+      <div class="flow-breakdown">
+        <div class="flow-meta-grid">
+          <div class="flow-meta-box">
+            <div class="flow-meta-label">Volume &amp; Skala</div>
+            <div class="flow-meta-value">1,6 Juta / Hari</div>
+            <div class="flow-meta-desc">Tumbuh ~8x dalam 18 bulan (dari 200K/hari)</div>
+          </div>
+          <div class="flow-meta-box">
+            <div class="flow-meta-label">Latensi Fraud Scoring</div>
+            <div class="flow-meta-value">&lt; 2 Detik (P95)</div>
+            <div class="flow-meta-desc">Fitur velocity real-time via Dataflow &amp; Pub/Sub</div>
+          </div>
+          <div class="flow-meta-box">
+            <div class="flow-meta-label">Rekonsiliasi Bank</div>
+            <div class="flow-meta-value">D+1 Pagi</div>
+            <div class="flow-meta-desc">Otomatisasi penuh dari sebelumnya D+3 manual</div>
+          </div>
+          <div class="flow-meta-box">
+            <div class="flow-meta-label">Efisiensi Biaya Cloud</div>
+            <div class="flow-meta-value">-25% s.d. 30%</div>
+            <div class="flow-meta-desc">Per juta transaksi (Dataflow &amp; BigQuery)</div>
+          </div>
+        </div>
+
+        <div class="flow-section">
+          <h4 class="flow-section-heading">1. Ringkasan &amp; Ruang Lingkup Proyek</h4>
+          <p class="flow-item" style="padding-left: 0; margin-bottom: 0.5rem;">
+            Arsitektur data end-to-end berskala besar yang menyerap transaksi pembayaran dan pembiayaan, event aplikasi, file settlement bank mitra, serta master data merchant/partner ke dalam <strong>BigQuery Medallion Data Warehouse</strong>—dilengkapi deteksi fraud near real-time, rekonsiliasi harian otomatis, observabilitas proaktif, dan penyajian BI tepercaya. <em>(Nama perusahaan dianonimkan menjadi "Multifinance"; angka bersifat ilustratif).</em>
+          </p>
+          <ul class="flow-list">
+            <li class="flow-item">
+              <strong>Komponen yang saya bangun:</strong>
+              <ul class="flow-sublist">
+                <li class="flow-subitem"><strong>Dataflow Streaming Ingestion &amp; Fraud Feature Layer:</strong> Ingesti dari 12 stream Pub/Sub, in-flight cleansing, stateful deduplication, late-event handling, pemuatan ke BigQuery Bronze via Storage Write API, dan komputasi fitur velocity real-time untuk layanan fraud scoring.</li>
+                <li class="flow-subitem"><strong>Transformasi Bronze ke Silver:</strong> Job Dataflow dan Dataproc Serverless (Spark) serta model Dataform yang diorkestrasi oleh Cloud Composer untuk pembersihan data, standardisasi tipe, dan persiapan analitik.</li>
+                <li class="flow-subitem"><strong>CDC Master Data &amp; Transaksi:</strong> Pipeline Google Cloud Datastream untuk menangkap perubahan data dari PostgreSQL ke BigQuery, termasuk SCD Type 2 untuk <code>dim_merchant</code>.</li>
+                <li class="flow-subitem"><strong>Rekonsiliasi Harian Otomatis:</strong> Cloud Composer dan Spark mencocokkan file settlement multi-format dari bank mitra terhadap <code>fact_transaction</code> serta menghasilkan laporan pengecualian.</li>
+                <li class="flow-subitem"><strong>Pipeline Observability:</strong> Monitoring dan alerting live di Cloud Monitoring dan Grafana untuk kesegaran data, late data, duplikasi, dan data loss di seluruh kanal pembayaran serta bank mitra.</li>
+              </ul>
+            </li>
+          </ul>
+          <div class="flow-table-responsive" style="margin-top: 0.75rem;">
+            <table class="flow-table">
+              <thead>
+                <tr>
+                  <th>Kondisi Awal</th>
+                  <th>Dampak Bisnis</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Volume transaksi tumbuh ~8x dalam 18 bulan (200K &rarr; 1,6M/hari)</td>
+                  <td>Pipeline lama tidak mampu melakukan scaling</td>
+                </tr>
+                <tr>
+                  <td>Laporan harian mengeksekusi query langsung ke database produksi</td>
+                  <td>Latensi pembayaran meningkat saat jam sibuk</td>
+                </tr>
+                <tr>
+                  <td>Rekonsiliasi semi-manual, selisih baru ditemukan pada D+2 hingga D+3</td>
+                  <td>Settlement tertunda dan muncul keluhan merchant/partner</td>
+                </tr>
+                <tr>
+                  <td>Aturan fraud statis diperiksa secara batch setiap beberapa jam</td>
+                  <td>Kerugian chargeback dan risiko reputasi</td>
+                </tr>
+                <tr>
+                  <td>Angka GMV berbeda-beda antar dashboard</td>
+                  <td>Tingkat kepercayaan terhadap data rendah</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="flow-section">
+          <h4 class="flow-section-heading">2. Alur Arsitektur End-to-End</h4>
+          <div class="flow-table-responsive">
+            <table class="flow-table">
+              <thead>
+                <tr>
+                  <th>Sumber Data</th>
+                  <th>Deskripsi</th>
+                  <th>Jalur Masuk ke GCP</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>PostgreSQL (OLTP)</strong></td>
+                  <td>Transaksi, merchant/partner, settlement</td>
+                  <td>CDC melalui Datastream langsung ke BigQuery dan Cloud Storage</td>
+                </tr>
+                <tr>
+                  <td><strong>MongoDB</strong></td>
+                  <td>Log event aplikasi dan hash device fingerprint</td>
+                  <td>Event publisher / change stream ke Pub/Sub</td>
+                </tr>
+                <tr>
+                  <td><strong>Bank Mitra (SFTP)</strong></td>
+                  <td>File settlement (CSV/TXT) dengan format berbeda per bank</td>
+                  <td>Cloud Composer SFTP Sensor, lalu ke Cloud Storage Bronze</td>
+                </tr>
+                <tr>
+                  <td><strong>Webhook Kanal Pembayaran</strong></td>
+                  <td>Notifikasi status dari kartu, virtual account, QRIS, dan e-wallet</td>
+                  <td>Webhook API (Cloud Run) ke Pub/Sub (<code>payment-webhook</code>)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <ul class="flow-list">
+            <li class="flow-item"><strong>1. Ingestion (Pub/Sub &amp; Datastream):</strong> Event aplikasi dan webhook mendarat di topik Pub/Sub. Datastream menangkap perubahan PostgreSQL via CDC. File bank mitra diambil oleh Cloud Composer.</li>
+            <li class="flow-item"><strong>2. Stream Processing (Dataflow):</strong> Membaca dari Pub/Sub, menyimpan raw record di Cloud Storage data lake, memuat layer BigQuery Bronze dengan in-flight cleansing &amp; deduplikasi, serta mempublikasikan fitur fraud real-time ke topik <code>fraud-features</code> untuk layanan scoring.</li>
+            <li class="flow-item"><strong>3. Data Jobs (Dataflow / Dataproc Serverless / Dataform):</strong> Transformasi Cleansing (Bronze ke Silver) dan Business Logic (Silver ke Gold), termasuk job rekonsiliasi harian.</li>
+            <li class="flow-item">
+              <strong>4. Medallion Layers (BigQuery):</strong>
+              <ul class="flow-sublist">
+                <li class="flow-subitem"><strong>Bronze:</strong> Event mentah persis seperti diterima dari seluruh sumber, termasuk penanda DELETE.</li>
+                <li class="flow-subitem"><strong>Silver:</strong> Data bersih, terdeduplikasi, bertipe data tepat, dan sudah dilakukan masking PII.</li>
+                <li class="flow-subitem"><strong>Gold:</strong> Data mart terkurasi (GMV, success rate per kanal, performa MDR, hasil rekonsiliasi, outcome fraud).</li>
+              </ul>
+            </li>
+            <li class="flow-item"><strong>5. Serving:</strong> Layer Gold menyuplai Looker / Looker Studio serta Vertex AI Feature Store untuk model fraud dan credit scoring merchant.</li>
+            <li class="flow-item"><strong>6. Governance &amp; Monitoring:</strong> Google Cloud Dataplex dan Data Catalog untuk tata kelola terpusat, lineage, dan kontrol akses; Cloud Monitoring, Cloud Logging, dan Grafana untuk kesehatan pipeline.</li>
+            <li class="flow-item"><strong>7. Delivery:</strong> Layer Gold menggerakkan dashboard eksekutif, laporan keuangan, tim risiko/fraud, serta aplikasi bisnis hilir.</li>
+          </ul>
+        </div>
+
+        <div class="flow-section">
+          <h4 class="flow-section-heading">3. Detail Implementasi Teknis</h4>
+          <p class="flow-item" style="padding-left: 0; margin-bottom: 0.5rem;">
+            <strong>3.1 Dataflow Streaming Pipeline (12 Sumber Data):</strong> Satu streaming job Dataflow terpadu menangani 12 sumber data (transaksi, refund, settlement, webhook per kanal, event perangkat), masing-masing dengan subscription Pub/Sub dan tabel BigQuery Bronze tersendiri berbasis loop konfigurasi.
+          </p>
+          <div class="flow-table-responsive">
+            <table class="flow-table">
+              <thead>
+                <tr>
+                  <th>Tahap</th>
+                  <th>Komponen</th>
+                  <th>Logika &amp; Fungsi Pemrosesan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>1. Read</strong></td>
+                  <td>Pub/Sub I/O</td>
+                  <td>Ingesti paralel dari subscription streaming.</td>
+                </tr>
+                <tr>
+                  <td><strong>2. CDC Prepare</strong></td>
+                  <td>JSON Parser &amp; Formatter</td>
+                  <td>Parsing payload, klasifikasi UPSERT/DELETE, menurunkan sequence number dari <code>event_time</code>, normalisasi <code>merchant_id</code> &amp; kode kanal, tagging sumber, dan ingestion timestamp.</td>
+                </tr>
+                <tr>
+                  <td><strong>3. Make Dedup Key</strong></td>
+                  <td>Key Extractor</td>
+                  <td>Membangun composite key dari <code>table_name + primary key + channel_reference</code> (selalu menyertakan <code>merchant_id</code>).</td>
+                </tr>
+                <tr>
+                  <td><strong>4. Stateful Dedup</strong></td>
+                  <td>Beam State &amp; Timer API</td>
+                  <td>Menyimpan sequence number tertinggi per key dan membuang record lama/duplikat; state kedaluwarsa otomatis setelah 7 hari inaktivitas.</td>
+                </tr>
+                <tr>
+                  <td><strong>5. Late Event Handling</strong></td>
+                  <td>Watermark &amp; Allowed Lateness</td>
+                  <td>Watermark berbasis event-time; event dalam jendela keterlambatan (mis. 10 menit) tetap diproses, selebihnya masuk side output <em>late events</em>.</td>
+                </tr>
+                <tr>
+                  <td><strong>6. Fix Types</strong></td>
+                  <td>Defensive Schema Mapper</td>
+                  <td>Casting ketat ke skema BigQuery, validasi nominal (mencegah crash dari nilai seperti <code>"N/A"</code>), penghapusan kolom audit redundan, dan log warning untuk nilai NULL.</td>
+                </tr>
+                <tr>
+                  <td><strong>7. Feature Compute</strong></td>
+                  <td>Windowed Aggregation</td>
+                  <td>Menghitung fitur velocity: transaksi per kartu (5 menit), velocity per perangkat, rasio gagal per merchant, dan anomali nominal terhadap baseline.</td>
+                </tr>
+                <tr>
+                  <td><strong>8. Write &amp; DLQ</strong></td>
+                  <td>Storage Write API &amp; Pub/Sub</td>
+                  <td>Penulisan streaming berkecepatan tinggi ke tabel Bronze, publikasi fitur ke <code>fraud-features</code>, serta Dead-Letter Queue ke <code>error_logs</code> tanpa menghentikan stream.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <ul class="flow-list">
+            <li class="flow-item">
+              <strong>Keputusan Desain Kunci Dataflow:</strong> Single multi-stream job (hemat biaya fixed worker 1x vs 12x), mode <em>exactly-once</em> dengan penulisan idempoten via Storage Write API, deduplikasi stateful terhadap pengiriman webhook berulang, autoscaling saat promo/tanggal gajian/jatuh tempo cicilan, preservasi histori DELETE &amp; refund, serta proteksi PII (tokenisasi kartu &amp; hashing device ID via Cloud DLP / Cloud KMS).
+            </li>
+            <li class="flow-item">
+              <strong>3.2 Pipeline Rekonsiliasi Harian (Cloud Composer + Dataproc Serverless Spark):</strong>
+              <ul class="flow-sublist">
+                <li class="flow-subitem"><strong>Fetch &amp; Parse:</strong> Cloud Composer SFTP Sensor mengunduh file bank ke Cloud Storage dengan retry/alerting keterlambatan, lalu diparsing oleh adapter khusus per bank (CSV, fixed-width, TXT) ke skema kanonik.</li>
+                <li class="flow-subitem"><strong>Normalize, Match &amp; Classify:</strong> Spark menstandardisasi zona waktu (UTC ke WIB), mata uang, dan referensi, mencocokkan <code>fact_transaction</code> berdasarkan <code>channel_reference</code>, nominal, dan tanggal, serta mengklasifikasikan status (<em>matched</em>, <em>amount mismatch</em>, <em>missing in bank</em>, <em>missing internal</em>, <em>duplicate</em>).</li>
+                <li class="flow-subitem"><strong>Publish:</strong> Menulis hasil ke <code>fact_reconciliation</code> yang dipartisi per tanggal settlement, lengkap dengan lineage dan laporan pengecualian bagi tim Finance.</li>
+              </ul>
+            </li>
+            <li class="flow-item">
+              <strong>3.3 Model Data Star Schema:</strong> Tabel fakta (<code>fact_transaction</code>, <code>fact_settlement</code>, <code>fact_reconciliation</code>, <code>fact_fraud_event</code>) dan dimensi (<code>dim_merchant</code> SCD Type 2 untuk tier/MDR/KYC, <code>dim_payment_channel</code>, <code>dim_date</code>, <code>dim_customer_device</code>, <code>dim_bank_partner</code>) yang dipartisi per tanggal transaksi dan di-cluster berdasarkan <code>merchant_id</code>.
+            </li>
+          </ul>
+        </div>
+
+        <div class="flow-section">
+          <h4 class="flow-section-heading">4. Lapisan Observabilitas &amp; Proactive Alerting</h4>
+          <div class="flow-table-responsive">
+            <table class="flow-table">
+              <thead>
+                <tr>
+                  <th>Pilar Monitor</th>
+                  <th>Pertanyaan yang Dijawab</th>
+                  <th>Metrik &amp; Visibilitas</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Data Transfer &amp; Freshness</strong></td>
+                  <td>Apakah setiap sumber aktif mengirim data?</td>
+                  <td>Status &amp; throughput per subscription, kanal, dan bank mitra; backlog Pub/Sub dan usia data terbaru di tiap layer.</td>
+                </tr>
+                <tr>
+                  <td><strong>Late Data</strong></td>
+                  <td>Tabel atau kanal mana yang terlambat?</td>
+                  <td>Selisih event time vs ingestion time di BigQuery serta jumlah record pada side output <em>late events</em>.</td>
+                </tr>
+                <tr>
+                  <td><strong>Duplicate Data</strong></td>
+                  <td>Apakah ada data masuk berulang?</td>
+                  <td>Jumlah duplikat per kanal dan tabel akibat retry webhook serta transport at-least-once.</td>
+                </tr>
+                <tr>
+                  <td><strong>Data Loss &amp; Integrity</strong></td>
+                  <td>Apakah ada data hilang di BigQuery?</td>
+                  <td>Rekonsiliasi jumlah &amp; total nominal DB sumber vs BigQuery, log dead-letter, serta metrik Beam.</td>
+                </tr>
+                <tr>
+                  <td><strong>Fraud Scoring Health</strong></td>
+                  <td>Apakah scoring tetap cepat?</td>
+                  <td>Latensi P50/P95/P99 dari kedatangan event hingga skor keluar, throughput fitur, dan error rate scoring.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <ul class="flow-list">
+            <li class="flow-item"><strong>Alerting &amp; Quality Gates:</strong> Notifikasi instan via Email, Slack, dan WhatsApp/PagerDuty saat anomali data loss, lonjakan duplikat, backlog tinggi, atau latensi fraud scoring P95 &gt; 2 detik. Layer Gold hanya dipublikasikan setelah lulus uji kualitas otomatis (Dataplex Data Quality / Dataform assertions / Great Expectations) dan dirangkum dalam laporan digest harian untuk tim Finance Ops, Risk &amp; Fraud, DevOps/SRE, serta Partnership Bank.</li>
+          </ul>
+        </div>
+
+        <div class="flow-section">
+          <h4 class="flow-section-heading">5. Masalah yang Diselesaikan &amp; Dampak Bisnis</h4>
+          <div class="flow-table-responsive">
+            <table class="flow-table">
+              <thead>
+                <tr>
+                  <th>Masalah</th>
+                  <th>Solusi</th>
+                  <th>Dampak Terukur</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Fraud terlambat terdeteksi</td>
+                  <td>Fitur velocity real-time di Dataflow dengan scoring via Pub/Sub</td>
+                  <td>Latensi scoring <strong>&lt; 2 detik (P95)</strong>, menggantikan batch multi-jam</td>
+                </tr>
+                <tr>
+                  <td>Rekonsiliasi lambat &amp; manual</td>
+                  <td>Cloud Composer + Spark + adapter bank + klasifikasi pengecualian</td>
+                  <td>Waktu rekonsiliasi turun dari <strong>D+3 menjadi D+1 pagi</strong></td>
+                </tr>
+                <tr>
+                  <td>Angka GMV berbeda antar dashboard</td>
+                  <td>Single Gold layer, SCD2, standardisasi zona waktu, pencatatan refund</td>
+                  <td>Satu sumber kebenaran; selisih 0,7% dilacak via lineage &amp; diperbaiki permanen</td>
+                </tr>
+                <tr>
+                  <td>Query analitik membebani DB produksi</td>
+                  <td>CDC via Datastream ke BigQuery warehouse terpisah</td>
+                  <td>Query analitik langsung ke DB produksi <strong>= 0</strong></td>
+                </tr>
+                <tr>
+                  <td>Biaya cloud tumbuh lebih cepat dari bisnis</td>
+                  <td>Partitioning/clustering BigQuery, autoscaling Dataflow, Spot/Flex VM, lifecycle GCS</td>
+                  <td>Biaya turun <strong>25–30% per juta transaksi</strong></td>
+                </tr>
+                <tr>
+                  <td>Query dashboard memakan waktu 40 menit</td>
+                  <td>Materialized views, clustering, dan pra-agregasi di layer Gold</td>
+                  <td>Dashboard utama termuat dalam <strong>&lt; 10 detik</strong></td>
+                </tr>
+                <tr>
+                  <td>Risiko audit &amp; kepatuhan</td>
+                  <td>Tokenisasi/masking PII (Cloud DLP), least-privilege IAM, Cloud Audit Logs</td>
+                  <td>Selaras dengan <strong>PCI DSS, OJK, Bank Indonesia, dan UU PDP</strong></td>
+                </tr>
+                <tr>
+                  <td>Kegagalan senyap (silent failures)</td>
+                  <td>Tabel dead-letter, metrik pipeline, dan rekonsiliasi jumlah record</td>
+                  <td><strong>Zero silent data loss</strong> dengan SLA reliabilitas &ge; 99,5%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    `,
+
+    // Use Case 2: Retail DWH
     usecase_retail_badge: "Real-Time Streaming & Medallion DWH",
-    usecase_retail_title: "1. Arsitektur Real-Time Data Analytics & Medallion Data Warehouse (Retail DWH)",
+    usecase_retail_title: "2. Arsitektur Real-Time Data Analytics & Medallion Data Warehouse (Retail DWH)",
     usecase_retail_summary: "Rancangan arsitektur streaming data 1.200 toko (100 GB/bulan, ~$300/bln) via Dataflow ke BigQuery Medallion Architecture dengan observabilitas Grafana.",
 
     // Use Case 2: Train Ticket Mobile App DWH (Firebase Analytics Phase 1, 2 & 3)
     usecase_fb_badge: "Firebase Analytics & Medallion DWH",
-    usecase_fb_title: "2. Mobile App Analytics Data Warehouse (Train Ticket Booking) — Firebase Analytics (Phase 1, 2 & 3)",
+    usecase_fb_title: "3. Mobile App Analytics Data Warehouse (Train Ticket Booking) — Firebase Analytics (Phase 1, 2 & 3)",
     usecase_fb_summary: "BigQuery Data Warehouse (~100 GB/hari) berbasis Medallion Architecture & Star Schema untuk aplikasi pemesanan tiket kereta (10M+ unduhan), mengintegrasikan analitik mobile Firebase (Fase 1 & 2) serta data store (Fase 3) ke Looker Studio.",
     usecase_fb_details: `
       <div class="flow-breakdown">
@@ -674,7 +988,7 @@ const translations = {
 
     // Use Case 3: Predictive Maintenance Spare Part Motor
     usecase_pm_badge: "On-Premise ML · Python",
-    usecase_pm_title: "3. Machine Learning: Predictive Maintenance Spare Part Motor",
+    usecase_pm_title: "4. Machine Learning: Predictive Maintenance Spare Part Motor",
     usecase_pm_summary: "Memprediksi kebutuhan penggantian spare part dan oli motor menggunakan data yang diekstraksi dari foto odometer dan plat nomor via pipeline Python on-premise.",
     usecase_pm_meta1_label: "Target Objek",
     usecase_pm_meta1_val: "1.200 Toko & Bengkel",
@@ -691,7 +1005,7 @@ const translations = {
 
     // Use Case 4: Generative AI & Distributed Multi-Agent Architecture
     usecase_genai_badge: "Enterprise AI & RAG Architecture",
-    usecase_genai_title: "4. Generative AI & Distributed Multi-Agent Architecture (Gemini Enterprise)",
+    usecase_genai_title: "5. Generative AI & Distributed Multi-Agent Architecture (Gemini Enterprise)",
     usecase_genai_summary: "Arsitektur AI otonom terdistribusi di GCP yang menggabungkan analitik BigQuery, Vertex AI Search RAG, konektor SharePoint/OneDrive, dan multimodal Gemini/Imagen.",
     usecase_genai_meta1_label: "Domain Solusi",
     usecase_genai_meta1_val: "Marketing AI Otonom",
@@ -708,7 +1022,7 @@ const translations = {
 
     // Use Case 5: Data Lineage Transaksi Toko
     usecase_lineage_badge: "Data Lineage & CDC Ingestion",
-    usecase_lineage_title: "5. Data Lineage Transaksi Toko: RekapTransaksiTokoDetail",
+    usecase_lineage_title: "6. Data Lineage Transaksi Toko: RekapTransaksiTokoDetail",
     usecase_lineage_summary: "Silsilah alur data terperinci dari level trigger basis data SQL Express di gerai toko lokal via Pub/Sub dan BigQuery Direct Subscription ke tabel analitik produksi.",
     usecase_lineage_meta1_label: "Titik Asal (Origin)",
     usecase_lineage_meta1_val: "1.200 Toko Retail",
@@ -958,7 +1272,7 @@ const translations = {
 
     // Diagram 2: Retail DWH Real-Time Analytics
     smartnet_diag2_badge: "Real-Time Streaming & Medallion DWH",
-    smartnet_diag2_title: "1. Architecture: Real-Time Data Analytics & Medallion Data Warehouse (Retail DWH)",
+    smartnet_diag2_title: "2. Architecture: Real-Time Data Analytics & Medallion Data Warehouse (Retail DWH)",
     smartnet_diag2_arch_title: "High-Level Architecture (Real-Time Streaming & Medallion DWH)",
     smartnet_diag2_desc: "End-to-end large-scale streaming data architecture ingesting from 1,200 retail store databases (DB Express) and branch systems (DB Standard) into a BigQuery Medallion Architecture with live Grafana monitoring.",
     smartnet_diag2_details: `
@@ -1231,7 +1545,7 @@ const translations = {
     // Use Case Accordion Controls
     usecases_section_title: "Key Case Studies & System Architectures",
     usecases_section_desc: "End-to-end data engineering architectures, high-scale streaming, mobile analytics, machine learning, and multi-agent systems.",
-    usecases_count_pill: "5 End-to-End Case Studies",
+    usecases_count_pill: "6 End-to-End Case Studies",
     usecases_expand_all: "Expand All",
     usecases_collapse_all: "Collapse All",
     usecase_open_hint: "Click any case title to view details",
@@ -1239,14 +1553,328 @@ const translations = {
     usecase_hint_close: "Close",
     competency_divider_label: "Core Engineering Competencies & Responsibilities",
 
-    // Use Case 1: Retail DWH
+    // Use Case 1: Multifinance Payment & Financing Data Platform
+    usecase_mf_badge: "Real-Time Fraud Detection & Medallion DWH",
+    usecase_mf_title: "1. Multifinance: Payment & Financing Data Platform with Real-Time Fraud Detection",
+    usecase_mf_summary: "Large-scale payment & financing data platform (1.6M tx/day) on GCP featuring a 12-stream Dataflow pipeline, real-time fraud scoring (<2s P95), automated bank reconciliation (D+1), and BigQuery Medallion DWH.",
+    usecase_mf_arch_title: "High-Level Architecture (Payment, Financing & Real-Time Fraud Platform)",
+    usecase_mf_details: `
+      <div class="flow-breakdown">
+        <div class="flow-meta-grid">
+          <div class="flow-meta-box">
+            <div class="flow-meta-label">Volume &amp; Scale</div>
+            <div class="flow-meta-value">1.6M Tx / Day</div>
+            <div class="flow-meta-desc">Grew ~8x in 18 months (from 200K/day)</div>
+          </div>
+          <div class="flow-meta-box">
+            <div class="flow-meta-label">Fraud Scoring Latency</div>
+            <div class="flow-meta-value">&lt; 2 Seconds (P95)</div>
+            <div class="flow-meta-desc">Real-time velocity features via Dataflow &amp; Pub/Sub</div>
+          </div>
+          <div class="flow-meta-box">
+            <div class="flow-meta-label">Bank Reconciliation</div>
+            <div class="flow-meta-value">D+1 Morning</div>
+            <div class="flow-meta-desc">Fully automated from D+3 manual process</div>
+          </div>
+          <div class="flow-meta-box">
+            <div class="flow-meta-label">Cloud Cost Efficiency</div>
+            <div class="flow-meta-value">-25% to 30%</div>
+            <div class="flow-meta-desc">Per million transactions (Dataflow &amp; BigQuery)</div>
+          </div>
+        </div>
+
+        <div class="flow-section">
+          <h4 class="flow-section-heading">1. Overview &amp; Project Scope</h4>
+          <p class="flow-item" style="padding-left: 0; margin-bottom: 0.5rem;">
+            An end-to-end, large-scale data architecture that ingests payment and financing transactions, application events, partner bank settlement files, and merchant/partner master data into a <strong>BigQuery Medallion Data Warehouse</strong>—equipped with near real-time fraud detection, automated daily reconciliation, proactive observability, and trusted BI delivery. <em>(Company name anonymized as "Multifinance"; figures are illustrative).</em>
+          </p>
+          <ul class="flow-list">
+            <li class="flow-item">
+              <strong>What I built:</strong>
+              <ul class="flow-sublist">
+                <li class="flow-subitem"><strong>Dataflow Streaming Ingestion &amp; Fraud Feature Layer:</strong> Ingestion from 12 Pub/Sub streams, in-flight cleansing, stateful deduplication, late-event handling, loading into BigQuery Bronze via Storage Write API, and real-time velocity feature computation for the fraud scoring service.</li>
+                <li class="flow-subitem"><strong>Bronze-to-Silver Transformation:</strong> Dataflow and Dataproc Serverless (Spark) jobs plus Dataform models, orchestrated by Cloud Composer, for data cleansing, type standardization, and preparation.</li>
+                <li class="flow-subitem"><strong>Master Data &amp; Transaction CDC:</strong> Google Cloud Datastream pipeline capturing change data from PostgreSQL into BigQuery, including SCD Type 2 for <code>dim_merchant</code>.</li>
+                <li class="flow-subitem"><strong>Automated Daily Reconciliation:</strong> Cloud Composer and Spark match multi-format partner bank settlement files against <code>fact_transaction</code> and produce exception reports.</li>
+                <li class="flow-subitem"><strong>Pipeline Observability:</strong> Live monitoring and alerting in Cloud Monitoring and Grafana for data freshness, late data, duplicates, and data loss across all payment channels and partner banks.</li>
+              </ul>
+            </li>
+          </ul>
+          <div class="flow-table-responsive" style="margin-top: 0.75rem;">
+            <table class="flow-table">
+              <thead>
+                <tr>
+                  <th>Starting Condition</th>
+                  <th>Impact</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Volume grew ~8x in 18 months (200K &rarr; 1.6M transactions/day)</td>
+                  <td>Legacy pipelines could not scale</td>
+                </tr>
+                <tr>
+                  <td>Daily reports queried the production database directly</td>
+                  <td>Payment latency increased during peak hours</td>
+                </tr>
+                <tr>
+                  <td>Semi-manual reconciliation, discrepancies found at D+2 to D+3</td>
+                  <td>Delayed settlements, merchant/partner complaints</td>
+                </tr>
+                <tr>
+                  <td>Static fraud rules checked in batches every few hours</td>
+                  <td>Chargeback losses and reputational damage</td>
+                </tr>
+                <tr>
+                  <td>GMV figures differed across dashboards</td>
+                  <td>Low trust in data</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="flow-section">
+          <h4 class="flow-section-heading">2. End-to-End High-Level Architecture Flow</h4>
+          <div class="flow-table-responsive">
+            <table class="flow-table">
+              <thead>
+                <tr>
+                  <th>Source</th>
+                  <th>Description</th>
+                  <th>Path into GCP</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>PostgreSQL (OLTP)</strong></td>
+                  <td>Transactions, merchants/partners, settlements</td>
+                  <td>CDC through Datastream directly into BigQuery and Cloud Storage</td>
+                </tr>
+                <tr>
+                  <td><strong>MongoDB</strong></td>
+                  <td>Application event logs and hashed device fingerprints</td>
+                  <td>Event publisher / change stream to Pub/Sub</td>
+                </tr>
+                <tr>
+                  <td><strong>Partner Banks (SFTP)</strong></td>
+                  <td>Settlement files (CSV/TXT) in a different format per bank</td>
+                  <td>Cloud Composer SFTP Sensor, then Cloud Storage Bronze</td>
+                </tr>
+                <tr>
+                  <td><strong>Payment Channel Webhooks</strong></td>
+                  <td>Status notifications from cards, virtual accounts, QRIS, and e-wallets</td>
+                  <td>Webhook API (Cloud Run) to Pub/Sub (<code>payment-webhook</code>)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <ul class="flow-list">
+            <li class="flow-item"><strong>1. Ingestion (Pub/Sub &amp; Datastream):</strong> Application events and webhooks land in Pub/Sub topics. Datastream captures PostgreSQL changes via CDC. Partner bank files are fetched by Cloud Composer.</li>
+            <li class="flow-item"><strong>2. Stream Processing (Dataflow):</strong> Reads from Pub/Sub, lands raw records in the Cloud Storage data lake, loads the BigQuery Bronze layer with in-flight cleansing and deduplication, and computes real-time fraud features published to the <code>fraud-features</code> topic for the scoring service.</li>
+            <li class="flow-item"><strong>3. Data Jobs (Dataflow / Dataproc Serverless / Dataform):</strong> Transformation Cleansing (Bronze to Silver) and Business Logic Transformation (Silver to Gold), including reconciliation jobs.</li>
+            <li class="flow-item">
+              <strong>4. Medallion Layers (BigQuery):</strong>
+              <ul class="flow-sublist">
+                <li class="flow-subitem"><strong>Bronze:</strong> Raw events exactly as received from all sources, including DELETE markers.</li>
+                <li class="flow-subitem"><strong>Silver:</strong> Cleansed, deduplicated, correctly typed, and PII-masked data.</li>
+                <li class="flow-subitem"><strong>Gold:</strong> Curated data marts (GMV, success rate per channel, MDR performance, reconciliation results, fraud outcomes).</li>
+              </ul>
+            </li>
+            <li class="flow-item"><strong>5. Serving:</strong> Gold feeds Looker / Looker Studio, and Vertex AI Feature Store for fraud and merchant credit scoring models.</li>
+            <li class="flow-item"><strong>6. Governance &amp; Monitoring:</strong> Google Cloud Dataplex and Data Catalog for centralized governance, lineage, and access control; Cloud Monitoring, Cloud Logging, and Grafana for pipeline health.</li>
+            <li class="flow-item"><strong>7. Delivery:</strong> Gold powers executive dashboards, finance reports, the risk/fraud team, and downstream business applications.</li>
+          </ul>
+        </div>
+
+        <div class="flow-section">
+          <h4 class="flow-section-heading">3. Detailed Implementation</h4>
+          <p class="flow-item" style="padding-left: 0; margin-bottom: 0.5rem;">
+            <strong>3.1 Dataflow Streaming Pipeline (12 Sources):</strong> A single consolidated streaming Dataflow job handles 12 data sources (transactions, refunds, settlement events, per-channel webhooks, device events), each with its own Pub/Sub subscription and BigQuery Bronze table in a config-driven loop structure.
+          </p>
+          <div class="flow-table-responsive">
+            <table class="flow-table">
+              <thead>
+                <tr>
+                  <th>Step</th>
+                  <th>Component</th>
+                  <th>Processing Logic &amp; Function</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>1. Read</strong></td>
+                  <td>Pub/Sub I/O</td>
+                  <td>Parallel ingestion from streaming subscriptions.</td>
+                </tr>
+                <tr>
+                  <td><strong>2. CDC Prepare</strong></td>
+                  <td>JSON Parser &amp; Formatter</td>
+                  <td>Parses payloads, classifies UPSERT/DELETE, derives sequence number from <code>event_time</code>, normalizes <code>merchant_id</code> &amp; channel codes, tags source, and appends ingestion timestamp.</td>
+                </tr>
+                <tr>
+                  <td><strong>3. Make Dedup Key</strong></td>
+                  <td>Key Extractor</td>
+                  <td>Builds composite key from <code>table_name + primary key + channel_reference</code> (always including <code>merchant_id</code>).</td>
+                </tr>
+                <tr>
+                  <td><strong>4. Stateful Dedup</strong></td>
+                  <td>Beam State &amp; Timer API</td>
+                  <td>Retains highest sequence number per key and drops older/duplicate records; state expires after 7 days of inactivity.</td>
+                </tr>
+                <tr>
+                  <td><strong>5. Late Event Handling</strong></td>
+                  <td>Watermark &amp; Allowed Lateness</td>
+                  <td>Event-time watermarks; events within allowed lateness (e.g. 10 min) are processed, others go to a <em>late events</em> side output.</td>
+                </tr>
+                <tr>
+                  <td><strong>6. Fix Types</strong></td>
+                  <td>Defensive Schema Mapper</td>
+                  <td>Strict BigQuery schema casting, amount validation (preventing crashes from <code>"N/A"</code>), redundant audit column removal, and logged warnings for NULLs.</td>
+                </tr>
+                <tr>
+                  <td><strong>7. Feature Compute</strong></td>
+                  <td>Windowed Aggregation</td>
+                  <td>Computes velocity features: transactions per card (5 min), velocity per device, failure ratio per merchant, and amount anomalies against baseline.</td>
+                </tr>
+                <tr>
+                  <td><strong>8. Write &amp; DLQ</strong></td>
+                  <td>Storage Write API &amp; Pub/Sub</td>
+                  <td>High-performance streaming writes into Bronze tables, features published to <code>fraud-features</code>, and Dead-Letter Queue to <code>error_logs</code> without halting the stream.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <ul class="flow-list">
+            <li class="flow-item">
+              <strong>Key Design Decisions:</strong> Single multi-stream job (1x vs 12x fixed overhead), exactly-once processing with idempotent Storage Write API writes, stateful sequence-based deduplication for webhook retries, autoscaling under promotional/payday spikes, preserved DELETE/refund audit trail, and PII protection by design (card tokenization &amp; device hashing via Cloud DLP / Cloud KMS).
+            </li>
+            <li class="flow-item">
+              <strong>3.2 Reconciliation Pipeline (Cloud Composer + Dataproc Serverless Spark):</strong>
+              <ul class="flow-sublist">
+                <li class="flow-subitem"><strong>Fetch &amp; Parse:</strong> Cloud Composer SFTP Sensor downloads each partner bank's file to Cloud Storage with retry/late alerts, parsed by per-bank adapters (CSV, fixed-width, TXT) to a canonical schema.</li>
+                <li class="flow-subitem"><strong>Normalize, Match &amp; Classify:</strong> Spark standardizes time zones (UTC to WIB), currencies, and references, matches <code>fact_transaction</code> on <code>channel_reference</code>, amount, and date, and flags records (<em>matched</em>, <em>amount mismatch</em>, <em>missing in bank</em>, <em>missing internal</em>, <em>duplicate</em>).</li>
+                <li class="flow-subitem"><strong>Publish:</strong> Writes results to <code>fact_reconciliation</code> partitioned by settlement date with full lineage and finance exception reports.</li>
+              </ul>
+            </li>
+            <li class="flow-item">
+              <strong>3.3 Star Schema Data Model:</strong> Fact tables (<code>fact_transaction</code>, <code>fact_settlement</code>, <code>fact_reconciliation</code>, <code>fact_fraud_event</code>) and dimensions (<code>dim_merchant</code> SCD Type 2 for tier/MDR/KYC, <code>dim_payment_channel</code>, <code>dim_date</code>, <code>dim_customer_device</code>, <code>dim_bank_partner</code>) partitioned by transaction date and clustered by <code>merchant_id</code>.
+            </li>
+          </ul>
+        </div>
+
+        <div class="flow-section">
+          <h4 class="flow-section-heading">4. Observability &amp; Proactive Alerting Layer</h4>
+          <div class="flow-table-responsive">
+            <table class="flow-table">
+              <thead>
+                <tr>
+                  <th>Monitor Pillar</th>
+                  <th>Question Answered</th>
+                  <th>Metrics &amp; Visibility</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Data Transfer &amp; Freshness</strong></td>
+                  <td>Is every source actively sending data?</td>
+                  <td>Throughput per subscription, channel, and partner bank; Pub/Sub backlog and latest data age at each layer.</td>
+                </tr>
+                <tr>
+                  <td><strong>Late Data</strong></td>
+                  <td>Which tables or channels are arriving late?</td>
+                  <td>Delta between event time and ingestion time in BigQuery, plus counts from the <em>late events</em> side output.</td>
+                </tr>
+                <tr>
+                  <td><strong>Duplicate Data</strong></td>
+                  <td>Is any data arriving redundantly?</td>
+                  <td>Duplicate counts per channel and table from webhook retries and at-least-once transport.</td>
+                </tr>
+                <tr>
+                  <td><strong>Data Loss &amp; Integrity</strong></td>
+                  <td>Is anything missing from BigQuery?</td>
+                  <td>Reconciles source DB counts &amp; amounts against BigQuery, plus dead-letter logs and Beam metrics.</td>
+                </tr>
+                <tr>
+                  <td><strong>Fraud Scoring Health</strong></td>
+                  <td>Is scoring staying fast?</td>
+                  <td>P50/P95/P99 latency from event arrival to score output, feature throughput, and scoring error rate.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <ul class="flow-list">
+            <li class="flow-item"><strong>Alerting &amp; Quality Gates:</strong> Instant alerts via Email, Slack, and WhatsApp/PagerDuty on data loss anomalies, duplicate spikes, high Pub/Sub backlog, or fraud scoring P95 latency &gt; 2s. Gold is published only after automated quality checks pass (Dataplex Data Quality / Dataform assertions / Great Expectations) with daily digest reports for Finance Ops, Risk &amp; Fraud, DevOps/SRE, and Bank Partnerships.</li>
+          </ul>
+        </div>
+
+        <div class="flow-section">
+          <h4 class="flow-section-heading">5. Problems Solved &amp; Business Impact</h4>
+          <div class="flow-table-responsive">
+            <table class="flow-table">
+              <thead>
+                <tr>
+                  <th>Problem</th>
+                  <th>Solution</th>
+                  <th>Impact</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Fraud detected too late</td>
+                  <td>Real-time velocity features in Dataflow with scoring via Pub/Sub</td>
+                  <td>Scoring latency <strong>&lt; 2 seconds (P95)</strong>, replacing multi-hour batches</td>
+                </tr>
+                <tr>
+                  <td>Slow, manual reconciliation</td>
+                  <td>Cloud Composer + Spark + bank adapters + exception classifier</td>
+                  <td>Reconciliation time reduced from <strong>D+3 to D+1 morning</strong></td>
+                </tr>
+                <tr>
+                  <td>GMV differing across dashboards</td>
+                  <td>Single Gold layer, SCD2, time zone standardization, refunds captured</td>
+                  <td>One source of truth; 0.7% discrepancy traced via lineage and fixed</td>
+                </tr>
+                <tr>
+                  <td>Analytical queries loading production DB</td>
+                  <td>CDC via Datastream into a separate BigQuery warehouse</td>
+                  <td>Direct analytical queries on production DB <strong>= 0</strong></td>
+                </tr>
+                <tr>
+                  <td>Cloud costs growing faster than business</td>
+                  <td>BigQuery partitioning/clustering, Dataflow autoscaling, Spot/Flex VMs, GCS lifecycle</td>
+                  <td>Cost reduced by <strong>25–30% per million transactions</strong></td>
+                </tr>
+                <tr>
+                  <td>40-minute dashboard queries</td>
+                  <td>Materialized views, clustering, and pre-aggregation in Gold</td>
+                  <td>Main dashboard loads in <strong>&lt; 10 seconds</strong></td>
+                </tr>
+                <tr>
+                  <td>Audit and compliance risk</td>
+                  <td>PII tokenization/masking (Cloud DLP), least-privilege IAM, Cloud Audit Logs</td>
+                  <td>Aligned with <strong>PCI DSS, OJK, Bank Indonesia, and Indonesia's PDP Law</strong></td>
+                </tr>
+                <tr>
+                  <td>Silent failures</td>
+                  <td>Dead-letter table, pipeline metrics, count reconciliation</td>
+                  <td><strong>Zero silent data loss</strong> with &ge; 99.5% on-time SLA</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    `,
+
+    // Use Case 2: Retail DWH
     usecase_retail_badge: "Real-Time Streaming & Medallion DWH",
-    usecase_retail_title: "1. Real-Time Data Analytics & Medallion Data Warehouse Architecture (Retail DWH)",
+    usecase_retail_title: "2. Real-Time Data Analytics & Medallion Data Warehouse Architecture (Retail DWH)",
     usecase_retail_summary: "High-scale streaming architecture ingesting 1,200 store databases (~100 GB/month, ~$300/mo) via Dataflow into BigQuery Medallion Architecture with Grafana observability.",
 
     // Use Case 2: Train Ticket Mobile App DWH (Firebase Analytics Phase 1, 2 & 3)
     usecase_fb_badge: "Firebase Analytics & Medallion DWH",
-    usecase_fb_title: "2. Mobile App Analytics Data Warehouse (Train Ticket Booking) — Firebase Analytics (Phase 1, 2 & 3)",
+    usecase_fb_title: "3. Mobile App Analytics Data Warehouse (Train Ticket Booking) — Firebase Analytics (Phase 1, 2 & 3)",
     usecase_fb_summary: "BigQuery Data Warehouse (~100 GB/day) utilizing Medallion Architecture & Star Schema for an Indonesian train ticket booking app (10M+ downloads), unifying Firebase mobile analytics (Phase 1 & 2) and store-level data (Phase 3) into Looker Studio.",
     usecase_fb_details: `
       <div class="flow-breakdown">
@@ -1460,7 +2088,7 @@ const translations = {
 
     // Use Case 3: Predictive Maintenance Spare Part Motor
     usecase_pm_badge: "On-Premise ML · Python",
-    usecase_pm_title: "3. Machine Learning: Motorcycle Spare Part Predictive Maintenance",
+    usecase_pm_title: "4. Machine Learning: Motorcycle Spare Part Predictive Maintenance",
     usecase_pm_summary: "Predicting spare part replacements and oil changes using computer vision OCR on odometer and license plate photos combined with historical service records.",
     usecase_pm_meta1_label: "Target Scope",
     usecase_pm_meta1_val: "1,200 Stores & Garages",
@@ -1477,7 +2105,7 @@ const translations = {
 
     // Use Case 4: Generative AI & Distributed Multi-Agent Architecture
     usecase_genai_badge: "Enterprise AI & RAG Architecture",
-    usecase_genai_title: "4. Generative AI & Distributed Multi-Agent Architecture (Gemini Enterprise)",
+    usecase_genai_title: "5. Generative AI & Distributed Multi-Agent Architecture (Gemini Enterprise)",
     usecase_genai_summary: "Autonomous distributed AI architecture on GCP aggregating BigQuery analytics, Vertex AI Search RAG, SharePoint/OneDrive connectors, and multimodal Gemini/Imagen.",
     usecase_genai_meta1_label: "Solution Domain",
     usecase_genai_meta1_val: "Autonomous Marketing AI",
@@ -1494,7 +2122,7 @@ const translations = {
 
     // Use Case 5: Data Lineage Transaksi Toko
     usecase_lineage_badge: "Data Lineage & CDC Ingestion",
-    usecase_lineage_title: "5. Store Transaction Data Lineage: RekapTransaksiTokoDetail",
+    usecase_lineage_title: "6. Store Transaction Data Lineage: RekapTransaksiTokoDetail",
     usecase_lineage_summary: "Detailed data lineage from local store SQL Express triggers through Pub/Sub and BigQuery Direct Subscription to production analytical views.",
     usecase_lineage_meta1_label: "Origin Point",
     usecase_lineage_meta1_val: "1,200 Retail Stores",
