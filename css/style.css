@@ -1123,9 +1123,27 @@ a.contact-val:hover,
 
 .usecase-badge-row {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 0.15rem;
+  margin-bottom: 0.25rem;
+}
+
+.usecase-badge-row .stat-pill {
+  margin-bottom: 0;
+}
+
+.industry-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.18rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background-color: var(--accent-light);
+  color: var(--accent);
+  border: 1px solid rgba(30, 95, 90, 0.2);
 }
 
 .usecase-accordion-title {

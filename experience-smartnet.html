@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/style.css?v=20261126_v1">
+  <link rel="stylesheet" href="css/style.css?v=20261126_v2">
 </head>
 <body>
 
@@ -66,7 +66,7 @@
         <!-- Accordion Controls Toolbar -->
         <div class="usecase-accordion-toolbar">
           <div class="usecase-count-info">
-            <span class="usecase-count-pill" data-i18n="usecases_count_pill">6 Studi Kasus End-to-End</span>
+            <span class="usecase-count-pill" data-i18n="usecases_count_pill">5 Studi Kasus End-to-End</span>
             <span data-i18n="usecase_open_hint">Klik judul kasus untuk melihat detail</span>
           </div>
           <div class="usecase-toolbar-actions">
@@ -88,6 +88,7 @@
             <button type="button" class="usecase-accordion-header" id="header-case-multifinance" aria-expanded="true" aria-controls="body-case-multifinance">
               <div class="usecase-header-left">
                 <div class="usecase-badge-row">
+                  <span class="industry-pill" data-i18n="industry_multifinance">Multifinance</span>
                   <span class="stat-pill" data-i18n="usecase_mf_badge">Real-Time Fraud Detection &amp; Medallion DWH</span>
                 </div>
                 <h3 class="usecase-accordion-title" data-i18n="usecase_mf_title">1. Multifinance: Payment &amp; Financing Data Platform dengan Real-Time Fraud Detection</h3>
@@ -443,6 +444,7 @@
             <button type="button" class="usecase-accordion-header" id="header-case-retail" aria-expanded="false" aria-controls="body-case-retail">
               <div class="usecase-header-left">
                 <div class="usecase-badge-row">
+                  <span class="industry-pill" data-i18n="industry_retail">Retail</span>
                   <span class="stat-pill" data-i18n="usecase_retail_badge">Real-Time Streaming &amp; Medallion DWH</span>
                 </div>
                 <h3 class="usecase-accordion-title" data-i18n="usecase_retail_title">2. Arsitektur Real-Time Data Analytics &amp; Medallion Data Warehouse (Retail DWH)</h3>
@@ -733,6 +735,7 @@
             <button type="button" class="usecase-accordion-header" id="header-case-firebase" aria-expanded="false" aria-controls="body-case-firebase">
               <div class="usecase-header-left">
                 <div class="usecase-badge-row">
+                  <span class="industry-pill" data-i18n="industry_transportation">Transportation</span>
                   <span class="stat-pill" data-i18n="usecase_fb_badge">Firebase Analytics &amp; Medallion DWH</span>
                 </div>
                 <h3 class="usecase-accordion-title" data-i18n="usecase_fb_title">3. Mobile App Analytics Data Warehouse (Train Ticket Booking) — Firebase Analytics (Phase 1, 2 &amp; 3)</h3>
@@ -964,6 +967,7 @@
             <button type="button" class="usecase-accordion-header" id="header-case-pm" aria-expanded="false" aria-controls="body-case-pm">
               <div class="usecase-header-left">
                 <div class="usecase-badge-row">
+                  <span class="industry-pill" data-i18n="industry_retail">Retail</span>
                   <span class="stat-pill" data-i18n="usecase_pm_badge">On-Premise ML · Python</span>
                 </div>
                 <h3 class="usecase-accordion-title" data-i18n="usecase_pm_title">4. Machine Learning: Predictive Maintenance Spare Part Motor</h3>
@@ -1091,6 +1095,7 @@
             <button type="button" class="usecase-accordion-header" id="header-case-genai" aria-expanded="false" aria-controls="body-case-genai">
               <div class="usecase-header-left">
                 <div class="usecase-badge-row">
+                  <span class="industry-pill" data-i18n="industry_marketing">Marketing</span>
                   <span class="stat-pill" data-i18n="usecase_genai_badge">Enterprise AI &amp; RAG Architecture</span>
                 </div>
                 <h3 class="usecase-accordion-title" data-i18n="usecase_genai_title">5. Generative AI &amp; Distributed Multi-Agent Architecture (Gemini Enterprise)</h3>
@@ -1213,233 +1218,6 @@
             </div>
           </div>
 
-          <!-- Case Study 5: Data Lineage Transaksi Toko -->
-          <div class="usecase-accordion-item" id="retail-data-lineage">
-            <button type="button" class="usecase-accordion-header" id="header-case-lineage" aria-expanded="false" aria-controls="body-case-lineage">
-              <div class="usecase-header-left">
-                <div class="usecase-badge-row">
-                  <span class="stat-pill" data-i18n="usecase_lineage_badge">Data Lineage &amp; CDC Ingestion</span>
-                </div>
-                <h3 class="usecase-accordion-title" data-i18n="usecase_lineage_title">6. Data Lineage Transaksi Toko: RekapTransaksiTokoDetail</h3>
-                <p class="usecase-accordion-summary" data-i18n="usecase_lineage_summary">Silsilah alur data terperinci dari level trigger basis data SQL Express di gerai toko lokal via Pub/Sub dan BigQuery Direct Subscription ke tabel analitik produksi.</p>
-              </div>
-              <div class="usecase-header-right">
-                <span class="usecase-status-hint">Lihat Detail</span>
-                <span class="usecase-chevron">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </span>
-              </div>
-            </button>
-
-            <div class="usecase-accordion-body" id="body-case-lineage" role="region" aria-labelledby="header-case-lineage">
-              <div class="usecase-accordion-body-inner">
-                <!-- Overview Meta Grid -->
-                <div class="flow-meta-grid" style="margin-top: 0.75rem;">
-                  <div class="flow-meta-box">
-                    <div class="flow-meta-label" data-i18n="usecase_lineage_meta1_label">Titik Asal (Origin)</div>
-                    <div class="flow-meta-value" data-i18n="usecase_lineage_meta1_val">1.200 Toko Retail</div>
-                    <div class="flow-meta-desc" data-i18n="usecase_lineage_meta1_desc">Basis data SQL Server Express POS</div>
-                  </div>
-                  <div class="flow-meta-box">
-                    <div class="flow-meta-label" data-i18n="usecase_lineage_meta2_label">Mekanisme CDC</div>
-                    <div class="flow-meta-value" data-i18n="usecase_lineage_meta2_val">DB Triggers &amp; Audit</div>
-                    <div class="flow-meta-desc" data-i18n="usecase_lineage_meta2_desc">Pencatatan mutasi transaksi otomatis</div>
-                  </div>
-                  <div class="flow-meta-box">
-                    <div class="flow-meta-label" data-i18n="usecase_lineage_meta3_label">Transport Layer</div>
-                    <div class="flow-meta-value" data-i18n="usecase_lineage_meta3_val">GCP Pub/Sub Streaming</div>
-                    <div class="flow-meta-desc" data-i18n="usecase_lineage_meta3_desc">Pengiriman streaming tanpa delay batch</div>
-                  </div>
-                  <div class="flow-meta-box">
-                    <div class="flow-meta-label" data-i18n="usecase_lineage_meta4_label">Target BigQuery</div>
-                    <div class="flow-meta-value" data-i18n="usecase_lineage_meta4_val">Direct Sub &amp; Views</div>
-                    <div class="flow-meta-desc" data-i18n="usecase_lineage_meta4_desc">Tabel analitik produksi terverifikasi</div>
-                  </div>
-                </div>
-
-                <!-- Architecture Diagram 3: Data Lineage RekapTransaksiTokoDetail -->
-                <div class="architecture-card" style="margin-top: 0.75rem;">
-                  <div class="architecture-card-header">
-                    <h4 class="architecture-card-title"><span data-i18n="smartnet_diag3_title">Data Lineage Transaksi Toko: RekapTransaksiTokoDetail</span></h4>
-                  </div>
-
-                  <div class="diagram-preview-box" data-lightbox-src="assets/retail-dwh-analytics-data-lineage.png" data-lightbox-caption-key="smartnet_diag3_title" role="button" tabindex="0" aria-label="Perbesar diagram Data Lineage">
-                    <img src="assets/retail-dwh-analytics-data-lineage.png" alt="Data Lineage RekapTransaksiTokoDetail" class="diagram-preview-img" loading="lazy">
-                    <div class="diagram-zoom-hint">
-                      <span data-i18n="diagram_zoom_hint">Klik untuk memperbesar diagram</span>
-                    </div>
-                  </div>
-
-                  <div class="architecture-card-body">
-                    <p class="diagram-desc" data-i18n="smartnet_diag3_desc">
-                      Silsilah alur data terperinci dari level trigger basis data SQL Express di gerai toko lokal hingga tersaji di tabel analitik Google BigQuery.
-                    </p>
-
-                    <div class="diagram-steps-grid">
-                      <div class="diagram-step-item">
-                        <div class="diagram-step-header">
-                          <h5 class="diagram-step-title" data-i18n="smartnet_diag3_s1_title">1. Trigger Tabel Audit Toko</h5>
-                        </div>
-                        <p class="diagram-step-text" data-i18n="smartnet_diag3_s1_text">
-                          Perubahan data di tabel RekapTransaksiTokoDetail mengaktifkan trigger otomatis yang mencatat log audit ke RekapTransaksiTokoDetail_Audit.
-                        </p>
-                      </div>
-
-                      <div class="diagram-step-item">
-                        <div class="diagram-step-header">
-                          <h5 class="diagram-step-title" data-i18n="smartnet_diag3_s2_title">2. Publikasi ke GCP Pub/Sub</h5>
-                        </div>
-                        <p class="diagram-step-text" data-i18n="smartnet_diag3_s2_text">
-                          Aplikasi toko mengekstrak baris audit dan menerbitkannya ke topik GCP Pub/Sub: pb-RekapTransaksiTokoDetail-raw.
-                        </p>
-                      </div>
-
-                      <div class="diagram-step-item">
-                        <div class="diagram-step-header">
-                          <h5 class="diagram-step-title" data-i18n="smartnet_diag3_s3_title">3. BigQuery Direct Subscription</h5>
-                        </div>
-                        <p class="diagram-step-text" data-i18n="smartnet_diag3_s3_text">
-                          Direct Subscriber BigQuery menyerap streaming message langsung ke tabel raw RekapTransaksiTokoDetail tanpa delay batch.
-                        </p>
-                      </div>
-
-                      <div class="diagram-step-item">
-                        <div class="diagram-step-header">
-                          <h5 class="diagram-step-title" data-i18n="smartnet_diag3_s4_title">4. Analytical View &amp; Scheduler</h5>
-                        </div>
-                        <p class="diagram-step-text" data-i18n="smartnet_diag3_s4_text">
-                          View analitik vw_RekapTransaksiTokoDetail memfilter kolom redundan, dan Cloud Scheduler memprosesnya ke tabel produksi pb_bronze_toko.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- Section Divider: Competencies & Core Responsibilities -->
-      <div class="competency-section-divider">
-        <div class="competency-divider-line"></div>
-        <div class="competency-divider-badge">
-          <span class="competency-divider-dot"></span>
-          <span data-i18n="competency_divider_label">Kompetensi Teknis &amp; Tanggung Jawab Inti</span>
-        </div>
-        <div class="competency-divider-line"></div>
-      </div>
-
-      <!-- Competency Block 1: Ingestion Skala Besar & Pipeline Data Terdistribusi -->
-      <section class="detail-section-block" id="large-scale-etl">
-        <h2 class="detail-block-title" data-i18n="smartnet_b2_title">Ingestion Skala Besar &amp; Streaming Pipelines</h2>
-        <p class="detail-block-desc" data-i18n="smartnet_b2_desc">Pengembangan jalur data bervolume tinggi, penanganan data real-time, dan migrasi basis data NoSQL.</p>
-
-        <div class="feature-cards-grid">
-          <div class="feature-item-card">
-            <span class="stat-pill">1TB+ Data Volume</span>
-            <h3 class="feature-item-title" data-i18n="smartnet_p3_title">ETL Firebase ke Google BigQuery</h3>
-            <p data-i18n="smartnet_p3_text">
-              Merancang dan memelihara pipeline ETL untuk memproses lebih dari 1TB data dari Firebase ke Google BigQuery, meningkatkan aksesibilitas dan ketersediaan data analitik untuk tim data science dan business intelligence.
-            </p>
-          </div>
-
-          <div class="feature-item-card">
-            <span class="stat-pill">Pub/Sub • Dataflow In-Flight</span>
-            <h3 class="feature-item-title" data-i18n="smartnet_p4_title">Streamlined Real-Time Data Ingestion</h3>
-            <p data-i18n="smartnet_p4_text">
-              Mengembangkan pipeline streaming real-time ke BigQuery memanfaatkan GCP Pub/Sub dan Cloud Dataflow. Mengintegrasikan logika transformasi <em>in-flight</em> untuk memfilter kolom audit redundan secara langsung, mengurangi overhead dan biaya penyimpanan hilir secara signifikan.
-            </p>
-          </div>
-
-          <div class="feature-item-card">
-            <span class="stat-pill">Cassandra ke Cloud Bigtable</span>
-            <h3 class="feature-item-title" data-i18n="smartnet_p5_title">Automated NoSQL Database Migration</h3>
-            <p data-i18n="smartnet_p5_text">
-              Merekayasa pipeline migrasi data otomatis tanpa kendala (seamless migration) untuk memindahkan beban kerja NoSQL dari on-premise Apache Cassandra ke Google Cloud Bigtable terkelola.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Block 3: Orchestration, Quality & Columnar Analytics -->
-      <section class="detail-section-block">
-        <h2 class="detail-block-title" data-i18n="smartnet_b3_title">Data Orchestration, Transformation & Analytics</h2>
-        <p class="detail-block-desc" data-i18n="smartnet_b3_desc">Standardisasi logika bisnis dan percepatan kueri eksploratif data warehouse.</p>
-
-        <div class="feature-cards-grid">
-          <div class="feature-item-card">
-            <span class="stat-pill">+30% Data Freshness</span>
-            <h3 class="feature-item-title" data-i18n="smartnet_p6_title">Orchestration via Apache Airflow & dbt</h3>
-            <p data-i18n="smartnet_p6_text">
-              Mengorkestrasi tahapan ingestion, transformasi, dan uji kualitas data otomatis menggunakan Apache Airflow dan dbt (data build tool). Berhasil meningkatkan kesegaran data (freshness) sebesar 30% dan menjamin konsistensi logika bisnis di seluruh dataset perusahaan.
-            </p>
-          </div>
-
-          <div class="feature-item-card">
-            <span class="stat-pill">High-Performance POC</span>
-            <h3 class="feature-item-title" data-i18n="smartnet_p7_title">Integrasi ClickHouse Columnar Storage</h3>
-            <p data-i18n="smartnet_p7_text">
-              Mengintegrasikan ClickHouse untuk pengujian analitik berkinerja tinggi pada proyek proof-of-concept (POC), menghasilkan akselerasi drastis dalam eksplorasi dan query analitik dataset berukuran besar.
-            </p>
-          </div>
-
-          <div class="feature-item-card">
-            <span class="stat-pill">-40% Waktu Pemrosesan Manual</span>
-            <h3 class="feature-item-title" data-i18n="smartnet_p8_title">5+ Dashboard Interaktif Looker</h3>
-            <p data-i18n="smartnet_p8_text">
-              Membangun 5+ dashboard analitik interaktif di Looker untuk kebutuhan pelaporan real-time manajemen, mengotomatiskan alur kerja dan memangkas pemrosesan data manual hingga 40%.
-            </p>
-          </div>
-
-          <div class="feature-item-card">
-            <span class="stat-pill">+30% Query Performance</span>
-            <h3 class="feature-item-title" data-i18n="smartnet_p9_title">Optimasi & Desain Basis Data</h3>
-            <p data-i18n="smartnet_p9_text">
-              Merancang dan mengoptimalkan skema basis data pada lebih dari 3 aplikasi produksi, menghasilkan peningkatan performa kueri rata-rata sebesar 30%.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Block 4: Architecture, Documentation & Team Leadership -->
-      <section class="detail-section-block">
-        <h2 class="detail-block-title" data-i18n="smartnet_b4_title">Tata Kelola Arsitektur & Manajemen Proyek</h2>
-        <p class="detail-block-desc" data-i18n="smartnet_b4_desc">Menyelaraskan rancangan arsitektur teknis dengan sasaran bisnis strategis para pemangku kepentingan.</p>
-
-        <div class="feature-cards-grid">
-          <div class="feature-item-card">
-            <span class="stat-pill">3+ BRD & FSD • -20% Revisi</span>
-            <h3 class="feature-item-title" data-i18n="smartnet_p10_title">Dokumentasi Kebutuhan Bisnis & Fungsional</h3>
-            <p data-i18n="smartnet_p10_text">
-              Menyusun 3+ Business Requirements Documents (BRD) dan Functional Specification Documents (FSD) komprehensif, mengeliminasi ambiguitas kebutuhan proyek dan memangkas revisi stakeholder hingga 20%.
-            </p>
-          </div>
-
-          <div class="feature-item-card">
-            <span class="stat-pill">3+ SAD & TSD • +15% Kejelasan</span>
-            <h3 class="feature-item-title" data-i18n="smartnet_p11_title">Rancangan Arsitektur Sistem & Spesifikasi Teknis</h3>
-            <p data-i18n="smartnet_p11_text">
-              Membuat 3+ System Architecture Documents (SAD) dan Technical Specification Documents (TSD), menyelaraskan rancang bangun teknis dengan objektif bisnis serta meningkatkan kejelasan tahap development sebesar 15%.
-            </p>
-          </div>
-
-          <div class="feature-item-card">
-            <span class="stat-pill">4+ Proyek • -25% Misalignment</span>
-            <h3 class="feature-item-title" data-i18n="smartnet_p12_title">Analisis Kebutuhan Lintas Tim</h3>
-            <p data-i18n="smartnet_p12_text">
-              Menganalisis kebutuhan teknis untuk 4+ inisiatif proyek, memfasilitasi komunikasi efektif antara stakeholder bisnis dan developer, serta memotong miskomunikasi sebesar 25%.
-            </p>
-          </div>
-
-          <div class="feature-item-card">
-            <span class="stat-pill">Delivery On-Time • 90% Compliance</span>
-            <h3 class="feature-item-title" data-i18n="smartnet_p13_title">Supervisi Developer & Validasi Kualitas</h3>
-            <p data-i18n="smartnet_p13_text">
-              Memonitor pengerjaan tugas tim developer untuk 5+ proyek (menekan keterlambatan task hingga 10%) dan memvalidasi hasil pengujian untuk 4+ proyek dengan tingkat kepatuhan spesifikasi mencapai 90%.
-            </p>
-          </div>
         </div>
       </section>
 
@@ -1475,7 +1253,7 @@
   </div>
 
   <!-- Scripts -->
-  <script src="js/translations.js?v=20261126_v1"></script>
-  <script src="js/main.js?v=20261126_v1"></script>
+  <script src="js/translations.js?v=20261126_v2"></script>
+  <script src="js/main.js?v=20261126_v2"></script>
 </body>
 </html>
